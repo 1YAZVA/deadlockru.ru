@@ -258,19 +258,26 @@ body.edit-on .edit-badge { display: inline-flex !important; }
 @keyframes toast-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
 
 /* ===== Фоновое видео главной ===== */
-#tab-home .hero-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+/* Слой на весь экран (fixed) — виден только пока открыта вкладка «Главная».
+   Кадр 16:9 занимает всю ширину (кроп по бокам минимальный, ~1.18x),
+   края VK-интерфейса уходят за границу экрана. */
+#tab-home .hero-bg {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden;
+}
 #tab-home .hero-bg iframe {
-  /* плеер ВК больше видимого поля: края с UI-кнопками уходят за скрап */
   position: absolute; left: 50%; top: 50%;
-  width: 230%; height: 230%;
-  transform: translate(-50%, -55%);
+  --bgm: max(100vw, 177.78vh);
+  width: calc(var(--bgm) * 1.18);
+  height: calc(var(--bgm) * 1.18 * 0.5625);
+  transform: translate(-50%, -51%);
   border: 0;
 }
 #tab-home .hero-bg .hero-bg-shade {
   position: absolute; inset: 0;
   background:
-    linear-gradient(to bottom, rgba(7,19,14,.55), rgba(7,19,14,.25) 45%, var(--bg) 100%),
-    radial-gradient(ellipse at 50% 30%, rgba(7,19,14,0) 30%, rgba(7,19,14,.55) 100%);
+    linear-gradient(to bottom, rgba(7,19,14,.6), rgba(7,19,14,.28) 45%, var(--bg) 100%),
+    radial-gradient(ellipse at 50% 30%, rgba(7,19,14,0) 30%, rgba(7,19,14,.5) 100%);
 }
-#tab-home { position: relative; overflow: hidden; }
+#tab-home { position: relative; }
 #tab-home > .hero, #tab-home > .container, #tab-home > .online-widget-wrap { position: relative; z-index: 1; }
