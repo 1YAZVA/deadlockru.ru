@@ -3,34 +3,6 @@
   "note": "Значения стартовые/приблизительные — сверьте с актуальным патчем и правьте в админке без кода.",
   "heroes": [
     {
-      "id": "haze",
-      "name": "Haze",
-      "role": "Керри / ганкер",
-      "avatar": "img/heroes/haze.webp",
-      "color": "#a64df0",
-      "desc": "Ассасин с невидимостью и Sleep Dagger. Слаба на ранней линии, раскрывается к поздней игре через фарм и точечные устранения целей.",
-      "stats": {
-        "weaponDamage": 6,
-        "fireRate": 1.4,
-        "health": 550,
-        "moveSpeed": 6.9
-      }
-    },
-    {
-      "id": "seven",
-      "name": "Seven",
-      "role": "Мид / спирит",
-      "avatar": "img/heroes/seven.webp",
-      "color": "#f0c615",
-      "desc": "Урон через способности: Chain Lightning и Static Hold. Король зоны миддлейна, но остро уязвим к раннему ганку.",
-      "stats": {
-        "weaponDamage": 5,
-        "fireRate": 1.1,
-        "health": 580,
-        "moveSpeed": 6.6
-      }
-    },
-    {
       "id": "abrams",
       "name": "Abrams",
       "role": "Танк / оффлейн",
@@ -42,77 +14,6 @@
         "fireRate": 0.9,
         "health": 750,
         "moveSpeed": 6.3
-      }
-    },
-    {
-      "id": "infernus",
-      "name": "Infernus",
-      "role": "Керри",
-      "avatar": "img/heroes/infernus.webp",
-      "color": "#ff7a1a",
-      "desc": "Быстрый спам-керри с поджогом: масштабируется скоростью стрельбы и спирит-бонусами. Сильный пик к поздней игре.",
-      "stats": {
-        "weaponDamage": 5.5,
-        "fireRate": 1.6,
-        "health": 540,
-        "moveSpeed": 7.0
-      }
-    },
-    {
-      "id": "lash",
-      "name": "Lash",
-      "role": "Мид / дайвер",
-      "avatar": "img/heroes/lash.webp",
-      "color": "#3ba1f0",
-      "desc": "Grapple + Death Slam: берёт врага в пакеты и устраивает дайвы. Требует уверенной механики, но наказывает за ошибки позиционирования.",
-      "stats": {
-        "weaponDamage": 6,
-        "fireRate": 1.2,
-        "health": 600,
-        "moveSpeed": 6.8
-      }
-    },
-    {
-      "id": "wraith",
-      "name": "Wraith",
-      "role": "Керри / бёрст",
-      "avatar": "img/heroes/wraith.webp",
-      "color": "#2fd8b5",
-      "desc": "Teleport Strike + Full Clip: мгновенный бёрст урона, быстро обнуляет отдельную цель. Зависит от таймингов кулдаунов.",
-      "stats": {
-        "weaponDamage": 6.5,
-        "fireRate": 1.1,
-        "health": 580,
-        "moveSpeed": 6.7
-      }
-    },
-    {
-      "id": "vindicta",
-      "name": "Vindicta",
-      "role": "Снайпер",
-      "avatar": "img/heroes/vindicta.png",
-      "color": "#c0392b",
-      "desc": "Дальний урон с Assassin's Scope: наказывает за плохое позиционирование, но хрупкая и зависит от команды.",
-      "stats": {
-        "weaponDamage": 7.5,
-        "fireRate": 0.85,
-        "health": 500,
-        "moveSpeed": 6.5
-      }
-    },
-    {
-      "id": "bebop",
-      "name": "Bebop",
-      "role": "Крюк / бёрст",
-      "avatar": "img/heroes/bebop.webp",
-      "color": "#7cb342",
-      "desc": "Hook выдёргивает врага из позиции, Heavy Barrage прижимает на месте. Сильный сингл-таргет урон, но требует точных попаданий крюка.",
-      "tags": "",
-      "stats": {
-        "weaponDamage": 6.8,
-        "fireRate": 1.0,
-        "health": 620,
-        "moveSpeed": 6.4
       }
     },
     {
@@ -139,6 +40,21 @@
       "stats": {
         "health": 780,
         "moveSpeed": 6.5
+      }
+    },
+    {
+      "id": "bebop",
+      "name": "Bebop",
+      "role": "Крюк / бёрст",
+      "avatar": "img/heroes/bebop.webp",
+      "color": "#7cb342",
+      "desc": "Hook выдёргивает врага из позиции, Heavy Barrage прижимает на месте. Сильный сингл-таргет урон, но требует точных попаданий крюка.",
+      "tags": "",
+      "stats": {
+        "weaponDamage": 6.8,
+        "fireRate": 1.0,
+        "health": 620,
+        "moveSpeed": 6.4
       }
     },
     {
@@ -259,6 +175,20 @@
       }
     },
     {
+      "id": "haze",
+      "name": "Haze",
+      "role": "Керри / ганкер",
+      "avatar": "img/heroes/haze.webp",
+      "color": "#a64df0",
+      "desc": "Ассасин с невидимостью и Sleep Dagger. Слаба на ранней линии, раскрывается к поздней игре через фарм и точечные устранения целей.",
+      "stats": {
+        "weaponDamage": 6,
+        "fireRate": 1.4,
+        "health": 550,
+        "moveSpeed": 6.9
+      }
+    },
+    {
       "id": "holliday",
       "name": "Holliday",
       "role": "Керри / взрывник",
@@ -269,6 +199,20 @@
       "stats": {
         "health": 780,
         "moveSpeed": 8.2
+      }
+    },
+    {
+      "id": "infernus",
+      "name": "Infernus",
+      "role": "Керри",
+      "avatar": "img/heroes/infernus.webp",
+      "color": "#ff7a1a",
+      "desc": "Быстрый спам-керри с поджогом: масштабируется скоростью стрельбы и спирит-бонусами. Сильный пик к поздней игре.",
+      "stats": {
+        "weaponDamage": 5.5,
+        "fireRate": 1.6,
+        "health": 540,
+        "moveSpeed": 7.0
       }
     },
     {
@@ -311,6 +255,20 @@
       }
     },
     {
+      "id": "lash",
+      "name": "Lash",
+      "role": "Мид / дайвер",
+      "avatar": "img/heroes/lash.webp",
+      "color": "#3ba1f0",
+      "desc": "Grapple + Death Slam: берёт врага в пакеты и устраивает дайвы. Требует уверенной механики, но наказывает за ошибки позиционирования.",
+      "stats": {
+        "weaponDamage": 6,
+        "fireRate": 1.2,
+        "health": 600,
+        "moveSpeed": 6.8
+      }
+    },
+    {
       "id": "forge",
       "name": "McGinnis",
       "role": "Мид / инженер-саппорт",
@@ -324,19 +282,6 @@
       }
     },
     {
-      "id": "mirage",
-      "name": "Mirage",
-      "role": "Убийца / контроллер",
-      "avatar": "img/heroes/mirage.webp",
-      "color": "#6A2E68",
-      "desc": "Джинн пустыни: жуки-скарабеи и торнадо путают врагов, метка джинна готовит казнь. Играет через контроль и накапливаемый урон.",
-      "tags": "Bodyguard,Traveller,Focused",
-      "stats": {
-        "health": 730,
-        "moveSpeed": 7.0
-      }
-    },
-    {
       "id": "mina",
       "name": "Mina",
       "role": "Керри / харас",
@@ -347,6 +292,19 @@
       "stats": {
         "health": 660,
         "moveSpeed": 6.5
+      }
+    },
+    {
+      "id": "mirage",
+      "name": "Mirage",
+      "role": "Убийца / контроллер",
+      "avatar": "img/heroes/mirage.webp",
+      "color": "#6A2E68",
+      "desc": "Джинн пустыни: жуки-скарабеи и торнадо путают врагов, метка джинна готовит казнь. Играет через контроль и накапливаемый урон.",
+      "tags": "Bodyguard,Traveller,Focused",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 7.0
       }
     },
     {
@@ -441,6 +399,20 @@
       }
     },
     {
+      "id": "seven",
+      "name": "Seven",
+      "role": "Мид / спирит",
+      "avatar": "img/heroes/seven.webp",
+      "color": "#f0c615",
+      "desc": "Урон через способности: Chain Lightning и Static Hold. Король зоны миддлейна, но остро уязвим к раннему ганку.",
+      "stats": {
+        "weaponDamage": 5,
+        "fireRate": 1.1,
+        "health": 580,
+        "moveSpeed": 6.6
+      }
+    },
+    {
       "id": "shiv",
       "name": "Shiv",
       "role": "Ближний бой / камикадзе",
@@ -519,6 +491,33 @@
       }
     },
     {
+      "id": "vindicta",
+      "name": "Vindicta",
+      "role": "Снайпер",
+      "avatar": "img/heroes/vindicta.png",
+      "color": "#c0392b",
+      "desc": "Дальний урон с Assassin's Scope: наказывает за плохое позиционирование, но хрупкая и зависит от команды.",
+      "stats": {
+        "weaponDamage": 7.5,
+        "fireRate": 0.85,
+        "health": 500,
+        "moveSpeed": 6.5
+      }
+    },
+    {
+      "id": "violet",
+      "name": "Violet",
+      "role": "Мид / художница",
+      "avatar": "img/heroes/violet.webp",
+      "color": "#653cbc",
+      "desc": "Художница с живыми чернилами: краска усиливает пули в Flow State, Still Life «выписывает» врагов, а Abstract Landscape превращает побоище в её картину.",
+      "tags": "Ambitious,Nimble,Creative",
+      "stats": {
+        "health": 710,
+        "moveSpeed": 6.9
+      }
+    },
+    {
       "id": "viscous",
       "name": "Viscous",
       "role": "Мид / гуталин",
@@ -545,19 +544,6 @@
       }
     },
     {
-      "id": "violet",
-      "name": "Violet",
-      "role": "Мид / художница",
-      "avatar": "img/heroes/violet.webp",
-      "color": "#653cbc",
-      "desc": "Художница с живыми чернилами: краска усиливает пули в Flow State, Still Life «выписывает» врагов, а Abstract Landscape превращает побоище в её картину.",
-      "tags": "Ambitious,Nimble,Creative",
-      "stats": {
-        "health": 710,
-        "moveSpeed": 6.9
-      }
-    },
-    {
       "id": "warden",
       "name": "Warden",
       "role": "Ближний бой / страж",
@@ -568,6 +554,20 @@
       "stats": {
         "health": 805,
         "moveSpeed": 6.3
+      }
+    },
+    {
+      "id": "wraith",
+      "name": "Wraith",
+      "role": "Керри / бёрст",
+      "avatar": "img/heroes/wraith.webp",
+      "color": "#2fd8b5",
+      "desc": "Teleport Strike + Full Clip: мгновенный бёрст урона, быстро обнуляет отдельную цель. Зависит от таймингов кулдаунов.",
+      "stats": {
+        "weaponDamage": 6.5,
+        "fireRate": 1.1,
+        "health": 580,
+        "moveSpeed": 6.7
       }
     },
     {
