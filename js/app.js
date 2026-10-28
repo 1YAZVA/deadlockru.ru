@@ -11,14 +11,11 @@ window.state = state; // админка правит состояние чере
 
 // ---------- навигация ----------
 function go(tab) {
-  // админка открывается ТОЛЬКО по секретному URL (#panel-…) — кнопки в навигации нет
-  if (tab === 'admin' && !(window.AdminUI && window.AdminUI.isUnlocked())) tab = 'home';
   document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
   const sec = $('#tab-' + tab);
   if (sec) sec.classList.add('active');
   document.querySelectorAll('#main-nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  location.hash = (tab === 'admin' && window.AdminUI) ? window.AdminUI.SECRET_HASH : tab;
-  if (tab === 'admin' && window.AdminUI) window.AdminUI.render();
+  location.hash = tab;
   window.scrollTo({ top: 0 });
 }
 
@@ -61,12 +58,12 @@ function renderNews() {
   const box = $('#news-list');
   box.innerHTML = state.notes.length
     ? state.notes.slice().sort((a, b) => b.date.localeCompare(a.date)).map(n => `
-      <article class="note">
+      <article class="note" data-id="${esc(n.id)}">
         <div class="meta"><span class="tag">${esc(n.tag || 'патч')}</span><span>${esc(n.date)}</span></div>
         <h3 style="font-family:var(--font-display);font-size:17px;margin-bottom:4px">${esc(n.title)}</h3>
         <p class="muted" style="white-space:pre-wrap">${esc(n.text)}</p>
       </article>`).join('')
-    : '<p class="muted">Пока нет записей — добавьте их через «Управление».</p>';
+    : '<p class="muted">Новостей пока нет.</p>';
 
   const latest = state.notes.slice().sort((a, b) => b.date.localeCompare(a.date))[0];
   const pill = $('#home-patch-pill');
@@ -100,14 +97,14 @@ function renderHeroes() {
           ${h.stats ? `<span class="stat-chip">⚔ ${h.stats.weaponDamage ?? '—'}</span><span class="stat-chip">⏱ ${h.stats.fireRate ?? '—'}/с</span>` : ''}
         </span>
       </span>
-    </div>`).join('') || '<p class="muted">Список пуст — добавьте героев в «Управлении».</p>';
+    </div>`).join('') || '<p class="muted">Список пуст.</p>';
 }
 
 function renderBuilds() {
   $('#builds-list').innerHTML = state.builds.map(bld => {
     const hero = state.heroes.find(h => h.id === bld.hero);
     return `
-    <article class="build">
+    <article class="build" data-id="${esc(bld.id)}">
       <div style="display:flex;gap:10px;align-items:center;margin-bottom:4px;flex-wrap:wrap">
         <span class="tag-pill" style="color:var(--accent);border-color:rgba(200,169,106,.4)">${hero ? esc(hero.name) : esc(bld.hero || '')}</span>
         ${bld.tags ? String(bld.tags).split(',').filter(Boolean).map(t => `<span class="tag-pill">${esc(t.trim())}</span>`).join('') : ''}
@@ -116,7 +113,7 @@ function renderBuilds() {
       <div class="items">${String(bld.items || '').split(',').map(i => i.trim()).filter(Boolean).map(i => `<span class="item">${esc(i)}</span>`).join('')}</div>
       <p class="muted" style="white-space:pre-wrap">${esc(bld.desc || '')}</p>
     </article>`;
-  }).join('') || '<p class="muted">Билдов пока нет — добавьте в «Управлении».</p>';
+  }).join('') || '<p class="muted">Сборок пока нет.</p>';
 }
 
 // ---------- онлайновый счётчик ----------
@@ -326,6 +323,10 @@ document.addEventListener('click', (e) => {
   loadSteamNews();
   window.DPS?.update();
   const hash = location.hash.replace('#', '');
-  if (window.AdminUI && window.AdminUI.isUnlocked()) go('admin'); // секретный URL
-  else if (hash && $('#tab-' + hash)) go(hash);
+  if (window.AdminUI && window.AdminUI.isUnlocked()) { window.AdminUI.enter(); return; } // секретный URL → режим правки
+  if (hash && $('#tab-' + hash)) {
+    go(hash);
+  } else if (hash) {
+    history.replaceState(null, '', location.pathname + location.search); // неизвестный хэш — сбрасываем
+  }
 })();
