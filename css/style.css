@@ -339,3 +339,7 @@ body.edit-on .edit-badge { display: inline-flex !important; }
 #tab-home .section-label { text-align: center; width: 100%; }
 #tab-home .card { text-align: center; }
 #tab-home .card .btn-mini { margin: 0 auto; }
+
+/* Официальные посты Steam в новостях */
+.note-src{display:inline-block;margin-top:6px;font-size:12px;color:var(--accent);text-decoration:none;border-bottom:1px dashed rgba(200,169,106,.4)}
+.note-src:hover{color:var(--accent2);border-bottom-color:var(--accent2)}
