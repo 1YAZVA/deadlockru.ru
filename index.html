@@ -3,130 +3,158 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DEADLOCK.FAN — фан-сайт игры Deadlock от Valve</title>
-<meta name="description" content="Фан-сайт Deadlock: новости и патчи, онлайн игры, карточки героев, билды и DPS-калькулятор.">
-<link rel="stylesheet" href="css/style.css">
+<title>Deadlock//RU — герои, билды, патчи и DPS на русском</title>
+<meta name="description" content="Всё о Deadlock на русском: онлайн игры, патчи, карточки героев, сборки и DPS-калькулятор.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
 <header>
   <div class="container header-row">
-    <div class="logo" id="go-home" style="cursor:pointer">DEADLOCK<span>.FAN</span></div>
+    <div class="logo" id="go-home">Deadlock<span>//</span>RU</div>
     <nav id="main-nav">
-      <button data-tab="home" class="active">Главная</button>
-      <button data-tab="news">Новости / патчи</button>
+      <button data-tab="home">Главная</button>
+      <button data-tab="news">Новости</button>
       <button data-tab="heroes">Герои</button>
-      <button data-tab="builds">Билды</button>
-      <button data-tab="calc">DPS-калькулятор</button>
-      <button data-tab="admin">🔒 Админка</button>
+      <button data-tab="builds">Сборки</button>
+      <button data-tab="calc">DPS</button>
+      <span class="online-widget" title="Мониторинг онлайна Deadlock в Steam"><span class="dot"></span><span>Онлайн:</span> <b id="online-count">…</b></span>
     </nav>
-    <div class="online-widget" title="Одновременно играющих в Steam">
-      <span class="dot"></span>Онлайн: <b id="online-count">…</b>
-    </div>
   </div>
 </header>
 
 <main class="container">
 
-  <!-- ГЛАВНАЯ -->
+  <!-- ГЛАВНАЯ: hero как в page.tsx -->
   <section id="tab-home" class="active">
-    <h2>Фан-сайт Deadlock</h2>
-    <p class="lead">6v6 third-person MOBA-шутер от Valve. Здесь собраны онлайн игры, патчи, герои, билды и DPS-калькулятор.</p>
-    <div class="grid">
-      <div class="card" style="text-align:center">
-        <h3 style="color:var(--ok)"> Онлайн сейчас</h3>
-        <div class="dps-big" id="home-online" style="color:var(--ok)">…</div>
-        <canvas id="spark" width="220" height="48" style="margin-top:6px"></canvas>
-        <div class="muted" id="home-online-note">обновляется каждую минуту</div>
+    <div class="hero">
+      <span class="hero-badge"><span class="dot"></span>Данные обновляются автоматически · остальное в разработке</span>
+      <h1 style="margin-top:36px"><span class="hero-title">Deadlock</span>
+        <span class="hero-sub"><span class="w">Онлайн.</span> <span class="s">Герои.</span> <span class="v">Патчи.</span></span>
+      </h1>
+      <p class="lead center">Всё о Deadlock на русском: точные числа, живой онлайн, сборки
+        и разбор изменений каждого патча — плюс DPS-калькулятор.</p>
+      <a class="patch-pill" href="#" data-goto="news" id="home-patch-pill" style="display:none">
+        <span class="dot"></span>
+        <span class="t">Свежий патч: <b id="pill-title"></b></span>
+        <span class="d" id="pill-date"></span>
+      </a>
+      <div style="margin-top:26px">
+        <canvas id="spark" width="260" height="46" style="max-width:100%"></canvas>
+        <div class="muted" id="home-online-note" style="margin-top:6px">обновляется каждую минуту</div>
+        <div style="font-family:var(--font-display);font-size:30px;font-weight:700;color:var(--vitality);margin-top:4px" id="home-online">…</div>
+        <div style="font-size:15px;color:var(--accent2);margin-top:2px;display:none" id="home-peak"></div>
       </div>
-      <div class="card">
-        <h3>Последний патч</h3>
-        <div id="home-latest-note" class="muted">…</div>
-        <a href="#" data-goto="news" style="font-size:13px">Все новости →</a>
-      </div>
-      <div class="card">
-        <h3>Инструменты</h3>
-        <p class="muted" style="margin-bottom:10px">Всё редактируется прямо на сайте, без кода — через 🔒 Админку.</p>
-        <button class="btn btn-ghost btn-sm" data-goto="heroes">Герои</button>
-        <button class="btn btn-ghost btn-sm" data-goto="builds">Билды</button>
-        <button class="btn btn-ghost btn-sm" data-goto="calc">DPS</button>
-      </div>
-      <div class="card">
-        <h3>Официальное</h3>
-        <p class="muted" style="margin-bottom:10px">Обновления Steam и RSS Deadlock в разделе новостей подтягиваются автоматически, детали — вручную.</p>
-        <a class="btn btn-ghost btn-sm" href="https://store.steampowered.com/news/app/1422450" target="_blank" rel="noopener">Steam-новости →</a>
+    </div>
+
+    <div class="container" style="padding:0">
+      <h2 class="section-label">Что здесь будет</h2>
+      <div class="grid" style="margin-top:22px">
+        <article class="card weapon">
+          <h3>Герои</h3>
+          <p class="muted">Все герои: статы, роль, карточка и советы. Подставляются в DPS-калькулятор одним кликом.</p>
+          <button class="btn-mini" data-goto="heroes">Смотреть</button>
+        </article>
+        <article class="card spirit">
+          <h3>Сборки</h3>
+          <p class="muted">Готовые билды с привязкой к герою и патчу, редактируются без кода.</p>
+          <button class="btn-mini" data-goto="builds">Смотреть</button>
+        </article>
+        <article class="card vitality">
+          <h3>Патчи</h3>
+          <p class="muted">Свои заметки о патчах + официальные новости Valve из Steam, автоматом.</p>
+          <button class="btn-mini" data-goto="news">Смотреть</button>
+        </article>
+        <article class="card gold">
+          <h3>DPS</h3>
+          <p class="muted">Калькулятор урона: оружие, темп, бонусы предметов, крит — средний и макс DPS.</p>
+          <button class="btn-mini" data-goto="calc">Открыть</button>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- НОВОСТИ -->
   <section id="tab-news">
-    <h2>Новости и патчи</h2>
-    <p class="lead">Свои заметки о патчах (редактируются в админке) + официальные новости Valve из Steam (подгружаются автоматически).</p>
-    <div id="news-list"></div>
-    <div class="rss-box">
-      <h3 class="muted" style="text-transform:uppercase;font-size:13px;letter-spacing:.5px">Официальные новости Steam</h3>
+    <div style="padding-top:40px">
+      <h2 class="sec-title">Новости и патчи</h2>
+      <p class="lead">Ваши заметки (редактируются в «Управлении») + официальные новости Valve из Steam.</p>
+      <div id="news-list"></div>
+      <h2 class="section-label" style="margin:34px 0 6px">Официальные новости Steam</h2>
       <div id="rss-list"><span class="muted">загрузка…</span></div>
     </div>
   </section>
 
   <!-- ГЕРОИ -->
   <section id="tab-heroes">
-    <h2>Герои</h2>
-    <p class="lead">Нажмите на карточку — герой подставится в DPS-калькулятор. Все данные редактируются в админке без кода.</p>
-    <div class="grid" id="heroes-grid"></div>
+    <div style="padding-top:40px">
+      <h2 class="sec-title">Герои</h2>
+      <p class="lead">Нажмите на героя — он подставится в DPS-калькулятор. Данные редактируются в «Управлении».</p>
+      <div class="list" id="heroes-grid"></div>
+    </div>
   </section>
 
   <!-- БИЛДЫ -->
   <section id="tab-builds">
-    <h2>Рекомендации по сборкам</h2>
-    <p class="lead">Порядок предметов и ключевая идея билда. Редактируется в админке.</p>
-    <div id="builds-list"></div>
+    <div style="padding-top:40px">
+      <h2 class="sec-title">Сборки</h2>
+      <p class="lead">Порядок предметов и ключевая идея билда. Редактируется в «Управлении».</p>
+      <div id="builds-list"></div>
+    </div>
   </section>
 
   <!-- КАЛЬКУЛЯТОР -->
   <section id="tab-calc">
-    <h2>DPS-калькулятор</h2>
-    <p class="lead">Полностью помечен как теоретический расчёт по карточке героя: базовый урон оружия, темп стрельбы, бонусы предметов, крит.</p>
-    <div class="calc-wrap">
-      <div class="calc-params">
-        <label>Герой (автоподстановка)</label>
-        <select id="calc-hero"><option value="">— вручную —</option></select>
-        <label>Базовый урон оружия</label><input type="number" id="calc-dmg" value="6" step="0.1" min="0">
-        <label>Темп стрельбы (выстр/сек)</label><input type="number" id="calc-rate" value="1.2" step="0.05" min="0.1">
-        <label>Прибавка урона от предметов (абс.)</label><input type="number" id="calc-add" value="0" step="0.5">
-        <label>Бонус % урона от предметов</label><input type="number" id="calc-dmgpct" value="0" step="5">
-        <label>Бонус % темпа стрельбы</label><input type="number" id="calc-ratepct" value="0" step="5">
-        <label>Шанс крита, %</label><input type="number" id="calc-critc" value="0" step="5" min="0" max="100">
-        <label>Множитель крита</label><input type="number" id="calc-critm" value="2.0" step="0.1" min="1">
-      </div>
-      <div class="calc-result">
-        <h3 class="muted" style="text-transform:uppercase;font-size:12px">Средний DPS (с учётом крита)</h3>
-        <div class="dps-big" id="dps-avg">—</div>
-        <div class="dps-sub">max DPS при вечном крите: <b id="dps-max" style="color:var(--text)">—</b></div>
-        <div class="dps-line"><span>Урон за выстрел</span><b id="dps-perhit">—</b></div>
-        <div class="dps-line"><span>Темп стрельбы</span><b id="dps-persec">—</b></div>
-        <div class="dps-line"><span>Множитель ожид. урона от критов</span><b id="dps-critf">—</b></div>
-        <p class="muted" style="margin-top:14px;font-size:12px">Модель упрощённая: не учитывает резисты, спирит, броню и хедшоты. Хотите — опишите в админке свои формулы. Рассчитать: <span class="muted" id="calc-hero-name"></span></p>
+    <div style="padding-top:40px">
+      <h2 class="sec-title">DPS-калькулятор</h2>
+      <p class="lead">Расчёт по карточке героя: базовый урон оружия, темп стрельбы, бонусы предметов и крит.</p>
+      <div class="calc-wrap">
+        <div class="calc-params">
+          <label>Герой (автоподстановка)</label>
+          <select id="calc-hero"><option value="">— вручную —</option></select>
+          <label>Базовый урон оружия</label><input type="number" id="calc-dmg" value="6" step="0.1" min="0">
+          <label>Темп стрельбы (выстр/сек)</label><input type="number" id="calc-rate" value="1.2" step="0.05" min="0.1">
+          <label>Прибавка урона от предметов (абс.)</label><input type="number" id="calc-add" value="0" step="0.5">
+          <label>Бонус % урона от предметов</label><input type="number" id="calc-dmgpct" value="0" step="5">
+          <label>Бонус % темпа стрельбы</label><input type="number" id="calc-ratepct" value="0" step="5">
+          <label>Шанс крита, %</label><input type="number" id="calc-critc" value="0" step="5" min="0" max="100">
+          <label>Множитель крита</label><input type="number" id="calc-critm" value="2.0" step="0.1" min="1">
+        </div>
+        <div class="calc-result">
+          <h3 class="section-label">Средний DPS (с учётом крита)</h3>
+          <div class="dps-big" id="dps-avg">—</div>
+          <div class="dps-sub">max DPS при вечном крите: <b id="dps-max" style="color:var(--text)">—</b></div>
+          <div class="dps-line"><span>Урон за выстрел</span><b id="dps-perhit">—</b></div>
+          <div class="dps-line"><span>Темп стрельбы</span><b id="dps-persec">—</b></div>
+          <div class="dps-line"><span>Множитель ожид. урона от критов</span><b id="dps-critf">—</b></div>
+          <p class="muted" style="margin-top:16px;font-size:12px">Модель упрощённая: без резистов, спирита, брони и хедшотов. Герой: <span class="muted" id="calc-hero-name"></span></p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- АДМИНКА -->
   <section id="tab-admin">
-    <h2>Админка</h2>
-    <div id="admin-root"></div>
+    <div style="padding-top:24px">
+      <h2 class="sec-title" style="text-align:center">Управление</h2>
+      <div id="admin-root"></div>
+    </div>
   </section>
 
 </main>
 
 <footer>
-  Фан-сайт сообщества. Не аффилирован с Valve Corporation. Deadlock © Valve — все права на игру и персонажей принадлежат Valve.<br>
-  Онлайн — по данным <a href="https://steamdb.info/app/1422450/charts/" target="_blank" rel="noopener">Steam</a>.
+  <div class="container">
+    Фан-проект сообщества. Не аффилирован с Valve Corporation. Deadlock и все связанные материалы —<br>
+    торговые марки Valve Corporation. Мониторинг онлайна — данные <a href="https://steamdb.info/app/1422450/charts/" target="_blank" rel="noopener">Steam</a>.
+  </div>
 </footer>
 
-<script src="js/dps.js"></script>
-<script src="js/app.js"></script>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v=11"></script>
+<script src="js/dps.js?v=11"></script>
+<script src="js/app.js?v=11"></script>
 </body>
 </html>
