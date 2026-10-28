@@ -1,19 +1,76 @@
 // ============ admin.js: правки прямо на сайте через GitHub Contents API ============
-// Логин: имя репозитория + fine-grained токен с правом Contents:Read/Write на этот репозиторий.
-// Токен хранится ТОЛЬКО в localStorage вашего браузера и уходит только на api.github.com.
+// ДОСТУП ТОЛЬКО ПО СЕКРЕТНОМУ URL: сайт/#panel-XXXX (SecretHash ниже — поменяйте на свой ключ!).
+// Логин: имя репозитория + GitHub-токен с правом Contents:Read/Write на этот репозиторий.
 'use strict';
 
 window.AdminUI = (function () {
+  // *** СМЕНИТЕ ЭТУ СТРОКУ на свой личный ключ: открывать админку будете по адресу
+  //     ваш-сайт/#panel-ВАШ-КЛЮЧ. Никто без этой ссылки админку не увидит. ***
+  const SECRET_HASH = 'panel-xk7m2q';
+  const isUnlocked = () => location.hash === '#' + SECRET_HASH;
+
+  // ---------- личный вход: почта + пароль + ключ доступа ----------
+  // Хранятся только SHA-256 хэши; правильные значения знает только владелец.
+  const CREDS = {
+    email:    'c6af2dfeda701d1e7660a4bfdf2184d05f82e66286a62f210704c69e24a0ab19',
+    password: '3342f6871f186f673675bee82f6b39e6373b7812991c469cf8889034f7993a91',
+    key:      '87043049c4c6aaadb41d793bc04cfd5a8d42de37c0968cd5db2cdad0d87f4582',
+  };
+  const AUTH_FLAG = 'dl_admin_auth';
+  const sha256hex = async (s) => {
+    const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+    return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, '0')).join('');
+  };
+  const authed = () => localStorage.getItem(AUTH_FLAG) === '1';
+  const deauth = () => localStorage.removeItem(AUTH_FLAG);
+
+  function renderGate() {
+    ROOT().innerHTML = `
+      <div class="admin-lock">
+        <h3 style="margin-bottom:10px">Личный вход</h3>
+        <p class="muted" style="margin-bottom:14px;font-size:13px">Доступ только для владельца сайта.</p>
+        <label>Email</label>
+        <input id="gate-email" type="email" autocomplete="off">
+        <label>Пароль</label>
+        <input id="gate-pass" type="password" autocomplete="off">
+        <label>Ключ доступа</label>
+        <input id="gate-key" type="password" autocomplete="off">
+        <button class="btn" id="gate-btn" style="margin-top:16px">Войти</button>
+        <span class="status" id="gate-status"></span>
+      </div>`;
+    $('#gate-key').focus();
+    const submit = async () => {
+      const [e, p, k] = [$('#gate-email').value.trim(), $('#gate-pass').value, $('#gate-key').value];
+      const [he, hp, hk] = await Promise.all([sha256hex(e), sha256hex(p), sha256hex(k)]);
+      if (he === CREDS.email && hp === CREDS.password && hk === CREDS.key) {
+        localStorage.setItem(AUTH_FLAG, '1');
+        render();
+      } else {
+        $('#gate-status').textContent = 'Неверные данные';
+        $('#gate-status').className = 'status err';
+      }
+    };
+    $('#gate-btn').addEventListener('click', submit);
+    ['#gate-email', '#gate-pass', '#gate-key'].forEach((s) => $(s).addEventListener('keydown', (ev) => { if (ev.key === 'Enter') submit(); }));
+  }
   const $ = (s, r) => (r || document).querySelector(s);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
   const ROOT = () => $('#admin-root');
 
   const LS_KEY = 'dl_admin';
+  const DEFAULT_REPO = '1YAZVA/deadlockru.ru';
+  const DEFAULT_BRANCH = 'main';
   let cfg = null;          // {repo, branch, token}
   let dataset = 'patchnotes';
   let editNoteId = null;
 
-  function loadCfg() { try { cfg = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch (_) { cfg = null; } }
+  function loadCfg() {
+    try { cfg = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch (_) { cfg = null; }
+    // дефолты: репозиторий сайта знать не обязательно — вшит
+    if (!cfg) cfg = { repo: DEFAULT_REPO, branch: DEFAULT_BRANCH, token: '' };
+    if (!cfg.repo) cfg.repo = DEFAULT_REPO;
+    if (!cfg.branch) cfg.branch = DEFAULT_BRANCH;
+  }
   function saveCfg(v) { cfg = v; v ? localStorage.setItem(LS_KEY, JSON.stringify(v)) : localStorage.removeItem(LS_KEY); }
 
   // ---------- GitHub API ----------
@@ -64,8 +121,9 @@ window.AdminUI = (function () {
 
   function render() {
     loadCfg();
-    if (!cfg || !cfg.token) return renderLogin();
-    renderEditor();
+    if (!isUnlocked()) return; // секретный URL не введён — вообще ничего не рендерим
+    if (!authed()) return renderGate();           // слой 2: почта + пароль + ключ
+    return renderEditor();                        // слой 3 (токен) — прямо внутри редактора
   }
 
   function renderLogin() {
@@ -111,14 +169,24 @@ window.AdminUI = (function () {
     ROOT().innerHTML = `
       <p class="muted" style="font-size:13px;margin-bottom:10px">
         Репозиторий: <b>${esc(cfg.repo)}</b>, ветка <b>${esc(cfg.branch)}</b>.
-        Правки не применяются на сайте мгновенно — это коммит в GitHub; GitHub Pages публикация занимает 1–3 минуты.
-        Токен хранится только в вашем браузере.
+        Правки уходят коммитами в GitHub; GitHub Pages после публикации обновляется 1–3 мин.
       </p>
+      ${!cfg.token ? `
+      <div class="editor-form" id="token-band" style="max-width:640px;margin-bottom:16px">
+        <h3>Подключите токен для сохранения</h3>
+        <p class="muted" style="margin-bottom:4px;font-size:13px">Править можно и без него (черновик живёт до перезагрузки страницы),
+        но чтобы сохранить изменения, нужен GitHub-токен с правом <b>Contents: Read and write</b> на репозиторий сайта.
+        Создать: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:var(--accent)">github.com → токены</a>.</p>
+        <label>Токен (сохранится только в этом браузере)</label>
+        <input id="adm-token2" type="password" placeholder="ghp_… или github_pat_…" autocomplete="off">
+        <div style="margin-top:12px"><button class="btn btn-sm" id="adm-connect" style="width:auto">Подключить токен</button>
+        <button class="btn btn-ghost btn-sm" id="adm-skip">Продолжить без токена</button></div>
+      </div>` : ''}
       <div class="admin-toolbar">
-        <select id="adm-ds" class="btn-ghost" style="padding:8px 12px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);color:var(--text)">
+        <select id="adm-ds" style="padding:7px 14px;border-radius:9999px;background:var(--panel2);border:1px solid var(--line);color:var(--text)">
           <option value="patchnotes">📝 Новости / патчи</option>
           <option value="heroes">🦸 Карточки героев</option>
-          <option value="builds">🛡 Билды</option>
+          <option value="builds">🛡 Сборки</option>
         </select>
         <button class="btn btn-ghost btn-sm" id="adm-reload">⟳ Загрузить из GitHub</button>
         <button class="btn btn-sm" id="adm-commit">💾 Сохранить (коммит)</button>
@@ -127,16 +195,43 @@ window.AdminUI = (function () {
       </div>
       <div id="adm-edit"></div>`;
 
+    if (!cfg.token) {
+      $('#adm-connect').addEventListener('click', async () => {
+        const t = $('#adm-token2').value.trim();
+        if (!t) return setStatus('Вставьте токен', 'err');
+        setStatus('Проверяю токен…');
+        try {
+          const rr = await fetch(`https://api.github.com/repos/${cfg.repo}/contents/${FILES.patchnotes}?ref=${encodeURIComponent(cfg.branch)}`, { headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + t } });
+          if (rr.status === 401) throw new Error('Токен недействителен');
+          if (rr.status === 403) throw new Error('Нет права Contents:Read/Write на репозиторий');
+          if (rr.status === 404) throw new Error('Репозиторий/ветка не найдены: ' + cfg.repo);
+          if (!rr.ok) throw new Error('GitHub ' + rr.status);
+          cfg.token = t;
+          saveCfg(cfg);
+          renderEditor();
+          await loadDataset();
+        } catch (e) { setStatus(e.message, 'err'); }
+      });
+      $('#adm-skip').addEventListener('click', () => { $('#token-band').remove(); setStatus('Без токена — только черновик, сохранение недоступно', 'err'); });
+    }
+
     $('#adm-ds').value = dataset;
     $('#adm-ds').addEventListener('change', () => { dataset = $('#adm-ds').value; loadDataset(); });
     $('#adm-reload').addEventListener('click', loadDataset);
-    $('#adm-logout').addEventListener('click', () => { saveCfg(null); render(); });
+    $('#adm-logout').addEventListener('click', () => { saveCfg(null); deauth(); render(); });
     $('#adm-commit').addEventListener('click', commit);
 
     await loadDataset();
   }
 
   async function loadDataset() {
+    if (!cfg || !cfg.token) {
+      currentSha = null;
+      renderBody();
+      rerenderSite();
+      setStatus('Черновой режим: правьте поля, данные берутся с сайта (к GitHub без токена не обращаемся)', 'ok');
+      return;
+    }
     setStatus('Загрузка…');
     try {
       const { sha, json } = await getFile(FILES[dataset]);
@@ -319,6 +414,7 @@ window.AdminUI = (function () {
   }
 
   async function commit() {
+    if (!cfg || !cfg.token) { setStatus('Для сохранения нужен GitHub-токен — подключите его в блоке выше', 'err'); return; }
     setStatus('Коммит…');
     const note = { note: 'Редактируется через админку сайта', updatedAt: new Date().toISOString().slice(0, 10) };
     try {
@@ -349,5 +445,5 @@ window.AdminUI = (function () {
   }
 
   loadCfg();
-  return { render };
+  return { render, isUnlocked, SECRET_HASH: '#' + SECRET_HASH };
 })();
