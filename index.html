@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -30,6 +30,14 @@
 
   <!-- ГЛАВНАЯ: hero как в page.tsx -->
   <section id="tab-home" class="active">
+    <!-- фоновое видео (VK, без звука, зациклено) + затемнение поверх -->
+    <div class="hero-bg" aria-hidden="true">
+      <iframe
+        src="https://vkvideo.ru/video_ext.php?oid=-223127459&id=456239026&autoplay=1&loop=1&mute=1&hd=2&no_ads=1"
+        allow="autoplay; encrypted-media; fullscreen; picture-in-picture" frameborder="0" scrolling="no"
+        loading="lazy" title=""></iframe>
+      <div class="hero-bg-shade"></div>
+    </div>
     <div class="hero">
       <span class="hero-badge"><span class="dot"></span>Данные обновляются автоматически · остальное в разработке</span>
       <h1 style="margin-top:36px"><span class="hero-title">Deadlock</span>
