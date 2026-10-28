@@ -106,7 +106,7 @@ function heroAvatar(h) {
 function renderHeroes() {
   $('#heroes-grid').innerHTML = state.heroes.map(h => `
     <div class="hero-card" data-hero="${esc(h.id)}" title="Открыть в DPS-калькуляторе">
-      <span class="ava-letter">${heroAvatar(h)}</span>
+      <span class="ava-letter" data-letter="${esc((h.name || '?').charAt(0).toUpperCase())}">${heroAvatar(h)}</span>
       <span style="min-width:0">
         <h4>${esc(h.name)}</h4>
         <span class="en">${esc(h.role || '')}</span>
@@ -116,6 +116,15 @@ function renderHeroes() {
         </span>
       </span>
     </div>`).join('') || '<p class="muted">Список пуст.</p>';
+
+  // если иконка героя не загрузилась (CDN недоступен) — показываем букву вместо чёрного круга
+  const grid = $('#heroes-grid');
+  grid?.querySelectorAll('.ava-letter img').forEach(img => {
+    const box = img.closest('.ava-letter');
+    img.addEventListener('error', () => {
+      if (box) box.textContent = box.dataset.letter || '?';
+    });
+  });
 }
 
 function renderBuilds() {
