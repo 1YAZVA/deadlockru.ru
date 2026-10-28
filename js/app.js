@@ -39,12 +39,15 @@ async function loadJSON(path) {
 }
 
 async function initData() {
-  const [h, b, n] = await Promise.all([
-    loadJSON('data/heroes.json'), loadJSON('data/builds.json'), loadJSON('data/patchnotes.json')
+  const [h, b, n, sn] = await Promise.all([
+    loadJSON('data/heroes.json'), loadJSON('data/builds.json'), loadJSON('data/patchnotes.json'),
+    loadJSON('data/steam-news.json')
   ]);
   state.heroes = h?.heroes || []; state.heroesUpdatedAt = h?.updatedAt;
   state.builds = b?.builds || [];
   state.notes = n?.notes || [];
+  state.steamPosts = sn?.posts || [];
+  state.steamSource = sn?.source || '';
   if (!h && !b && !n) {
     // скорее всего открыто как file://
     document.body.insertAdjacentHTML('afterbegin',
@@ -56,16 +59,31 @@ async function initData() {
 // ---------- рендеры ----------
 function renderNews() {
   const box = $('#news-list');
-  box.innerHTML = state.notes.length
-    ? state.notes.slice().sort((a, b) => b.date.localeCompare(a.date)).map(n => `
-      <article class="note" data-id="${esc(n.id)}">
-        <div class="meta"><span class="tag">${esc(n.tag || 'патч')}</span><span>${esc(n.date)}</span></div>
+  // свои заметки (редактируются в панели) + официальные посты Valve из data/steam-news.json
+  const own = state.notes.map(n => ({ ...n, own: true }));
+  const steam = (state.steamPosts || []).map(p => ({
+    ...p,
+    tag: /patch|update|balance/i.test(p.title) ? 'Патч Valve' : 'Официально',
+    own: false
+  }));
+  const all = [...own, ...steam].sort((a, b) => b.date.localeCompare(a.date));
+  const steamCount = steam.length;
+
+  box.innerHTML = `
+    <p class="muted" style="text-align:center;font-size:12.5px;margin-bottom:18px">
+      Официальные обновления Valve (${steamCount}) — загружаются из Steam.
+      Свои заметки сообщества можно добавить в режиме редактора.</p>`
+    + (all.length
+      ? all.map(n => `
+      <article class="note" ${n.own ? `data-id="${esc(n.id)}"` : ''}>
+        <div class="meta"><span class="tag">${esc(n.tag || 'новость')}</span><span>${esc(n.date)}</span></div>
         <h3 style="font-family:var(--font-display);font-size:17px;margin-bottom:4px">${esc(n.title)}</h3>
         <p class="muted" style="white-space:pre-wrap">${esc(n.text)}</p>
+        ${n.url ? `<a class="note-src" href="${esc(n.url)}" target="_blank" rel="noopener">источник в Steam ↗</a>` : ''}
       </article>`).join('')
-    : '<p class="muted">Новостей пока нет.</p>';
+      : '<p class="muted">Новостей пока нет.</p>');
 
-  const latest = state.notes.slice().sort((a, b) => b.date.localeCompare(a.date))[0];
+  const latest = all[0];
   const pill = $('#home-patch-pill');
   if (pill) {
     if (latest) {
