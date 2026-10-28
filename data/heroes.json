@@ -90,7 +90,7 @@
       "id": "vindicta",
       "name": "Vindicta",
       "role": "Снайпер",
-      "avatar": "img/heroes/vindicta.webp",
+      "avatar": "img/heroes/vindicta.png",
       "color": "#c0392b",
       "desc": "Дальний урон с Assassin's Scope: наказывает за плохое позиционирование, но хрупкая и зависит от команды.",
       "stats": {
