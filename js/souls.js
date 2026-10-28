@@ -33,7 +33,7 @@
       laneX: lane,
       y: initial ? rand(-60, h) : h + rand(30, 320),
       r: kind === 'ally' ? rand(5, 9) : rand(7, 11),
-      vy: kind === 'ally' ? rand(26, 48) : rand(18, 34),
+      vy: kind === 'ally' ? rand(55, 95) : rand(38, 64),
       swayAmp: rand(9, 24),
       swayFreq: rand(0.25, 0.7),
       phase: rand(0, 60),
@@ -70,13 +70,13 @@
     for (let i = 1; i < n; i++) {
       const p0 = s.trail[i - 1], p1 = s.trail[i];
       const k = i / n;                                  // 0 у головы, 1 на конце
-      const wob = Math.sin(now * 0.0045 + i * 0.62) * (0.35 + 0.9 * k) * s.r * 1.25;
+      const wob = Math.sin(now * 0.0035 + i * 0.5) * (0.5 + 1.8 * k) * s.r * 1.5;
 
       ctx.globalCompositeOperation = 'source-over';
-      // дым (широкий тёмный)
-      ctx.strokeStyle = `rgba(${dsr},${dsg},${dsb},${(0.55 * k * a).toFixed(3)})`;
-      ctx.lineWidth = s.r * (1.7 - 0.85 * k);
-      ctx.beginPath(); ctx.moveTo(p0.x + wob * 0.35, p0.y); ctx.lineTo(p1.x + wob, p1.y); ctx.stroke();
+      // дым (широкий тёмный, непрерывный)
+      ctx.strokeStyle = `rgba(${dsr},${dsg},${dsb},${(0.5 * k * a).toFixed(3)})`;
+      ctx.lineWidth = s.r * (1.6 - 0.9 * k);
+      ctx.beginPath(); ctx.moveTo(p0.x + wob * 0.4, p0.y); ctx.lineTo(p1.x + wob, p1.y); ctx.stroke();
 
       ctx.globalCompositeOperation = 'lighter';
       // светлая жила внутри дыма
@@ -110,12 +110,12 @@
     const px = (s.side === 0 ? s.laneX : w - s.laneX) + sway + drift;
 
     // копим точки хвоста (хвост тянется и слегка «отстаёт» вниз)
-    if (s.hist > 0.048) {
+    if (s.hist > 0.045) {
       s.hist = 0;
-      s.trail.push({ x: px, y: s.y + s.r * 0.7 });
-      if (s.trail.length > 15) s.trail.shift();
+      s.trail.push({ x: px, y: s.y + s.r * 0.8 });
+      if (s.trail.length > 24) s.trail.shift();
     } else {
-      for (const p of s.trail) p.y -= s.vy * dt * 0.5;
+      for (const p of s.trail) p.y -= s.vy * dt * 0.55;
     }
 
     const [sr, sg, sb] = s.pal.soft;
@@ -146,14 +146,14 @@
     // 4) вспышки-спицы: вращающиеся языки пламени вокруг ядра
     const spin = now * 0.001 * s.spin * s.pulse + s.phase * 2;
     const pulseW = 0.5 + 0.5 * Math.sin(now * 0.003 * s.pulse + s.phase);
-    ctx.strokeStyle = `rgba(${sr},${sg},${sb},${(0.55 * a).toFixed(3)})`;
-    ctx.lineWidth = rr * 0.2;
-    for (let i = 0; i < 5; i++) {
-      const ang = spin + (i * Math.PI * 2) / 5;
-      const len = rr * (1.5 + 1.1 * pulseW * (0.35 + 0.65 * Math.abs(Math.sin(ang * 1.7 + s.phase))));
+    ctx.strokeStyle = `rgba(${sr},${sg},${sb},${(0.45 * a).toFixed(3)})`;
+    ctx.lineWidth = rr * 0.24;
+    for (let i = 0; i < 4; i++) {
+      const ang = spin + (i * Math.PI) / 2;
+      const len = rr * (1.2 + 0.8 * pulseW);
       const c = Math.cos(ang), sn = Math.sin(ang);
       ctx.beginPath();
-      ctx.moveTo(px + c * rr * 0.7, s.y + sn * rr * 0.7);
+      ctx.moveTo(px + c * rr * 0.75, s.y + sn * rr * 0.75);
       ctx.lineTo(px + c * len, s.y + sn * len);
       ctx.stroke();
       ctx.globalCompositeOperation = 'lighter';
