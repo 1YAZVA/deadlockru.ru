@@ -147,3 +147,112 @@ input,select,textarea{font-family:var(--font-body)}
 /* ---------- footer как в site-chrome.tsx ---------- */
 footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:12px;text-align:center;line-height:1.7}
 footer a{color:var(--muted);text-decoration:underline}
+
+/* ===== Режим правки (секретный URL) ===== */
+body.edit-on .edit-badge { display: inline-flex !important; }
+
+.edit-badge {
+  display: none;
+  position: absolute; top: 6px; right: 6px; z-index: 60;
+  width: 26px; height: 26px; padding: 0;
+  align-items: center; justify-content: center;
+  border-radius: 8px;
+  border: 1px solid rgba(200,169,106,.55);
+  background: rgba(10,26,19,.92);
+  color: var(--accent); font-size: 13px; cursor: pointer;
+  transition: .15s;
+}
+.edit-badge:hover { background: var(--accent); color: #10190f; transform: scale(1.08); }
+
+.edit-on .note, .edit-on .build, .edit-on .hero-card { outline: 1px dashed rgba(200,169,106,.25); outline-offset: 2px; }
+
+#edit-fab {
+  position: fixed; right: 22px; bottom: 22px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  border: none; cursor: pointer;
+  background: linear-gradient(135deg, #2fd8a0, #1d8f66);
+  color: #0b120d; font-size: 30px; font-weight: 700; line-height: 1;
+  box-shadow: 0 6px 24px rgba(0,0,0,.55), 0 0 0 3px rgba(47,216,160,.25);
+  transition: transform .15s;
+}
+#edit-fab:hover { transform: scale(1.07) rotate(90deg); }
+
+#edit-fab-menu {
+  position: fixed; right: 22px; bottom: 88px; z-index: 91;
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--panel2, #12241b); border: 1px solid var(--line, rgba(200,169,106,.3));
+  border-radius: 14px; padding: 8px; min-width: 190px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.6);
+}
+#edit-fab-menu button {
+  all: unset; cursor: pointer; padding: 9px 14px; border-radius: 10px;
+  color: var(--text, #e8e4d8); font-size: 14px;
+}
+#edit-fab-menu button:hover { background: rgba(200,169,106,.15); color: var(--accent, #c8a96a); }
+
+#edit-toolbar {
+  position: fixed; right: 88px; bottom: 38px; z-index: 90;
+  display: flex; gap: 8px; align-items: center;
+  background: rgba(10,26,19,.95); border: 1px solid rgba(200,169,106,.4);
+  border-radius: 9999px; padding: 7px 10px 7px 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.5);
+  font-size: 13px; color: var(--text, #e8e4d8);
+}
+#edit-toolbar .et-status { color: var(--accent2, #9db98a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+#edit-toolbar .et-save {
+  all: unset; cursor: pointer; padding: 7px 14px; border-radius: 9999px;
+  background: linear-gradient(135deg, #2fd8a0, #1d8f66); color: #0b120d; font-weight: 700; font-size: 13px;
+}
+#edit-toolbar .et-save:hover { filter: brightness(1.1); }
+#edit-toolbar .et-min {
+  all: unset; cursor: pointer; padding: 5px 9px; border-radius: 8px;
+  border: 1px solid rgba(200,169,106,.35); color: var(--accent, #c8a96a); font-size: 12px;
+}
+#edit-toolbar .et-min:hover { background: rgba(200,169,106,.15); }
+
+#edit-overlay .edit-bg {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(4,10,7,.72); backdrop-filter: blur(3px);
+}
+#edit-overlay .edit-modal {
+  position: fixed; z-index: 101; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 40px); overflow: auto;
+  background: var(--panel, #0e2318); border: 1px solid rgba(200,169,106,.45);
+  border-radius: 18px; padding: 22px 24px 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.7);
+}
+#edit-overlay .edit-modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+#edit-overlay .edit-modal-head h3 { margin: 0; font-family: var(--font-display, inherit); font-size: 18px; color: var(--accent, #c8a96a); }
+#edit-overlay .edit-x {
+  all: unset; cursor: pointer; width: 30px; height: 30px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,.15); color: var(--text, #e8e4d8); font-size: 13px;
+}
+#edit-overlay .edit-x:hover { background: rgba(255,255,255,.08); }
+
+#edit-overlay label { display: block; font-size: 12px; color: var(--accent2, #9db98a); margin: 12px 0 4px; text-transform: uppercase; letter-spacing: .04em; }
+#edit-overlay input, #edit-overlay textarea, #edit-overlay select {
+  width: 100%; box-sizing: border-box;
+  padding: 9px 12px; border-radius: 10px;
+  background: var(--panel2, #12241b); border: 1px solid var(--line, rgba(200,169,106,.25));
+  color: var(--text, #e8e4d8); font: inherit; font-size: 14px;
+}
+#edit-overlay input:focus, #edit-overlay textarea:focus { outline: none; border-color: var(--accent, #c8a96a); }
+
+.edit-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; align-items: center; }
+.edit-status { margin-left: 10px; font-size: 13px; color: var(--vitality, #4cad6d); }
+.edit-status.err { color: var(--bad, #e05252); }
+
+.edit-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.edit-grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.edit-grid2 label, .edit-grid4 label { margin-top: 0 !important; }
+
+.edit-toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+  z-index: 120; padding: 10px 20px; border-radius: 9999px;
+  background: rgba(10,26,19,.96); border: 1px solid rgba(47,216,160,.5);
+  color: #d9efe2; font-size: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.55);
+  animation: toast-in .25s ease-out;
+}
+.edit-toast.err { border-color: rgba(224,82,82,.6); color: #f4d9d9; }
+@keyframes toast-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
