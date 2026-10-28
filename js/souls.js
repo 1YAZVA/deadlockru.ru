@@ -19,6 +19,8 @@
   const souls = [];
   const sparks = [];
   const glitters = [];
+  const darks = [];      // чёрные округлые вкрапления (дымки)
+  const bursts = [];     // лопнувшие души (взрыв)
 
   const rand = (a, b) => a + Math.random() * (b - a);
 
@@ -56,6 +58,40 @@
   function spawnGlitter(x, y, pal) {
     if (glitters.length > 30) return;
     glitters.push({ x, y, life: rand(0.3, 0.7), t: 0, pal, size: rand(2.5, 5) });
+  }
+
+  // чёрные округлые дымки вокруг души (как в игре)
+  function spawnDark(x, y, big) {
+    if (darks.length > 70) return;
+    darks.push({
+      x: x + rand(-9, 9), y: y + rand(-6, 16),
+      r: big ? rand(3, 5.5) : rand(1.6, 3.6),
+      vx: rand(-5, 5), vy: rand(-8, 3),
+      life: rand(0.55, 1.4), t: 0
+    });
+  }
+
+  // душа лопается: кольцо искр + тёмный пшик + вспышка (как в конце жизни)
+  function popSoul(s) {
+    bursts.push({
+      x: s.px, y: s.py, t: 0, life: 0.6, pal: s.pal, rr: s.r,
+      puffs: Array.from({ length: 8 }, () => ({
+        ang: rand(0, Math.PI * 2), d0: rand(2, 6),
+        spd: rand(28, 62), size: rand(2.5, 5)
+      }))
+    });
+    // радиальные цветные искры
+    for (let i = 0; i < 13; i++) {
+      const ang = (i / 13) * Math.PI * 2 + rand(-0.2, 0.2);
+      const spd = rand(55, 160);
+      sparks.push({
+        x: s.px, y: s.py,
+        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd - 15,
+        r: rand(1.2, 2.6), life: rand(0.35, 0.75), t: 0, pal: s.pal
+      });
+    }
+    // тёмный пшик
+    for (let i = 0; i < 6; i++) spawnDark(s.px, s.py, true);
   }
 
   // -- хвост-хлыст: тёмный дым + светлое сердце внутри, каждая точка извивается --
@@ -107,6 +143,10 @@
     const sway = Math.sin(s.phase * s.swayFreq * Math.PI * 2) * s.swayAmp;
     const drift = Math.sin(now * 0.0004 + s.phase * 3) * 4;
     const px = (s.side === 0 ? s.laneX : w - s.laneX) + sway + drift;
+    s.px = px; s.py = s.y;   // для клика/наведения
+
+    // чёрные округлые дымки вокруг души
+    if (Math.random() < 0.09) spawnDark(px, s.y, false);
 
     // копим точки хвоста (хвост тянется и слегка «отстаёт» вниз)
     if (s.hist > 0.045) {
@@ -192,6 +232,55 @@
   }
 
   function drawSparks(dt) {
+    ctx.globalCompositeOperation = 'source-over';
+    // тёмный дым, чёрные вкрапления и лопнувшие души — «поверх» (не аддитивно)
+    for (let i = darks.length - 1; i >= 0; i--) {
+      const p = darks[i];
+      p.t += dt;
+      if (p.t >= p.life) { darks.splice(i, 1); continue; }
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      const k = 1 - p.t / p.life;
+      ctx.fillStyle = 'rgba(10,14,12,' + (0.5 * k).toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * (0.7 + 0.5 * k), 0, Math.PI * 2);
+      ctx.fill();
+    }
+    // взрыв лопнувшей души
+    for (let i = bursts.length - 1; i >= 0; i--) {
+      const b = bursts[i];
+      b.t += dt;
+      const k = b.t / b.life;
+      if (k >= 1) { bursts.splice(i, 1); continue; }
+      const [dr, dg, db] = b.pal.deep;
+      const [sr, sg, sb] = b.pal.soft;
+      // тёмный пшик: расширяющиеся чёрные круги
+      for (const p of b.puffs) {
+        const d = p.d0 + p.spd * b.t;
+        ctx.fillStyle = 'rgba(10,14,12,' + ((1 - k) * 0.45).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(b.x + Math.cos(p.ang) * d, b.y + Math.sin(p.ang) * d, p.size * (1 + k * 1.6), 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'lighter';
+      // расходящееся кольцо
+      ctx.strokeStyle = `rgba(${sr},${sg},${sb},${((1 - k) * 0.6).toFixed(3)})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(b.x, b.y, b.rr * (0.8 + k * 4.2), 0, Math.PI * 2); ctx.stroke();
+      // короткая крест-вспышка в начале
+      if (b.t < 0.14) {
+        const fa = 1 - b.t / 0.14;
+        ctx.strokeStyle = b.pal.flash;
+        ctx.globalAlpha = 0.85 * fa;
+        ctx.beginPath();
+        ctx.moveTo(b.x - b.rr * 2.6, b.y); ctx.lineTo(b.x + b.rr * 2.6, b.y);
+        ctx.moveTo(b.x, b.y - b.rr * 2.6); ctx.lineTo(b.x, b.y + b.rr * 2.6);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.lineWidth = 1;
+    }
+
     ctx.globalCompositeOperation = 'lighter';
     for (let i = sparks.length - 1; i >= 0; i--) {
       const p = sparks[i];
@@ -284,6 +373,9 @@
     ctx = canvas.getContext('2d');
     resize();
 
+    // отладочный доступ (для тестов/подбора настроек)
+    window.__soulsDebug = { souls, sparks, darks, bursts };
+
     metrics();
     for (let i = 0; i < SOULS_PER_SIDE * 2; i++) {
       const s = makeSoul(true);
@@ -303,6 +395,39 @@
         if (document.hidden) stop(); else start();
       });
     }
+
+    // лопание душ по клику (как «добивание» orbов в игре).
+    // клики по карточкам/кнопкам не считаем — только по пустому полю у души.
+    const INTERACTIVE = 'a,button,input,textarea,select,label,.hero-card,.build,.note,.card,.patch-pill,.online-widget,.edit-badge,.soc-btn,.tag-pill,.btn-mini,#edit-fab-menu';
+    document.addEventListener('pointerdown', (e) => {
+      if (!running || !pane || !pane.classList.contains('active')) return;
+      if (e.target.closest(INTERACTIVE)) return;
+      const cx = e.clientX, cy = e.clientY;
+      for (let i = 0; i < souls.length; i++) {
+        const s = souls[i];
+        if (s.px == null || s.alpha < 0.35) continue;
+        const dx = cx - s.px, dy = cy - s.py;
+        const rad = Math.max(24, s.r * 3.4);
+        if (dx * dx + dy * dy <= rad * rad) {
+          popSoul(s);
+          souls[i] = makeSoul(false);
+          break;
+        }
+      }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!running) return;
+      if (e.target.closest(INTERACTIVE)) { document.body.style.cursor = ''; return; }
+      let hover = false;
+      for (const s of souls) {
+        if (s.px == null || s.alpha < 0.35) continue;
+        const dx = e.clientX - s.px, dy = e.clientY - s.py;
+        const rad = Math.max(24, s.r * 3.4);
+        if (dx * dx + dy * dy <= rad * rad) { hover = true; break; }
+      }
+      document.body.style.cursor = hover ? 'pointer' : '';
+    }, { passive: true });
 
     start();
   }
