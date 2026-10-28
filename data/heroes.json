@@ -1,0 +1,14 @@
+{
+  "updatedAt": "2026-10-29",
+  "note": "Значения стартовые/приблизительные — сверьте с актуальным патчем и правьте в админке без кода.",
+  "heroes": [
+    { "id": "haze", "name": "Haze", "role": "Керри / ганкер", "avatar": "", "color": "#a64df0", "desc": "Ассасин с невидимостью и Sleep Dagger. Слаба на ранней линии, раскрывается к поздней игре через фарм и точечные устранения целей.", "stats": { "weaponDamage": 6, "fireRate": 1.4, "health": 550, "moveSpeed": 6.9 } },
+    { "id": "seven", "name": "Seven", "role": "Мид / спирит", "avatar": "", "color": "#f0c615", "desc": "Урон через способности: Chain Lightning и Static Hold. Король зоны миддлейна, но остро уязвим к раннему ганку.", "stats": { "weaponDamage": 5, "fireRate": 1.1, "health": 580, "moveSpeed": 6.6 } },
+    { "id": "abrams", "name": "Abrams", "role": "Танк / оффлейн", "avatar": "", "color": "#e04f2e", "desc": "Ближний бой, много здоровья и контроля. Seismic Impact — вход в драку, ультимейт изолирует ключевую цель врага.", "stats": { "weaponDamage": 7, "fireRate": 0.9, "health": 750, "moveSpeed": 6.3 } },
+    { "id": "infernus", "name": "Infernus", "role": "Керри", "avatar": "", "color": "#ff7a1a", "desc": "Быстрый спам-керри с поджогом: масштабируется скоростью стрельбы и спирит-бонусами. Сильный пик к поздней игре.", "stats": { "weaponDamage": 5.5, "fireRate": 1.6, "health": 540, "moveSpeed": 7.0 } },
+    { "id": "lash", "name": "Lash", "role": "Мид / дайвер", "avatar": "", "color": "#3ba1f0", "desc": "Grapple + Death Slam: берёт врага в пакеты и устраивает дайвы. Требует уверенной механики, но наказывает за ошибки позиционирования.", "stats": { "weaponDamage": 6, "fireRate": 1.2, "health": 600, "moveSpeed": 6.8 } },
+    { "id": "wraith", "name": "Wraith", "role": "Керри / бёрст", "avatar": "", "color": "#2fd8b5", "desc": "Teleport Strike + Full Clip: мгновенный бёрст урона, быстро обнуляет отдельную цель. Зависит от таймингов кулдаунов.", "stats": { "weaponDamage": 6.5, "fireRate": 1.1, "health": 580, "moveSpeed": 6.7 } },
+    { "id": "vindicta", "name": "Vindicta", "role": "Снайпер", "avatar": "", "color": "#c0392b", "desc": "Дальний урон с Assassin's Scope: наказывает за плохое позиционирование, но хрупкая и зависит от команды.", "stats": { "weaponDamage": 7.5, "fireRate": 0.85, "health": 500, "moveSpeed": 6.5 } },
+    { "id": "bebop", "name": "Bebop", "role": "Крюк / бёрст", "avatar": "", "color": "#7cb342", "desc": "Hook выдёргивает врага из позиции, Heavy Barrage прижимает на месте. Сильный сингл-таргет урон, но требует точных попаданий крюка.", "stats": { "weaponDamage": 6.8, "fireRate": 1.0, "health": 620, "moveSpeed": 6.4 } }
+  ]
+}
