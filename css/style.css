@@ -281,3 +281,15 @@ body.edit-on .edit-badge { display: inline-flex !important; }
 }
 #tab-home { position: relative; }
 #tab-home > .hero, #tab-home > .container, #tab-home > .online-widget-wrap { position: relative; z-index: 1; }
+
+/* Первый экран — только герой; карточки и вся/info-блоки видны после прокрутки */
+#tab-home > .hero {
+  min-height: calc(100vh - 76px);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 90px 20px 70px;
+}
+/* Все надписи главной — по центру */
+#tab-home .section-label { text-align: center; width: 100%; }
+#tab-home .card { text-align: center; }
+#tab-home .card .btn-mini { margin: 0 auto; }
