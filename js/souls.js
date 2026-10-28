@@ -1,93 +1,169 @@
 // ---------- Души (фоновая анимация вкладки «Герои») ----------
-// Светящиеся сферы, как души убитых криптов в Deadlock: всплывают снизу,
-// слегка колышутся в полёте и тянут за собой рой мелких искр.
-// Живут по бокам экрана (в «полях» рядом с контентом), за карточками.
+// Свои души — зелёные (как после лайнового крипа), вражеские — фиолетово-синие.
+// Многослойный рендер: ореол, пульсирующее кольцо, вращающаяся внутренняя
+// энергия, яркое ядро и хвост-комета из затухающих следов + рой искр.
 (function () {
   'use strict';
 
-  const PANE = '#tab-heroes';           // где живут души
+  const PANE = '#tab-heroes';
   const SOULS_PER_SIDE = 7;             // по 7 душ слева и справа
-  const GREEN = { core: '#C9FFDF', mid: 'rgba(76,230,138,', glow: 'rgba(46,196,110,' };
+  const ENEMY_SHARE = 0.3;              // доля вражеских (фиолетовых) душ
 
-  let canvas, ctx, raf = null, running = false, sideW = 0, dpr = 1;
+  // палитры
+  const PALETTES = {
+    ally: {
+      core: '#D8FFE8',
+      soft: [110, 240, 160],   // rgb мягкого свечения
+      deep: [32, 150, 90],     // rgb дальнего ореола
+      spark: 'rgba(150,255,200,'
+    },
+    enemy: {
+      core: '#ECE7FF',
+      soft: [150, 120, 235],   // фиолетово-синий
+      deep: [84, 60, 170],
+      spark: 'rgba(200,180,255,'
+    }
+  };
+
+  let canvas, ctx, raf = null, running = false, sideW = 0;
   const souls = [];
   const sparks = [];
 
-  function rand(a, b) { return a + Math.random() * (b - a); }
+  const rand = (a, b) => a + Math.random() * (b - a);
 
   function makeSoul(initial) {
-    const side = Math.random() < 0.5 ? 0 : 1;           // 0 = слева, 1 = справа
+    const side = Math.random() < 0.5 ? 0 : 1;
+    const enemy = Math.random() < ENEMY_SHARE;
     const h = window.innerHeight;
-    const w = window.innerWidth;
-    const lane = rand(16, Math.max(32, Math.min(sideW, 240) - 16)); // линия внутри бокового поля
-    const t = rand(0, 60);
+    const lane = rand(18, Math.max(34, Math.min(sideW, 240) - 18));
     return {
-      side,
+      side, enemy, pal: enemy ? PALETTES.enemy : PALETTES.ally,
       laneX: lane,
-      y: initial ? rand(0, h) : h + rand(20, 260),
-      r: rand(4.5, 9),                                  // радиус ядра
-      vy: rand(22, 42),                                 // px/сек вверх
-      swayAmp: rand(8, 22),                             // размах колыхания
-      swayFreq: rand(0.35, 0.8),
-      phase: t,
-      alpha: initial ? rand(.5, .9) : 0,
-      born: performance.now()
+      y: initial ? rand(-40, h) : h + rand(20, 300),
+      r: enemy ? rand(7, 11) : rand(4.5, 8.5),          // вражеские чуть крупнее
+      vy: enemy ? rand(16, 30) : rand(24, 46),
+      swayAmp: rand(8, 22),
+      swayFreq: rand(0.3, 0.75),
+      phase: rand(0, 60),
+      spin: rand(0.8, 2.4),                             // скорость внутреннего вихря
+      pulse: rand(0.6, 1.4),                            // частота пульса кольца
+      alpha: initial ? rand(.55, .95) : 0,
+      trail: [],                                        // хвост-комета
+      history: 0
     };
   }
 
-  function spawnSpark(x, y) {
+  function spawnSpark(x, y, pal) {
+    if (sparks.length > 90) return;
     sparks.push({
-      x: x + rand(-6, 6), y: y + rand(-4, 14),
-      vx: rand(-8, 8), vy: rand(4, 26),
-      r: rand(0.8, 2.2), life: rand(0.7, 1.5), t: 0
+      x: x + rand(-7, 7), y: y + rand(-4, 16),
+      vx: rand(-9, 9), vy: rand(6, 30),
+      r: rand(0.7, 2.4), life: rand(0.6, 1.6), t: 0, pal
     });
   }
 
   function drawSoul(s, now, dt) {
     const w = window.innerWidth, h = window.innerHeight;
+
+    // движение
     s.y -= s.vy * dt;
     s.phase += dt;
+    s.history += dt;
 
-    // появление снизу / исчезновение наверху
+    // появление / затухание
     const fadeIn = Math.min(1, s.alpha + dt * 0.8);
-    const fadeTop = Math.min(1, (s.y - h * 0.06) / (h * 0.14)); // затухание у верхней кромки
+    const fadeTop = Math.min(1, (s.y - h * 0.05) / (h * 0.13));
     const a = fadeIn * Math.max(0, Math.min(1, fadeTop));
     s.alpha = fadeIn;
+    if (a <= 0.01) return;
 
-    // колыхание вокруг своей линии
     const sway = Math.sin(s.phase * s.swayFreq * Math.PI * 2) * s.swayAmp;
-    const drift = Math.sin(now * 0.0004 + s.phase * 3) * 4; // медленный «поплавок»
+    const drift = Math.sin(now * 0.0004 + s.phase * 3) * 4;
     const px = (s.side === 0 ? s.laneX : w - s.laneX) + sway + drift;
 
-    // след из искр
-    if (Math.random() < 0.25) spawnSpark(px + rand(-3, 3), s.y + s.r);
+    // хвост-комета: копим следы
+    if (s.history > 0.028) {
+      s.history = 0;
+      s.trail.push({ x: px, y: s.y + s.r * 0.6 });
+      if (s.trail.length > 13) s.trail.shift();
+    } else if (s.trail.length) {
+      // след тоже «плывёт» вверх — правим за душой
+      for (const p of s.trail) p.y -= s.vy * dt * 0.55;
+    }
 
-    const g = ctx.createRadialGradient(px, s.y, 0, px, s.y, s.r * 4.5);
-    g.addColorStop(0, GREEN.core);
-    g.addColorStop(0.25, GREEN.mid + (0.9 * a) + ')');
-    g.addColorStop(0.55, GREEN.glow + (0.35 * a) + ')');
-    g.addColorStop(1, 'rgba(30,120,70,0)');
-    ctx.globalAlpha = 1;
+    const [sr, sg, sb] = s.pal.soft;
+    const [dr, dg, db] = s.pal.deep;
+    ctx.globalCompositeOperation = 'lighter';
+
+    // 1) дальний ореол
+    let g = ctx.createRadialGradient(px, s.y, 0, px, s.y, s.r * 7);
+    g.addColorStop(0, `rgba(${dr},${dg},${db},${(0.30 * a).toFixed(3)})`);
+    g.addColorStop(0.5, `rgba(${dr},${dg},${db},${(0.10 * a).toFixed(3)})`);
+    g.addColorStop(1, `rgba(${dr},${dg},${db},0)`);
     ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(px, s.y, s.r * 4.5, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.beginPath(); ctx.arc(px, s.y, s.r * 7, 0, Math.PI * 2); ctx.fill();
+
+    // 2) среднее свечение
+    g = ctx.createRadialGradient(px, s.y, 0, px, s.y, s.r * 3.2);
+    g.addColorStop(0, `rgba(${sr},${sg},${sb},${(0.55 * a).toFixed(3)})`);
+    g.addColorStop(1, `rgba(${sr},${sg},${sb},0)`);
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(px, s.y, s.r * 3.2, 0, Math.PI * 2); ctx.fill();
+
+    // 3) хвост-комета (позади и ниже)
+    for (let i = 0; i < s.trail.length; i++) {
+      const p = s.trail[i];
+      const k = (i + 1) / s.trail.length;              // 0..1 к голове
+      const rad = s.r * (0.16 + 0.7 * k);
+      ctx.fillStyle = `rgba(${sr},${sg},${sb},${(0.35 * k * k * a).toFixed(3)})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, rad, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // 4) пульсирующее кольцо
+    const ringR = s.r * (2.1 + 0.25 * Math.sin(now * 0.002 * s.pulse + s.phase));
+    ctx.strokeStyle = `rgba(${sr},${sg},${sb},${(0.28 * a).toFixed(3)})`;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.arc(px, s.y, ringR, 0, Math.PI * 2); ctx.stroke();
+
+    // 5) внутренний вихрь: две дуги вращаются вокруг ядра
+    const spin = now * 0.0016 * s.spin + s.phase;
+    ctx.strokeStyle = `rgba(${sr},${sg},${sb},${(0.65 * a).toFixed(3)})`;
+    ctx.lineWidth = s.r * 0.22;
+    for (let k = 0; k < 2; k++) {
+      const off = spin + k * Math.PI * 0.9;
+      ctx.beginPath();
+      ctx.arc(px, s.y, s.r * 1.05, off, off + Math.PI * 0.75);
+      ctx.stroke();
+    }
+
+    // 6) ядро (яркое, почти белое)
+    g = ctx.createRadialGradient(px, s.y, 0, px, s.y, s.r);
+    g.addColorStop(0, s.pal.core);
+    g.addColorStop(0.7, `rgba(${sr},${sg},${sb},${(0.95 * a).toFixed(3)})`);
+    g.addColorStop(1, `rgba(${dr},${dg},${db},0)`);
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(px, s.y, s.r * 1.15, 0, Math.PI * 2); ctx.fill();
+
+    // 7) искры
+    if (Math.random() < 0.3) spawnSpark(px + rand(-4, 4), s.y + s.r, s.pal);
+
+    ctx.globalCompositeOperation = 'source-over';
   }
 
   function drawSparks(dt) {
+    ctx.globalCompositeOperation = 'lighter';
     for (let i = sparks.length - 1; i >= 0; i--) {
       const p = sparks[i];
       p.t += dt;
       if (p.t >= p.life) { sparks.splice(i, 1); continue; }
       p.x += p.vx * dt; p.y += p.vy * dt;
       const k = 1 - p.t / p.life;
-      ctx.globalAlpha = 0.5 * k;
-      ctx.fillStyle = 'rgba(140,255,190,' + (0.7 * k).toFixed(3) + ')';
+      ctx.fillStyle = p.pal.spark + (0.85 * k).toFixed(3) + ')';
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * k, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, Math.max(0.2, p.r * k), 0, Math.PI * 2);
       ctx.fill();
     }
-    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
   }
 
   function frame(now) {
@@ -100,24 +176,22 @@
     for (const s of souls) drawSoul(s, now, dt);
     drawSparks(dt);
 
-    // респавн: душа ушла за верх — рождаем внизу
     for (let i = 0; i < souls.length; i++) {
-      if (souls[i].y < -30) souls[i] = makeSoul(false);
+      if (souls[i].y < -60) souls[i] = makeSoul(false);
     }
     raf = requestAnimationFrame(frame);
   }
 
   function metrics() {
-    // ширина бокового «поля»: зазор между краем экрана и контентом
     const main = document.querySelector('main');
     if (!main) { sideW = 60; return; }
     const gap = (window.innerWidth - main.getBoundingClientRect().width) / 2;
-    sideW = Math.max(46, Math.min(gap, 260));
+    sideW = Math.max(50, Math.min(gap, 260));
   }
 
   function resize() {
     if (!canvas) return;
-    dpr = Math.min(2, window.devicePixelRatio || 1);
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
     canvas.style.width = window.innerWidth + 'px';
@@ -153,18 +227,16 @@
     ctx = canvas.getContext('2d');
     resize();
 
-    // наполняем души: слева и справа поровну
     metrics();
     for (let i = 0; i < SOULS_PER_SIDE * 2; i++) {
       const s = makeSoul(true);
       s.side = i % 2;
-      s.laneX = rand(16, Math.max(32, Math.min(sideW, 240) - 16));
+      s.laneX = rand(18, Math.max(34, Math.min(sideW, 240) - 18));
       souls.push(s);
     }
 
     window.addEventListener('resize', resize);
 
-    // активируем только на вкладке «Герои»
     const pane = document.querySelector(PANE);
     if (pane && 'MutationObserver' in window) {
       new MutationObserver(() => {
