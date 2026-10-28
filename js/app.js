@@ -11,11 +11,13 @@ window.state = state; // админка правит состояние чере
 
 // ---------- навигация ----------
 function go(tab) {
+  // админка открывается ТОЛЬКО по секретному URL (#panel-…) — кнопки в навигации нет
+  if (tab === 'admin' && !(window.AdminUI && window.AdminUI.isUnlocked())) tab = 'home';
   document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
   const sec = $('#tab-' + tab);
   if (sec) sec.classList.add('active');
   document.querySelectorAll('#main-nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  location.hash = tab;
+  location.hash = (tab === 'admin' && window.AdminUI) ? window.AdminUI.SECRET_HASH : tab;
   if (tab === 'admin' && window.AdminUI) window.AdminUI.render();
   window.scrollTo({ top: 0 });
 }
@@ -61,37 +63,44 @@ function renderNews() {
     ? state.notes.slice().sort((a, b) => b.date.localeCompare(a.date)).map(n => `
       <article class="note">
         <div class="meta"><span class="tag">${esc(n.tag || 'патч')}</span><span>${esc(n.date)}</span></div>
-        <h3>${esc(n.title)}</h3>
+        <h3 style="font-family:var(--font-display);font-size:17px;margin-bottom:4px">${esc(n.title)}</h3>
         <p class="muted" style="white-space:pre-wrap">${esc(n.text)}</p>
       </article>`).join('')
-    : '<p class="muted">Пока нет записей — добавьте их через 🔒 Админку.</p>';
+    : '<p class="muted">Пока нет записей — добавьте их через «Управление».</p>';
 
   const latest = state.notes.slice().sort((a, b) => b.date.localeCompare(a.date))[0];
-  $('#home-latest-note').innerHTML = latest
-    ? `<b>${esc(latest.title)}</b><p style="margin-top:4px">${esc(String(latest.text).slice(0, 140))}…</p><div class="muted">${esc(latest.date)}</div>`
-    : 'Записей пока нет.';
+  const pill = $('#home-patch-pill');
+  if (pill) {
+    if (latest) {
+      $('#pill-title').textContent = latest.title;
+      $('#pill-date').textContent = latest.date;
+      pill.style.display = 'flex';
+    } else {
+      pill.style.display = 'none';
+    }
+  }
 }
 
 function heroAvatar(h) {
+  const letter = (h.name || '?').trim().charAt(0).toUpperCase();
   return h.avatar
     ? `<img src="${esc(h.avatar)}" alt="${esc(h.name)}" loading="lazy">`
-    : `<span style="color:${esc(h.color || 'var(--accent)')}">◆</span>`;
+    : esc(letter);
 }
 
 function renderHeroes() {
   $('#heroes-grid').innerHTML = state.heroes.map(h => `
-    <div class="card hero-card" data-hero="${esc(h.id)}" title="Открыть в калькуляторе">
-      <div class="ava">${heroAvatar(h)}</div>
-      <h4>${esc(h.name)}</h4>
-      <div class="role">${esc(h.role || '')}</div>
-      <p class="muted" style="min-height:60px">${esc(h.desc || '')}</p>
-      <div class="stats-row">
-        ${h.stats ? `
-        <span class="stat-chip">⚔ ${h.stats.weaponDamage ?? '—'}</span>
-        <span class="stat-chip">⏱ ${h.stats.fireRate ?? '—'}/с</span>
-        <span class="stat-chip">❤ ${h.stats.health ?? '—'}</span>` : ''}
-      </div>
-    </div>`).join('') || '<p class="muted">Список пуст — добавьте героев в админке.</p>';
+    <div class="hero-card" data-hero="${esc(h.id)}" title="Открыть в DPS-калькуляторе">
+      <span class="ava-letter">${heroAvatar(h)}</span>
+      <span style="min-width:0">
+        <h4>${esc(h.name)}</h4>
+        <span class="en">${esc(h.role || '')}</span>
+        <span class="tags">
+          ${h.tags ? String(h.tags).split(',').filter(Boolean).map(t => `<span class="tag-pill">${esc(t.trim())}</span>`).join('') : ''}
+          ${h.stats ? `<span class="stat-chip">⚔ ${h.stats.weaponDamage ?? '—'}</span><span class="stat-chip">⏱ ${h.stats.fireRate ?? '—'}/с</span>` : ''}
+        </span>
+      </span>
+    </div>`).join('') || '<p class="muted">Список пуст — добавьте героев в «Управлении».</p>';
 }
 
 function renderBuilds() {
@@ -99,15 +108,15 @@ function renderBuilds() {
     const hero = state.heroes.find(h => h.id === bld.hero);
     return `
     <article class="build">
-      <div class="meta" style="display:flex;gap:10px;align-items:center;margin-bottom:4px">
-        <span class="role" style="margin:0">${hero ? esc(hero.name) : esc(bld.hero || '')}</span>
-        ${bld.tags ? `<span class="tag">${esc(bld.tags)}</span>` : ''}
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:4px;flex-wrap:wrap">
+        <span class="tag-pill" style="color:var(--accent);border-color:rgba(200,169,106,.4)">${hero ? esc(hero.name) : esc(bld.hero || '')}</span>
+        ${bld.tags ? String(bld.tags).split(',').filter(Boolean).map(t => `<span class="tag-pill">${esc(t.trim())}</span>`).join('') : ''}
       </div>
       <h3>${esc(bld.title)}</h3>
       <div class="items">${String(bld.items || '').split(',').map(i => i.trim()).filter(Boolean).map(i => `<span class="item">${esc(i)}</span>`).join('')}</div>
       <p class="muted" style="white-space:pre-wrap">${esc(bld.desc || '')}</p>
     </article>`;
-  }).join('') || '<p class="muted">Билдов пока нет — добавьте в админке.</p>';
+  }).join('') || '<p class="muted">Билдов пока нет — добавьте в «Управлении».</p>';
 }
 
 // ---------- онлайновый счётчик ----------
@@ -144,19 +153,47 @@ async function fetchJSON(url) {
   throw new Error('live: все источники недоступны');
 }
 
-async function fetchOnline() {
-  // 1) официальный live-счётчик (заработает, когда Valve откроет публичную статистику)
+async function fetchOnlineStats() {
+  // Возвращает {live, peak}: live — текущий онлайн, peak — пик за 24 ч (Steam Charts).
+  // Источник №0: наш же data/live.json — его каждые 5 минут обновляет GitHub Actions
+  // (свой файл → ни CORS, ни прокси; самый быстрый и надёжный путь).
+  let live = null, peak = null;
   try {
-    const j = await fetchJSON(`https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=${APPID}`);
-    if (typeof j?.response?.player_count === 'number') return { kind: 'live', value: j.response.player_count };
+    const j = await (await fetch('data/live.json?t=' + Date.now(), { cache: 'no-store' })).json();
+    const fresh = Date.parse(j.updated) > Date.now() - 25 * 60e3; // старше 25 мин считаем протухшим
+    if (fresh && typeof j.live === 'number') live = j.live;
+    // пик из live.json берём всегда: Charts-API иногда не отвечает в браузере,
+    // а в workflow мы его пишем в тот же файл
+    if (fresh && typeof j.peak === 'number') peak = j.peak;
   } catch (_) {}
-  // 2) пик за последние сутки из официальной статистики Steam Charts
-  try {
-    const j = await fetchJSON('https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/');
-    const row = j?.response?.ranks?.find((x) => x.appid === APPID);
-    if (row?.peak_in_game) return { kind: 'peak', value: row.peak_in_game };
-  } catch (_) {}
-  return null;
+  // Свежий файл = источник истины, внешние запросы не нужны (грузятся до 30 с)
+  if (live != null) return { live, peak };
+
+  // Далее параллельные внешние источники — на случай, если Actions ещё не начал работать.
+  const jobStore = fetchText(`https://store.steampowered.com/charts/mostplayed`);
+  const jobExact = fetchJSON(`https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=${APPID}`);
+  const jobSpy = fetchJSON(`https://steamspy.com/api.php?request=appdetails&appid=${APPID}`);
+  const jobCharts = fetchJSON('https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/');
+  const [store, steam, spy, charts] = await Promise.allSettled([jobStore, jobExact, jobSpy, jobCharts]);
+
+  if (live == null && store.status === 'fulfilled' && store.value) {
+    const m = store.value.match(/1422450[\s\S]{0,200}?nConcurrentInGame\\?":(\d+)/);
+    if (m) live = parseInt(m[1], 10);
+  }
+  if (live == null && steam.status === 'fulfilled') {
+    const c = steam.value?.response?.player_count;
+    if (typeof c === 'number') live = c;
+  }
+  if (live == null && spy.status === 'fulfilled') {
+    const ccu = spy.value?.ccu;
+    if (typeof ccu === 'number' && ccu > 0) live = ccu;
+  }
+  if (charts.status === 'fulfilled') {
+    const row = charts.value?.response?.ranks?.find((x) => x.appid === APPID);
+    if (row?.peak_in_game) peak = row.peak_in_game;
+  }
+  if (live == null && peak == null) return null;
+  return { live, peak };
 }
 
 function drawSpark() {
@@ -177,38 +214,63 @@ function drawSpark() {
 
 let sparkTimer = null;
 async function refreshOnline() {
-  const res = await fetchOnline();
-  const live = $('#online-count'), home = $('#home-online');
-  if (res) {
-    [live, home].forEach((el) => { if (el) el.textContent = fmtNum(res.value); });
-    home.style.color = res.kind === 'peak' ? 'var(--accent2)' : 'var(--ok)';
-    const note = $('#home-online-note');
-    if (note) note.textContent = res.kind === 'peak' ? 'пик за 24 ч · Steam Charts' : 'обновляется каждую минуту';
-    $('.online-widget').title = res.kind === 'peak'
-      ? 'Пик одновременного онлайна за последние сутки (Steam Charts). Живой счётчик Steam пока не открывает статистику для этой игры.'
-      : 'Одновременно играющих в Steam';
-    localStorage.setItem('dl_online_last', JSON.stringify({ t: Date.now(), ...res }));
+  const res = await fetchOnlineStats();
+  const live = $('#online-count'), homeLive = $('#home-online'), homePeak = $('#home-peak');
+  const note = $('#home-online-note');
+  if (res?.live != null) {
+    // есть настоящий live-онлайн
+    [live, homeLive].forEach((el) => { if (el) el.textContent = fmtNum(res.live); });
+    homeLive.style.color = 'var(--vitality)';
+    if (note) note.textContent = 'играют прямо сейчас';
+    $('.online-widget').title = 'Одновременно играющих в Steam';
+    if (homePeak && res.peak != null) { homePeak.textContent = 'Пик за 24 ч: ' + fmtNum(res.peak); homePeak.style.display = ''; }
+  } else if (res?.peak != null) {
+    // Steam пока не отдаёт live (Valve закрыл статистику) — показываем пик с честной пометкой
+    [live, homeLive].forEach((el) => { if (el) el.textContent = '★ ' + fmtNum(res.peak); });
+    homeLive.style.color = 'var(--accent2)';
+    if (note) note.textContent = 'пик онлайна за 24 ч · точный «сейчас» Steam пока не отдаёт';
+    $('.online-widget').title = 'Пик одновременного онлайна за 24 ч (Steam Charts). Текущий онлайн Valve пока не публикует для этой игры.';
+    if (homePeak) { homePeak.style.display = 'none'; }
   } else {
-    // прокси недоступны: показываем последнее известное значение, если есть
+    // внешние запросы не удались: показываем последнее известное значение
     const last = JSON.parse(localStorage.getItem('dl_online_last') || 'null');
     if (last) {
       const mins = Math.round((Date.now() - last.t) / 60000);
       const label = `≈ ${fmtNum(last.value)} (${mins === 0 ? '<1' : mins} мин назад)`;
-      [live, home].forEach((el) => { if (el) el.textContent = label; });
-      const note = $('#home-online-note');
+      [live, homeLive].forEach((el) => { if (el) el.textContent = label; });
       if (note) note.textContent = 'внешние запросы недоступны — показано последнее значение';
     } else {
-      [live, home].forEach((el) => { if (el) el.textContent = 'н/д'; });
+      [live, homeLive].forEach((el) => { if (el) el.textContent = 'н/д'; });
     }
   }
-  const hist = JSON.parse(localStorage.getItem('dl_online_hist') || '[]');
-  const now = Date.now();
-  if (res && (!hist.length || now - hist[hist.length - 1].t > 55e3)) hist.push({ t: now, c: res.value });
-  while (hist.length > 48) hist.shift();
-  localStorage.setItem('dl_online_hist', JSON.stringify(hist));
+  if (res) {
+    localStorage.setItem('dl_online_last', JSON.stringify({ t: Date.now(), value: res.live ?? res.peak, kind: res.live != null ? 'live' : 'peak' }));
+    const hist = JSON.parse(localStorage.getItem('dl_online_hist') || '[]');
+    const now = Date.now();
+    if (!hist.length || now - hist[hist.length - 1].t > 55e3) hist.push({ t: now, c: res.live ?? res.peak });
+    while (hist.length > 48) hist.shift();
+    localStorage.setItem('dl_online_hist', JSON.stringify(hist));
+  }
   drawSpark();
 }
 function startOnlineLoop() { refreshOnline(); clearInterval(sparkTimer); sparkTimer = setInterval(refreshOnline, 60e3); }
+
+// fetchText — как fetchJSON, но для больших текстов (HTML-страницы Steam Store)
+async function fetchText(url) {
+  const chain = [];
+  if (!directTried) { directTried = true; chain.push(url); }
+  for (let i = 0; i < PROXIES.length; i++) chain.push(PROXIES[(proxyStart + i) % PROXIES.length](url));
+  proxyStart++;
+  for (const u of chain) {
+    const ac = new AbortController(); const to = setTimeout(() => ac.abort(), 15000);
+    try {
+      const r = await fetch(u, { cache: 'no-store', signal: ac.signal });
+      clearTimeout(to);
+      if (r.ok) return await r.text();
+    } catch (_) { clearTimeout(to); }
+  }
+  throw new Error('text: все источники недоступны');
+}
 
 // ---------- RSS официальных новостей ----------
 async function loadSteamNews() {
@@ -264,5 +326,6 @@ document.addEventListener('click', (e) => {
   loadSteamNews();
   window.DPS?.update();
   const hash = location.hash.replace('#', '');
-  if (hash && $('#tab-' + hash)) go(hash);
+  if (window.AdminUI && window.AdminUI.isUnlocked()) go('admin'); // секретный URL
+  else if (hash && $('#tab-' + hash)) go(hash);
 })();
