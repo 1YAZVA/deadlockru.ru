@@ -8,10 +8,10 @@
   const PANE = '#tab-heroes';
   const SOULS_PER_SIDE = 7;             // по 7 душ слева и справа
 
-  // палитры: [мягкий RGB], [глубокий RGB], вспышки, ядро-минус
+  // палитры: зелёные (после лайнового крипа) и янтарно-оранжевые
+  // (как «незакреплённая» огненная душа из ролика) — два вида, без фиолетового
   const PALETTES = {
     ally:   { soft: [64, 245, 168],  deep: [26, 160, 96],   flash: '#E7FFF2', dark: [8, 20, 15] },
-    enemy:  { soft: [155, 122, 240], deep: [84, 58, 178],   flash: '#EFEAFF', dark: [12, 8, 22] },
     amber:  { soft: [255, 190, 92],  deep: [190, 120, 40],  flash: '#FFF3DC', dark: [24, 14, 6] }
   };
 
@@ -24,8 +24,7 @@
 
   function makeSoul(initial) {
     const side = Math.random() < 0.5 ? 0 : 1;
-    const roll = Math.random();
-    const kind = roll < 0.62 ? 'ally' : (roll < 0.87 ? 'enemy' : 'amber');
+    const kind = Math.random() < 0.72 ? 'ally' : 'amber';   // янтарные — «чужие», крупнее
     const h = window.innerHeight;
     const lane = rand(18, Math.max(34, Math.min(sideW, 240) - 18));
     return {
