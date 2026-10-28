@@ -211,22 +211,24 @@ function drawSpark() {
 
 let sparkTimer = null;
 async function refreshOnline() {
+  // Онлайн показываем ТОЛЬКО в шапке (`.online-widget`, правый верхний угол).
+  // Главную страницу не загружали лишними блоками; если элементы home-— не найдены, пропускаем.
   const res = await fetchOnlineStats();
   const live = $('#online-count'), homeLive = $('#home-online'), homePeak = $('#home-peak');
   const note = $('#home-online-note');
   if (res?.live != null) {
     // есть настоящий live-онлайн
     [live, homeLive].forEach((el) => { if (el) el.textContent = fmtNum(res.live); });
-    homeLive.style.color = 'var(--vitality)';
+    if (homeLive) homeLive.style.color = 'var(--vitality)';
     if (note) note.textContent = 'играют прямо сейчас';
-    $('.online-widget').title = 'Одновременно играющих в Steam';
+    const w = $('.online-widget'); if (w) w.title = 'Одновременно играющих в Steam';
     if (homePeak && res.peak != null) { homePeak.textContent = 'Пик за 24 ч: ' + fmtNum(res.peak); homePeak.style.display = ''; }
   } else if (res?.peak != null) {
     // Steam пока не отдаёт live (Valve закрыл статистику) — показываем пик с честной пометкой
     [live, homeLive].forEach((el) => { if (el) el.textContent = '★ ' + fmtNum(res.peak); });
-    homeLive.style.color = 'var(--accent2)';
+    if (homeLive) homeLive.style.color = 'var(--accent2)';
     if (note) note.textContent = 'пик онлайна за 24 ч · точный «сейчас» Steam пока не отдаёт';
-    $('.online-widget').title = 'Пик одновременного онлайна за 24 ч (Steam Charts). Текущий онлайн Valve пока не публикует для этой игры.';
+    const w = $('.online-widget'); if (w) w.title = 'Пик одновременного онлайна за 24 ч (Steam Charts). Текущий онлайн Valve пока не публикует для этой игры.';
     if (homePeak) { homePeak.style.display = 'none'; }
   } else {
     // внешние запросы не удались: показываем последнее известное значение
