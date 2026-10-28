@@ -441,9 +441,8 @@ window.AdminUI = (function () {
 
   loadCfg();
   startObserver();
-  window.addEventListener('hashchange', () => {
-    if (!isUnlocked() && document.body.classList.contains('edit-on')) exitEditMode();
-  });
+  // выход из режима правки — только кнопкой «✕» в тулбаре.
+  // Навигация по вкладкам меняет location.hash — это НЕ выход, режим живёт до выхода вручную.
   if (isUnlocked()) {
     if (authed()) enterEditMode(); else showGate();
   }
