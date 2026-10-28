@@ -441,10 +441,10 @@ window.AdminUI = (function () {
 
   loadCfg();
   startObserver();
-  // выход из режима правки — только кнопкой «✕» в тулбаре.
-  // Навигация по вкладкам меняет location.hash — это НЕ выход, режим живёт до выхода вручную.
-  if (isUnlocked()) {
-    if (authed()) enterEditMode(); else showGate();
-  }
+  // Режим правки включается при каждой загрузке, если личный вход уже пройден
+  // (флаг в localStorage живёт в этом браузере до кнопки «✕»). Шторка «Личный вход»
+  // показывается только по секретному URL, если входа ещё не было.
+  if (authed()) enterEditMode();
+  else if (isUnlocked()) showGate();
   return { enter: () => { authed() ? (closeModal(), enterEditMode()) : showGate(); }, exitEditMode, isUnlocked, SECRET_HASH: '#' + SECRET_HASH };
 })();
