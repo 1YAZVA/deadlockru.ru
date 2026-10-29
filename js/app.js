@@ -26,7 +26,16 @@ document.addEventListener('click', (e) => {
 });
 $('#go-home').addEventListener('click', () => go('home'));
 
-// ---------- вкладка «Предметы»: боковые вкладки категорий + магазин тиров ----------
+// ---------- вкладка «Предметы»: вкладки категорий справа + магазин тиров ----------
+const TIER_COST = { 1: 800, 2: 1600, 3: 3200, 4: 6400 }; // цена тира в соулах — как в игре
+
+// вывески магазинов в духе игровых (FAIRFAX / CURIOSITY CATALOG / MPS)
+const CAT_SHOP = {
+  weapon:   { name: 'Фэйрфакс',  tag: 'артиллерия — куплено и продано' },
+  spirit:   { name: 'Диковины',  tag: 'каталог № 777 — небесная алхимия и запретная лингвистика' },
+  vitality: { name: 'MPS',       tag: 'мистико-фармацевтические магазины — для семей и зверей' },
+};
+
 function itemCardHTML(it) {
   const stats = Array.isArray(it.stats) ? it.stats.filter(Boolean) : [];
   return `<article class="item-card" data-id="${esc(it.id)}" tabindex="0" role="button" aria-expanded="false" title="${esc(it.name)}">
@@ -38,21 +47,20 @@ function itemCardHTML(it) {
 
 function tierSecHTML(cat, tier) {
   const list = (window.state.items || []).filter((i) => i.category === cat && Number(i.tier) === Number(tier));
+  const cost = `<span class="cost"><i class="soul-dot"></i>${esc(fmtNum(TIER_COST[tier]))}</span><b>Тир ${tier}</b>`;
   if (!list.length) {
-    return `<div class="tier-sec"><div class="tier-bar"><b>Тир ${tier}</b></div><p class="tier-clear">Пусто — предметы добавим в этот тир позже.</p></div>`;
+    return `<div class="tier-sec"><div class="tier-bar">${cost}</div><p class="tier-clear">Пусто — предметы добавим в этот тир позже.</p></div>`;
   }
-  const costs = [...new Set(list.map((i) => Number(i.cost)))];
-  const costTxt = costs.length === 1
-    ? esc(fmtNum(costs[0]))
-    : esc(fmtNum(Math.min(...costs))) + '–' + esc(fmtNum(Math.max(...costs)));
   return `<div class="tier-sec">
-    <div class="tier-bar"><span class="cost"><i class="soul-dot"></i>${costTxt}</span><b>Тир ${tier}</b></div>
+    <div class="tier-bar">${cost}</div>
     <div class="items-row">${list.map(itemCardHTML).join('')}</div>
   </div>`;
 }
 
 function categoryPanelHTML(cat) {
-  return `<div class="tiers-flow">${[1, 2, 3, 4].map((t) => tierSecHTML(cat, t)).join('')}</div>`;
+  const shop = CAT_SHOP[cat] || { name: '', tag: '' };
+  return `<div class="shop-head"><span class="shop-name">${esc(shop.name)}</span><span class="shop-tag">${esc(shop.tag)}</span></div>
+    <div class="tiers-flow">${[1, 2, 3, 4].map((t) => tierSecHTML(cat, t)).join('')}</div>`;
 }
 
 function renderItems() { // перерисовка панели активной категории (вызывает и админка после правок)
@@ -64,7 +72,7 @@ function renderItems() { // перерисовка панели активной
 }
 window.renderItems = renderItems;
 
-// выбор категории в боковой панели (вкладки, панель одна на все)
+// выбор категории во вкладках справа (панель одна на все, раскрывается влево)
 function selectItemsCategory(cat) {
   const btn = document.querySelector('#items-cattabs .side-tab[data-cat="' + cat + '"]');
   if (!btn) return;

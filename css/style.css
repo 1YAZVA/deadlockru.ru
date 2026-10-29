@@ -71,23 +71,28 @@ h2.sec-title{font-family:var(--font-display);font-size:27px;font-weight:700;marg
 .card.spirit{border-top-color:var(--spirit)}.card.vitality{border-top-color:var(--vitality)}
 .card h3{font-family:var(--font-display);font-size:17px;font-weight:600;margin-bottom:6px}
 
-/* вкладка «Предметы»: как в игре — боковые вкладки категорий выдвигаются, тиры сеткой */
+/* вкладка «Предметы»: как в игре — слева узкая рейка только с иконками (строго в столбик);
+   при наведении рейка разворачивается вправо и показывает названия категорий */
 .shop-wrap{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;margin-top:22px}
-.shop-side{display:flex;flex-direction:column;gap:6px;width:74px;padding:10px 0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;transition:width .28s ease}
-.shop-side:hover{width:196px}
-.side-tab{display:flex;align-items:center;gap:12px;height:66px;margin:0 9px;padding:0 13px;background:none;border:0;border-radius:11px;color:inherit;font:inherit;cursor:pointer;white-space:nowrap;transition:background .2s}
-.side-tab .ico{width:46px;height:46px;flex:none;display:grid;place-items:center;border-radius:12px;background:color-mix(in srgb,var(--cat) 14%,transparent);border:1px solid color-mix(in srgb,var(--cat) 34%,transparent);color:var(--cat);transition:background .2s,box-shadow .2s}
+.shop-side{display:flex;flex-direction:column;align-items:stretch;gap:6px;width:62px;padding:8px 0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;transition:width .25s ease;position:sticky;top:72px;z-index:5}
+.shop-side:hover{width:200px}
+.side-tab{display:flex;align-items:center;gap:12px;height:56px;flex:none;margin:0 9px;padding:0;background:none;border:0;border-radius:12px;color:inherit;font:inherit;cursor:pointer;white-space:nowrap;transition:background .2s}
+.side-tab .ico{width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:12px;background:color-mix(in srgb,var(--cat) 14%,transparent);border:1px solid color-mix(in srgb,var(--cat) 34%,transparent);color:var(--cat);transition:background .2s,box-shadow .2s}
 .side-tab .ico svg{width:22px;height:22px}
-.side-tab .lbl{opacity:0;transform:translateX(-10px);transition:opacity .25s ease,transform .25s ease;font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em}
+.side-tab .lbl{opacity:0;transform:translateX(-8px);transition:opacity .2s ease .05s,transform .2s ease .05s;font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em}
 .shop-side:hover .lbl{opacity:1;transform:none}
 .side-tab:hover{background:color-mix(in srgb,var(--cat) 9%,transparent)}
 .side-tab.active{background:color-mix(in srgb,var(--cat) 7%,transparent)}
 .side-tab.active .ico{background:color-mix(in srgb,var(--cat) 30%,transparent);box-shadow:0 0 16px color-mix(in srgb,var(--cat) 30%,transparent)}
-.side-tab.active .lbl{color:var(--cat);opacity:1;transform:none}
+.side-tab.active .lbl{color:var(--cat)}
 .cat-panel{min-height:340px}
 .cat-panel-box{border:1px solid var(--line);border-left:3px solid var(--cat);border-radius:12px;background:color-mix(in srgb,var(--cat) 6%,var(--panel));padding:16px}
 .cat-panel.fadein{animation:itemsFade .3s ease}
 @keyframes itemsFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* шапка магазина: баннер в духе игровых вывесок (FAIRFAX / CURIOSITY CATALOG / MPS) */
+.shop-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:2px 0 16px;padding:12px 18px;border:1px solid color-mix(in srgb,var(--cat) 30%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--cat) 9%,transparent)}
+.shop-head .shop-name{font-family:var(--font-deco);font-size:24px;letter-spacing:.07em;text-transform:uppercase;color:var(--cat);line-height:1.1}
+.shop-head .shop-tag{font-size:12.5px;color:var(--muted);font-style:italic}
 .tiers-flow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .tier-sec{border:1px solid color-mix(in srgb,var(--cat) 26%,var(--line));border-radius:14px;background:color-mix(in srgb,var(--cat) 4%,var(--panel));padding:14px}
 .tier-bar{display:flex;align-items:center;gap:12px;margin:0 0 12px}
@@ -110,13 +115,13 @@ h2.sec-title{font-family:var(--font-display);font-size:27px;font-weight:700;marg
 .item-stats li{position:relative;padding-left:11px;color:#d5e2d9;text-align:left}
 .item-stats li::before{content:'';position:absolute;left:0;top:6.5px;width:4px;height:4px;border-radius:50%;background:var(--cat)}
 .soul-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;background:#d98a1f;background:radial-gradient(circle at 35% 30%, #ffd479, #d98a1f 72%)}
-/* мобильная: боковые вкладки горизонтально сверху */
+/* мобильная: вкладки категорий горизонтально сверху панели, названия видны сразу */
 @media (max-width:860px){
   .shop-wrap{grid-template-columns:1fr}
-  .shop-side{flex-direction:row;width:100%;padding:8px}
+  .shop-side{flex-direction:row;flex-wrap:wrap;width:100%;padding:8px;position:sticky;top:57px}
   .shop-side:hover{width:100%}
-  .side-tab{height:56px;margin:0;flex:none}
-  .side-tab .lbl{opacity:1;transform:none;font-size:13.5px}
+  .side-tab{height:52px;flex:1 1 auto;justify-content:center;padding:0 12px}
+  .side-tab .lbl{opacity:1;transform:none}
   .tiers-flow{grid-template-columns:1fr}
 }
 .muted{color:var(--muted);font-size:13px}

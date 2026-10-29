@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=17">
+<link rel="stylesheet" href="css/style.css?v=23">
 </head>
 <body>
 
@@ -100,29 +100,29 @@
     </div>
   </section>
 
-  <!-- ПРЕДМЕТЫ: категории-вкладки, выпадающая панель с тирами (наполнение позже) -->
+  <!-- ПРЕДМЕТЫ: магазин как в игре — вкладки категорий справа, панель с тирами раскрывается влево -->
   <section id="tab-items">
     <div style="padding-top:40px">
       <h2 class="sec-title">Предметы</h2>
-      <p class="lead">Три категории магазина. Выберите категорию — под ней раскроются её тиры.</p>
-      <div class="cat-tabs" id="items-cattabs">
-        <button type="button" class="cat-tab weapon" data-cat="weapon" aria-expanded="false">
-          <h3>Оружие</h3>
-          <p>Урон, темп стрельбы, крит, magazine и точность.</p>
-          <span class="chev" aria-hidden="true">▼</span>
-        </button>
-        <button type="button" class="cat-tab vitality" data-cat="vitality" aria-expanded="false">
-          <h3>Живучесть</h3>
-          <p>Здоровье, регенерация, сопротивления, щиты и мобильность.</p>
-          <span class="chev" aria-hidden="true">▼</span>
-        </button>
-        <button type="button" class="cat-tab spirit" data-cat="spirit" aria-expanded="false">
-          <h3>Спиритизм</h3>
-          <p>Сила духа, перезарядка способностей, длительность и урон способностей.</p>
-          <span class="chev" aria-hidden="true">▼</span>
-        </button>
+      <p class="lead">Магазин как в игре: вкладки категорий справа, панель с тирами раскрывается влево.
+        Наполнение тиров — по мере добавления предметов.</p>
+      <div class="shop-wrap">
+        <nav class="shop-side" id="items-cattabs" aria-label="Категории магазина">
+          <button type="button" class="side-tab weapon" data-cat="weapon" role="tab" aria-selected="false">
+            <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="7.2"/><path d="M12 1.6v4.2M12 18.2v4.2M1.6 12h4.2M18.2 12h4.2"/><circle cx="12" cy="12" r="2.3" fill="currentColor" stroke="none"/></svg></span>
+            <span class="lbl">Оружие</span>
+          </button>
+          <button type="button" class="side-tab spirit" data-cat="spirit" role="tab" aria-selected="false">
+            <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="12" r="9.6"/><path d="M12 3.4 17.6 19.4 4.9 9.9h14.2L6.4 19.4Z"/></svg></span>
+            <span class="lbl">Спиритизм</span>
+          </button>
+          <button type="button" class="side-tab vitality" data-cat="vitality" role="tab" aria-selected="false">
+            <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M9.4 2.8h5.2v6.6h6.6v5.2h-6.6v6.6H9.4v-6.6H2.8V9.4h6.6Z"/></svg></span>
+            <span class="lbl">Живучесть</span>
+          </button>
+        </nav>
+        <div class="cat-panel" id="items-panel" aria-live="polite"></div>
       </div>
-      <div class="cat-panel" id="items-panel"></div>
     </div>
   </section>
 
@@ -198,7 +198,7 @@
 
 <script src="js/admin.js?v=16"></script>
 <script src="js/dps.js?v=15"></script>
-<script src="js/app.js?v=20"></script>
+<script src="js/app.js?v=21"></script>
 <script src="js/souls.js?v=9"></script>
 </body>
 </html>
