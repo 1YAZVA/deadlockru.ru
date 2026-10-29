@@ -354,6 +354,353 @@
         "Длительность дебаффа: 12 с"
       ],
       "funcEn": "0.0s Cooldown, +60 Bonus Health, -13% Bullet Resist, +12s Debuff Duration"
+    },
+    {
+      "id": "alchemical_fire",
+      "name": "Alchemical Fire",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/alchemical_fire.png",
+      "stats": [
+        "Задержка применения: 0,2 с",
+        "Перезарядка: 30 с",
+        "Длительность: 5 с",
+        "-7% сопротивления пулям",
+        "45 урона в секунду",
+        "Макс. 95 урона в секунду",
+        "+10 мм радиуса",
+        "+10 силы духа"
+      ],
+      "funcEn": "+0.2s Cast Delay, 30.0s Cooldown, +5s Duration, -7% Bullet Resist, +45 Damage Per Second, +95 Max DPS, +10mm Radius, +10 Spirit Power"
+    },
+    {
+      "id": "ballistic_enchantment",
+      "name": "Ballistic Enchantment",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/ballistic_enchantment.png",
+      "stats": [
+        "Длительность: 14 с",
+        "Лимит стаков по не-героям: 8",
+        "+22% радиуса",
+        "+22% дальности способности",
+        "+20% урона оружия за стак",
+        "+5% урона оружия по не-героям"
+      ],
+      "funcEn": "+14s Duration, +8 Non-Hero Stack Limit, +22% Radius, +22% Ability Range, +20% Weapon Damage per Stack, +5% Non-Hero Weapon Damage"
+    },
+    {
+      "id": "berserker",
+      "name": "Berserker",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/berserker.png",
+      "stats": [
+        "+8% сопротивления пулям",
+        "Длительность: 10 с",
+        "120 полученного урона за стак",
+        "Макс. стаков: 10",
+        "+7% урона оружия за стак"
+      ],
+      "funcEn": "+8% Bullet Resist, +10s Duration, +120 Damage taken to Stack, +10.0 Max Stacks, +7% Weapon Damage per Stack"
+    },
+    {
+      "id": "blood_tribute",
+      "name": "Blood Tribute",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/blood_tribute.png",
+      "stats": [
+        "Задержка применения: 0 с",
+        "Перезарядка: 0 с",
+        "+35% скорости стрельбы",
+        "+2,0 мм скорости передвижения",
+        "+50/с высасывания здоровья",
+        "+8% сопротивления дебаффам",
+        "+4 реген вне боя",
+        "+35% сопротивления дебаффам",
+        "+8% сопротивления духу"
+      ],
+      "funcEn": "+0.0s Cast Delay, 0.0s Cooldown, +35% Fire Rate, +2.0mm Move Speed, +50/s Health Drain, +8% Debuff Resist, +4 Out of Combat Regen, +35% Debuff Resist, +8% Spirit Resist"
+    },
+    {
+      "id": "burst_fire",
+      "name": "Burst Fire",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/burst_fire.png",
+      "stats": [
+        "Перезарядка: 9 с",
+        "Длительность: 4,5 с",
+        "+32% скорости стрельбы",
+        "+10% скорости стрельбы",
+        "+1,25 мм скорости передвижения",
+        "+50% дальности скольжения"
+      ],
+      "funcEn": "9.0s Cooldown, +4.5s Duration, +32% Fire Rate, +10% Fire Rate, +1.25mm Move Speed, +50% Slide Distance"
+    },
+    {
+      "id": "cultist_sacrifice",
+      "name": "Cultist Sacrifice",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/cultist_sacrifice.png",
+      "stats": [
+        "+7 мм дальности применения",
+        "Перезарядка: 270 с",
+        "Длительность: 160 с",
+        "+10% урона оружия",
+        "+1 заряд способности",
+        "+50 доп. здоровья",
+        "+180% бонусных душ",
+        "+30% урона оружия по NPC",
+        "+30% сопротивления пулям от NPC",
+        "+2 реген вне боя",
+        "+12% радиуса",
+        "+12% дальности способностей"
+      ],
+      "funcEn": "+7mm Cast Range, 270s Cooldown, +160s Duration, +10% Weapon Damage, +1 Bonus Ability Charges, +50 Bonus Health, +180% Bonus Souls, +30% Weapon Damage vs. NPCs, +30% Bullet Resist vs. NPCs, +2 Out of Combat Regen, +12% Radius, +12% Ability Range"
+    },
+    {
+      "id": "escalating_resilience",
+      "name": "Escalating Resilience",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/escalating_resilience.png",
+      "stats": [
+        "+18% урона оружия",
+        "+35% макс. ёмкости магазина",
+        "+75 доп. здоровья",
+        "Длительность стака: 24 с",
+        "+2% сопротивления пулям за стак",
+        "Макс. +30% сопротивления пулям"
+      ],
+      "funcEn": "+18% Weapon Damage, +35% Max Ammo, +75 Bonus Health, +24s Stack Duration, +2% Bullet Resist per Stack, +30% Max Bullet Resist"
+    },
+    {
+      "id": "express_shot",
+      "name": "Express Shot",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/express_shot.png",
+      "stats": [
+        "Перезарядка: 8 с",
+        "+8% урона оружия",
+        "+60% скорости пуль",
+        "+2 доп. патрона за выстрел",
+        "+125% урона оружия",
+        "+40% урона вторым огнём",
+        "+100% скорости пуль"
+      ],
+      "funcEn": "8s Cooldown, +8% Weapon Damage, +60% Bullet Velocity, +2 Extra Ammo Consumed, +125% Weapon Damage, +40% Secondary Fire Weapon Damage, +100% Bullet Velocity"
+    },
+    {
+      "id": "headhunter",
+      "name": "Headhunter",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/headhunter.png",
+      "stats": [
+        "Перезарядка: 8 с",
+        "+5% урона оружия",
+        "+50 доп. здоровья",
+        "+1,75 мм скорости передвижения",
+        "+75 бонусного урона в голову",
+        "+4% лечения за хедшот",
+        "Длительность ускорения: 3 с",
+        "+100% шанс срабатывания"
+      ],
+      "funcEn": "8s Cooldown, +5% Weapon Damage, +50 Bonus Health, +1.75mm Move Speed, +75 Head Shot Bonus Damage, +4% Heal Per Headshot, +3s Move Speed Duration, +100% Proc Chance"
+    },
+    {
+      "id": "heroic_aura",
+      "name": "Heroic Aura",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/heroic_aura.png",
+      "stats": [
+        "Перезарядка: 22 с",
+        "Длительность: 7 с",
+        "+2,25 мм скорости передвижения",
+        "Радиус (актив): 35 мм",
+        "+26% скорости стрельбы",
+        "+1,5 мм скорости бега",
+        "+17% сопротивления пулям",
+        "Радиус: 35 мм"
+      ],
+      "funcEn": "22.0s Cooldown, +7s Duration, +2.25mm Move Speed, +35mm Active Radius, +26% Fire Rate, +1.5mm Sprint Speed, +17% Bullet Resist, +35mm Radius"
+    },
+    {
+      "id": "hollow_point",
+      "name": "Hollow Point",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/hollow_point.png",
+      "stats": [
+        "+35% урона оружия",
+        "+125 доп. здоровья",
+        "-9% сопротивления пулям",
+        "Длительность дебаффа: 8 с",
+        "+4,5 реген вне боя"
+      ],
+      "funcEn": "+35% Weapon Damage, +125 Bonus Health, -9% Bullet Resist, +8s Debuff Duration, +4.5 Out of Combat Regen"
+    },
+    {
+      "id": "hunters_aura",
+      "name": "Hunter's Aura",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/hunters_aura.png",
+      "stats": [
+        "+100 доп. здоровья",
+        "+0,75 мм скорости бега",
+        "-10% сопротивления пулям",
+        "+15% скорости стрельбы",
+        "Радиус: 15 мм"
+      ],
+      "funcEn": "+100 Bonus Health, +0.75mm Sprint Speed, -10% Bullet Resist, +15% Fire Rate, +15mm Radius"
+    },
+    {
+      "id": "point_blank",
+      "name": "Point Blank",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/point_blank.png",
+      "stats": [
+        "+75 доп. здоровья",
+        "+15 мм ближней дистанции",
+        "+50% урона оружия",
+        "+30% сопротивления в ближнем бою",
+        "Длительность замедления: 2 с",
+        "+25% скорости передвижения"
+      ],
+      "funcEn": "+75 Bonus Health, +15mm Close Range, +50% Weapon Damage, +30% Melee Resist, +2s Slow Duration, +25% Move Speed"
+    },
+    {
+      "id": "shadow_weave",
+      "name": "Shadow Weave",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/shadow_weave.png",
+      "stats": [
+        "Перезарядка: 45 с",
+        "Длительность невидимости: 13 с",
+        "+25% темпа стрельбы в засаде",
+        "+25% урона в ближнем бою в засаде",
+        "+25 силы духа в засаде",
+        "Длительность засады: 5 с",
+        "+1,5 мм скорости бега",
+        "Время растворения: 0,6 с",
+        "+5 мм скорости бега невидимым",
+        "+5 реген вне боя",
+        "Радиус обнаружения: 20 мм"
+      ],
+      "funcEn": "45.0s Cooldown, +13s Stealth Duration, +25% Ambush Fire Rate, +25% Ambush Melee Damage, +25 Ambush Spirit Power, +5s Ambush Duration, +1.5mm Sprint Speed, +0.6s Fade Time, +5mm Invis Sprint Speed, +5 Out of Combat Regen, +20mm Spot Radius"
+    },
+    {
+      "id": "sharpshooter",
+      "name": "Sharpshooter",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/sharpshooter.png",
+      "stats": [
+        "+10% урона оружия",
+        "+20% дистанции падения урона",
+        "+60% скорости пуль",
+        "-0,7 мм скорости передвижения",
+        "+1,0 мм скорости бега",
+        "+25% зум оружия",
+        "+60% урона оружия",
+        "+15 мм минимальной дистанции"
+      ],
+      "funcEn": "+10% Weapon Damage, +20% Weapon Fall-off Range, +60% Bullet Velocity, -0.7mm Move Speed, +1.0mm Sprint Speed, +25% Weapon Zoom, +60% Weapon Damage, +15mm Min. Distance"
+    },
+    {
+      "id": "spirit_rend",
+      "name": "Spirit Rend",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/spirit_rend.png",
+      "stats": [
+        "+10% духовного вампиризма",
+        "+75 доп. здоровья",
+        "Длительность дебаффа: 8 с",
+        "-7% сопротивления духу за хедшот",
+        "Макс. стаков: 4",
+        "Макс. частота: 2 с",
+        "-8% сопротивления духу у врага"
+      ],
+      "funcEn": "+10% Spirit Lifesteal, +75 Bonus Health, +8s Debuff Duration, -7% Spirit Resist on Headshot, +4 Max Stacks, +2s Max Frequency, -8% Spirit Resist"
+    },
+    {
+      "id": "tesla_bullets",
+      "name": "Tesla Bullets",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/tesla_bullets.png",
+      "stats": [
+        "33 урона при прыжке",
+        "Макс. прыжков: 4",
+        "Радиус прыжка: 8 мм",
+        "33 урона шоком",
+        "+15% шанс срабатывания",
+        "Макс. частота: 0,2 с"
+      ],
+      "funcEn": "+33 Damage on Jump, +4 Max Jumps, +8mm Jump Radius, +33 Shock Damage, +15% Proc Chance, +0.2s Max Frequency"
+    },
+    {
+      "id": "toxic_bullets",
+      "name": "Toxic Bullets",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/toxic_bullets.png",
+      "stats": [
+        "Время распада накопления: 5 с",
+        "+1,28% накопления за выстрел",
+        "Длительность: 4 с",
+        "Кровотечение: 1,7%/с",
+        "-35% получаемого врагом лечения",
+        "-35% получаемого врагом лечения"
+      ],
+      "funcEn": "+5s Buildup Decay Time, +1.28% Buildup Per Shot, +4s Duration, +1.7%/sec Bleed Damage, -35% Healing Reduction, -35% Healing Reduction"
+    },
+    {
+      "id": "weighted_shots",
+      "name": "Weighted Shots",
+      "tier": 3,
+      "cost": 3200,
+      "category": "weapon",
+      "icon": "img/items/weighted_shots.png",
+      "stats": [
+        "+40% урона оружия",
+        "-0,5 мм скорости передвижения",
+        "Время распада накопления: 5 с",
+        "+0,7% накопления за выстрел",
+        "-22% дистанции рывка",
+        "Длительность замедления: 3,5 с",
+        "+30% скорости передвижения",
+        "-14% восстановления выносливости",
+        "+22% сопротивления дебаффам"
+      ],
+      "funcEn": "+40% Weapon Damage, -0.5mm Move Speed, +5s Buildup Decay Time, +0.7% Buildup Per Shot, -22% Dash Distance, +3.5s Slow Duration, +30% Move Speed, -14% Stamina Recovery, +22% Debuff Resist"
     }
   ]
 }
