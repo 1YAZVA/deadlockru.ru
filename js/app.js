@@ -26,6 +26,31 @@ document.addEventListener('click', (e) => {
 });
 $('#go-home').addEventListener('click', () => go('home'));
 
+// ---------- вкладка «Предметы»: категории-вкладки с выпадающей панелью тиров ----------
+const ITEMS_TIERS = [1, 2, 3, 4].map(n =>
+  `<div class="tier-cell"><h4>Тир ${n}</h4><p>Пусто — предметы добавим в этот тир позже.</p></div>`);
+
+function categoryPanelHTML(cat) {
+  return `<div class="cat-panel-box"><div class="tier-grid">${ITEMS_TIERS.join('')}</div></div>`;
+}
+
+$('#items-cattabs')?.addEventListener('click', (e) => {
+  const btn = e.target.closest('.cat-tab');
+  if (!btn) return;
+  const box = $('#items-cattabs'), panel = $('#items-panel');
+  const already = btn.classList.contains('active');
+  box.querySelectorAll('.cat-tab.active').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-expanded', 'false'); });
+  if (already) { // повторный клик — свернуть панель
+    panel.classList.remove('open');
+    panel.addEventListener('transitionend', () => { if (!panel.classList.contains('open')) panel.innerHTML = ''; }, { once: true });
+    return;
+  }
+  btn.classList.add('active');
+  btn.setAttribute('aria-expanded', 'true');
+  panel.className = 'cat-panel open ' + btn.dataset.cat;
+  panel.innerHTML = `<div class="cat-panel-inner">${categoryPanelHTML(btn.dataset.cat)}</div>`;
+});
+
 // ---------- загрузка данных ----------
 async function loadJSON(path) {
   try {
