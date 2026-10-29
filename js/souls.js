@@ -1,7 +1,7 @@
 // ---------- Души (фоновая анимация вкладки «Герои») ----------
-// По референсу из игры: светящаяся «плазма» с тёмным ядром и вспышками-спицами,
-// тянущая за собой извивающийся дымный хвост-хлыст + искры.
-// Свои души — зелёные, вражеские — фиолетово-синие и янтарные.
+// По референсу из игры: светящаяся плазма, ПОВЕРХ неё — тёмная сфера-корпус
+// с круглыми «дырками» (плазма светится сквозь них), вспышки-спицы,
+// извивающийся дымный хвост-хлыст + искры. Цвета: зелёные и янтарные.
 (function () {
   'use strict';
 
@@ -24,6 +24,17 @@
 
   const rand = (a, b) => a + Math.random() * (b - a);
 
+  // набор «дырок» в тёмном корпусе души (сквозь них светится плазма)
+  function makeHoles() {
+    // одна крупная ближе к центру + 2–4 помельче вокруг
+    const arr = [{ a: rand(0, 6.283), w: rand(-0.6, 0.6) * 0.001, d: rand(0.15, 0.4), r: rand(0.42, 0.62), ph: rand(0, 6.283) }];
+    const n = 2 + (Math.random() * 3 | 0);
+    for (let i = 0; i < n; i++) {
+      arr.push({ a: rand(0, 6.283), w: rand(-0.6, 0.6) * 0.001, d: rand(0.35, 0.75), r: rand(0.18, 0.42), ph: rand(0, 6.283) });
+    }
+    return arr;
+  }
+
   function makeSoul(initial) {
     const side = Math.random() < 0.5 ? 0 : 1;
     const kind = Math.random() < 0.72 ? 'ally' : 'amber';   // янтарные — «чужие», крупнее
@@ -40,6 +51,7 @@
       phase: rand(0, 60),
       spin: (Math.random() < 0.5 ? -1 : 1) * rand(1.4, 3.2),  // вихрь ядра
       pulse: rand(0.7, 1.5),                                  // частота вспышек
+      holes: makeHoles(),                                     // дырки в тёмной сфере
       alpha: initial ? rand(.5, .9) : 0,
       trail: [],
       hist: 0
@@ -75,9 +87,9 @@
   function popSoul(s) {
     bursts.push({
       x: s.px, y: s.py, t: 0, life: 0.6, pal: s.pal, rr: s.r,
-      puffs: Array.from({ length: 8 }, () => ({
+      puffs: Array.from({ length: 10 }, () => ({
         ang: rand(0, Math.PI * 2), d0: rand(2, 6),
-        spd: rand(28, 62), size: rand(2.5, 5)
+        spd: rand(28, 62), size: rand(2.5, 5.5) * (s.r / 8)
       }))
     });
     // радиальные цветные искры
@@ -211,18 +223,46 @@
       ctx.globalAlpha = 1;
     }
 
-    // 6) тело: яркая плазма с тёмным ядром-зрачком
-    g = ctx.createRadialGradient(px, s.y, 0, px, s.y, rr * 1.35);
-    g.addColorStop(0, `rgba(${s.pal.dark[0]},${s.pal.dark[1]},${s.pal.dark[2]},${(0.9 * a).toFixed(3)})`);   // тёмный зрачок
-    g.addColorStop(0.55, `rgba(${sr},${sg},${sb},${(0.95 * a).toFixed(3)})`);                                  // плазма
+    // 6) тело: яркая плазма (светится изнутри тёмной сферы)
+    g = ctx.createRadialGradient(px, s.y, 0, px, s.y, rr * 1.6);
+    g.addColorStop(0, `rgba(${sr},${sg},${sb},${(0.95 * a).toFixed(3)})`);
+    g.addColorStop(0.6, `rgba(${sr},${sg},${sb},${(0.5 * a).toFixed(3)})`);
     g.addColorStop(1, `rgba(${dr},${dg},${db},0)`);
     ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(px, s.y, rr * 1.35, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(px, s.y, rr * 1.6, 0, Math.PI * 2); ctx.fill();
 
-    // световая кайма поверх
-    ctx.strokeStyle = `rgba(${Math.min(255,sr+110)},${Math.min(255,sg+90)},${Math.min(255,sb+70)},${(0.65 * a).toFixed(3)})`;
-    ctx.lineWidth = rr * 0.16;
-    ctx.beginPath(); ctx.arc(px, s.y, rr * 0.98, 0, Math.PI * 2); ctx.stroke();
+    // 6b) ЧЁРНАЯ СФЕРА ПОВЕРХ ядра: тёмный корпус души
+    const shellR = rr * 1.9;
+    const [kr, kg, kb] = s.pal.dark;
+    ctx.globalCompositeOperation = 'source-over';
+    g = ctx.createRadialGradient(px, s.y, shellR * 0.2, px, s.y, shellR);
+    g.addColorStop(0,    `rgba(${kr},${kg},${kb},${(0.93 * a).toFixed(3)})`);
+    g.addColorStop(0.7,  `rgba(${kr},${kg},${kb},${(0.88 * a).toFixed(3)})`);
+    g.addColorStop(0.88, `rgba(${kr},${kg},${kb},${(0.62 * a).toFixed(3)})`);
+    g.addColorStop(1,    `rgba(${kr},${kg},${kb},0)`);
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(px, s.y, shellR, 0, Math.PI * 2); ctx.fill();
+
+    ctx.globalCompositeOperation = 'lighter';
+
+    // 6c) дырки: плазма светится сквозь тёмный корпус
+    for (const h of s.holes) {
+      const ha = h.a + now * h.w;
+      const hx = px + Math.cos(ha) * shellR * h.d;
+      const hy = s.y + Math.sin(ha) * shellR * h.d * 0.9;
+      const hr = rr * h.r * (0.85 + 0.25 * Math.sin(now * 0.005 + h.ph));
+      g = ctx.createRadialGradient(hx, hy, 0, hx, hy, hr);
+      g.addColorStop(0, `rgba(${Math.min(255,sr+90)},${Math.min(255,sg+60)},${Math.min(255,sb+40)},${(0.95 * a).toFixed(3)})`);
+      g.addColorStop(0.4, `rgba(${sr},${sg},${sb},${(0.75 * a).toFixed(3)})`);
+      g.addColorStop(1, `rgba(${sr},${sg},${sb},0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(hx, hy, hr, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // тонкая светлая кромка сферы
+    ctx.strokeStyle = `rgba(${Math.min(255,sr+110)},${Math.min(255,sg+90)},${Math.min(255,sb+70)},${(0.4 * a).toFixed(3)})`;
+    ctx.lineWidth = rr * 0.12;
+    ctx.beginPath(); ctx.arc(px, s.y, shellR * 0.92, 0, Math.PI * 2); ctx.stroke();
 
     // 7) искры позади
     if (Math.random() < 0.3) spawnSpark(px + rand(-4, 4), s.y + rr, s.pal);
