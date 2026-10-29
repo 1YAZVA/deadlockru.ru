@@ -1,0 +1,104 @@
+{
+  "updatedAt": "2026-10-29",
+  "source": "0xThiagoAmaral/deadlock-open-assets — игровые данные June 2026 (assets/game/items.json)",
+  "items": [
+    {
+      "id": "close_quarters",
+      "name": "Close Quarters",
+      "tier": 1,
+      "cost": 800,
+      "category": "weapon",
+      "icon": "img/items/close_quarters.png",
+      "stats": [
+        "+15 мм ближней дистанции",
+        "+20% урона оружия",
+        "+20% сопротивления в ближнем бою"
+      ],
+      "funcEn": "+15mm Close Range, +20% Weapon Damage, +20% Melee Resist"
+    },
+    {
+      "id": "extended_magazine",
+      "name": "Extended Magazine",
+      "tier": 1,
+      "cost": 800,
+      "category": "weapon",
+      "icon": "img/items/extended_magazine.png",
+      "stats": [
+        "+8% урона оружия",
+        "+30% ёмкости магазина"
+      ],
+      "funcEn": "+8% Weapon Damage, +30% Max Ammo"
+    },
+    {
+      "id": "headshot_booster",
+      "name": "Headshot Booster",
+      "tier": 1,
+      "cost": 800,
+      "category": "weapon",
+      "icon": "img/items/headshot_booster.png",
+      "stats": [
+        "Перезарядка: 9 с",
+        "+30 доп. здоровья",
+        "+45 бонусного урона в голову",
+        "+100% шанс срабатывания"
+      ],
+      "funcEn": "9.0s Cooldown, +30 Bonus Health, +45 Head Shot Bonus Damage, +100% Proc Chance"
+    },
+    {
+      "id": "high_velocity_rounds",
+      "name": "High-Velocity Rounds",
+      "tier": 1,
+      "cost": 800,
+      "category": "weapon",
+      "icon": "img/items/high_velocity_rounds.png",
+      "stats": [
+        "+8% урона оружия",
+        "+60% скорости пуль"
+      ],
+      "funcEn": "+8% Weapon Damage, +60% Bullet Velocity"
+    },
+    {
+      "id": "monster_rounds",
+      "name": "Monster Rounds",
+      "tier": 1,
+      "cost": 800,
+      "category": "weapon",
+      "icon": "img/items/monster_rounds.png",
+      "stats": [
+        "+25% урона оружия по NPC",
+        "+25% сопротивления пулям от NPC",
+        "+1 реген вне боя"
+      ],
+      "funcEn": "+25% Weapon Damage vs. NPCs, +25% Bullet Resist vs. NPCs, +1 Out of Combat Regen"
+    },
+    {
+      "id": "rapid_rounds",
+      "name": "Rapid Rounds",
+      "tier": 1,
+      "cost": 800,
+      "category": "weapon",
+      "icon": "img/items/rapid_rounds.png",
+      "stats": [
+        "+9% скорости стрельбы"
+      ],
+      "funcEn": "+9% Fire Rate"
+    },
+    {
+      "id": "restorative_shot",
+      "name": "Restorative Shot",
+      "tier": 1,
+      "cost": 800,
+      "category": "weapon",
+      "icon": "img/items/restorative_shot.png",
+      "stats": [
+        "Перезарядка: 6 с",
+        "+6% урона оружия",
+        "+50 лечения при попадании по героям",
+        "+20 лечения при попадании по NPC/сферам",
+        "+100% шанс срабатывания",
+        "+1 мм радиуса"
+      ],
+      "funcEn": "6s Cooldown, +6% Weapon Damage, +50 Healing From Heroes, +20 Healing From NPCs / Orbs, +100% Proc Chance, +1mm Radius"
+    }
+  ]
+}
