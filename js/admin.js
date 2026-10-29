@@ -32,9 +32,9 @@ window.AdminUI = (function () {
   const LS_KEY = 'dl_admin';
   const DEFAULT_REPO = '1YAZVA/deadlockru.ru';
   const DEFAULT_BRANCH = 'main';
-  const FILES = { patchnotes: 'data/patchnotes.json', heroes: 'data/heroes.json', builds: 'data/builds.json' };
+  const FILES = { patchnotes: 'data/patchnotes.json', heroes: 'data/heroes.json', builds: 'data/builds.json', items: 'data/items.json' };
   let cfg = null;              // {repo, branch, token}
-  const dirty = { patchnotes: false, heroes: false, builds: false }; // что не закоммичено
+  const dirty = { patchnotes: false, heroes: false, builds: false, items: false }; // что не закоммичено
 
   function loadCfg() {
     try { cfg = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch (_) { cfg = null; }
@@ -168,6 +168,7 @@ window.AdminUI = (function () {
         if (key === 'heroes') { window.state.heroes = json.heroes || []; window.state.heroesUpdatedAt = json.updatedAt; }
         if (key === 'builds') window.state.builds = json.builds || [];
         if (key === 'patchnotes') window.state.notes = json.notes || [];
+        if (key === 'items') window.state.items = json.items || [];
       } catch (e) { /* один сбой не роняет остальные */ }
     }
     if (window.renderNews) window.renderNews();
@@ -208,6 +209,7 @@ window.AdminUI = (function () {
         ['note', '📰 Новость / патч'],
         ['hero', '🦸 Героя'],
         ['build', '🛡 Сборку'],
+        ['item', '⚔ Предмет'],
       ].map(([k, l]) => `<button data-kind="${k}">${l}</button>`).join('');
       document.body.appendChild(m);
       m.addEventListener('click', (e) => {
@@ -216,6 +218,7 @@ window.AdminUI = (function () {
         if (b.dataset.kind === 'note') openNoteModal(null);
         if (b.dataset.kind === 'hero') openHeroModal(null);
         if (b.dataset.kind === 'build') openBuildModal(null);
+        if (b.dataset.kind === 'item') openItemModal(null);
       });
       const closer = (ev) => { if (!m.contains(ev.target)) { m.remove(); document.removeEventListener('click', closer); } };
       setTimeout(() => document.addEventListener('click', closer), 0);
@@ -231,7 +234,7 @@ window.AdminUI = (function () {
     const dirtyList = Object.keys(dirty).filter(k => dirty[k]);
     el.innerHTML = `
       <span class="et-status">${cfg.token
-        ? (dirtyList.length ? `черновик: ${dirtyList.map(k => k === 'patchnotes' ? 'новости' : k === 'heroes' ? 'герои' : 'сборки').join(', ')}` : 'всё сохранено')
+        ? (dirtyList.length ? `черновик: ${dirtyList.map(k => k === 'patchnotes' ? 'новости' : k === 'heroes' ? 'герои' : k === 'items' ? 'предметы' : 'сборки').join(', ')}` : 'всё сохранено')
         : 'нет токена — только черновик'}</span>
       <button class="et-save" id="et-commit" title="Отправить изменения коммитами на GitHub">💾 Сохранить</button>
       ${cfg.token ? '' : '<button class="et-min" id="et-token" title="Подключить токен">🔌</button>'}
@@ -259,12 +262,14 @@ window.AdminUI = (function () {
         if (kind === 'note') openNoteModal(id);
         if (kind === 'hero') openHeroModal(id);
         if (kind === 'build') openBuildModal(id);
+        if (kind === 'item') openItemModal(id);
       });
       el.appendChild(b);
     };
     document.querySelectorAll('#news-list .note[data-id]').forEach(el => add(el, 'note', el.dataset.id));
     document.querySelectorAll('#heroes-grid .hero-card[data-hero]').forEach(el => add(el, 'hero', el.dataset.hero));
     document.querySelectorAll('#builds-list .build[data-id]').forEach(el => add(el, 'build', el.dataset.id));
+    document.querySelectorAll('#items-panel .item-card[data-id]').forEach(el => add(el, 'item', el.dataset.id));
   }
   // пересобираем бейджи после каждой перерисовки списков
   const mo = new MutationObserver(() => { if (document.body.classList.contains('edit-on')) attachBadges(); });
@@ -273,6 +278,8 @@ window.AdminUI = (function () {
       const el = document.getElementById(id);
       if (el) mo.observe(el, { childList: true });
     });
+    const ip = document.getElementById('items-panel');
+    if (ip) mo.observe(ip, { childList: true, subtree: true }); // панель предметов появляется/перерисовывается динамически
   }
 
   // ---------- редакторы (модалки) ----------
@@ -364,6 +371,59 @@ window.AdminUI = (function () {
     });
   }
 
+  function openItemModal(id) {
+    const it = id ? (window.state.items || []).find(x => x.id === id) : null;
+    const m = openModal(it ? 'Правка предмета' : 'Новый предмет', `
+      <div class="edit-grid2">
+        <div><label>Название</label><input id="i-name" value="${esc(it?.name || '')}" placeholder="Close Quarters"></div>
+        <div><label>Стоимость (души)</label><input id="i-cost" type="number" step="1" value="${it?.cost ?? 800}"></div>
+        <div><label>Категория</label>
+          <select id="i-cat">
+            <option value="weapon">Оружие</option>
+            <option value="vitality">Живучесть</option>
+            <option value="spirit">Спиритизм</option>
+          </select></div>
+        <div><label>Тир</label>
+          <select id="i-tier">${[1, 2, 3, 4].map(t => `<option value="${t}">Тир ${t}</option>`).join('')}</select></div>
+      </div>
+      <label>Иконка (локальный путь img/… или URL)</label><input id="i-icon" value="${esc(it?.icon || '')}" placeholder="img/items/close_quarters.png">
+      <label>Характеристики (по одной в строке; строка «—» скрывает блок)</label>
+      <textarea id="i-stats" style="min-height:80px" placeholder="+8% урона оружия&#10;+30% ёмкости магазина">${esc((it?.stats || []).join('\n'))}</textarea>
+      <div class="edit-actions">
+        <button class="btn btn-sm" id="i-save">${it ? 'Сохранить' : 'Добавить'}</button>
+        ${it ? '<button class="btn btn-danger btn-sm" id="i-del">🗑 Удалить</button>' : ''}
+      </div>`);
+    if (it) $('#i-cat', m).value = it.category || 'weapon';
+    if (it) $('#i-tier', m).value = String(it.tier || 1);
+    const save = () => {
+      const rec = {
+        id: it?.id || 'it' + Date.now(),
+        name: $('#i-name', m).value.trim(),
+        tier: parseInt($('#i-tier', m).value, 10) || 1,
+        cost: parseInt($('#i-cost', m).value, 10) || 800,
+        category: $('#i-cat', m).value,
+        icon: $('#i-icon', m).value.trim(),
+        stats: $('#i-stats', m).value.split('\n').map(s => s.trim()).filter(s => s && s !== '—'),
+      };
+      if (!rec.name) { toast('Название обязательно', 'err'); return; }
+      if (it && it.funcEn) rec.funcEn = it.funcEn; // сохраняем EN-справку при правке
+      const arr = window.state.items = window.state.items || [];
+      const i = arr.findIndex(x => x.id === rec.id);
+      if (i >= 0) arr[i] = rec; else arr.push(rec);
+      dirty.items = true; redrawToolbar();
+      rerenderSite(); closeModal();
+      toast('Сохранено в черновик → нажмите 💾 «Сохранить» для коммита', 'ok');
+    };
+    $('#i-save', m).addEventListener('click', save);
+    $('#i-del', m)?.addEventListener('click', () => {
+      if (!confirm('Удалить предмет ' + it.name + '?')) return;
+      window.state.items = (window.state.items || []).filter(x => x.id !== it.id);
+      dirty.items = true; redrawToolbar(); rerenderSite(); closeModal();
+      toast('Удалено из черновика → не забудьте 💾 коммит', 'ok');
+    });
+    m.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') save(); });
+  }
+
   function openBuildModal(id) {
     const b = id ? window.state.builds.find(x => x.id === id) : null;
     const heroOpts = window.state.heroes.map(x => `<option value="${esc(x.id)}" ${x.id === b?.hero ? 'selected' : ''}>${esc(x.name)}</option>`).join('');
@@ -424,6 +484,10 @@ window.AdminUI = (function () {
         await putFile(FILES.builds, { ...note(new Date().toISOString().slice(0, 10)), builds: window.state.builds }, msg + ': сборки');
         dirty.builds = false;
       }
+      if (dirty.items) {
+        await putFile(FILES.items, { updatedAt: new Date().toISOString().slice(0, 10), source: '0xThiagoAmaral/deadlock-open-assets — игровые данные June 2026 (assets/game/items.json)', items: window.state.items }, msg + ': предметы');
+        dirty.items = false;
+      }
       redrawToolbar();
       toast('Сохранено коммитами! GitHub Pages обновит сайт через 1–3 мин.', 'ok');
     } catch (e) {
@@ -436,6 +500,7 @@ window.AdminUI = (function () {
     if (window.renderNews) window.renderNews();
     if (window.renderBuilds) window.renderBuilds();
     if (window.renderHeroesGrid) window.renderHeroesGrid();
+    if (window.renderItems) window.renderItems();
     window.DPS?.update();
   }
 
