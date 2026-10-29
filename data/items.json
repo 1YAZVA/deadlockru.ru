@@ -99,6 +99,261 @@
         "+1 мм радиуса"
       ],
       "funcEn": "6s Cooldown, +6% Weapon Damage, +50 Healing From Heroes, +20 Healing From NPCs / Orbs, +100% Proc Chance, +1mm Radius"
+    },
+    {
+      "id": "active_reload",
+      "name": "Active Reload",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/active_reload.png",
+      "stats": [
+        "Перезарядка: 12 с",
+        "Длительность эффекта: 7 с",
+        "+20% ёмкости магазина",
+        "+25% скорости стрельбы",
+        "+0,75 мм скорости передвижения",
+        "+16% вампиризма от пуль"
+      ],
+      "funcEn": "12s Cooldown, +7s Duration, +20% Max Ammo, +25% Fire Rate, +0.75mm Move Speed, +16% Bullet Lifesteal"
+    },
+    {
+      "id": "fleetfoot",
+      "name": "Fleetfoot",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/fleetfoot.png",
+      "stats": [
+        "Перезарядка: 16 с",
+        "Длительность эффекта: 5 с",
+        "+3,0 мм скорости передвижения",
+        "+6% урона оружия",
+        "+6% сопротивления пулям",
+        "+35% дальности скольжения",
+        "+40% сопротивления замедлению"
+      ],
+      "funcEn": "16.0s Cooldown, +5s Duration, +3.0mm Move Speed, +6% Weapon Damage, +6% Bullet Resist, +35% Slide Distance, +40% Slow Resist"
+    },
+    {
+      "id": "intensifying_magazine",
+      "name": "Intensifying Magazine",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/intensifying_magazine.png",
+      "stats": [
+        "+% урона оружия",
+        "+45% макс. урона оружия",
+        "+20% ёмкости магазина",
+        "+2,5 с до максимального урона"
+      ],
+      "funcEn": "+% Weapon Damage, +45% Max Weapon Damage, +20% Max Ammo, +2.5s Time for Max Damage"
+    },
+    {
+      "id": "kinetic_dash",
+      "name": "Kinetic Dash",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/kinetic_dash.png",
+      "stats": [
+        "Длительность эффекта: 7 с",
+        "+6 временных зарядов магазина",
+        "+25% скорости стрельбы",
+        "+1 выносливость",
+        "+12% восстановления выносливости"
+      ],
+      "funcEn": "+7s Duration, +6 Temporary Ammo, +25% Fire Rate, +1 Stamina, +12% Stamina Recovery"
+    },
+    {
+      "id": "long_range",
+      "name": "Long Range",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/long_range.png",
+      "stats": [
+        "+8% дистанции падения урона",
+        "+0,75 мм скорости бега",
+        "+40% урона оружия",
+        "+15 мм минимальной дистанции"
+      ],
+      "funcEn": "+8% Weapon Fall-off Range, +0.75mm Sprint Speed, +40% Weapon Damage, +15mm Min. Distance"
+    },
+    {
+      "id": "melee_charge",
+      "name": "Melee Charge",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/melee_charge.png",
+      "stats": [
+        "Перезарядка: 5 с",
+        "+25% бонусного урона тяжёлой атаки",
+        "+10% урона в ближнем бою",
+        "+6% сопротивления пулям",
+        "+50% дистанции тяжёлой атаки"
+      ],
+      "funcEn": "5s Cooldown, +25% Bonus Heavy Damage, +10% Melee Damage, +6% Bullet Resist, +50% Heavy Melee Distance"
+    },
+    {
+      "id": "mystic_shot",
+      "name": "Mystic Shot",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/mystic_shot.png",
+      "stats": [
+        "Перезарядка: 8 с",
+        "+40 духовного урона",
+        "+100% шанс срабатывания",
+        "Макс. частота: 1 с",
+        "+1 мм радиуса",
+        "+7 силы духа"
+      ],
+      "funcEn": "8s Cooldown, +40 Spirit Damage, +100% Proc Chance, +1s Max Frequency, +1mm Radius, +7 Spirit Power"
+    },
+    {
+      "id": "opening_rounds",
+      "name": "Opening Rounds",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/opening_rounds.png",
+      "stats": [
+        "+8% урона оружия",
+        "+25% урона оружия",
+        "+60% скорости пуль",
+        "+7 силы духа"
+      ],
+      "funcEn": "+8% Weapon Damage, +25% Weapon Damage, +60% Bullet Velocity, +7 Spirit Power"
+    },
+    {
+      "id": "recharging_rush",
+      "name": "Recharging Rush",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/recharging_rush.png",
+      "stats": [
+        "Перезарядка: 25 с",
+        "+10% урона оружия",
+        "+20% ёмкости магазина",
+        "Порог урона: 200",
+        "Окно времени: 3,5 с"
+      ],
+      "funcEn": "25s Cooldown, +10% Weapon Damage, +20% Max Ammo, +200 Damage Threshold, +3.5s Time Frame"
+    },
+    {
+      "id": "slowing_bullets",
+      "name": "Slowing Bullets",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/slowing_bullets.png",
+      "stats": [
+        "+15% урона оружия",
+        "Время распада накопления: 5 с",
+        "+0,7% накопления за выстрел",
+        "-22% дистанции рывка",
+        "Длительность замедления: 3,5 с",
+        "+30% скорости передвижения"
+      ],
+      "funcEn": "+15% Weapon Damage, +5s Buildup Decay Time, +0.7% Buildup Per Shot, -22% Dash Distance, +3.5s Slow Duration, +30% Move Speed"
+    },
+    {
+      "id": "spirit_shredder_bullets",
+      "name": "Spirit Shredder Bullets",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/spirit_shredder_bullets.png",
+      "stats": [
+        "+10% духовного вампиризма",
+        "Длительность дебаффа: 8 с",
+        "-8% сопротивления духу у врага"
+      ],
+      "funcEn": "+10% Spirit Lifesteal, +8s Debuff Duration, -8% Spirit Resist"
+    },
+    {
+      "id": "split_shot",
+      "name": "Split Shot",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/split_shot.png",
+      "stats": [
+        "Перезарядка: 27 с",
+        "Длительность эффекта: 5 с",
+        "+5 мультивыстрел",
+        "Макс. стаков: 5",
+        "Длительность стака: 12 с",
+        "+8% урона оружия за стак"
+      ],
+      "funcEn": "27s Cooldown, +5s Buff Duration, +5 Weapon Multishot, +5 Max Stacks, +12s Stack Duration, +8% Weapon Damage per Stack"
+    },
+    {
+      "id": "stalker",
+      "name": "Stalker",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/stalker.png",
+      "stats": [
+        "Перезарядка: 6 с",
+        "Длительность эффекта: 5 с",
+        "+50 доп. здоровья",
+        "+1,5 мм скорости передвижения",
+        "-6% сопротивления пулям",
+        "17 урона в секунду",
+        "Длительность дебаффа: 5 с",
+        "+25 мм бонусного радиуса",
+        "+8 мм ближней дистанции",
+        "-50% дистанции слышимости шагов"
+      ],
+      "funcEn": "6s Cooldown, +5s Duration, +50 Bonus Health, +1.5mm Move Speed, -6% Bullet Resist, +17 Damage Per Second, +5s Debuff Duration, +25mm Bonus Radius, +8mm Close Range, -50% Footstep Sound Distance"
+    },
+    {
+      "id": "swift_striker",
+      "name": "Swift Striker",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/swift_striker.png",
+      "stats": [
+        "+20% скорости стрельбы",
+        "+0,75 мм скорости бега"
+      ],
+      "funcEn": "+20% Fire Rate, +0.75mm Sprint Speed"
+    },
+    {
+      "id": "titanic_magazine",
+      "name": "Titanic Magazine",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/titanic_magazine.png",
+      "stats": [
+        "+14% урона оружия",
+        "+100% ёмкости магазина"
+      ],
+      "funcEn": "+14% Weapon Damage, +100% Max Ammo"
+    },
+    {
+      "id": "weakening_headshot",
+      "name": "Weakening Headshot",
+      "tier": 2,
+      "cost": 1600,
+      "category": "weapon",
+      "icon": "img/items/weakening_headshot.png",
+      "stats": [
+        "Перезарядка: 0 с",
+        "+60 доп. здоровья",
+        "-13% сопротивления пулям у врага",
+        "Длительность дебаффа: 12 с"
+      ],
+      "funcEn": "0.0s Cooldown, +60 Bonus Health, -13% Bullet Resist, +12s Debuff Duration"
     }
   ]
 }
