@@ -71,11 +71,22 @@ h2.sec-title{font-family:var(--font-display);font-size:27px;font-weight:700;marg
 .card.spirit{border-top-color:var(--spirit)}.card.vitality{border-top-color:var(--vitality)}
 .card h3{font-family:var(--font-display);font-size:17px;font-weight:600;margin-bottom:6px}
 
-/* вкладка «Предметы»: разбивка категории на тиры */
+/* вкладка «Предметы»: тиры-аккордеоны; цвет категории задаётся в --cat */
+.card.weapon{--cat:var(--weapon)}.card.vitality{--cat:var(--vitality)}.card.spirit{--cat:var(--spirit)}
 .tier-rows{margin-top:14px;border-top:1px dashed var(--line)}
-.tier-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px dashed var(--line);font-size:13px}
-.tier-row b{font-family:var(--font-display);font-size:12.5px;font-weight:600;letter-spacing:.06em}
-.tier-row span{color:var(--muted);font-size:12px}
+.tier-item{border-bottom:1px dashed var(--line)}
+.tier-head{display:flex;align-items:center;gap:10px;width:100%;padding:8px 4px 8px 10px;background:none;border:0;border-left:2px solid transparent;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:background .2s,border-color .2s}
+.tier-head b{font-family:var(--font-display);font-size:12.5px;font-weight:600;letter-spacing:.06em}
+.tier-head .soon{margin-left:auto;color:var(--muted);font-size:12px}
+.tier-head .chev{color:var(--muted);font-size:10px;transition:transform .25s,color .25s}
+.tier-head:hover .chev{color:var(--cat)}
+.tier-item.open .tier-head{border-left-color:var(--cat);background:color-mix(in srgb,var(--cat) 9%,transparent)}
+.tier-item.open .tier-head b{color:var(--cat)}
+.tier-item.open .tier-head .chev{transform:rotate(180deg);color:var(--cat)}
+.tier-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.tier-body>div{overflow:hidden}
+.tier-item.open .tier-body{grid-template-rows:1fr}
+.tier-note{margin:0;padding:10px 0 12px 14px;font-size:12.5px;color:var(--muted)}
 .muted{color:var(--muted);font-size:13px}
 .btn-mini{display:inline-block;margin-top:14px;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:9999px;padding:6px 15px;font-size:12px;cursor:pointer;font-family:inherit;transition:color .15s}
 .btn-mini:hover{color:var(--text)}
