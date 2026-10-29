@@ -26,57 +26,70 @@ document.addEventListener('click', (e) => {
 });
 $('#go-home').addEventListener('click', () => go('home'));
 
-// ---------- вкладка «Предметы»: категории-вкладки с выпадающей панелью тиров ----------
-const ITEM_TIER_LABELS = { 1: 'Тир 1', 2: 'Тир 2', 3: 'Тир 3', 4: 'Тир 4' };
-
+// ---------- вкладка «Предметы»: боковые вкладки категорий + магазин тиров ----------
 function itemCardHTML(it) {
   const stats = Array.isArray(it.stats) ? it.stats.filter(Boolean) : [];
-  return `<article class="item-card" data-id="${esc(it.id)}">
+  return `<article class="item-card" data-id="${esc(it.id)}" tabindex="0" role="button" aria-expanded="false" title="${esc(it.name)}">
     <span class="item-icon"><img src="${esc(it.icon || '')}" alt="${esc(it.name)}" loading="lazy"></span>
-    <div class="item-info">
-      <b class="item-name">${esc(it.name)}</b>
-      <span class="item-cost"><i class="soul-dot"></i>${esc(fmtNum(it.cost))} душ</span>
-      ${stats.length ? `<ul class="item-stats">${stats.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : ''}
-    </div>
+    <b class="item-name">${esc(it.name)}</b>
+    ${stats.length ? `<ul class="item-stats">${stats.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : ''}
   </article>`;
 }
 
-function tierCellHTML(cat, tier) {
+function tierSecHTML(cat, tier) {
   const list = (window.state.items || []).filter((i) => i.category === cat && Number(i.tier) === Number(tier));
-  const body = list.length
-    ? `<div class="item-grid">${list.map(itemCardHTML).join('')}</div>`
-    : '<p class="tier-clear">Пусто — предметы добавим в этот тир позже.</p>';
-  return `<div class="tier-cell"><h4>${ITEM_TIER_LABELS[tier]}</h4>${body}</div>`;
+  if (!list.length) {
+    return `<div class="tier-sec"><div class="tier-bar"><b>Тир ${tier}</b></div><p class="tier-clear">Пусто — предметы добавим в этот тир позже.</p></div>`;
+  }
+  const costs = [...new Set(list.map((i) => Number(i.cost)))];
+  const costTxt = costs.length === 1
+    ? esc(fmtNum(costs[0]))
+    : esc(fmtNum(Math.min(...costs))) + '–' + esc(fmtNum(Math.max(...costs)));
+  return `<div class="tier-sec">
+    <div class="tier-bar"><span class="cost"><i class="soul-dot"></i>${costTxt}</span><b>Тир ${tier}</b></div>
+    <div class="items-row">${list.map(itemCardHTML).join('')}</div>
+  </div>`;
 }
 
 function categoryPanelHTML(cat) {
-  return `<div class="cat-panel-box"><div class="tier-grid">${[1, 2, 3, 4].map((t) => tierCellHTML(cat, t)).join('')}</div></div>`;
+  return `<div class="tiers-flow">${[1, 2, 3, 4].map((t) => tierSecHTML(cat, t)).join('')}</div>`;
 }
 
-function renderItems() { // перерисовка открытой панели (вызывает и админка после правок)
-  const btn = $('#items-cattabs .cat-tab.active');
+function renderItems() { // перерисовка панели активной категории (вызывает и админка после правок)
+  const btn = $('#items-cattabs .side-tab.active');
   const panel = $('#items-panel');
-  if (!btn || !panel || !panel.classList.contains('open')) return;
-  const inner = panel.querySelector('.cat-panel-inner');
-  if (inner) inner.innerHTML = categoryPanelHTML(btn.dataset.cat);
+  if (!btn || !panel) return;
+  panel.className = 'cat-panel open ' + btn.dataset.cat;
+  panel.innerHTML = `<div class="cat-panel-box">${categoryPanelHTML(btn.dataset.cat)}</div>`;
 }
 window.renderItems = renderItems;
 
-$('#items-cattabs')?.addEventListener('click', (e) => {
-  const btn = e.target.closest('.cat-tab');
+// выбор категории в боковой панели (вкладки, панель одна на все)
+function selectItemsCategory(cat) {
+  const btn = document.querySelector('#items-cattabs .side-tab[data-cat="' + cat + '"]');
   if (!btn) return;
-  const box = $('#items-cattabs'), panel = $('#items-panel');
-  const already = btn.classList.contains('active');
-  box.querySelectorAll('.cat-tab.active').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-expanded', 'false'); });
-  if (already) { // повторный клик — свернуть панель
-    panel.classList.remove('open');
-    panel.addEventListener('transitionend', () => { if (!panel.classList.contains('open')) panel.innerHTML = ''; }, { once: true });
-    return;
-  }
-  btn.classList.add('active');
-  btn.setAttribute('aria-expanded', 'true');
-  panel.className = 'cat-panel open ' + btn.dataset.cat;
-  panel.innerHTML = `<div class="cat-panel-inner">${categoryPanelHTML(btn.dataset.cat)}</div>`;
+  document.querySelectorAll('#items-cattabs .side-tab').forEach((b) => {
+    b.classList.toggle('active', b === btn);
+    b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+  });
+  renderItems();
+  const panel = $('#items-panel'); // короткая вспышка при смене категории
+  if (panel) { panel.classList.remove('fadein'); void panel.offsetWidth; panel.classList.add('fadein'); }
+}
+selectItemsCategory('weapon'); // Батя: старт с оружия — как на скрине магазина
+
+$('#items-cattabs')?.addEventListener('click', (e) => {
+  const btn = e.target.closest('.side-tab');
+  if (btn) selectItemsCategory(btn.dataset.cat);
+});
+
+// разворот характеристик предмета по клику на карточку
+$('#items-panel')?.addEventListener('click', (e) => {
+  if (e.target.closest('.edit-badge')) return; // ✎ — только редактирование
+  const card = e.target.closest('.item-card');
+  if (!card) return;
+  card.classList.toggle('exp');
+  card.setAttribute('aria-expanded', card.classList.contains('exp') ? 'true' : 'false');
 });
 
 // ---------- загрузка данных ----------
@@ -400,7 +413,7 @@ document.addEventListener('click', (e) => {
   const heroes = state.heroes;
   $('#calc-hero').innerHTML = '<option value="">— вручную —</option>' +
     heroes.map(h => `<option value="${esc(h.id)}">${esc(h.name)}</option>`).join('');
-  renderNews(); renderHeroes(); renderBuilds();
+  renderNews(); renderHeroes(); renderBuilds(); renderItems();
   window.renderNews = renderNews; window.renderBuilds = renderBuilds; window.renderHeroesGrid = renderHeroes;
   startOnlineLoop();
   loadSteamNews();
