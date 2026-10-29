@@ -88,7 +88,21 @@ h2.sec-title{font-family:var(--font-display);font-size:27px;font-weight:700;marg
 .tier-cell{border:1px dashed color-mix(in srgb,var(--cat) 45%,var(--line));border-radius:10px;padding:14px 16px;min-height:120px}
 .tier-cell h4{font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cat);margin:0}
 .tier-cell p{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+.tier-clear{margin:0;font-size:12.5px;color:var(--muted)}
 .weapon{--cat:var(--weapon)}.vitality{--cat:var(--vitality)}.spirit{--cat:var(--spirit)}
+/* карточка предмета: скруглённая карточка + иконка в зубчатой рамке */
+.item-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.item-card{position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid color-mix(in srgb,var(--cat) 28%,var(--line));border-radius:12px;padding:12px 14px;transition:border-color .15s}
+.item-card:hover{border-color:color-mix(in srgb,var(--cat) 60%,var(--line))}
+.item-icon{position:relative;flex:none;width:52px;height:52px;background:color-mix(in srgb,var(--cat) 26%,#0a0d0b);clip-path:polygon(100% 50%,90.6% 60.9%,93.3% 75%,79.7% 79.7%,75% 93.3%,60.9% 90.6%,50% 100%,39.1% 90.6%,25% 93.3%,20.3% 79.7%,6.7% 75%,9.4% 60.9%,0% 50%,9.4% 39.1%,6.7% 25%,20.3% 20.3%,25% 6.7%,39.1% 9.4%,50% 0%,60.9% 9.4%,75% 6.7%,79.7% 20.3%,93.3% 25%,90.6% 39.1%)}
+.item-icon img{position:absolute;inset:7px;width:calc(100% - 14px);height:calc(100% - 14px);object-fit:contain;filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
+.item-info{min-width:0}
+.item-name{display:block;font-family:var(--font-display);font-size:13.5px;font-weight:600;letter-spacing:.02em}
+.item-cost{display:block;margin-top:3px;font-size:12px;color:var(--muted)}
+.soul-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;background:#d98a1f;background:radial-gradient(circle at 35% 30%, #ffd479, #d98a1f 72%)}
+.item-stats{margin:7px 0 0;padding:0;list-style:none;display:grid;gap:3px;font-size:12px;color:#cfe0d6}
+.item-stats li{position:relative;padding-left:11px;color:#d5e2d9}
+.item-stats li::before{content:'';position:absolute;left:0;top:6.5px;width:4px;height:4px;border-radius:50%;background:var(--cat)}
 .muted{color:var(--muted);font-size:13px}
 .btn-mini{display:inline-block;margin-top:14px;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:9999px;padding:6px 15px;font-size:12px;cursor:pointer;font-family:inherit;transition:color .15s}
 .btn-mini:hover{color:var(--text)}
