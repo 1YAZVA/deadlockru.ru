@@ -26,6 +26,14 @@ document.addEventListener('click', (e) => {
 });
 $('#go-home').addEventListener('click', () => go('home'));
 
+// ---------- вкладка «Предметы»: аккордеоны тиров ----------
+$('#tab-items')?.addEventListener('click', (e) => {
+  const head = e.target.closest('.tier-head');
+  if (!head) return;
+  const item = head.closest('.tier-item');
+  item.classList.toggle('open');
+});
+
 // ---------- загрузка данных ----------
 async function loadJSON(path) {
   try {
