@@ -6,7 +6,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<'
 const fmtNum = (n) => n == null ? '…' : Number(n).toLocaleString('ru-RU');
 
 const APPID = 1422450; // Deadlock
-const state = { heroes: [], builds: [], notes: [] };
+const state = { heroes: [], builds: [], notes: [], items: [] };
 window.state = state; // админка правит состояние через window.state
 
 // ---------- навигация ----------
@@ -27,12 +27,40 @@ document.addEventListener('click', (e) => {
 $('#go-home').addEventListener('click', () => go('home'));
 
 // ---------- вкладка «Предметы»: категории-вкладки с выпадающей панелью тиров ----------
-const ITEMS_TIERS = [1, 2, 3, 4].map(n =>
-  `<div class="tier-cell"><h4>Тир ${n}</h4><p>Пусто — предметы добавим в этот тир позже.</p></div>`);
+const ITEM_TIER_LABELS = { 1: 'Тир 1', 2: 'Тир 2', 3: 'Тир 3', 4: 'Тир 4' };
+
+function itemCardHTML(it) {
+  const stats = Array.isArray(it.stats) ? it.stats.filter(Boolean) : [];
+  return `<article class="item-card" data-id="${esc(it.id)}">
+    <span class="item-icon"><img src="${esc(it.icon || '')}" alt="${esc(it.name)}" loading="lazy"></span>
+    <div class="item-info">
+      <b class="item-name">${esc(it.name)}</b>
+      <span class="item-cost"><i class="soul-dot"></i>${esc(fmtNum(it.cost))} душ</span>
+      ${stats.length ? `<ul class="item-stats">${stats.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` : ''}
+    </div>
+  </article>`;
+}
+
+function tierCellHTML(cat, tier) {
+  const list = (window.state.items || []).filter((i) => i.category === cat && Number(i.tier) === Number(tier));
+  const body = list.length
+    ? `<div class="item-grid">${list.map(itemCardHTML).join('')}</div>`
+    : '<p class="tier-clear">Пусто — предметы добавим в этот тир позже.</p>';
+  return `<div class="tier-cell"><h4>${ITEM_TIER_LABELS[tier]}</h4>${body}</div>`;
+}
 
 function categoryPanelHTML(cat) {
-  return `<div class="cat-panel-box"><div class="tier-grid">${ITEMS_TIERS.join('')}</div></div>`;
+  return `<div class="cat-panel-box"><div class="tier-grid">${[1, 2, 3, 4].map((t) => tierCellHTML(cat, t)).join('')}</div></div>`;
 }
+
+function renderItems() { // перерисовка открытой панели (вызывает и админка после правок)
+  const btn = $('#items-cattabs .cat-tab.active');
+  const panel = $('#items-panel');
+  if (!btn || !panel || !panel.classList.contains('open')) return;
+  const inner = panel.querySelector('.cat-panel-inner');
+  if (inner) inner.innerHTML = categoryPanelHTML(btn.dataset.cat);
+}
+window.renderItems = renderItems;
 
 $('#items-cattabs')?.addEventListener('click', (e) => {
   const btn = e.target.closest('.cat-tab');
@@ -64,15 +92,16 @@ async function loadJSON(path) {
 }
 
 async function initData() {
-  const [h, b, n, sn] = await Promise.all([
+  const [h, b, n, sn, it] = await Promise.all([
     loadJSON('data/heroes.json'), loadJSON('data/builds.json'), loadJSON('data/patchnotes.json'),
-    loadJSON('data/steam-news.json')
+    loadJSON('data/steam-news.json'), loadJSON('data/items.json')
   ]);
   state.heroes = h?.heroes || []; state.heroesUpdatedAt = h?.updatedAt;
   state.builds = b?.builds || [];
   state.notes = n?.notes || [];
   state.steamPosts = sn?.posts || [];
   state.steamSource = sn?.source || '';
+  state.items = it?.items || [];
   if (!h && !b && !n) {
     // скорее всего открыто как file://
     document.body.insertAdjacentHTML('afterbegin',
