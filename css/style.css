@@ -71,38 +71,54 @@ h2.sec-title{font-family:var(--font-display);font-size:27px;font-weight:700;marg
 .card.spirit{border-top-color:var(--spirit)}.card.vitality{border-top-color:var(--vitality)}
 .card h3{font-family:var(--font-display);font-size:17px;font-weight:600;margin-bottom:6px}
 
-/* вкладка «Предметы»: категории-вкладки + выпадающая панель с тирами */
-.cat-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
-.cat-tab{position:relative;background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--cat);border-radius:12px;padding:20px;text-align:left;color:inherit;font:inherit;cursor:pointer;transition:border-color .15s}
-.cat-tab:hover{border-color:rgba(200,169,106,.6)}
-.cat-tab.active{border-color:var(--cat)}
-.cat-tab h3{font-family:var(--font-display);font-size:17px;font-weight:600;margin-bottom:6px}
-.cat-tab p{font-size:13px;color:var(--muted);margin:0}
-.cat-tab .chev{position:absolute;top:20px;right:16px;color:var(--muted);font-size:10px;transition:transform .25s,color .25s}
-.cat-tab.active .chev{transform:rotate(180deg);color:var(--cat)}
-.cat-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease}
-.cat-panel.open{grid-template-rows:1fr}
-.cat-panel-inner{overflow:hidden}
-.cat-panel-box{margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--cat);background:color-mix(in srgb,var(--cat) 7%,var(--panel));border-radius:12px;padding:18px}
-.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.tier-cell{border:1px dashed color-mix(in srgb,var(--cat) 45%,var(--line));border-radius:10px;padding:14px 16px;min-height:120px}
-.tier-cell h4{font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cat);margin:0}
-.tier-cell p{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+/* вкладка «Предметы»: как в игре — боковые вкладки категорий выдвигаются, тиры сеткой */
+.shop-wrap{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;margin-top:22px}
+.shop-side{display:flex;flex-direction:column;gap:6px;width:74px;padding:10px 0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;transition:width .28s ease}
+.shop-side:hover{width:196px}
+.side-tab{display:flex;align-items:center;gap:12px;height:66px;margin:0 9px;padding:0 13px;background:none;border:0;border-radius:11px;color:inherit;font:inherit;cursor:pointer;white-space:nowrap;transition:background .2s}
+.side-tab .ico{width:46px;height:46px;flex:none;display:grid;place-items:center;border-radius:12px;background:color-mix(in srgb,var(--cat) 14%,transparent);border:1px solid color-mix(in srgb,var(--cat) 34%,transparent);color:var(--cat);transition:background .2s,box-shadow .2s}
+.side-tab .ico svg{width:22px;height:22px}
+.side-tab .lbl{opacity:0;transform:translateX(-10px);transition:opacity .25s ease,transform .25s ease;font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em}
+.shop-side:hover .lbl{opacity:1;transform:none}
+.side-tab:hover{background:color-mix(in srgb,var(--cat) 9%,transparent)}
+.side-tab.active{background:color-mix(in srgb,var(--cat) 7%,transparent)}
+.side-tab.active .ico{background:color-mix(in srgb,var(--cat) 30%,transparent);box-shadow:0 0 16px color-mix(in srgb,var(--cat) 30%,transparent)}
+.side-tab.active .lbl{color:var(--cat);opacity:1;transform:none}
+.cat-panel{min-height:340px}
+.cat-panel-box{border:1px solid var(--line);border-left:3px solid var(--cat);border-radius:12px;background:color-mix(in srgb,var(--cat) 6%,var(--panel));padding:16px}
+.cat-panel.fadein{animation:itemsFade .3s ease}
+@keyframes itemsFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tiers-flow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tier-sec{border:1px solid color-mix(in srgb,var(--cat) 26%,var(--line));border-radius:14px;background:color-mix(in srgb,var(--cat) 4%,var(--panel));padding:14px}
+.tier-bar{display:flex;align-items:center;gap:12px;margin:0 0 12px}
+.tier-bar .cost{display:inline-flex;align-items:center;background:linear-gradient(180deg,rgba(255,212,121,.17),rgba(255,212,121,.07));border:1px solid rgba(255,212,121,.38);border-radius:9px;padding:4px 12px;font-family:var(--font-display);font-weight:700;font-size:15.5px;color:#ffd479;letter-spacing:.02em}
+.tier-bar .cost .soul-dot{margin-right:6px}
+.tier-bar b{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .tier-clear{margin:0;font-size:12.5px;color:var(--muted)}
+.items-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
 .weapon{--cat:var(--weapon)}.vitality{--cat:var(--vitality)}.spirit{--cat:var(--spirit)}
-/* карточка предмета: скруглённая карточка + иконка в зубчатой рамке */
-.item-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
-.item-card{position:relative;display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid color-mix(in srgb,var(--cat) 28%,var(--line));border-radius:12px;padding:12px 14px;transition:border-color .15s}
-.item-card:hover{border-color:color-mix(in srgb,var(--cat) 60%,var(--line))}
-.item-icon{position:relative;flex:none;width:52px;height:52px;background:color-mix(in srgb,var(--cat) 26%,#0a0d0b);clip-path:polygon(100% 50%,90.6% 60.9%,93.3% 75%,79.7% 79.7%,75% 93.3%,60.9% 90.6%,50% 100%,39.1% 90.6%,25% 93.3%,20.3% 79.7%,6.7% 75%,9.4% 60.9%,0% 50%,9.4% 39.1%,6.7% 25%,20.3% 20.3%,25% 6.7%,39.1% 9.4%,50% 0%,60.9% 9.4%,75% 6.7%,79.7% 20.3%,93.3% 25%,90.6% 39.1%)}
-.item-icon img{position:absolute;inset:7px;width:calc(100% - 14px);height:calc(100% - 14px);object-fit:contain;filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
-.item-info{min-width:0}
-.item-name{display:block;font-family:var(--font-display);font-size:13.5px;font-weight:600;letter-spacing:.02em}
-.item-cost{display:block;margin-top:3px;font-size:12px;color:var(--muted)}
-.soul-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;background:#d98a1f;background:radial-gradient(circle at 35% 30%, #ffd479, #d98a1f 72%)}
-.item-stats{margin:7px 0 0;padding:0;list-style:none;display:grid;gap:3px;font-size:12px;color:#cfe0d6}
-.item-stats li{position:relative;padding-left:11px;color:#d5e2d9}
+/* карточка предмета: большая иконка; параметры свёрнуты — разворачиваются по клику */
+.item-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;background:var(--panel);border:1px solid color-mix(in srgb,var(--cat) 28%,var(--line));border-radius:12px;padding:12px 8px 10px;cursor:pointer;transition:border-color .15s,transform .15s;min-width:0}
+.item-card:hover{border-color:color-mix(in srgb,var(--cat) 62%,var(--line));transform:translateY(-2px)}
+.item-card:focus-visible{outline:2px solid var(--cat);outline-offset:2px}
+.item-icon{position:relative;flex:none;width:72px;height:72px;background:color-mix(in srgb,var(--cat) 26%,#0a0d0b);clip-path:polygon(100% 50%,90.6% 60.9%,93.3% 75%,79.7% 79.7%,75% 93.3%,60.9% 90.6%,50% 100%,39.1% 90.6%,25% 93.3%,20.3% 79.7%,6.7% 75%,9.4% 60.9%,0% 50%,9.4% 39.1%,6.7% 25%,20.3% 20.3%,25% 6.7%,39.1% 9.4%,50% 0%,60.9% 9.4%,75% 6.7%,79.7% 20.3%,93.3% 25%,90.6% 39.1%)}
+.item-icon img{position:absolute;inset:11px;width:calc(100% - 22px);height:calc(100% - 22px);object-fit:contain;filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
+.item-name{font-family:var(--font-display);font-size:11.5px;font-weight:600;line-height:1.3;letter-spacing:.01em}
+.item-card.exp{border-color:color-mix(in srgb,var(--cat) 62%,var(--line));background:color-mix(in srgb,var(--cat) 7%,var(--panel))}
+.item-stats{display:none;margin:0;padding:8px 4px 0;border-top:1px dashed color-mix(in srgb,var(--cat) 40%,var(--line));list-style:none;gap:4px;font-size:11.5px;width:100%;text-align:left}
+.item-card.exp .item-stats{display:grid}
+.item-stats li{position:relative;padding-left:11px;color:#d5e2d9;text-align:left}
 .item-stats li::before{content:'';position:absolute;left:0;top:6.5px;width:4px;height:4px;border-radius:50%;background:var(--cat)}
+.soul-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;background:#d98a1f;background:radial-gradient(circle at 35% 30%, #ffd479, #d98a1f 72%)}
+/* мобильная: боковые вкладки горизонтально сверху */
+@media (max-width:860px){
+  .shop-wrap{grid-template-columns:1fr}
+  .shop-side{flex-direction:row;width:100%;padding:8px}
+  .shop-side:hover{width:100%}
+  .side-tab{height:56px;margin:0;flex:none}
+  .side-tab .lbl{opacity:1;transform:none;font-size:13.5px}
+  .tiers-flow{grid-template-columns:1fr}
+}
 .muted{color:var(--muted);font-size:13px}
 .btn-mini{display:inline-block;margin-top:14px;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:9999px;padding:6px 15px;font-size:12px;cursor:pointer;font-family:inherit;transition:color .15s}
 .btn-mini:hover{color:var(--text)}
