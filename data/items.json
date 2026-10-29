@@ -701,6 +701,205 @@
         "+22% сопротивления дебаффам"
       ],
       "funcEn": "+40% Weapon Damage, -0.5mm Move Speed, +5s Buildup Decay Time, +0.7% Buildup Per Shot, -22% Dash Distance, +3.5s Slow Duration, +30% Move Speed, -14% Stamina Recovery, +22% Debuff Resist"
+    },
+    {
+      "id": "armor_piercing_rounds",
+      "name": "Armor Piercing Rounds",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/armor_piercing_rounds.png",
+      "stats": [
+        "+8% урона оружия",
+        "+60% скорости пуль",
+        "+55% шанс срабатывания"
+      ],
+      "funcEn": "+8% Weapon Damage, +60% Bullet Velocity, +55% Proc Chance"
+    },
+    {
+      "id": "capacitor",
+      "name": "Capacitor",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/capacitor.png",
+      "stats": [
+        "Задержка применения: 0,2 с",
+        "Перезарядка: 40 с",
+        "+5% скорости стрельбы",
+        "43 урона при прыжке",
+        "Макс. прыжков: 6",
+        "Радиус прыжка: 10 мм",
+        "100 урона",
+        "43 урона шоком",
+        "Макс. +75% скорости передвижения",
+        "+20% шанс срабатывания",
+        "Макс. частота: 0,2 с",
+        "Длительность замедления: 3 с"
+      ],
+      "funcEn": "+0.2s Cast Delay, 40s Cooldown, +5% Fire Rate, +43 Damage on Jump, +6 Max Jumps, +10mm Jump Radius, +100 Damage, +43 Shock Damage, +75% Max Move Speed, +20% Proc Chance, +0.2s Max Frequency, +3s Slow Duration"
+    },
+    {
+      "id": "crippling_headshot",
+      "name": "Crippling Headshot",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/crippling_headshot.png",
+      "stats": [
+        "+125 доп. здоровья",
+        "-16% сопротивления пулям",
+        "Длительность дебаффа: 12 с",
+        "-35% получаемого врагом лечения",
+        "-35% получаемого врагом лечения",
+        "-16% сопротивления духу у врага"
+      ],
+      "funcEn": "+125 Bonus Health, -16% Bullet Resist, +12s Debuff Duration, -35% Healing Reduction, -35% Healing Reduction, -16% Spirit Resist"
+    },
+    {
+      "id": "crushing_fists",
+      "name": "Crushing Fists",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/crushing_fists.png",
+      "stats": [
+        "Перезарядка: 5 с",
+        "+25% бонусного урона тяжёлой атаки",
+        "+22% урона в ближнем бою",
+        "+12% сопротивления пулям",
+        "-4% сопротивления пулям",
+        "Длительность дебаффа: 8 с",
+        "Тяжёлая атака: +2x бонус",
+        "+15% ёмкости магазина",
+        "Макс. стаков: 6",
+        "+60% дистанции тяжёлой атаки",
+        "Длительность оглушения: 0,5 с"
+      ],
+      "funcEn": "5s Cooldown, +25% Bonus Heavy Damage, +22% Melee Damage, +12% Bullet Resist, -4% Bullet Resist, +8s Debuff Duration, +2x Heavy Melee Bonus, +15% Ammo, +6 Max Stacks, +60% Heavy Melee Distance, +0.5s Stun Duration"
+    },
+    {
+      "id": "frenzy",
+      "name": "Frenzy",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/frenzy.png",
+      "stats": [
+        "Перезарядка: 16 с",
+        "Длительность: 10 с",
+        "+15% скорости стрельбы",
+        "+160 доп. здоровья",
+        "+40% скорости стрельбы",
+        "+4 мм/с скорости передвижения",
+        "+40% сопротивления дебаффам",
+        "Порог здоровья: 50%"
+      ],
+      "funcEn": "16s Cooldown, +10s Duration, +15% Fire Rate, +160 Bonus Health, +40% Fire Rate, +4m m/s Move Speed, +40% Debuff Resist, +50% Health Threshold"
+    },
+    {
+      "id": "glass_cannon",
+      "name": "Glass Cannon",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/glass_cannon.png",
+      "stats": [
+        "+80% урона оружия",
+        "+2 доп. патрона за убийство",
+        "Время распада накопления: 2 с",
+        "+1,2% накопления за выстрел",
+        "+7% скорости стрельбы за убийство",
+        "-13% макс. здоровья",
+        "Макс. стаков: 8",
+        "Длительность замедления: 3 с",
+        "Шанс замедления пулями: 30%"
+      ],
+      "funcEn": "+80% Weapon Damage, +2 Bonus Ammo Per Kill, +2s Buildup Decay Time, +1.2% Buildup Per Shot, +7% Fire Rate per Kill, -13% Max Health, +8 Max Stacks, +3s Slow Duration, +30% Bullet Slow Proc"
+    },
+    {
+      "id": "lucky_shot",
+      "name": "Lucky Shot",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/lucky_shot.png",
+      "stats": [
+        "+30% макс. ёмкости магазина",
+        "+100% бонусного урона оружия",
+        "+25% шанс срабатывания",
+        "+1 мм радиуса"
+      ],
+      "funcEn": "+30% Max Ammo, +100% Bonus Weapon Damage, +25% Proc Chance, +1mm Radius"
+    },
+    {
+      "id": "ricochet",
+      "name": "Ricochet",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/ricochet.png",
+      "stats": [
+        "+18% скорости стрельбы",
+        "+65% урона рикошета",
+        "Дальность рикошета: 13 мм",
+        "+2 цели рикошета"
+      ],
+      "funcEn": "+18% Fire Rate, +65% Ricochet Damage, +13mm Ricochet Range, +2 Ricochet Targets"
+    },
+    {
+      "id": "silencer",
+      "name": "Silencer",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/silencer.png",
+      "stats": [
+        "Время распада накопления: 5 с",
+        "+1,04% накопления за выстрел",
+        "Длительность дебаффа: 6 с",
+        "Длительность иммунитета: 10 с",
+        "Длительность безмолвия: 2,5 с",
+        "-25% снижения духовного урона",
+        "+12% сопротивления духу"
+      ],
+      "funcEn": "+5s Buildup Decay Time, +1.04% Buildup Per Shot, +6s Debuff Duration, +10s Immunity Duration, +2.5s Silence Duration, -25% Spirit Damage Reduction, +12% Spirit Resist"
+    },
+    {
+      "id": "spellslinger",
+      "name": "Spellslinger",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/spellslinger.png",
+      "stats": [
+        "+11% скорости стрельбы",
+        "Длительность баффа: 18 с",
+        "+5% снижения перезарядки способностей",
+        "Макс. стаков: 6",
+        "-10% времени перезарядки магазина"
+      ],
+      "funcEn": "+11% Fire Rate, +18s Buff Duration, 5% Ability Cooldown Reduction, +6 Max Stacks, -10% Reload Time"
+    },
+    {
+      "id": "spiritual_overflow",
+      "name": "Spiritual Overflow",
+      "tier": 4,
+      "cost": 6400,
+      "category": "weapon",
+      "icon": "img/items/spiritual_overflow.png",
+      "stats": [
+        "Длительность: 15 с",
+        "+13% духовного вампиризма",
+        "+15% длительности способностей",
+        "+32% скорости стрельбы",
+        "+90 доп. здоровья",
+        "+40 силы духа",
+        "Время распада накопления: 5 с",
+        "+0,75% накопления за выстрел",
+        "+6 силы духа"
+      ],
+      "funcEn": "+15s Duration, +13% Spirit Lifesteal, +15% Ability Duration, +32% Fire Rate, +90 Bonus Health, +40 Spirit Power, +5s Buildup Decay Time, +0.75% Buildup Per Shot, +6 Spirit Power"
     }
   ]
 }
