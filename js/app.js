@@ -69,6 +69,16 @@ function renderItems() { // перерисовка панели активной
   if (!btn || !panel) return;
   panel.className = 'cat-panel open ' + btn.dataset.cat;
   panel.innerHTML = `<div class="cat-panel-box">${categoryPanelHTML(btn.dataset.cat)}</div>`;
+  // нет png-иконки — показываем монограмму вместо битой картинки (файл можно добавить позже)
+  panel.querySelectorAll('.item-icon img').forEach((img) => {
+    img.addEventListener('error', () => {
+      const name = img.closest('.item-card')?.querySelector('.item-name')?.textContent || '?';
+      const mono = document.createElement('b');
+      mono.className = 'item-mono';
+      mono.textContent = name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+      img.replaceWith(mono);
+    });
+  });
 }
 window.renderItems = renderItems;
 
