@@ -190,10 +190,10 @@ function heroAvatar(h) {
 
 function renderHeroes() {
   $('#heroes-grid').innerHTML = state.heroes.map(h => `
-    <div class="hero-card" data-hero="${esc(h.id)}" title="Открыть в DPS-калькуляторе">
+    <div class="hero-card${h.profile ? ' has-profile' : ''}" data-hero="${esc(h.id)}" title="${h.profile ? 'Открыть профиль героя' : 'Открыть в DPS-калькуляторе'}">
       <span class="ava-letter" data-letter="${esc((h.name || '?').charAt(0).toUpperCase())}">${heroAvatar(h)}</span>
       <span style="min-width:0">
-        <h4>${esc(h.name)}</h4>
+        <h4>${esc(h.name)}${h.profile ? ' <span class="prof-chip">профиль</span>' : ''}</h4>
         <span class="en">${esc(h.role || '')}</span>
         <span class="tags">
           ${h.tags ? String(h.tags).split(',').filter(Boolean).map(t => `<span class="tag-pill">${esc(t.trim())}</span>`).join('') : ''}
@@ -411,11 +411,69 @@ async function loadSteamNews() {
   box.innerHTML = '<span class="muted">Не удалось загрузить RSS (CORS). Прямая ссылка: <a href="https://store.steampowered.com/news/app/1422450" target="_blank" rel="noopener">steamcommunity/news</a></span>';
 }
 
-// ---------- каркание героя в калькулятор ----------
-document.addEventListener('click', (e) => {
-  const hc = e.target.closest('.hero-card[data-hero]');
-  if (!hc) return;
-  const h = state.heroes.find(x => x.id === hc.dataset.hero);
+// ---------- профиль героя: клик по герою открывает его способности и статы ----------
+function abilityHTML(ab) {
+  const rows = Array.isArray(ab.rows) ? ab.rows : [];
+  const typeCls = /пассив/i.test(ab.type || '') ? 'pass' : /ульт/i.test(ab.type || '') ? 'ult' : 'act';
+  return `<div class="abil-card" data-ab="${esc(ab.id || '')}">
+    <div class="abil-head">
+      <span class="abil-ico"><img src="${esc(ab.icon || '')}" alt="${esc(ab.name)}"></span>
+      <div class="abil-tt">
+        <b>${esc(ab.name)}</b>
+        <span class="abil-meta">${(ab.meta || []).map(esc).join(' · ')}</span>
+      </div>
+      <span class="abil-type t-${typeCls}">${esc(ab.type || '')}</span>
+    </div>
+    <p class="abil-desc">${esc(ab.desc || '')}</p>
+    ${rows.length ? `<ul class="abil-rows">${rows.map(r => `<li>${esc(r)}</li>`).join('')}</ul>` : ''}
+    ${(ab.upgrades || []).length ? `<div class="abil-ups">${(ab.upgrades || []).map(u => `<span class="abil-up"><i>${esc(u.p)}</i>${esc(u.t)}</span>`).join('')}</div>` : ''}
+    ${(ab.notes || []).length ? `<details class="abil-notes"><summary>Подробнее</summary><ul>${(ab.notes || []).map(n2 => `<li>${esc(n2)}</li>`).join('')}</ul></details>` : ''}
+  </div>`;
+}
+
+function heroDetailHTML(h) {
+  const p = h.profile || {};
+  const chip = (v) => `<span class="hd-chip">${esc(v)}</span>`;
+  const fine = [p.release ? 'Выход: ' + p.release : '', p.voice ? 'Озвучка: ' + p.voice : '', p.devNames ? 'внутренние имена: ' + p.devNames : ''].filter(Boolean).join(' · ');
+  return `<div class="hero-detail" data-hero="${esc(h.id)}" style="--hcol:${esc(h.color || '#ff7a1a')}">
+    <div class="hd-top">
+      <span class="ava-letter hd-ava" data-letter="${esc((h.name || '?').charAt(0).toUpperCase())}">${heroAvatar(h)}</span>
+      <div class="hd-id">
+        <h3>${esc(h.name)}</h3>
+        <span class="hd-role">${esc(h.role || '')}${p.tags ? ' · ' + esc(p.tags) : ''}</span>
+        ${fine ? `<span class="hd-fine">${esc(fine)}</span>` : ''}
+        <div class="hd-acts">
+          <button type="button" class="btn btn-sm" data-jump-calc="${esc(h.id)}">Открыть в DPS-калькуляторе</button>
+          ${p.weapon ? `<span class="hd-weapon">⚔ ${esc(p.weapon.name)} — ${esc(p.weapon.subtitle || '')}</span>` : ''}
+        </div>
+      </div>
+    </div>
+    ${p.weapon?.rows ? `<div class="hd-block"><b>Оружие — ${esc(p.weapon.name)}</b><p class="hd-desc">${esc(p.weapon.desc || '')}</p><div class="hd-chips">${p.weapon.rows.map(chip).join('')}</div></div>` : ''}
+    <div class="hd-grid">
+      ${p.vitality ? `<div class="hd-block"><b>Живучесть</b><div class="hd-chips">${p.vitality.map(chip).join('')}</div></div>` : ''}
+      ${p.melee ? `<div class="hd-block"><b>Ближний бой</b><div class="hd-chips">${p.melee.map(chip).join('')}</div></div>` : ''}
+      ${p.spirit ? `<div class="hd-block"><b>Дух</b><div class="hd-chips">${chip(p.spirit)}</div></div>` : ''}
+    </div>
+    ${(p.abilities || []).length ? `<div class="hd-abilities">${p.abilities.map(abilityHTML).join('')}</div>`
+      : `<p class="muted hd-empty">Полный профиль героя (способности, скейлы, апгрейды) скоро появится.</p>`}
+    ${p.playstyle ? `<div class="hd-block hd-lore"><b>Стиль игры</b><p class="hd-desc">${esc(p.playstyle)}</p></div>` : ''}
+    ${p.lore ? `<details class="hd-block hd-lore"><summary>Лор</summary><p class="hd-desc">${esc(p.lore)}</p></details>` : ''}
+  </div>`;
+}
+
+function openHeroDetail(id) {
+  const h = state.heroes.find(x => x.id === id);
+  const box = $('#hero-detail');
+  if (!h || !box) return;
+  box.innerHTML = heroDetailHTML(h);
+  box.classList.add('open');
+  box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  window.renderHeroDetail = heroDetailHTML; // для админки (перерендер после правок)
+}
+
+// DPS-подстановка героя (прежнее поведение клика по карточке)
+function jumpToCalc(id) {
+  const h = state.heroes.find(x => x.id === id);
   if (h?.stats) {
     $('#calc-hero').value = h.id;
     $('#calc-dmg').value = h.stats.weaponDamage ?? '';
@@ -423,6 +481,17 @@ document.addEventListener('click', (e) => {
     go('calc');
     window.DPS?.update();
   }
+}
+
+// клики по сетке героев: карточка → детальный профиль; кнопка «DPS» внутри профиля → калькулятор
+document.addEventListener('click', (e) => {
+  const jump = e.target.closest('[data-jump-calc]');
+  if (jump) { jumpToCalc(jump.dataset.jumpCalc); return; }
+  const hc = e.target.closest('.hero-card[data-hero]');
+  if (!hc) return;
+  const h = state.heroes.find(x => x.id === hc.dataset.hero);
+  if (h?.profile) openHeroDetail(h.id);
+  else jumpToCalc(hc.dataset.hero); // у героя без профиля — прежнее поведение
 });
 
 // ---------- init ----------
