@@ -336,6 +336,7 @@ window.AdminUI = (function () {
         <div><label>❤ Здоровье</label><input id="h-hp" type="number" value="${s.health ?? ''}"></div>
         <div><label>👟 Скорость</label><input id="h-ms" type="number" step="0.1" value="${s.moveSpeed ?? ''}"></div>
       </div>
+      <label>Профиль героя (JSON: теги, оружие, способности с апгрейдами; пусто = без профиля)</label><textarea id="h-profile" style="min-height:140px;font-family:monospace;font-size:12px" placeholder='{"tags":"Танк", "abilities":[…]}'>${h?.profile ? esc(JSON.stringify(h.profile, null, 2)) : ''}</textarea>
       <div class="edit-actions">
         <button class="btn btn-sm" id="h-save">${h ? 'Сохранить' : 'Добавить'}</button>
         ${h ? '<button class="btn btn-danger btn-sm" id="h-del">🗑 Удалить</button>' : ''}
@@ -352,9 +353,17 @@ window.AdminUI = (function () {
         stats: { weaponDamage: num($('#h-dmg', m).value), fireRate: num($('#h-fire', m).value), health: num($('#h-hp', m).value), moveSpeed: num($('#h-ms', m).value) },
       };
       if (!rec.name) { toast('Имя обязательно', 'err'); return; }
+      // профиль (JSON) — если поле заполнено, валидируем и сохраняем; пустое = профиль удалить
+      const rawP = $('#h-profile', m).value.trim();
+      if (rawP) {
+        try { rec.profile = JSON.parse(rawP); }
+        catch (e) { toast('Профиль: ошибка JSON — ' + e.message, 'err'); return; }
+        if (rec.profile.abilities && !Array.isArray(rec.profile.abilities)) { toast('Профиль: abilities должен быть массивом', 'err'); return; }
+      }
       if (h) {
         Object.assign(h, rec);
         h.stats = rec.stats;
+        if (rawP) h.profile = rec.profile; else delete h.profile;
       } else {
         window.state.heroes.push(rec);
       }
