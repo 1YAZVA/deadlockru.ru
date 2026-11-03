@@ -1,0 +1,2548 @@
+{
+ "updatedAt": "2026-10-30",
+ "source": "0xThiagoAmaral/deadlock-open-assets — игровые данные June 2026 (assets/game/items.json)",
+ "items": [
+  {
+   "id": "close_quarters",
+   "name": "Close Quarters",
+   "tier": 1,
+   "cost": 800,
+   "category": "weapon",
+   "icon": "img/items/close_quarters.png",
+   "stats": [
+    "+15 мм ближней дистанции",
+    "+20% урона оружия",
+    "+20% сопротивления в ближнем бою"
+   ],
+   "funcEn": "+15mm Close Range, +20% Weapon Damage, +20% Melee Resist"
+  },
+  {
+   "id": "extended_magazine",
+   "name": "Extended Magazine",
+   "tier": 1,
+   "cost": 800,
+   "category": "weapon",
+   "icon": "img/items/extended_magazine.png",
+   "stats": [
+    "+8% урона оружия",
+    "+30% ёмкости магазина"
+   ],
+   "funcEn": "+8% Weapon Damage, +30% Max Ammo"
+  },
+  {
+   "id": "headshot_booster",
+   "name": "Headshot Booster",
+   "tier": 1,
+   "cost": 800,
+   "category": "weapon",
+   "icon": "img/items/headshot_booster.png",
+   "stats": [
+    "Перезарядка: 9 с",
+    "+30 доп. здоровья",
+    "+45 бонусного урона в голову",
+    "+100% шанс срабатывания"
+   ],
+   "funcEn": "9.0s Cooldown, +30 Bonus Health, +45 Head Shot Bonus Damage, +100% Proc Chance"
+  },
+  {
+   "id": "high_velocity_rounds",
+   "name": "High-Velocity Rounds",
+   "tier": 1,
+   "cost": 800,
+   "category": "weapon",
+   "icon": "img/items/high_velocity_rounds.png",
+   "stats": [
+    "+8% урона оружия",
+    "+60% скорости пуль"
+   ],
+   "funcEn": "+8% Weapon Damage, +60% Bullet Velocity"
+  },
+  {
+   "id": "monster_rounds",
+   "name": "Monster Rounds",
+   "tier": 1,
+   "cost": 800,
+   "category": "weapon",
+   "icon": "img/items/monster_rounds.png",
+   "stats": [
+    "+25% урона оружия по NPC",
+    "+25% сопротивления пулям от NPC",
+    "+1 реген вне боя"
+   ],
+   "funcEn": "+25% Weapon Damage vs. NPCs, +25% Bullet Resist vs. NPCs, +1 Out of Combat Regen"
+  },
+  {
+   "id": "rapid_rounds",
+   "name": "Rapid Rounds",
+   "tier": 1,
+   "cost": 800,
+   "category": "weapon",
+   "icon": "img/items/rapid_rounds.png",
+   "stats": [
+    "+9% скорости стрельбы"
+   ],
+   "funcEn": "+9% Fire Rate"
+  },
+  {
+   "id": "restorative_shot",
+   "name": "Restorative Shot",
+   "tier": 1,
+   "cost": 800,
+   "category": "weapon",
+   "icon": "img/items/restorative_shot.png",
+   "stats": [
+    "Перезарядка: 6 с",
+    "+6% урона оружия",
+    "+50 лечения при попадании по героям",
+    "+20 лечения при попадании по NPC/сферам",
+    "+100% шанс срабатывания",
+    "+1 мм радиуса"
+   ],
+   "funcEn": "6s Cooldown, +6% Weapon Damage, +50 Healing From Heroes, +20 Healing From NPCs / Orbs, +100% Proc Chance, +1mm Radius"
+  },
+  {
+   "id": "active_reload",
+   "name": "Active Reload",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/active_reload.png",
+   "stats": [
+    "Перезарядка: 12 с",
+    "Длительность эффекта: 7 с",
+    "+20% ёмкости магазина",
+    "+25% скорости стрельбы",
+    "+0,75 мм скорости передвижения",
+    "+16% вампиризма от пуль"
+   ],
+   "funcEn": "12s Cooldown, +7s Duration, +20% Max Ammo, +25% Fire Rate, +0.75mm Move Speed, +16% Bullet Lifesteal"
+  },
+  {
+   "id": "fleetfoot",
+   "name": "Fleetfoot",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/fleetfoot.png",
+   "stats": [
+    "Перезарядка: 16 с",
+    "Длительность эффекта: 5 с",
+    "+3,0 мм скорости передвижения",
+    "+6% урона оружия",
+    "+6% сопротивления пулям",
+    "+35% дальности скольжения",
+    "+40% сопротивления замедлению"
+   ],
+   "funcEn": "16.0s Cooldown, +5s Duration, +3.0mm Move Speed, +6% Weapon Damage, +6% Bullet Resist, +35% Slide Distance, +40% Slow Resist"
+  },
+  {
+   "id": "intensifying_magazine",
+   "name": "Intensifying Magazine",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/intensifying_magazine.png",
+   "stats": [
+    "+% урона оружия",
+    "+45% макс. урона оружия",
+    "+20% ёмкости магазина",
+    "+2,5 с до максимального урона"
+   ],
+   "funcEn": "+% Weapon Damage, +45% Max Weapon Damage, +20% Max Ammo, +2.5s Time for Max Damage"
+  },
+  {
+   "id": "kinetic_dash",
+   "name": "Kinetic Dash",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/kinetic_dash.png",
+   "stats": [
+    "Длительность эффекта: 7 с",
+    "+6 временных зарядов магазина",
+    "+25% скорости стрельбы",
+    "+1 выносливость",
+    "+12% восстановления выносливости"
+   ],
+   "funcEn": "+7s Duration, +6 Temporary Ammo, +25% Fire Rate, +1 Stamina, +12% Stamina Recovery"
+  },
+  {
+   "id": "long_range",
+   "name": "Long Range",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/long_range.png",
+   "stats": [
+    "+8% дистанции падения урона",
+    "+0,75 мм скорости бега",
+    "+40% урона оружия",
+    "+15 мм минимальной дистанции"
+   ],
+   "funcEn": "+8% Weapon Fall-off Range, +0.75mm Sprint Speed, +40% Weapon Damage, +15mm Min. Distance"
+  },
+  {
+   "id": "melee_charge",
+   "name": "Melee Charge",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/melee_charge.png",
+   "stats": [
+    "Перезарядка: 5 с",
+    "+25% бонусного урона тяжёлой атаки",
+    "+10% урона в ближнем бою",
+    "+6% сопротивления пулям",
+    "+50% дистанции тяжёлой атаки"
+   ],
+   "funcEn": "5s Cooldown, +25% Bonus Heavy Damage, +10% Melee Damage, +6% Bullet Resist, +50% Heavy Melee Distance"
+  },
+  {
+   "id": "mystic_shot",
+   "name": "Mystic Shot",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/mystic_shot.png",
+   "stats": [
+    "Перезарядка: 8 с",
+    "+40 духовного урона",
+    "+100% шанс срабатывания",
+    "Макс. частота: 1 с",
+    "+1 мм радиуса",
+    "+7 силы духа"
+   ],
+   "funcEn": "8s Cooldown, +40 Spirit Damage, +100% Proc Chance, +1s Max Frequency, +1mm Radius, +7 Spirit Power"
+  },
+  {
+   "id": "opening_rounds",
+   "name": "Opening Rounds",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/opening_rounds.png",
+   "stats": [
+    "+8% урона оружия",
+    "+25% урона оружия",
+    "+60% скорости пуль",
+    "+7 силы духа"
+   ],
+   "funcEn": "+8% Weapon Damage, +25% Weapon Damage, +60% Bullet Velocity, +7 Spirit Power"
+  },
+  {
+   "id": "recharging_rush",
+   "name": "Recharging Rush",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/recharging_rush.png",
+   "stats": [
+    "Перезарядка: 25 с",
+    "+10% урона оружия",
+    "+20% ёмкости магазина",
+    "Порог урона: 200",
+    "Окно времени: 3,5 с"
+   ],
+   "funcEn": "25s Cooldown, +10% Weapon Damage, +20% Max Ammo, +200 Damage Threshold, +3.5s Time Frame"
+  },
+  {
+   "id": "slowing_bullets",
+   "name": "Slowing Bullets",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/slowing_bullets.png",
+   "stats": [
+    "+15% урона оружия",
+    "Время распада накопления: 5 с",
+    "+0,7% накопления за выстрел",
+    "-22% дистанции рывка",
+    "Длительность замедления: 3,5 с",
+    "+30% скорости передвижения"
+   ],
+   "funcEn": "+15% Weapon Damage, +5s Buildup Decay Time, +0.7% Buildup Per Shot, -22% Dash Distance, +3.5s Slow Duration, +30% Move Speed"
+  },
+  {
+   "id": "spirit_shredder_bullets",
+   "name": "Spirit Shredder Bullets",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/spirit_shredder_bullets.png",
+   "stats": [
+    "+10% духовного вампиризма",
+    "Длительность дебаффа: 8 с",
+    "-8% сопротивления духу у врага"
+   ],
+   "funcEn": "+10% Spirit Lifesteal, +8s Debuff Duration, -8% Spirit Resist"
+  },
+  {
+   "id": "split_shot",
+   "name": "Split Shot",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/split_shot.png",
+   "stats": [
+    "Перезарядка: 27 с",
+    "Длительность эффекта: 5 с",
+    "+5 мультивыстрел",
+    "Макс. стаков: 5",
+    "Длительность стака: 12 с",
+    "+8% урона оружия за стак"
+   ],
+   "funcEn": "27s Cooldown, +5s Buff Duration, +5 Weapon Multishot, +5 Max Stacks, +12s Stack Duration, +8% Weapon Damage per Stack"
+  },
+  {
+   "id": "stalker",
+   "name": "Stalker",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/stalker.png",
+   "stats": [
+    "Перезарядка: 6 с",
+    "Длительность эффекта: 5 с",
+    "+50 доп. здоровья",
+    "+1,5 мм скорости передвижения",
+    "-6% сопротивления пулям",
+    "17 урона в секунду",
+    "Длительность дебаффа: 5 с",
+    "+25 мм бонусного радиуса",
+    "+8 мм ближней дистанции",
+    "-50% дистанции слышимости шагов"
+   ],
+   "funcEn": "6s Cooldown, +5s Duration, +50 Bonus Health, +1.5mm Move Speed, -6% Bullet Resist, +17 Damage Per Second, +5s Debuff Duration, +25mm Bonus Radius, +8mm Close Range, -50% Footstep Sound Distance"
+  },
+  {
+   "id": "swift_striker",
+   "name": "Swift Striker",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/swift_striker.png",
+   "stats": [
+    "+20% скорости стрельбы",
+    "+0,75 мм скорости бега"
+   ],
+   "funcEn": "+20% Fire Rate, +0.75mm Sprint Speed"
+  },
+  {
+   "id": "titanic_magazine",
+   "name": "Titanic Magazine",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/titanic_magazine.png",
+   "stats": [
+    "+14% урона оружия",
+    "+100% ёмкости магазина"
+   ],
+   "funcEn": "+14% Weapon Damage, +100% Max Ammo"
+  },
+  {
+   "id": "weakening_headshot",
+   "name": "Weakening Headshot",
+   "tier": 2,
+   "cost": 1600,
+   "category": "weapon",
+   "icon": "img/items/weakening_headshot.png",
+   "stats": [
+    "Перезарядка: 0 с",
+    "+60 доп. здоровья",
+    "-13% сопротивления пулям у врага",
+    "Длительность дебаффа: 12 с"
+   ],
+   "funcEn": "0.0s Cooldown, +60 Bonus Health, -13% Bullet Resist, +12s Debuff Duration"
+  },
+  {
+   "id": "alchemical_fire",
+   "name": "Alchemical Fire",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/alchemical_fire.png",
+   "stats": [
+    "Задержка применения: 0,2 с",
+    "Перезарядка: 30 с",
+    "Длительность: 5 с",
+    "-7% сопротивления пулям",
+    "45 урона в секунду",
+    "Макс. 95 урона в секунду",
+    "+10 мм радиуса",
+    "+10 силы духа"
+   ],
+   "funcEn": "+0.2s Cast Delay, 30.0s Cooldown, +5s Duration, -7% Bullet Resist, +45 Damage Per Second, +95 Max DPS, +10mm Radius, +10 Spirit Power"
+  },
+  {
+   "id": "ballistic_enchantment",
+   "name": "Ballistic Enchantment",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/ballistic_enchantment.png",
+   "stats": [
+    "Длительность: 14 с",
+    "Лимит стаков по не-героям: 8",
+    "+22% радиуса",
+    "+22% дальности способности",
+    "+20% урона оружия за стак",
+    "+5% урона оружия по не-героям"
+   ],
+   "funcEn": "+14s Duration, +8 Non-Hero Stack Limit, +22% Radius, +22% Ability Range, +20% Weapon Damage per Stack, +5% Non-Hero Weapon Damage"
+  },
+  {
+   "id": "berserker",
+   "name": "Berserker",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/berserker.png",
+   "stats": [
+    "+8% сопротивления пулям",
+    "Длительность: 10 с",
+    "120 полученного урона за стак",
+    "Макс. стаков: 10",
+    "+7% урона оружия за стак"
+   ],
+   "funcEn": "+8% Bullet Resist, +10s Duration, +120 Damage taken to Stack, +10.0 Max Stacks, +7% Weapon Damage per Stack"
+  },
+  {
+   "id": "blood_tribute",
+   "name": "Blood Tribute",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/blood_tribute.png",
+   "stats": [
+    "Задержка применения: 0 с",
+    "Перезарядка: 0 с",
+    "+35% скорости стрельбы",
+    "+2,0 мм скорости передвижения",
+    "+50/с высасывания здоровья",
+    "+8% сопротивления дебаффам",
+    "+4 реген вне боя",
+    "+35% сопротивления дебаффам",
+    "+8% сопротивления духу"
+   ],
+   "funcEn": "+0.0s Cast Delay, 0.0s Cooldown, +35% Fire Rate, +2.0mm Move Speed, +50/s Health Drain, +8% Debuff Resist, +4 Out of Combat Regen, +35% Debuff Resist, +8% Spirit Resist"
+  },
+  {
+   "id": "burst_fire",
+   "name": "Burst Fire",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/burst_fire.png",
+   "stats": [
+    "Перезарядка: 9 с",
+    "Длительность: 4,5 с",
+    "+32% скорости стрельбы",
+    "+10% скорости стрельбы",
+    "+1,25 мм скорости передвижения",
+    "+50% дальности скольжения"
+   ],
+   "funcEn": "9.0s Cooldown, +4.5s Duration, +32% Fire Rate, +10% Fire Rate, +1.25mm Move Speed, +50% Slide Distance"
+  },
+  {
+   "id": "cultist_sacrifice",
+   "name": "Cultist Sacrifice",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/cultist_sacrifice.png",
+   "stats": [
+    "+7 мм дальности применения",
+    "Перезарядка: 270 с",
+    "Длительность: 160 с",
+    "+10% урона оружия",
+    "+1 заряд способности",
+    "+50 доп. здоровья",
+    "+180% бонусных душ",
+    "+30% урона оружия по NPC",
+    "+30% сопротивления пулям от NPC",
+    "+2 реген вне боя",
+    "+12% радиуса",
+    "+12% дальности способностей"
+   ],
+   "funcEn": "+7mm Cast Range, 270s Cooldown, +160s Duration, +10% Weapon Damage, +1 Bonus Ability Charges, +50 Bonus Health, +180% Bonus Souls, +30% Weapon Damage vs. NPCs, +30% Bullet Resist vs. NPCs, +2 Out of Combat Regen, +12% Radius, +12% Ability Range"
+  },
+  {
+   "id": "escalating_resilience",
+   "name": "Escalating Resilience",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/escalating_resilience.png",
+   "stats": [
+    "+18% урона оружия",
+    "+35% макс. ёмкости магазина",
+    "+75 доп. здоровья",
+    "Длительность стака: 24 с",
+    "+2% сопротивления пулям за стак",
+    "Макс. +30% сопротивления пулям"
+   ],
+   "funcEn": "+18% Weapon Damage, +35% Max Ammo, +75 Bonus Health, +24s Stack Duration, +2% Bullet Resist per Stack, +30% Max Bullet Resist"
+  },
+  {
+   "id": "express_shot",
+   "name": "Express Shot",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/express_shot.png",
+   "stats": [
+    "Перезарядка: 8 с",
+    "+8% урона оружия",
+    "+60% скорости пуль",
+    "+2 доп. патрона за выстрел",
+    "+125% урона оружия",
+    "+40% урона вторым огнём",
+    "+100% скорости пуль"
+   ],
+   "funcEn": "8s Cooldown, +8% Weapon Damage, +60% Bullet Velocity, +2 Extra Ammo Consumed, +125% Weapon Damage, +40% Secondary Fire Weapon Damage, +100% Bullet Velocity"
+  },
+  {
+   "id": "headhunter",
+   "name": "Headhunter",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/headhunter.png",
+   "stats": [
+    "Перезарядка: 8 с",
+    "+5% урона оружия",
+    "+50 доп. здоровья",
+    "+1,75 мм скорости передвижения",
+    "+75 бонусного урона в голову",
+    "+4% лечения за хедшот",
+    "Длительность ускорения: 3 с",
+    "+100% шанс срабатывания"
+   ],
+   "funcEn": "8s Cooldown, +5% Weapon Damage, +50 Bonus Health, +1.75mm Move Speed, +75 Head Shot Bonus Damage, +4% Heal Per Headshot, +3s Move Speed Duration, +100% Proc Chance"
+  },
+  {
+   "id": "heroic_aura",
+   "name": "Heroic Aura",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/heroic_aura.png",
+   "stats": [
+    "Перезарядка: 22 с",
+    "Длительность: 7 с",
+    "+2,25 мм скорости передвижения",
+    "Радиус (актив): 35 мм",
+    "+26% скорости стрельбы",
+    "+1,5 мм скорости бега",
+    "+17% сопротивления пулям",
+    "Радиус: 35 мм"
+   ],
+   "funcEn": "22.0s Cooldown, +7s Duration, +2.25mm Move Speed, +35mm Active Radius, +26% Fire Rate, +1.5mm Sprint Speed, +17% Bullet Resist, +35mm Radius"
+  },
+  {
+   "id": "hollow_point",
+   "name": "Hollow Point",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/hollow_point.png",
+   "stats": [
+    "+35% урона оружия",
+    "+125 доп. здоровья",
+    "-9% сопротивления пулям",
+    "Длительность дебаффа: 8 с",
+    "+4,5 реген вне боя"
+   ],
+   "funcEn": "+35% Weapon Damage, +125 Bonus Health, -9% Bullet Resist, +8s Debuff Duration, +4.5 Out of Combat Regen"
+  },
+  {
+   "id": "hunters_aura",
+   "name": "Hunter's Aura",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/hunters_aura.png",
+   "stats": [
+    "+100 доп. здоровья",
+    "+0,75 мм скорости бега",
+    "-10% сопротивления пулям",
+    "+15% скорости стрельбы",
+    "Радиус: 15 мм"
+   ],
+   "funcEn": "+100 Bonus Health, +0.75mm Sprint Speed, -10% Bullet Resist, +15% Fire Rate, +15mm Radius"
+  },
+  {
+   "id": "point_blank",
+   "name": "Point Blank",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/point_blank.png",
+   "stats": [
+    "+75 доп. здоровья",
+    "+15 мм ближней дистанции",
+    "+50% урона оружия",
+    "+30% сопротивления в ближнем бою",
+    "Длительность замедления: 2 с",
+    "+25% скорости передвижения"
+   ],
+   "funcEn": "+75 Bonus Health, +15mm Close Range, +50% Weapon Damage, +30% Melee Resist, +2s Slow Duration, +25% Move Speed"
+  },
+  {
+   "id": "shadow_weave",
+   "name": "Shadow Weave",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/shadow_weave.png",
+   "stats": [
+    "Перезарядка: 45 с",
+    "Длительность невидимости: 13 с",
+    "+25% темпа стрельбы в засаде",
+    "+25% урона в ближнем бою в засаде",
+    "+25 силы духа в засаде",
+    "Длительность засады: 5 с",
+    "+1,5 мм скорости бега",
+    "Время растворения: 0,6 с",
+    "+5 мм скорости бега невидимым",
+    "+5 реген вне боя",
+    "Радиус обнаружения: 20 мм"
+   ],
+   "funcEn": "45.0s Cooldown, +13s Stealth Duration, +25% Ambush Fire Rate, +25% Ambush Melee Damage, +25 Ambush Spirit Power, +5s Ambush Duration, +1.5mm Sprint Speed, +0.6s Fade Time, +5mm Invis Sprint Speed, +5 Out of Combat Regen, +20mm Spot Radius"
+  },
+  {
+   "id": "sharpshooter",
+   "name": "Sharpshooter",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/sharpshooter.png",
+   "stats": [
+    "+10% урона оружия",
+    "+20% дистанции падения урона",
+    "+60% скорости пуль",
+    "-0,7 мм скорости передвижения",
+    "+1,0 мм скорости бега",
+    "+25% зум оружия",
+    "+60% урона оружия",
+    "+15 мм минимальной дистанции"
+   ],
+   "funcEn": "+10% Weapon Damage, +20% Weapon Fall-off Range, +60% Bullet Velocity, -0.7mm Move Speed, +1.0mm Sprint Speed, +25% Weapon Zoom, +60% Weapon Damage, +15mm Min. Distance"
+  },
+  {
+   "id": "spirit_rend",
+   "name": "Spirit Rend",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/spirit_rend.png",
+   "stats": [
+    "+10% духовного вампиризма",
+    "+75 доп. здоровья",
+    "Длительность дебаффа: 8 с",
+    "-7% сопротивления духу за хедшот",
+    "Макс. стаков: 4",
+    "Макс. частота: 2 с",
+    "-8% сопротивления духу у врага"
+   ],
+   "funcEn": "+10% Spirit Lifesteal, +75 Bonus Health, +8s Debuff Duration, -7% Spirit Resist on Headshot, +4 Max Stacks, +2s Max Frequency, -8% Spirit Resist"
+  },
+  {
+   "id": "tesla_bullets",
+   "name": "Tesla Bullets",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/tesla_bullets.png",
+   "stats": [
+    "33 урона при прыжке",
+    "Макс. прыжков: 4",
+    "Радиус прыжка: 8 мм",
+    "33 урона шоком",
+    "+15% шанс срабатывания",
+    "Макс. частота: 0,2 с"
+   ],
+   "funcEn": "+33 Damage on Jump, +4 Max Jumps, +8mm Jump Radius, +33 Shock Damage, +15% Proc Chance, +0.2s Max Frequency"
+  },
+  {
+   "id": "toxic_bullets",
+   "name": "Toxic Bullets",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/toxic_bullets.png",
+   "stats": [
+    "Время распада накопления: 5 с",
+    "+1,28% накопления за выстрел",
+    "Длительность: 4 с",
+    "Кровотечение: 1,7%/с",
+    "-35% получаемого врагом лечения",
+    "-35% получаемого врагом лечения"
+   ],
+   "funcEn": "+5s Buildup Decay Time, +1.28% Buildup Per Shot, +4s Duration, +1.7%/sec Bleed Damage, -35% Healing Reduction, -35% Healing Reduction"
+  },
+  {
+   "id": "weighted_shots",
+   "name": "Weighted Shots",
+   "tier": 3,
+   "cost": 3200,
+   "category": "weapon",
+   "icon": "img/items/weighted_shots.png",
+   "stats": [
+    "+40% урона оружия",
+    "-0,5 мм скорости передвижения",
+    "Время распада накопления: 5 с",
+    "+0,7% накопления за выстрел",
+    "-22% дистанции рывка",
+    "Длительность замедления: 3,5 с",
+    "+30% скорости передвижения",
+    "-14% восстановления выносливости",
+    "+22% сопротивления дебаффам"
+   ],
+   "funcEn": "+40% Weapon Damage, -0.5mm Move Speed, +5s Buildup Decay Time, +0.7% Buildup Per Shot, -22% Dash Distance, +3.5s Slow Duration, +30% Move Speed, -14% Stamina Recovery, +22% Debuff Resist"
+  },
+  {
+   "id": "armor_piercing_rounds",
+   "name": "Armor Piercing Rounds",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/armor_piercing_rounds.png",
+   "stats": [
+    "+8% урона оружия",
+    "+60% скорости пуль",
+    "+55% шанс срабатывания"
+   ],
+   "funcEn": "+8% Weapon Damage, +60% Bullet Velocity, +55% Proc Chance"
+  },
+  {
+   "id": "capacitor",
+   "name": "Capacitor",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/capacitor.png",
+   "stats": [
+    "Задержка применения: 0,2 с",
+    "Перезарядка: 40 с",
+    "+5% скорости стрельбы",
+    "43 урона при прыжке",
+    "Макс. прыжков: 6",
+    "Радиус прыжка: 10 мм",
+    "100 урона",
+    "43 урона шоком",
+    "Макс. +75% скорости передвижения",
+    "+20% шанс срабатывания",
+    "Макс. частота: 0,2 с",
+    "Длительность замедления: 3 с"
+   ],
+   "funcEn": "+0.2s Cast Delay, 40s Cooldown, +5% Fire Rate, +43 Damage on Jump, +6 Max Jumps, +10mm Jump Radius, +100 Damage, +43 Shock Damage, +75% Max Move Speed, +20% Proc Chance, +0.2s Max Frequency, +3s Slow Duration"
+  },
+  {
+   "id": "crippling_headshot",
+   "name": "Crippling Headshot",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/crippling_headshot.png",
+   "stats": [
+    "+125 доп. здоровья",
+    "-16% сопротивления пулям",
+    "Длительность дебаффа: 12 с",
+    "-35% получаемого врагом лечения",
+    "-35% получаемого врагом лечения",
+    "-16% сопротивления духу у врага"
+   ],
+   "funcEn": "+125 Bonus Health, -16% Bullet Resist, +12s Debuff Duration, -35% Healing Reduction, -35% Healing Reduction, -16% Spirit Resist"
+  },
+  {
+   "id": "crushing_fists",
+   "name": "Crushing Fists",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/crushing_fists.png",
+   "stats": [
+    "Перезарядка: 5 с",
+    "+25% бонусного урона тяжёлой атаки",
+    "+22% урона в ближнем бою",
+    "+12% сопротивления пулям",
+    "-4% сопротивления пулям",
+    "Длительность дебаффа: 8 с",
+    "Тяжёлая атака: +2x бонус",
+    "+15% ёмкости магазина",
+    "Макс. стаков: 6",
+    "+60% дистанции тяжёлой атаки",
+    "Длительность оглушения: 0,5 с"
+   ],
+   "funcEn": "5s Cooldown, +25% Bonus Heavy Damage, +22% Melee Damage, +12% Bullet Resist, -4% Bullet Resist, +8s Debuff Duration, +2x Heavy Melee Bonus, +15% Ammo, +6 Max Stacks, +60% Heavy Melee Distance, +0.5s Stun Duration"
+  },
+  {
+   "id": "frenzy",
+   "name": "Frenzy",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/frenzy.png",
+   "stats": [
+    "Перезарядка: 16 с",
+    "Длительность: 10 с",
+    "+15% скорости стрельбы",
+    "+160 доп. здоровья",
+    "+40% скорости стрельбы",
+    "+4 мм/с скорости передвижения",
+    "+40% сопротивления дебаффам",
+    "Порог здоровья: 50%"
+   ],
+   "funcEn": "16s Cooldown, +10s Duration, +15% Fire Rate, +160 Bonus Health, +40% Fire Rate, +4m m/s Move Speed, +40% Debuff Resist, +50% Health Threshold"
+  },
+  {
+   "id": "glass_cannon",
+   "name": "Glass Cannon",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/glass_cannon.png",
+   "stats": [
+    "+80% урона оружия",
+    "+2 доп. патрона за убийство",
+    "Время распада накопления: 2 с",
+    "+1,2% накопления за выстрел",
+    "+7% скорости стрельбы за убийство",
+    "-13% макс. здоровья",
+    "Макс. стаков: 8",
+    "Длительность замедления: 3 с",
+    "Шанс замедления пулями: 30%"
+   ],
+   "funcEn": "+80% Weapon Damage, +2 Bonus Ammo Per Kill, +2s Buildup Decay Time, +1.2% Buildup Per Shot, +7% Fire Rate per Kill, -13% Max Health, +8 Max Stacks, +3s Slow Duration, +30% Bullet Slow Proc"
+  },
+  {
+   "id": "lucky_shot",
+   "name": "Lucky Shot",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/lucky_shot.png",
+   "stats": [
+    "+30% макс. ёмкости магазина",
+    "+100% бонусного урона оружия",
+    "+25% шанс срабатывания",
+    "+1 мм радиуса"
+   ],
+   "funcEn": "+30% Max Ammo, +100% Bonus Weapon Damage, +25% Proc Chance, +1mm Radius"
+  },
+  {
+   "id": "ricochet",
+   "name": "Ricochet",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/ricochet.png",
+   "stats": [
+    "+18% скорости стрельбы",
+    "+65% урона рикошета",
+    "Дальность рикошета: 13 мм",
+    "+2 цели рикошета"
+   ],
+   "funcEn": "+18% Fire Rate, +65% Ricochet Damage, +13mm Ricochet Range, +2 Ricochet Targets"
+  },
+  {
+   "id": "silencer",
+   "name": "Silencer",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/silencer.png",
+   "stats": [
+    "Время распада накопления: 5 с",
+    "+1,04% накопления за выстрел",
+    "Длительность дебаффа: 6 с",
+    "Длительность иммунитета: 10 с",
+    "Длительность безмолвия: 2,5 с",
+    "-25% снижения духовного урона",
+    "+12% сопротивления духу"
+   ],
+   "funcEn": "+5s Buildup Decay Time, +1.04% Buildup Per Shot, +6s Debuff Duration, +10s Immunity Duration, +2.5s Silence Duration, -25% Spirit Damage Reduction, +12% Spirit Resist"
+  },
+  {
+   "id": "spellslinger",
+   "name": "Spellslinger",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/spellslinger.png",
+   "stats": [
+    "+11% скорости стрельбы",
+    "Длительность баффа: 18 с",
+    "+5% снижения перезарядки способностей",
+    "Макс. стаков: 6",
+    "-10% времени перезарядки магазина"
+   ],
+   "funcEn": "+11% Fire Rate, +18s Buff Duration, 5% Ability Cooldown Reduction, +6 Max Stacks, -10% Reload Time"
+  },
+  {
+   "id": "spiritual_overflow",
+   "name": "Spiritual Overflow",
+   "tier": 4,
+   "cost": 6400,
+   "category": "weapon",
+   "icon": "img/items/spiritual_overflow.png",
+   "stats": [
+    "Длительность: 15 с",
+    "+13% духовного вампиризма",
+    "+15% длительности способностей",
+    "+32% скорости стрельбы",
+    "+90 доп. здоровья",
+    "+40 силы духа",
+    "Время распада накопления: 5 с",
+    "+0,75% накопления за выстрел",
+    "+6 силы духа"
+   ],
+   "funcEn": "+15s Duration, +13% Spirit Lifesteal, +15% Ability Duration, +32% Fire Rate, +90 Bonus Health, +40 Spirit Power, +5s Buildup Decay Time, +0.75% Buildup Per Shot, +6 Spirit Power"
+  },
+  {
+   "id": "extra_charge",
+   "name": "Extra Charge",
+   "tier": 1,
+   "cost": 800,
+   "category": "spirit",
+   "icon": "img/items/extra_charge.png",
+   "stats": [
+    "+7 Бонус к спирит. мощи для заряжаемых умений",
+    "+1 Число зарядов умения"
+   ]
+  },
+  {
+   "id": "extra_spirit",
+   "name": "Extra Spirit",
+   "tier": 1,
+   "cost": 800,
+   "category": "spirit",
+   "icon": "img/items/extra_spirit.png",
+   "stats": [
+    "+10 Спиритическая мощь"
+   ]
+  },
+  {
+   "id": "golden_goose_egg",
+   "name": "Golden Goose Egg",
+   "tier": 1,
+   "cost": 800,
+   "category": "spirit",
+   "icon": "img/items/golden_goose_egg.png",
+   "stats": [
+    "+1 м/c Скорость бега",
+    "+1 Восстановление вне боя",
+    "-15% Снижение урона",
+    "Вы постепенно получаете души, пока живы.",
+    "Актив: Вылупив яйцо, вы получите души и постоянные бонусы. Чем дольше у вас яйцо, тем выше его ценность. При вылуплении яйца вы получите постоянный бонус за каждые 80 накопленных душ.",
+    "80 Души в минуту"
+   ]
+  },
+  {
+   "id": "mystic_burst",
+   "name": "Mystic Burst",
+   "tier": 1,
+   "cost": 800,
+   "category": "spirit",
+   "icon": "img/items/mystic_burst.png",
+   "stats": [
+    "+40 ед. к прочности щита от спиритизма",
+    "+6% к урону от оружия",
+    "Постепенно заряжается спиритическим уроном, благодаря чему умения, наносящие более 80 ед. урона, причиняют дополнительный урон.",
+    "14 с. Время зарядки",
+    "40 Дополнительный урон"
+   ]
+  },
+  {
+   "id": "mystic_expansion",
+   "name": "Mystic Expansion",
+   "tier": 1,
+   "cost": 800,
+   "category": "spirit",
+   "icon": "img/items/mystic_expansion.png",
+   "stats": [
+    "+7% к сопр. пулям",
+    "+15% к дальности умений",
+    "Увеличивает дальность выбранного умения и радиус его эффекта.",
+    "+20% к дальности умений"
+   ]
+  },
+  {
+   "id": "mystic_regeneration",
+   "name": "Mystic Regeneration",
+   "tier": 1,
+   "cost": 800,
+   "category": "spirit",
+   "icon": "img/items/mystic_regeneration.png",
+   "stats": [
+    "+50 Бонус к здоровью",
+    "Нанесение спиритического урона вражеским героям даёт вам бонусное восстановление. Накапливается при нанесении урона разным героям.",
+    "7 с. Длительность восстановления",
+    "4 ед./c Восстановление"
+   ]
+  },
+  {
+   "id": "rusted_barrel",
+   "name": "Rusted Barrel",
+   "tier": 1,
+   "cost": 800,
+   "category": "spirit",
+   "icon": "img/items/rusted_barrel.png",
+   "stats": [
+    "+60 Бонус к здоровью",
+    "+0.5 м/c Скорость бега",
+    "У выбранной цели снижаются скорострельность и сопротивляемость пулям.",
+    "Актив: 32 м Дальность применения",
+    "5 сек. Длительность",
+    "16 с. Перезарядка",
+    "-32% Скорострельность",
+    "+-8% Сопротивляемость пулям"
+   ]
+  },
+  {
+   "id": "spirit_strike",
+   "name": "Spirit Strike",
+   "tier": 1,
+   "cost": 800,
+   "category": "spirit",
+   "icon": "img/items/spirit_strike.png",
+   "stats": [
+    "+12% к урону в ближнем бою",
+    "+80 ед. к прочности щита от спиритизма",
+    "Совершив лёгкий или тяжёлый удар ближнего боя по герою, вы нанесёте ему дополнительный спиритический урон и уменьшите его сопротивляемость спиритизму. При нанесении лёгких ударов ближнего боя перезарядка длится в 2 раза дольше.",
+    "6 с. Длительность",
+    "8 с. Перезарядка",
+    "40 Спиритический урон",
+    "+-6% Сопр. спиритизму"
+   ]
+  },
+  {
+   "id": "arcane_surge",
+   "name": "Arcane Surge",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/arcane_surge.png",
+   "stats": [
+    "+1 Выносливость",
+    "+12% Восстановление выносливости",
+    "После совершения рывка с прыжком следующее умение, которое вы используете в течение 7 сек., будет иметь бонусную дальность, длительность и спиритическую мощь.",
+    "7 сек. Окно применения",
+    "+12% Дальность умения",
+    "+15% Длительность умений",
+    "+20 Спиритическая мощь"
+   ]
+  },
+  {
+   "id": "bullet_resist_shredder",
+   "name": "Bullet Resist Shredder",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/bullet_resist_shredder.png",
+   "stats": [
+    "+9% Сопр. пулям",
+    "+9% Урон от оружия",
+    "Снижает сопротивляемость пулям у врагов, которым вы наносите спиритический урон.",
+    "8 с. Длительность",
+    "+-10% Сопротивляемость пулям"
+   ]
+  },
+  {
+   "id": "cold_front",
+   "name": "Cold Front",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/cold_front.png",
+   "stats": [
+    "+6% Сопр. спиритизму",
+    "Вы выпускаете расширяющуюся леденящую волну, которая наносит спиритический урон и замедляет задетых врагов.",
+    "Актив: 10 м Конечный радиус",
+    "25 с. Перезарядка",
+    "95 Урон",
+    "-48% Скорость передвижения",
+    "4 с. Длительность"
+   ]
+  },
+  {
+   "id": "compress_cooldown",
+   "name": "Compress Cooldown",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/compress_cooldown.png",
+   "stats": [
+    "+100 ед. к прочности щита от спиритизма",
+    "+1.5 ед. к восстановлению здоровья",
+    "+10% к боезапасу",
+    "+14% к сокращению перезарядки умений",
+    "Сокращает время перезарядки выбранного умения.",
+    "+18% Сокращение перезарядки умений"
+   ]
+  },
+  {
+   "id": "duration_extender",
+   "name": "Duration Extender",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/duration_extender.png",
+   "stats": [
+    "+8% к урону от оружия",
+    "+100 ед. к здоровью",
+    "+1.75 ед. к восстановлению здоровья",
+    "+14% к длительности умений",
+    "Усиливает выбранное умение, повышая время его действия.",
+    "+22% Длительность умений"
+   ]
+  },
+  {
+   "id": "improved_spirit",
+   "name": "Improved Spirit",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/improved_spirit.png",
+   "stats": [
+    "+1.5 Восстановление вне боя",
+    "+18 Спиритическая мощь"
+   ]
+  },
+  {
+   "id": "mystic_slow",
+   "name": "Mystic Slow",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/mystic_slow.png",
+   "stats": [
+    "+50 Бонус к здоровью",
+    "+0.75 м/c Скорость бега",
+    "Когда цель получает спиритический урон, у неё снижается скорость передвижения.",
+    "2 с. Длительность",
+    "-24% Скорость передвижения",
+    "-10% Дальность рывка"
+   ]
+  },
+  {
+   "id": "mystic_vulnerability",
+   "name": "Mystic Vulnerability",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/mystic_vulnerability.png",
+   "stats": [
+    "+8% Сопр. спиритизму",
+    "Когда враг получает спиритический урон, у него снижается сопротивляемость спиритизму.",
+    "7 с. Длительность",
+    "+-8% Сопр. спиритизму"
+   ]
+  },
+  {
+   "id": "quicksilver_reload",
+   "name": "Quicksilver Reload",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/quicksilver_reload.png",
+   "stats": [
+    "Усиленное умение постепенно заряжается, благодаря чему при использовании наносит доп. спиритический урон, даёт повышенную скорострельность и перезаряжает оружие.",
+    "18 с. Время зарядки",
+    "44 Урон",
+    "+10% Скорострельность",
+    "100% Перезаряжаемые пули"
+   ]
+  },
+  {
+   "id": "slowing_hex",
+   "name": "Slowing Hex",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/slowing_hex.png",
+   "stats": [
+    "+0.5 м/c Скорость бега",
+    "Замедляет передвижение выбранного врага и накладывает безмолвие на его предметы и умения, связанные с передвижением. Увеличивает гравитацию цели. Не влияет на расход её выносливости.",
+    "Актив: 25 м Дальность применения",
+    "3.5 с. Длительность",
+    "29 с. Перезарядка",
+    "-16% Скорость передвижения",
+    "-26% Дальность рывка"
+   ]
+  },
+  {
+   "id": "spirit_sap",
+   "name": "Spirit Sap",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/spirit_sap.png",
+   "stats": [
+    "+50 Бонус к здоровью",
+    "Снижает сопротивляемость спиритизму и спиритическую мощь выбранного врага.",
+    "Актив: 40 м Дальность применения",
+    "18 с. Перезарядка",
+    "-9% Сопр. спиритизму",
+    "-30 Спиритическая мощь",
+    "12 с. Длительность"
+   ]
+  },
+  {
+   "id": "suppressor",
+   "name": "Suppressor",
+   "tier": 2,
+   "cost": 1600,
+   "category": "spirit",
+   "icon": "img/items/suppressor.png",
+   "stats": [
+    "+6 Спиритическая мощь",
+    "+8% Сопр. пулям",
+    "Нанося спиритический урон врагам, вы также снижаете их скорострельность.",
+    "-28% Скорострельность",
+    "4.5 с. Длительность"
+   ]
+  },
+  {
+   "id": "decay",
+   "name": "Decay",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/decay.png",
+   "stats": [
+    "+8 Спиритическая мощь",
+    "+65 Бонус к здоровью",
+    "Вы постепенно наносите урон цели на основе её текущего здоровья. Урон от «Разложения» не может убить и не влияет на срабатывание предметов.",
+    "Актив: 20 м Дальность применения",
+    "12 с. Длительность",
+    "30 с. Перезарядка",
+    "1.95% урона в секунду Урон от кровотечения",
+    "-50% Получаемое лечение"
+   ]
+  },
+  {
+   "id": "disarming_hex",
+   "name": "Disarming Hex",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/disarming_hex.png",
+   "stats": [
+    "+75 Бонус к здоровью",
+    "+0.75 м/c Скорость бега",
+    "Разоружает выбранного врага и снижает его сопротивляемость пулям.",
+    "Актив: 32 м Дальность применения",
+    "4.25 с. Длительность",
+    "16 с. Перезарядка",
+    "+-13% Сопротивляемость пулям"
+   ]
+  },
+  {
+   "id": "greater_expansion",
+   "name": "Greater Expansion",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/greater_expansion.png",
+   "stats": [
+    "+10% Сопр. спиритизму",
+    "Увеличивает дальность и радиус действия ваших умений и предметов.",
+    "+30% к дальности умений"
+   ]
+  },
+  {
+   "id": "knockdown",
+   "name": "Knockdown",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/knockdown.png",
+   "stats": [
+    "+75 Бонус к здоровью",
+    "+5% к дальности умений",
+    "Вы накладываете оглушение после задержки в 2 сек. Оглушение действует дольше на цели, находящиеся в воздухе. Во время действия оглушения гравитация цели увеличивается.",
+    "Актив: 45 м Дальность применения"
+   ]
+  },
+  {
+   "id": "radiant_regeneration",
+   "name": "Radiant Regeneration",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/radiant_regeneration.png",
+   "stats": [
+    "+90 Бонус к здоровью",
+    "6 с. Перезарядка",
+    "3 с. Длительность",
+    "65 Лечение при использовании умения",
+    "+1.75 м/c Скорость передвижения",
+    "Вы получаете лечение и кратковременный бонус к скорости передвижения при применении умения.",
+    "7 с. Длительность восстановления",
+    "4 ед./c Восстановление"
+   ]
+  },
+  {
+   "id": "rapid_recharge",
+   "name": "Rapid Recharge",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/rapid_recharge.png",
+   "stats": [
+    "+14% Сокращение перезарядки умений с зарядами",
+    "+14 Бонус к спирит. мощи для заряжаемых умений",
+    "+2 Число зарядов умения",
+    "+30% Уменьшение интервала умений с зарядами"
+   ]
+  },
+  {
+   "id": "silence_wave",
+   "name": "Silence Wave",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/silence_wave.png",
+   "stats": [
+    "+50 Бонус к здоровью",
+    "Вы выпускаете расширяющийся снаряд, который ненадолго накладывает на врагов безмолвие и наносит урон при попадании. Безмолвие не прерывает подготавливаемые умения.",
+    "Актив: 40 м Дальность применения",
+    "42 с. Перезарядка",
+    "75 Урон"
+   ]
+  },
+  {
+   "id": "spirit_snatch",
+   "name": "Spirit Snatch",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/spirit_snatch.png",
+   "stats": [
+    "+7% Урон в ближнем бою",
+    "+75 Бонус к здоровью",
+    "Совершив лёгкий или тяжёлый удар ближнего боя по герою, вы нанесёте ему дополнительный спиритический урон, а также украдёте его сопротивляемость спиритизму и спиритическую мощь. При нанесении лёгких ударов ближнего боя сила эффектов снижается на 30%.",
+    "10 с. Длительность",
+    "6 с. Перезарядка",
+    "50 Спиритический урон",
+    "12% Кража сопр. спиритизму",
+    "25 Кража спирит. мощи"
+   ]
+  },
+  {
+   "id": "superior_cooldown",
+   "name": "Superior Cooldown",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/superior_cooldown.png",
+   "stats": [
+    "+4 Восстановление вне боя",
+    "Сокращает время перезарядки ваших умений.",
+    "+20% Сокращение перезарядки умений"
+   ]
+  },
+  {
+   "id": "superior_duration",
+   "name": "Superior Duration",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/superior_duration.png",
+   "stats": [
+    "+8% Сопр. пулям",
+    "Увеличивает длительность действия ваших умений и предметов.",
+    "+28% Длительность умений"
+   ]
+  },
+  {
+   "id": "surge_of_power",
+   "name": "Surge of Power",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/surge_of_power.png",
+   "stats": [
+    "+75 ед. к здоровью",
+    "Усиливает выбранное умение: навсегда увеличивает его спиритическую мощь. Применив его, вы некоторое время передвигаетесь быстрее и не замедляетесь при совершении атак.",
+    "8 с. Длительность ускорения передвижения",
+    "14 с. Перезарядка",
+    "+28 Спирит. мощь усиленного умения",
+    "20% Доп. скорострельность",
+    "+1.75 м/c Скорость передвижения"
+   ]
+  },
+  {
+   "id": "tankbuster",
+   "name": "Tankbuster",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/tankbuster.png",
+   "stats": [
+    "+50 Бонус к здоровью",
+    "Постепенно заряжается спиритическим уроном, благодаря чему умения, наносящие более 165 ед. урона, причиняют дополнительный урон. Игнорирует сопротивляемость спиритизму.",
+    "14 с. Время зарядки",
+    "40 Урон",
+    "7.5% Доп. урон от текущего здоровья"
+   ]
+  },
+  {
+   "id": "torment_pulse",
+   "name": "Torment Pulse",
+   "tier": 3,
+   "cost": 3200,
+   "category": "spirit",
+   "icon": "img/items/torment_pulse.png",
+   "stats": [
+    "+100 Бонус к здоровью",
+    "+18% Сопротивляемость в ближнем бою",
+    "Периодически наносит спиритический урон двум ближайшим врагам неподалёку.",
+    "9 м Радиус пульсации",
+    "1.4 с. Перезарядка",
+    "25 Урон от импульса"
+   ]
+  },
+  {
+   "id": "arctic_blast",
+   "name": "Arctic Blast",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/arctic_blast.png",
+   "stats": [
+    "+10% Сопр. спиритизму",
+    "Вы выпускаете расширяющуюся леденящую волну, которая наносит спиритический урон и замораживает, а затем замедляет задетые цели. У замедленных жертв замораживается восстановление выносливости",
+    "Актив: 16 м Конечный радиус",
+    "24 с. Перезарядка",
+    "175 Урон",
+    "1 с. Длительность заморозки"
+   ]
+  },
+  {
+   "id": "boundless_spirit",
+   "name": "Boundless Spirit",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/boundless_spirit.png",
+   "stats": [
+    "+100 ед. к здоровью",
+    "+4 ед. к восстановлению вне боя",
+    "+40 ед. к спиритической мощи",
+    "3 с. Длительность",
+    "75 Лечение при использовании умения",
+    "+2 м/с к скорости передвижения"
+   ]
+  },
+  {
+   "id": "cursed_relic",
+   "name": "Cursed Relic",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/cursed_relic.png",
+   "stats": [
+    "-14% Снижение урона",
+    "Проклинает врага: прерывает его действия, накладывает безмолвие и обезоруживание и запрещает использовать предметы. Снимает все положительные эффекты, кроме наложенных ультами. Наносимый вами урон снижен на время действия проклятия.",
+    "Актив: 55 с. Перезарядка",
+    "3.25 с. Длительность",
+    "20 м Дальность применения",
+    "-25% Снижение урона"
+   ]
+  },
+  {
+   "id": "echo_shard",
+   "name": "Echo Shard",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/echo_shard.png",
+   "stats": [
+    "+5% Сопр. спиритизму",
+    "+5% Сопр. пулям",
+    "Актив: Сбрасывает перезарядку усиленного умения (кроме ультов). Перезарядка этого предмета увеличивается в зависимости от перезарядки усиленного умения.",
+    "100% Перезарядка усиленных умений"
+   ]
+  },
+  {
+   "id": "escalating_exposure",
+   "name": "Escalating Exposure",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/escalating_exposure.png",
+   "stats": [
+    "-8% Сопр. спиритизму при нанесении спирит. урона",
+    "+17% Сопр. спиритизму",
+    "Нанося спиритический урон, вы получаете накапливаемое повышение спиритизма, которое увеличивает спиритический урон, наносимый вами цели.",
+    "12 Максимум ед. эффекта",
+    "12 с. Длительность",
+    "0.7 сек. Мин. интервал срабатывания за цель",
+    "+4.5% Спирит. урон за накопление"
+   ]
+  },
+  {
+   "id": "ethereal_shift",
+   "name": "Ethereal Shift",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/ethereal_shift.png",
+   "stats": [
+    "+6 ед. к спиритической мощи",
+    "Вы мгновенно переходите в состояние пустоты и кратковременно становитесь неуязвимы.",
+    "Актив: 4.0 сек. Длительность",
+    "37 с. Перезарядка",
+    "5 с. Длительность эффекта",
+    "+20 Спиритическая мощь",
+    "+30% Сопр. спиритизму",
+    "+3 м/c Скорость передвижения"
+   ]
+  },
+  {
+   "id": "focus_lens",
+   "name": "Focus Lens",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/focus_lens.png",
+   "stats": [
+    "+10% Скорострельность",
+    "Накладывает безмолвие на выбранного врага. Часть всего урона, нанесённого в период безмолвия, накладывается на цель по окончании действия эффекта.",
+    "Актив: -9% Сопр. спиритизму",
+    "12 сек. Длительность снижения сопротивляемости и мощи",
+    "25 м Дальность применения",
+    "-30 Спиритическая мощь",
+    "45 с. Перезарядка",
+    "35% Урон по окончании"
+   ]
+  },
+  {
+   "id": "lightning_scroll",
+   "name": "Lightning Scroll",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/lightning_scroll.png",
+   "stats": [
+    "-24% Уменьшение скорости передв. при получении спирит. урона",
+    "+50 Бонус к здоровью",
+    "+0.75 м/c Скорость бега",
+    "Урон от вашего ульта накладывает оглушение и наносит доп. спиритический урон после короткой задержки.",
+    "3 сек. Задержка перед срабатыванием",
+    "150 Урон"
+   ]
+  },
+  {
+   "id": "magic_carpet",
+   "name": "Magic Carpet",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/magic_carpet.png",
+   "stats": [
+    "+15% Длительность умений",
+    "+125 Бонус к здоровью",
+    "+14 Спиритическая мощь",
+    "-15% Модификатор гравитации",
+    "+25% Управление в воздухе",
+    "Призывает волшебный ковёр, который уносит вас прочь. Вам даётся невосприимчивость к замедлениям на время полёта, но любое ваше действие его прервёт. Во время призыва нельзя использовать умения.",
+    "Актив: +7 м/c Бонус к скорости в полёте",
+    "1.3 с. Длительность призыва",
+    "12 с. Длительность"
+   ]
+  },
+  {
+   "id": "mercurial_magnum",
+   "name": "Mercurial Magnum",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/mercurial_magnum.png",
+   "stats": [
+    "+20% Макс. боезапас",
+    "+7 Спиритическая мощь",
+    "Усиленное умение постепенно заряжается, благодаря чему наносит доп. спиритический урон, повышает скорострельность и перезаряжает оружие при использовании. До следующей перезарядки оружия ваши пули наносят доп. спиритический урон, пропорциональный вашей спиритической мощи.",
+    "100% Перезаряжаемые пули",
+    "14 с. Время зарядки",
+    "+20% Базовый урон от пуль",
+    "60 Урон",
+    "+22% Скорострельность"
+   ]
+  },
+  {
+   "id": "mystic_reverb",
+   "name": "Mystic Reverb",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/mystic_reverb.png",
+   "stats": [
+    "+10% Кража здоровья спиритизмом",
+    "Усиливает выбранное умение: оно получает кражу здоровья, замедляет цель и после короткой задержки наносит врагам вокруг неё долю от нанесённого ей урона.",
+    "16 м Радиус",
+    "3 с. Длительность задержки",
+    "6.25 с. Перезарядка",
+    "50% Урон",
+    "+30% Кража здоровья от усиления",
+    "40% Замедление передвижения"
+   ]
+  },
+  {
+   "id": "refresher",
+   "name": "Refresher",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/refresher.png",
+   "stats": [
+    "+8% к сопр. спиритизму",
+    "+16% к сопр. пулям",
+    "Сбрасывает перезарядку всех ваших умений и восстанавливает все их заряды.",
+    "Актив: 300 с. Перезарядка"
+   ]
+  },
+  {
+   "id": "scourge",
+   "name": "Scourge",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/scourge.png",
+   "stats": [
+    "+100 Бонус к здоровью",
+    "Накладывает на союзника сопротивляемость спиритизму, сопротивляемость отриц. эффектам и ауру, которая наносит урон врагам пропорционально их макс. здоровью. Отрицательные эффекты, уже наложенные на цель, ослабляются. Можно применять на себя.",
+    "Актив: 10 с. Длительность",
+    "35 м Дальность применения",
+    "35 с. Перезарядка",
+    "10 м радиус",
+    "2.3% Макс. здоровья в секунду",
+    "+40% Сопр. спиритизму",
+    "+20% Сопр. отриц. эффектам"
+   ]
+  },
+  {
+   "id": "spirit_burn",
+   "name": "Spirit Burn",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/spirit_burn.png",
+   "stats": [
+    "+6% к дальности умений",
+    "Если нанести врагу значительный спиритический урон в течение 5 сек., происходит взрыв, который наносит урон этому врагу и обжигает его. Во время горения враги получают постепенный урон, а получаемое ими лечение уменьшается. Для каждого врага действует отдельная перезарядка: до её окончания нельзя повторно наложить эффект. Если целью выбран не герой, урон уменьшается вдвое.",
+    "20 с. Длит. невосприимчивости",
+    "8 с. Длительность эффекта",
+    "-70% Получаемое лечение",
+    "500 Порог урона",
+    "50 Урон от взрыва",
+    "24 Урон в секунду"
+   ]
+  },
+  {
+   "id": "transcendent_cooldown",
+   "name": "Transcendent Cooldown",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/transcendent_cooldown.png",
+   "stats": [
+    "+4 Восстановление вне боя",
+    "Сокращает время перезарядки ваших умений и предметов.",
+    "+25% Сокращение перезарядки умений",
+    "+25% Сокращение перезарядки предметов"
+   ]
+  },
+  {
+   "id": "vortex_web",
+   "name": "Vortex Web",
+   "tier": 4,
+   "cost": 6400,
+   "category": "spirit",
+   "icon": "img/items/vortex_web.png",
+   "stats": [
+    "+8% к дальности умений",
+    "+0.75 м/c Скорость бега",
+    "Актив: Вы бросаете вакуумную гранату, которая притягивает врагов в небольшую область и накладывает на них «Замедляющие чары». Альт. огонь: применить на конкретную цель.",
+    "4.0 с. Длительность",
+    "0.5 с. Длительность приковывания",
+    "42 с. Перезарядка",
+    "-36% Дальность рывка",
+    "12 м Радиус приковывания",
+    "-28% Скорость передвижения"
+   ]
+  },
+  {
+   "id": "extra_health",
+   "name": "Extra Health",
+   "tier": 1,
+   "cost": 800,
+   "category": "vitality",
+   "icon": "img/items/extra_health.png",
+   "stats": [
+    "+210 Бонус к здоровью"
+   ]
+  },
+  {
+   "id": "extra_regen",
+   "name": "Extra Regen",
+   "tier": 1,
+   "cost": 800,
+   "category": "vitality",
+   "icon": "img/items/extra_regen.png",
+   "stats": [
+    "+1.5 Восстановление вне боя",
+    "+2.5 Восстановление здоровья"
+   ]
+  },
+  {
+   "id": "extra_stamina",
+   "name": "Extra Stamina",
+   "tier": 1,
+   "cost": 800,
+   "category": "vitality",
+   "icon": "img/items/extra_stamina.png",
+   "stats": [
+    "+12% Восстановление выносливости",
+    "+1 Выносливость"
+   ]
+  },
+  {
+   "id": "grit",
+   "name": "Grit",
+   "tier": 1,
+   "cost": 800,
+   "category": "vitality",
+   "icon": "img/items/grit.png",
+   "stats": [
+    "+1.0 Восстановление вне боя",
+    "Вы ненадолго получаете барьер.",
+    "Актив: 4 с. Время действия барьера",
+    "60 с. Перезарядка",
+    "200 Барьер"
+   ]
+  },
+  {
+   "id": "healing_rite",
+   "name": "Healing Rite",
+   "tier": 1,
+   "cost": 800,
+   "category": "vitality",
+   "icon": "img/items/healing_rite.png",
+   "stats": [
+    "+30 ед. к здоровью",
+    "+3 ед. к спиритической мощи",
+    "Даёт цели восстановление здоровья и скорость бега. Эффект пропадает, если цель получает урон от вражеских героев или построек. Можно применить на себя.",
+    "Актив: 70 с. Перезарядка",
+    "20 с. Длительность восстановления",
+    "30 м Дальность применения",
+    "300 Общее восст. здоровья",
+    "+2 м/c Скорость бега"
+   ]
+  },
+  {
+   "id": "melee_lifesteal",
+   "name": "Melee Lifesteal",
+   "tier": 1,
+   "cost": 800,
+   "category": "vitality",
+   "icon": "img/items/melee_lifesteal.png",
+   "stats": [
+    "+12% Урон в ближнем бою",
+    "Ваша следующая атака ближнего боя лечит вас. Лечение от существ, не являющихся героями, эффективно на 30%. Множитель времени перезарядки составляет 1.5 при нанесении лёгких ударов ближнего боя.",
+    "8 с. Перезарядка",
+    "100 Лечение при попадании в ближнем бою"
+   ]
+  },
+  {
+   "id": "rebuttal",
+   "name": "Rebuttal",
+   "tier": 1,
+   "cost": 800,
+   "category": "vitality",
+   "icon": "img/items/rebuttal.png",
+   "stats": [
+    "-1.75 с. Время перезарядки парирования",
+    "+18% Сопротивляемость в ближнем бою",
+    "+75 Бонус к здоровью",
+    "В случае успешного парирования атаки вражеского героя вы лечите себя на объём, соответствующий парированному урону, отражаете этот урон на цель и получаете временный бонус к наносимому урону.",
+    "6 с. Длительность эффекта",
+    "+30% Доп. урон",
+    "100% Парированный урон в лечение"
+   ]
+  },
+  {
+   "id": "sprint_boots",
+   "name": "Sprint Boots",
+   "tier": 1,
+   "cost": 800,
+   "category": "vitality",
+   "icon": "img/items/sprint_boots.png",
+   "stats": [
+    "+2 Восстановление вне боя",
+    "+2.0 м/c Скорость бега"
+   ]
+  },
+  {
+   "id": "battle_vest",
+   "name": "Battle Vest",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/battle_vest.png",
+   "stats": [
+    "+3 Восстановление вне боя",
+    "+18% Сопр. пулям",
+    "Если у вас более 65% здоровья, увеличивается наносимый вами урон от оружия и вам даётся повышенная скорострельность.",
+    "+18% Урон от оружия",
+    "+7% Скорострельность"
+   ]
+  },
+  {
+   "id": "bullet_lifesteal",
+   "name": "Bullet Lifesteal",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/bullet_lifesteal.png",
+   "stats": [
+    "+90 Бонус к здоровью",
+    "+6% Урон от оружия",
+    "+13% Кража здоровья пулями"
+   ]
+  },
+  {
+   "id": "debuff_reducer",
+   "name": "Debuff Reducer",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/debuff_reducer.png",
+   "stats": [
+    "+90 Бонус к здоровью",
+    "Снижает длительность всех накладываемых на вас отрицательных эффектов.",
+    "+25% Сопр. отриц. эффектам"
+   ]
+  },
+  {
+   "id": "enchanters_emblem",
+   "name": "Enchanter's Emblem",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/enchanters_emblem.png",
+   "stats": [
+    "+2 Восстановление вне боя",
+    "+18% Сопр. спиритизму",
+    "Если у вас более 65% здоровья, вам даётся дополнительная спиритическая мощь и сокращённое время перезарядки умений.",
+    "+15 Спиритическая мощь",
+    "+5% Сокращение перезарядки умений"
+   ]
+  },
+  {
+   "id": "enduring_speed",
+   "name": "Enduring Speed",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/enduring_speed.png",
+   "stats": [
+    "+2 Восстановление вне боя",
+    "+2.0 м/c Скорость передвижения",
+    "Уменьшает эффективность наложенного врагами снижения скорости передвижения.",
+    "+25% Сопротивляемость замедлению"
+   ]
+  },
+  {
+   "id": "guardian_ward",
+   "name": "Guardian Ward",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/guardian_ward.png",
+   "stats": [
+    "+1.5 Восстановление вне боя",
+    "+8% к дальности умений",
+    "Цель получает барьер и временное повышение скорости передвижения. Можно применять на себя. Если применяется не на себя, время перезарядки сокращается вдвое.",
+    "Актив: 60 с. Перезарядка",
+    "6 с. Длительность эффекта",
+    "40 м Дальность применения",
+    "250 Барьер",
+    "+2.75 м/c Скорость передвижения"
+   ]
+  },
+  {
+   "id": "healbane",
+   "name": "Healbane",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/healbane.png",
+   "stats": [
+    "+7 Спиритическая мощь",
+    "Наносимый вами спиритический урон снижает врагу получаемое лечение. Если вражеский герой умирает, находясь под действием этого эффекта, вы значительно восстанавливаете здоровье.",
+    "8 с. Длительность",
+    "-35% Получаемое лечение",
+    "275 Лечение за убийство героя"
+   ]
+  },
+  {
+   "id": "healing_booster",
+   "name": "Healing Booster",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/healing_booster.png",
+   "stats": [
+    "+3 Восстановление здоровья",
+    "+1 Восстановление вне боя",
+    "Повышает эффективность вашего лечения.",
+    "+20% Исходящее лечение"
+   ]
+  },
+  {
+   "id": "reactive_barrier",
+   "name": "Reactive Barrier",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/reactive_barrier.png",
+   "stats": [
+    "+1.0 Восстановление вне боя",
+    "Вы получаете барьер, когда оглушены, скованы, обездвижены, спите или обезмолвлены.",
+    "55 с. Перезарядка",
+    "10 с. Длительность",
+    "325 Барьер"
+   ]
+  },
+  {
+   "id": "restorative_locket",
+   "name": "Restorative Locket",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/restorative_locket.png",
+   "stats": [
+    "+8% Сопр. спиритизму",
+    "Когда враг в радиусе 35m метров от вас использует умение, вы получаете один эффект восстановления.",
+    "Актив: Если враг применяет умение в радиусе 32m м от вас, вы получаете единицу эффекта восстановления. Поглотите все накопленные единицы, чтобы полечить себя и восстановить до 3 ед. выносливости в зависимости от числа накопленных единиц.",
+    "20 с. Перезарядка",
+    "25 Максимум ед. эффекта",
+    "3 Макс. восст. выносливости",
+    "16 Лечение за ед. эффекта"
+   ]
+  },
+  {
+   "id": "return_fire",
+   "name": "Return Fire",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/return_fire.png",
+   "stats": [
+    "+10% Сопр. пулям",
+    "Автоматически выстреливает в любого врага, который наносит вам урон умением или оружием.",
+    "Актив: 6.5 с. Длительность",
+    "23 с. Перезарядка",
+    "65% Возвращение урона от пуль",
+    "25% Возвращение спиритического урона"
+   ]
+  },
+  {
+   "id": "spirit_lifesteal",
+   "name": "Spirit Lifesteal",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/spirit_lifesteal.png",
+   "stats": [
+    "+90 Бонус к здоровью",
+    "+6 Спиритическая мощь",
+    "+13% Кража здоровья спиритизмом"
+   ]
+  },
+  {
+   "id": "spirit_shielding",
+   "name": "Spirit Shielding",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/spirit_shielding.png",
+   "stats": [
+    "+2.5 Восстановление вне боя",
+    "Даёт вам барьер каждый раз, когда вражеские герои наносят вам значительный спиритический урон за короткий интервал времени.",
+    "225 Порог урона",
+    "3.5 сек. Интервал",
+    "8 с. Время действия барьера",
+    "45 с. Перезарядка",
+    "300 Барьер",
+    "+18% Сопр. спиритизму"
+   ]
+  },
+  {
+   "id": "trophy_collector",
+   "name": "Trophy Collector",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/trophy_collector.png",
+   "stats": [
+    "+-15% Урон от оружия по всем, кроме героев",
+    "+2.0 м/c Скорость бега",
+    "+2 Восстановление вне боя",
+    "При каждой помощи или убийстве вы получаете бонус к скорости бега и дальности умений, а ещё у вас начинают пассивно генерироваться души. Данный эффект накапливается и не обнуляется в случае смерти.",
+    "16 Максимум ед. эффекта",
+    "+0.15 м/c Скорость бега",
+    "+0.75% к дальности умений",
+    "16 Души в минуту"
+   ]
+  },
+  {
+   "id": "weapon_shielding",
+   "name": "Weapon Shielding",
+   "tier": 2,
+   "cost": 1600,
+   "category": "vitality",
+   "icon": "img/items/weapon_shielding.png",
+   "stats": [
+    "+2.5 Восстановление вне боя",
+    "Даёт вам барьер каждый раз, когда вражеские герои наносят вам значительный урон от оружия за короткий интервал времени.",
+    "250 Порог урона",
+    "4.0 сек. Интервал",
+    "35 с. Перезарядка",
+    "8 с. Время действия барьера",
+    "300 Барьер",
+    "+18% Сопр. пулям"
+   ]
+  },
+  {
+   "id": "bullet_resilience",
+   "name": "Bullet Resilience",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/bullet_resilience.png",
+   "stats": [
+    "+3 Восстановление вне боя",
+    "+30% Сопр. пулям",
+    "Если у вас менее 50% здоровья, вы получаете дополнительную сопротивляемость пулям.",
+    "+15% Сопр. пулям"
+   ]
+  },
+  {
+   "id": "counterspell",
+   "name": "Counterspell",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/counterspell.png",
+   "stats": [
+    "+50 Бонус к здоровью",
+    "+5 Спиритическая мощь",
+    "Ваше следующее парирование защитит вас от урона и эффектов вражеских умений и предметов. При успешном парировании умения вы получите лечение и бонусы к скорости передвижения и спиритической мощи.",
+    "6 с. Длительность эффекта",
+    "23 с. Перезарядка",
+    "0.8 с. Длительность парирования заклинаний",
+    "150 Лечение",
+    "+20 Спиритическая мощь",
+    "+1.75 м/c Скорость передвижения"
+   ]
+  },
+  {
+   "id": "dispel_magic",
+   "name": "Dispel Magic",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/dispel_magic.png",
+   "stats": [
+    "+10% Сопр. спиритизму",
+    "Снижает длительность всех накладываемых на вас отрицательных эффектов.",
+    "+40% Сопр. отриц. эффектам",
+    "Актив: Снимает с вас все отрицательные эффекты, кроме наложенных ультами. Если был снят хоть один эффект, вы лечите себя и получаете бонус к скорости передвижения. Нельзя применять в состоянии оглушения и сна.",
+    "45 с. Перезарядка",
+    "+2 м/c Скорость передвижения",
+    "3 с. Длительность эффекта",
+    "250 Восст. здоровья при активации"
+   ]
+  },
+  {
+   "id": "fortitude",
+   "name": "Fortitude",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/fortitude.png",
+   "stats": [
+    "+375 Бонус к здоровью",
+    "Если в течение некоторого времени не получать урон, вам даётся восстановление здоровья.",
+    "Увеличивает вашу скорость передвижения, когда у вас больше 75% здоровья.",
+    "+10 с. Задержка восстановления",
+    "+2.25 % Восстановление от макс. здоровья",
+    "+1.5 м/c Скорость передвижения"
+   ]
+  },
+  {
+   "id": "fury_trance",
+   "name": "Fury Trance",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/fury_trance.png",
+   "stats": [
+    "+14% Кража здоровья пулями",
+    "+100 Бонус к здоровью",
+    "+6% Урон от оружия",
+    "Актив: Даёт скорострельность, сопротивляемость спиритизму и скорость передвижения, а также снимает штраф к скорости передвижения при стрельбе, но накладывает безмолвие и не даёт восстанавливать и использовать выносливость.",
+    "18 с. Перезарядка",
+    "6.5 с. Длительность",
+    "32% Скорострельность",
+    "+1 м/c Скорость передвижения",
+    "+40% Сопр. спиритизму"
+   ]
+  },
+  {
+   "id": "healing_nova",
+   "name": "Healing Nova",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/healing_nova.png",
+   "stats": [
+    "+5% к дальности умений",
+    "+8 Спиритическая мощь",
+    "Лечит вас и союзников поблизости.",
+    "Актив: 60 с. Перезарядка",
+    "2 с. Длительность восстановления",
+    "18 м радиус",
+    "325 Общее восст. здоровья"
+   ]
+  },
+  {
+   "id": "lifestrike",
+   "name": "Lifestrike",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/lifestrike.png",
+   "stats": [
+    "+125 Бонус к здоровью",
+    "+16% Урон в ближнем бою",
+    "Ваши атаки ближнего боя замедляют врагов и лечат вас на процент от нанесённого в ближнем бою урона, а также на фиксированное количество единиц. Лечение от существ, не являющихся героями, эффективно на 40%. Множитель времени перезарядки составляет 1.5 при нанесении лёгких ударов ближнего боя.",
+    "2.5 с. Длительность замедления",
+    "4 с. Перезарядка",
+    "-48% Скорость передвижения",
+    "120 Лечение при попадании в ближнем бою",
+    "35% Лечение при попадании в ближнем бою"
+   ]
+  },
+  {
+   "id": "majestic_leap",
+   "name": "Majestic Leap",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/majestic_leap.png",
+   "stats": [
+    "+10 ед. к спиритической мощи",
+    "+125 ед. к здоровью",
+    "+6% к сопр. спиритизму",
+    "Подбрасывает вас ввысь и даёт вам барьер. Находясь в воздухе, вы можете снова применить этот предмет, чтобы ускорить падение. Нельзя использовать в течение 5 сек. после того, как вас атаковал вражеский герой.",
+    "Актив: 45 с. Перезарядка",
+    "8 с. Время действия барьера",
+    "+50% Управление в воздухе",
+    "200 Барьер",
+    "5 с. Перезарядка после прерывания"
+   ]
+  },
+  {
+   "id": "metal_skin",
+   "name": "Metal Skin",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/metal_skin.png",
+   "stats": [
+    "+12% Сопр. пулям",
+    "Даёт невосприимчивость к пулям.",
+    "Актив: -1.5 м/c Снижение скорости перемещения при активации",
+    "-20% Дальность рывка",
+    "5.0 с. Длительность",
+    "24 с. Перезарядка"
+   ]
+  },
+  {
+   "id": "rescue_beam",
+   "name": "Rescue Beam",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/rescue_beam.png",
+   "stats": [
+    "+0.75 м/c Скорость бега",
+    "+6% к дальности умений",
+    "Лечит вас и выбранного союзного героя в зависимости от максимального здоровья. Один раз за время лечения вы можете притянуть цель к себе. Можно применить на себя.",
+    "Актив: 2.5 с. Длительность применения",
+    "35 м Дальность применения",
+    "60 с. Перезарядка",
+    "20% Лечение"
+   ]
+  },
+  {
+   "id": "spirit_resilience",
+   "name": "Spirit Resilience",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/spirit_resilience.png",
+   "stats": [
+    "+3 Восстановление вне боя",
+    "+30% Сопр. спиритизму",
+    "Если у вас менее 50% здоровья, вы получаете дополнительную сопротивляемость спиритизму.",
+    "+15% Сопр. спиритизму"
+   ]
+  },
+  {
+   "id": "stamina_mastery",
+   "name": "Stamina Mastery",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/stamina_mastery.png",
+   "stats": [
+    "+2 Выносливость",
+    "+18% Восстановление выносливости",
+    "+23% Дальность прыжка в воздухе/с рывком",
+    "Позволяет делать дополнительный прыжок или рывок в воздухе перед приземлением."
+   ]
+  },
+  {
+   "id": "veil_walker",
+   "name": "Veil Walker",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/veil_walker.png",
+   "stats": [
+    "+125 Бонус к здоровью",
+    "+6 Спиритическая мощь",
+    "Пройдя через вселенскую вуаль, вы получите скрытность, лечение и повышенную скорость передвижения.",
+    "8 с. Длительность невидимости",
+    "15 с. Перезарядка",
+    "3.5 м/c Скор. передв. в невидимости",
+    "85 Лечение"
+   ]
+  },
+  {
+   "id": "warp_stone",
+   "name": "Warp Stone",
+   "tier": 3,
+   "cost": 3200,
+   "category": "vitality",
+   "icon": "img/items/warp_stone.png",
+   "stats": [
+    "+20% к урону от оружия",
+    "+8 ед. к спиритической мощи",
+    "Телепортирует вас вперёд и увеличивает сопротивляемость пулям.",
+    "Актив: 6 сек. Длительность эффекта",
+    "16 с. Перезарядка",
+    "11 м Дальность телепортации",
+    "+30% Сопр. пулям"
+   ]
+  },
+  {
+   "id": "cheat_death",
+   "name": "Cheat Death",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/cheat_death.png",
+   "stats": [
+    "+200 Бонус к здоровью",
+    "+15% Сопр. пулям",
+    "90 с. Перезарядка",
+    "-60% Уменьшение урона",
+    "-60% Получаемое лечение",
+    "4.5 сек. Длительность бессмертия"
+   ]
+  },
+  {
+   "id": "colossus",
+   "name": "Colossus",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/colossus.png",
+   "stats": [
+    "+15% Урон от оружия",
+    "+25% Базовое здоровье",
+    "Вы увеличиваетесь в размерах и получаете бонусы к сопротивляемости пулям и спиритизму, а также наносите повышенный урон ближнего боя. Враги поблизости замедляются и имеют сниженную скорость рывка.",
+    "Актив: 14 м радиус",
+    "7 с. Длительность",
+    "37 с. Перезарядка",
+    "20% Масштаб модели",
+    "35% Сопр. пулям",
+    "35% Сопр. спиритизму",
+    "+30% Урон в ближнем бою",
+    "-24% Скорость передвижения"
+   ]
+  },
+  {
+   "id": "divine_barrier",
+   "name": "Divine Barrier",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/divine_barrier.png",
+   "stats": [
+    "+10% к дальности умений",
+    "+1.5 Восстановление вне боя",
+    "Снимает все отрицательные эффекты (кроме оглушения) с цели, а также даёт ей барьер и бонус к скорости передвижения. Можно применять на себя. При применении не на себя время перезарядки сокращается вдвое.",
+    "Актив: 45 с. Перезарядка",
+    "6 с. Длительность эффекта",
+    "40 м Дальность применения",
+    "600 Барьер",
+    "+2.75 м/c Скорость передвижения"
+   ]
+  },
+  {
+   "id": "diviners_kevlar",
+   "name": "Diviner's Kevlar",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/diviners_kevlar.png",
+   "stats": [
+    "+15% Длительность умений",
+    "+10% Сокращение перезарядки ульта",
+    "Применив ульт, вы получаете барьер и временный бонус к спиритической мощи.",
+    "20 с. Длительность эффекта",
+    "40 с. Перезарядка",
+    "1000 Барьер",
+    "+40 Спиритическая мощь"
+   ]
+  },
+  {
+   "id": "healing_tempo",
+   "name": "Healing Tempo",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/healing_tempo.png",
+   "stats": [
+    "+10% Сопр. спиритизму",
+    "+6 Восстановление здоровья",
+    "+4 Восстановление вне боя",
+    "+25% Исходящее лечение",
+    "7 с. Длительность эффекта",
+    "+35% Скорострельность",
+    "+1.25 м/c Скорость передвижения",
+    "Когда вы накладываете на себя или союзника лечение, у цели будет повышенная скорострельность и bonus move speed. Не распространяется на врождённое восстановление и пассивную кражу здоровья пулями/спиритизмом."
+   ]
+  },
+  {
+   "id": "indomitable",
+   "name": "Indomitable",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/indomitable.png",
+   "stats": [
+    "+2.0 Восстановление вне боя",
+    "+10% Сопр. пулям",
+    "+10% Сопр. спиритизму",
+    "55 с. Перезарядка",
+    "10 с. Длительность",
+    "325 Барьер"
+   ]
+  },
+  {
+   "id": "infuser",
+   "name": "Infuser",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/infuser.png",
+   "stats": [
+    "+13% Кража здоровья спиритизмом",
+    "+10% Сопр. спиритизму",
+    "+100 Бонус к здоровью",
+    "+6 Спиритическая мощь",
+    "Даёт бонус к краже здоровья спиритизмом и спиритической мощи.",
+    "Актив: 30 с. Перезарядка",
+    "7 с. Длительность",
+    "+70% Кража здоровья спиритизмом",
+    "+30 Спиритическая мощь"
+   ]
+  },
+  {
+   "id": "inhibitor",
+   "name": "Inhibitor",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/inhibitor.png",
+   "stats": [
+    "+10% Урон от оружия",
+    "+150 Бонус к здоровью",
+    "Ваши пули накладывают на цель накапливаемый эффект, который снижает наносимый ею урон и её лечение.",
+    "5 с. Длительность эффекта",
+    "0.77% Накопление за выстрел",
+    "-30% Снижение урона",
+    "-40% Получаемое лечение"
+   ]
+  },
+  {
+   "id": "juggernaut",
+   "name": "Juggernaut",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/juggernaut.png",
+   "stats": [
+    "+2.5 м/c Скорость передвижения",
+    "+25% Сопротивляемость в ближнем бою",
+    "+8 Восстановление здоровья",
+    "+50% Сопротивляемость замедлению",
+    "4 сек. Длительность",
+    "-40% Скорострельность"
+   ]
+  },
+  {
+   "id": "leech",
+   "name": "Leech",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/leech.png",
+   "stats": [
+    "+180 Бонус к здоровью",
+    "+12% Урон от оружия",
+    "+12 Спиритическая мощь",
+    "+28% Кража здоровья спиритизмом",
+    "+28% Кража здоровья пулями",
+    "Ослабляет накладываемое на вас врагами снижения лечения."
+   ]
+  },
+  {
+   "id": "phantom_strike",
+   "name": "Phantom Strike",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/phantom_strike.png",
+   "stats": [
+    "+15% Урон от оружия",
+    "+8 Спиритическая мощь",
+    "Телепортирует вас к выбранному врагу и притягивает его к земле, нанося урон, обезоруживая его, и снижая скорость его передвижения.",
+    "Актив: 25 м Дальность применения",
+    "35 с. Перезарядка",
+    "3 сек. Длительность эффекта",
+    "-40% Скорость передвижения",
+    "75 Урон при попадании"
+   ]
+  },
+  {
+   "id": "plated_armor",
+   "name": "Plated Armor",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/plated_armor.png",
+   "stats": [
+    "+130 Бонус к здоровью",
+    "Даёт шанс либо отразить летящие в вас пули, нейтрализовав весь урон от оружия, либо предотвратить все эффекты, накладываемые на вас пулями при попадании.",
+    "30% Вероятность отражения",
+    "50% Вероятность предотвращения при попадании"
+   ]
+  },
+  {
+   "id": "siphon_bullets",
+   "name": "Siphon Bullets",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/siphon_bullets.png",
+   "stats": [
+    "+15% Урон от оружия",
+    "+10% Сопр. пулям",
+    "Ваши выстрелы на время крадут долю от максимального здоровья жертв. Украденное здоровье возвращается врагам по окончании действия эффекта.",
+    "17 с. Длительность кражи",
+    "1.2 с. Мин. интервал срабатывания",
+    "2.5% Кража макс. здоровья"
+   ]
+  },
+  {
+   "id": "spellbreaker",
+   "name": "Spellbreaker",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/spellbreaker.png",
+   "stats": [
+    "+90 Бонус к здоровью",
+    "+18% Сопр. спиритизму",
+    "+25% Сопр. отриц. эффектам",
+    "При следующем получении большого спиритического урона он будет существенно снижен.",
+    "175 Порог урона",
+    "9 с. Перезарядка",
+    "65% Уменьшение спиритического урона"
+   ]
+  },
+  {
+   "id": "unstoppable",
+   "name": "Unstoppable",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/unstoppable.png",
+   "stats": [
+    "+25% Сопр. отриц. эффектам",
+    "+125 Бонус к здоровью",
+    "Временно подавляет отрицательные эффекты и даёт вам невосприимчивость к оглушению, безмолвию, сну, оцепенению и обезоруживанию. Нельзя использовать во время оглушения или сна.",
+    "Актив: 60 с. Перезарядка",
+    "5.5 с. Длительность"
+   ]
+  },
+  {
+   "id": "vampiric_burst",
+   "name": "Vampiric Burst",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/vampiric_burst.png",
+   "stats": [
+    "+13% Кража здоровья пулями",
+    "+10% Сопр. пулям",
+    "+100 Бонус к здоровью",
+    "+6% Урон от оружия",
+    "Актив: Даёт бонус к краже здоровья, скорострельности и боезапасу. Увеличенный этим умением боезапас может превысить максимальный.",
+    "+75% Боезапас",
+    "30 с. Перезарядка",
+    "5 с. Длительность",
+    "70% Кража здоровья пулями",
+    "34% Скорострельность"
+   ]
+  },
+  {
+   "id": "witchmail",
+   "name": "Witchmail",
+   "tier": 4,
+   "cost": 6400,
+   "category": "vitality",
+   "icon": "img/items/witchmail.png",
+   "stats": [
+    "+22% Сопр. спиритизму",
+    "+14 Спиритическая мощь",
+    "1 с. Перезарядка",
+    "75 Порог урона",
+    "4 с. Сокращение перезарядки за попадание",
+    "Когда вы получаете большой спиритический урон от врагов, у вашего случайно выбранного умения сокращается время перезарядки."
+   ]
+  }
+ ]
+}

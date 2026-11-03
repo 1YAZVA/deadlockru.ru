@@ -1,0 +1,728 @@
+{
+  "updatedAt": "2026-10-29",
+  "note": "Значения стартовые/приблизительные — сверьте с актуальным патчем и правьте в админке без кода.",
+  "heroes": [
+    {
+      "id": "abrams",
+      "name": "Abrams",
+      "role": "Танк / оффлейн",
+      "avatar": "img/heroes/abrams.webp",
+      "color": "#e04f2e",
+      "desc": "Ближний бой, много здоровья и контроля. Seismic Impact — вход в драку, ультимейт изолирует ключевую цель врага.",
+      "stats": {
+        "weaponDamage": 7,
+        "fireRate": 0.9,
+        "health": 750,
+        "moveSpeed": 6.3
+      },
+      "profile": {
+        "tags": "Танк, Бойец, Упрямый",
+        "release": "24 апреля 2024",
+        "voice": "Сэмюэл Джо (Samoa Joe)",
+        "devNames": "Atlas, Bull",
+        "playstyle": "У Abrams хватает массы и живучести, чтобы вести драку с фронта: он врывается в самую гущу врагов и смотрит, как они разбегаются. Если враги тратят огонь на него — лайн-участники его команды колечат безнаказанно.",
+        "lore": "Крепкий удар, крепкая голова и крепкие напитки. Детектив Abrams годами был фигурой нью-йоркского расследовательского мира: от краденых картин до пропавших людей и ритуальных убийств — Abrams брался не за всякое дело... он их раскрывал. Но дни слежек за изменниками кончились, когда однажды он открыл дверь офиса и увидел на столе Тотем (The Tome). Никаких инструкций — только записка, нацарапанная ониксовой кровью: «Не давай им заполучить его». Abrams так и не понял, откуда взялась штука; но раз его дом взламывали, офис перерывали трижды, а машину взрывали — он кровно заинтересован разобраться, что, чёрт возьми, происходит.",
+        "weapon": {
+          "name": "Case Closed",
+          "subtitle": "Россыпь · ближняя дистанция",
+          "rows": [
+            "Урон в секунду: 51,4",
+            "Урон пули: 3,6 (+0,1 за бонус-уровень)",
+            "Картечин за выстрел: 9",
+            "Обойма: 9",
+            "Темп: 1,59/с",
+            "Перезарядка обоймы: 3,5 с (0,35 с на патрон)",
+            "Скорость пуль: 610 м/с",
+            "Дальность падения урона: 17 м → 40 м"
+          ],
+          "desc": "Дробовик стреляет 9 картечинами квадратным веером: центральная — точная, остальные имеют широкий разброс. Перезаряжается по одному патрону; перезарядку можно прервать."
+        },
+        "vitality": [
+          "Здоровье: 800 (+49 за бонус-уровень)",
+          "Реген здоровья: 1,5/с",
+          "Скорость ходьбы: 6,4 м/с",
+          "Скорость спринта: +1,6 м/с",
+          "Скорость дэша: 13,9 м/с",
+          "Выносливость: 3 (восстановление 4,5 с)"
+        ],
+        "melee": [
+          "Лёгкая атака: 50 (+1,74 за бонус-уровень)",
+          "Тяжёлая атака: 116 (+4,03)"
+        ],
+        "spirit": "Сила духа: 0 (+1,1 за бонус-уровень)",
+        "scales": {
+          "bullet": 3.6, "bulletPerLevel": 0.1, "pellets": 9, "fireRate": 1.59, "mag": 9, "reload": 3.5,
+          "health": 800, "healthPerLevel": 49, "regen": 1.5, "moveSpeed": 6.4, "sprint": 1.6,
+          "spirit": 0, "spiritPerLevel": 1.1,
+          "melee": 50, "meleePerLevel": 1.74, "meleeHeavy": 116, "meleeHeavyPerLevel": 4.03, "stamina": 3
+        },
+        "abilities": [
+          {
+            "id": "siphon_life",
+            "name": "Siphon Life",
+            "icon": "img/abilities/abrams/ability_siphon_life.png",
+            "key": "1",
+            "type": "Активная",
+            "meta": ["Радиус 8 м", "Длительность 4 с", "Перезарядка 42 с"],
+            "calc": { "base": 22, "per": "сек", "scale": 0.6 },
+            "desc": "Высасывает здоровье у врагов поблизости: наносит духовный урон с течением времени и лечит Abrams на часть нанесённого урона.",
+            "rows": [
+              "Урон духом: 22/с · скейлинг духа ×0,6",
+              "Вампиризм: 70% (35% по не-героям)",
+              "Тик урона: каждые 0,25 с"
+            ],
+            "upgrades": [
+              { "p": "1", "t": "Перезарядка −20 с" },
+              { "p": "2", "t": "Длительность +2 с" },
+              { "p": "5", "t": "Радиус +2 м и урон +18/с, улучшенный скейлинг духа" }
+            ],
+            "notes": [
+              "Полный контроль пока идёт сифон: можно бежать, делать дэш, прыгать, стрелять и кастовать другие способности.",
+              "Siphon Life не является каналируемой: не прерывается от контроля и не выключается повторным нажатием.",
+              "Лечение усиливается Healing Booster и снижается антихилом; запускает уникальный эффект Healing Tempo."
+            ]
+          },
+          {
+            "id": "shoulder_charge",
+            "name": "Shoulder Charge",
+            "icon": "img/abilities/abrams/ability_shoulder_charge.png",
+            "key": "2",
+            "type": "Активная",
+            "meta": ["Длительность 1,4 с", "Перезарядка 33 с"],
+            "calc": { "base": 30, "per": "каст", "scale": 1.4 },
+            "desc": "Рывок вперёд с притяжением задетых героев. Столкновение героя со стеной — оглушение. При контакте с героем Abrams ускоряется на оставшейся дистанции.",
+            "rows": [
+              "Урон духом: 30 при контакте с героем · скейлинг духа ×1,4",
+              "Оглушение: 0,3 с при ударе героя в стену",
+              "Дистанция рывка: ~17,5 м"
+            ],
+            "upgrades": [
+              { "p": "1", "t": "Замедление +32% на 3 с" },
+              { "p": "2", "t": "Оглушение при ударе в стену +0,8 с" },
+              { "p": "5", "t": "Перезарядка −18 с; контакт с героем: урон оружия +1,5 на 6 с" }
+            ],
+            "notes": [
+              "Бонус Т5 размазывается на все 9 картечин: +1,5 × 9 = +13,5 урона за выстрел (мили афект не затрагивает).",
+              "Притяжение не оглушает — враг может продолжать использовать предметы.",
+              "Оглушение игнорирует снижение оглушений от Diminishing Returns; длительность сокращается Debuff Resist."
+            ]
+          },
+          {
+            "id": "infernal_resilience",
+            "name": "Infernal Resilience",
+            "icon": "img/abilities/abrams/ability_infernal_resilience.png",
+            "key": "3",
+            "type": "Пассивная",
+            "meta": ["Пассивная · всегда"],
+            "desc": "Проходные защитные бонусы. Часть полученного урона возвращается регенерацией со временем.",
+            "rows": [
+              "Регенерация: 13% полученного урона",
+              "Время регенерации: 20 с"
+            ],
+            "upgrades": [
+              { "p": "1", "t": "Макс. здоровье +200" },
+              { "p": "2", "t": "Вампиризм в ближнем бою +18%" },
+              { "p": "5", "t": "Сопротивление дебаффам +20% и регенерация урона +9%" }
+            ],
+            "notes": [
+              "Лечение считается от фактической потери здоровья, а не от «входящего урона».",
+              "Исключение — Cheat Death: при ≤1 HP Infernal Resilience продолжает накапливать лечение."
+            ]
+          },
+          {
+            "id": "seismic_impact",
+            "name": "Seismic Impact",
+            "icon": "img/abilities/abrams/ability_seismic_impact.png",
+            "key": "4",
+            "type": "Ультимейтинг",
+            "meta": ["Перезарядка 215 с"],
+            "calc": { "base": 100, "per": "каст", "scale": 2.33 },
+            "desc": "Высокий прыжок и обвал на землю: духовный урон и оглушение в площади.",
+            "rows": [
+              "Урон духом: 100 · скейлинг духа ×2,33",
+              "Оглушение: 1,6 с",
+              "Радиус удара: 9 м (задевает врагов до 6 м в высоту)",
+              "Дальность прыжка: до ~55 м при полном разгоне"
+            ],
+            "upgrades": [
+              { "p": "1", "t": "Перезарядка −30 с" },
+              { "p": "2", "t": "Оглушение +0,8 с" },
+              { "p": "5", "t": "На касте: Неуязвимость к контролю (Unstoppable) 5 с и радиус +6 м" }
+            ],
+            "notes": [
+              "Столкнувшись с летящим врагом при падении, Abrams утаскивает его с собой.",
+              "Ability Range расширяет радиус и высоту удара, но не влияет на прыжок самого Abrams."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "apollo",
+      "name": "Apollo",
+      "role": "Убийца / керри",
+      "avatar": "img/heroes/apollo.webp",
+      "color": "#FF3333",
+      "desc": "Аристократичный дуэлянт-фехтовальщик: точные выпады и рывки, наказывает за каждое раскрытие. Требует чистой механики, зато доминирует в равных стычках.",
+      "tags": "Finesse,Mobility",
+      "stats": {
+        "health": 770,
+        "moveSpeed": 7.2
+      }
+    },
+    {
+      "id": "baba",
+      "name": "Baba",
+      "role": "Мид / спирит",
+      "avatar": "img/heroes/baba.webp",
+      "color": "#895672",
+      "desc": "Ведьма с зельями и паучьими лапами: Threadsap ослабляет врага, brew усиливает союзников, мобильность через Granny Long Legs. Необычный мид-герой с хексами.",
+      "tags": "Hexing,Cackling",
+      "stats": {
+        "health": 780,
+        "moveSpeed": 6.5
+      }
+    },
+    {
+      "id": "bebop",
+      "name": "Bebop",
+      "role": "Крюк / бёрст",
+      "avatar": "img/heroes/bebop.webp",
+      "color": "#7cb342",
+      "desc": "Hook выдёргивает врага из позиции, Heavy Barrage прижимает на месте. Сильный сингл-таргет урон, но требует точных попаданий крюка.",
+      "tags": "",
+      "stats": {
+        "weaponDamage": 6.8,
+        "fireRate": 1.0,
+        "health": 620,
+        "moveSpeed": 6.4
+      }
+    },
+    {
+      "id": "billy",
+      "name": "Billy",
+      "role": "Ближний бой / дайвер",
+      "avatar": "img/heroes/billy.webp",
+      "color": "#D4AD0E",
+      "desc": "Панк-козёл: бешеный ближний бой с бейсбольной битой и взрывной подачей. Живёт на грани и наказывает за пассивность врагов.",
+      "tags": "Punk,Chaotic",
+      "stats": {
+        "health": 820,
+        "moveSpeed": 7.0
+      }
+    },
+    {
+      "id": "calico",
+      "name": "Calico",
+      "role": "Убийца / керри",
+      "avatar": "img/heroes/calico.webp",
+      "color": "#572798",
+      "desc": "Трёхцветная проназа: проскальзывает сквозь линии, ставит капканы и срывает цели рывковым бёрстом. Её невозможно поймать, опасно недооценивать.",
+      "tags": "Tricksy,Slippery,Burst Damage",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 6.8
+      }
+    },
+    {
+      "id": "celeste",
+      "name": "Celeste",
+      "role": "Саппорт / контроль",
+      "avatar": "img/heroes/celeste.webp",
+      "color": "#BBA9E1",
+      "desc": "Сияющая артистка: ослепляет врагов, ломает планировку драки бликом и усиливает союзников. Дисраптор с сильными наказаниями за жадность.",
+      "tags": "Performer,Disruptive,Dazzling",
+      "stats": {
+        "health": 690,
+        "moveSpeed": 6.2
+      }
+    },
+    {
+      "id": "deadman-danny",
+      "name": "Deadman Danny",
+      "role": "Керри / артиллерия",
+      "avatar": "img/heroes/deadman-danny.webp",
+      "color": "#CE8D2A",
+      "desc": "Рекламный агент Fairfax с ракетницей: Strix Salvo помечает цели для добивания, Jettison Fuel выжигает зоны. Авиамобильный подавляющий стрелок.",
+      "tags": "Reckless,High-flying,Explosive",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 6.4
+      }
+    },
+    {
+      "id": "doorman",
+      "name": "The Doorman",
+      "role": "Мид / карта-контроль",
+      "avatar": "img/heroes/doorman.webp",
+      "color": "#B77528",
+      "desc": "Консьерж с порталами и манекенами: перекрывает коридоры, подменяет себя двойником и морочит врагов. Хозяин позиционной войны и ловушек.",
+      "tags": "Disorienting,Map Control,Mind Games",
+      "stats": {
+        "health": 755,
+        "moveSpeed": 7.9
+      }
+    },
+    {
+      "id": "drifter",
+      "name": "Drifter",
+      "role": "Убийца / страж тени",
+      "avatar": "img/heroes/drifter.webp",
+      "color": "#9D2C2B",
+      "desc": "Сталкер из теней: питается уроном по крови и восстанавливается за каждую жертву. Выбирает одинокие цели и не отпускает их до конца драки.",
+      "tags": "Stalker,Bloodthirsty,Cruel",
+      "stats": {
+        "health": 755,
+        "moveSpeed": 6.9
+      }
+    },
+    {
+      "id": "dynamo",
+      "name": "Dynamo",
+      "role": "Мид / спирит",
+      "avatar": "img/heroes/dynamo.webp",
+      "color": "#D0B945",
+      "desc": "Опорный спирит-саппорт: ауры лечат и усиливают команду, а ультимейт Singularity собирает всю драку в одну точку. Классический инициатор с клатч-фактором.",
+      "tags": "Teamplay,Initiator,Clutch",
+      "stats": {
+        "health": 880,
+        "moveSpeed": 6.7
+      }
+    },
+    {
+      "id": "graves",
+      "name": "Graves",
+      "role": "Мид / некромант",
+      "avatar": "img/heroes/graves.webp",
+      "color": "#D9F334",
+      "desc": "Гробовщик-некромант: ставит мёртвые зоны, поднимает попутчиков и накрывает линии распадом. Наказывает за каждый шаг по его земле.",
+      "tags": "Morbid,Area Denial,Necromancer",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 7.0
+      }
+    },
+    {
+      "id": "grey-talon",
+      "name": "Grey Talon",
+      "role": "Снайпер / охотник",
+      "avatar": "img/heroes/grey-talon.webp",
+      "color": "#5EB083",
+      "desc": "Древний охотник с луком: заряженные выстрелы накрывают зоны, ловушки запирают фланги, орёл добивает жертву с самой дальней дистанции.",
+      "tags": "Precision,Hunter,Area Denial",
+      "stats": {
+        "health": 780,
+        "moveSpeed": 6.3
+      }
+    },
+    {
+      "id": "haze",
+      "name": "Haze",
+      "role": "Керри / ганкер",
+      "avatar": "img/heroes/haze.webp",
+      "color": "#a64df0",
+      "desc": "Ассасин с невидимостью и Sleep Dagger. Слаба на ранней линии, раскрывается к поздней игре через фарм и точечные устранения целей.",
+      "stats": {
+        "weaponDamage": 6,
+        "fireRate": 1.4,
+        "health": 550,
+        "moveSpeed": 6.9
+      }
+    },
+    {
+      "id": "holliday",
+      "name": "Holliday",
+      "role": "Керри / взрывник",
+      "avatar": "img/heroes/holliday.webp",
+      "color": "#A35A1B",
+      "desc": "Инженер-меткий стрелок: катапультные платформы меняют перекрестье драки, ловушки и бомбы наказывают за неаккуратность. Раскрывается через точные выстрелы и нестандартные позиции.",
+      "tags": "Crackshot,Explosive,Apprehender",
+      "stats": {
+        "health": 780,
+        "moveSpeed": 8.2
+      }
+    },
+    {
+      "id": "infernus",
+      "name": "Infernus",
+      "role": "Керри",
+      "avatar": "img/heroes/infernus.webp",
+      "color": "#ff7a1a",
+      "desc": "Быстрый спам-керри с поджогом: масштабируется скоростью стрельбы и спирит-бонусами. Сильный пик к поздней игре.",
+      "stats": {
+        "weaponDamage": 5.5,
+        "fireRate": 1.6,
+        "health": 540,
+        "moveSpeed": 7.0
+      }
+    },
+    {
+      "id": "ivy",
+      "name": "Ivy",
+      "role": "Керри / дисраптор",
+      "avatar": "img/heroes/ivy.webp",
+      "color": "#9D8CA9",
+      "desc": "Каменная душа-растение: шипы и щиты стоят героями на линии, срывает пики урона врага и не даёт себя сдвинуть.",
+      "tags": "Team-up,Disruptor,Rock Solid",
+      "stats": {
+        "health": 755,
+        "moveSpeed": 7.2
+      }
+    },
+    {
+      "id": "kelvin",
+      "name": "Kelvin",
+      "role": "Ближний бой / защита",
+      "avatar": "img/heroes/kelvin.webp",
+      "color": "#74ABBC",
+      "desc": "Ледяной страж: купол замораживает контакт-зону, ледяная стена отрезает врагов, скольжение даёт мобильность. Защищает линии как скала.",
+      "tags": "Protector,Explorer,Ice Cold",
+      "stats": {
+        "health": 880,
+        "moveSpeed": 6.7
+      }
+    },
+    {
+      "id": "ghost",
+      "name": "Lady Geist",
+      "role": "Мид / бёрст-вампир",
+      "avatar": "img/heroes/ghost.webp",
+      "color": "#218440",
+      "desc": "Фатальная вампирша: жертвует своим здоровьем ради бёрста, дренирует жизнь из врагов и взрывает зоны фитилём. Любит раннюю агрессию.",
+      "tags": "Lifesteal,Self Damage,Fatale",
+      "stats": {
+        "health": 880,
+        "moveSpeed": 6.3
+      }
+    },
+    {
+      "id": "lash",
+      "name": "Lash",
+      "role": "Мид / дайвер",
+      "avatar": "img/heroes/lash.webp",
+      "color": "#3ba1f0",
+      "desc": "Grapple + Death Slam: берёт врага в пакеты и устраивает дайвы. Требует уверенной механики, но наказывает за ошибки позиционирования.",
+      "stats": {
+        "weaponDamage": 6,
+        "fireRate": 1.2,
+        "health": 600,
+        "moveSpeed": 6.8
+      }
+    },
+    {
+      "id": "forge",
+      "name": "McGinnis",
+      "role": "Мид / инженер-саппорт",
+      "avatar": "img/heroes/forge.webp",
+      "color": "#23549D",
+      "desc": "Изобретательница: турели держат линию, стены режут рывки, аптечная станция лечит команду. Гибкий раш с большим уроном по зонам.",
+      "tags": "Inventor,Support,Disruption",
+      "stats": {
+        "health": 780,
+        "moveSpeed": 6.7
+      }
+    },
+    {
+      "id": "mina",
+      "name": "Mina",
+      "role": "Керри / харас",
+      "avatar": "img/heroes/mina.webp",
+      "color": "#A9171E",
+      "desc": "Летучая охотница: издёргивает врагов с дистанции, прячется в тени и уходит в бэт-форму. Хрупкая, но невыносимая в стычках.",
+      "tags": "Harasser,Nimble,Vexing",
+      "stats": {
+        "health": 660,
+        "moveSpeed": 6.5
+      }
+    },
+    {
+      "id": "mirage",
+      "name": "Mirage",
+      "role": "Убийца / контроллер",
+      "avatar": "img/heroes/mirage.webp",
+      "color": "#6A2E68",
+      "desc": "Джинн пустыни: жуки-скарабеи и торнадо путают врагов, метка джинна готовит казнь. Играет через контроль и накапливаемый урон.",
+      "tags": "Bodyguard,Traveller,Focused",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 7.0
+      }
+    },
+    {
+      "id": "mo-krill",
+      "name": "Mo & Krill",
+      "role": "Ближний бой / инициатор",
+      "avatar": "img/heroes/mo-krill.webp",
+      "color": "#C58428",
+      "desc": "Дуэт-подземник: выходит из туннеля прямо под ноги врагам, цепляет и выносит ключевую цель из строя. Дуо с лучшим входом из-под земли.",
+      "tags": "Tag-Team,Initiator,Burrower",
+      "stats": {
+        "health": 930,
+        "moveSpeed": 8.0
+      }
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse Harrow",
+      "role": "Керри / контроль",
+      "avatar": "img/heroes/nurse.webp",
+      "color": "#55C9BA",
+      "desc": "Психо-няня с банками пиявок: Leech Therapy забирает здоровье и энергию, пары вселяют силу в союзников, иглы поддерживают, а ужасы из сумки разгоняют врагов.",
+      "tags": "Strict,Terrifying,Savior",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 6.8
+      }
+    },
+    {
+      "id": "paige",
+      "name": "Paige",
+      "role": "Мид / протектор",
+      "avatar": "img/heroes/paige.webp",
+      "color": "#258F63",
+      "desc": "Книжная волшебница: спасает и усиливает союзников, переписывая ход драки как страницу. Аккуратный протектор для плановой игры.",
+      "tags": "Helpful,Protector,Booksmart",
+      "stats": {
+        "health": 680,
+        "moveSpeed": 6.9
+      }
+    },
+    {
+      "id": "chrono",
+      "name": "Paradox",
+      "role": "Керри / тактик",
+      "avatar": "img/heroes/chrono.webp",
+      "color": "#983952",
+      "desc": "Хладнокровный тактик: стена времени режет линии огня, пульс-гранаты дробят строй, свап меняет союзника местами с жертвой.",
+      "tags": "Calculated,Disruptor,Tactician",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 6.7
+      }
+    },
+    {
+      "id": "synth",
+      "name": "Pocket",
+      "role": "Убийца / трюкач",
+      "avatar": "img/heroes/synth.webp",
+      "color": "#858617",
+      "desc": "Беспокойный трюкач: бумеранг-ножи, прыжки и выкрутасы-газы — головная боль любой команды. Бёрст-ассасин с трудноуловимым характером.",
+      "tags": "Trickster,Burst Damage,Frogs",
+      "stats": {
+        "health": 780,
+        "moveSpeed": 7.2
+      }
+    },
+    {
+      "id": "ratking",
+      "name": "Rat King",
+      "role": "Ближний бой / засада",
+      "avatar": "img/heroes/ratking.webp",
+      "color": "#733033",
+      "desc": "Крысиный король: мелочь окружает и не даёт отдышаться, а сам он почти неистребим в заварушках. Полный разбор — скоро.",
+      "tags": "Scrappy,Regal,Tenacious",
+      "stats": {
+        "health": 800,
+        "moveSpeed": 6.8
+      }
+    },
+    {
+      "id": "rem",
+      "name": "Rem",
+      "role": "Мид / фамильяр",
+      "avatar": "img/heroes/rem.webp",
+      "color": "#5383D1",
+      "desc": "Крохотная соня с фамильяром: помогает союзникам во сне и наяву, усыпляет общую воинственность врагов своим спокойствием. Полный разбор — скоро.",
+      "tags": "Helpful,Tiny,zZzzZ",
+      "stats": {
+        "health": 680,
+        "moveSpeed": 7.2
+      }
+    },
+    {
+      "id": "seven",
+      "name": "Seven",
+      "role": "Мид / спирит",
+      "avatar": "img/heroes/seven.webp",
+      "color": "#f0c615",
+      "desc": "Урон через способности: Chain Lightning и Static Hold. Король зоны миддлейна, но остро уязвим к раннему ганку.",
+      "stats": {
+        "weaponDamage": 5,
+        "fireRate": 1.1,
+        "health": 580,
+        "moveSpeed": 6.6
+      }
+    },
+    {
+      "id": "shiv",
+      "name": "Shiv",
+      "role": "Ближний бой / камикадзе",
+      "avatar": "img/heroes/shiv.webp",
+      "color": "#E52A68",
+      "desc": "Вечный бунтарь: копит ярость, кровоточащие удары крадут здоровье врага, а стойкость делает его неубиваемым в затяжной драке.",
+      "tags": "Rage,Bleed,Repeat",
+      "stats": {
+        "health": 830,
+        "moveSpeed": 6.5
+      }
+    },
+    {
+      "id": "silver",
+      "name": "Silver",
+      "role": "Ближний бой / оборотень",
+      "avatar": "img/heroes/silver.webp",
+      "color": "#BFBC9F",
+      "desc": "Проклятый оборотень: превращение распускает зверя — когти, регенерация и неистовый темп. Ближний бой с двумя режимами безумия.",
+      "tags": "Feral,Hot Mess,Transformation",
+      "stats": {
+        "health": 830,
+        "moveSpeed": 6.7
+      }
+    },
+    {
+      "id": "sinclair",
+      "name": "Sinclair",
+      "role": "Мид / иллюзионист",
+      "avatar": "img/heroes/sinclair.webp",
+      "color": "#6B6B6B",
+      "desc": "Великолепный иллюзионист: волшебные двойники и ловушки-фокусы, ворует приёмы у врагов. Разносторонний мид с вечным сюрпризом.",
+      "tags": "Trickster,Copycat,Versatile",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 7.2
+      }
+    },
+    {
+      "id": "solomon",
+      "name": "Solomon",
+      "role": "Мид / стратег",
+      "avatar": "img/heroes/solomon.webp",
+      "color": "#AA9E7E",
+      "desc": "Стратег-гроссмейстер: расставляет фигуры по доске города, развивает ферзя для матовой связки. Каждый его ход — заранее просчитанная западня.",
+      "tags": "Strategist,Focused,Checkmate",
+      "stats": {
+        "health": 780,
+        "moveSpeed": 6.7
+      }
+    },
+    {
+      "id": "venator",
+      "name": "Venator",
+      "role": "Керри / тактик",
+      "avatar": "img/heroes/venator.webp",
+      "color": "#BD3599",
+      "desc": "Святой охотник за головами: благословения и выверенные приёмы с оружием держат строй, молитвы гасят панику. Тактический стрелок с душой пастыря.",
+      "tags": "Devout,Arms Expert,Tactical",
+      "stats": {
+        "health": 820,
+        "moveSpeed": 6.4
+      }
+    },
+    {
+      "id": "victor",
+      "name": "Victor",
+      "role": "Ближний бой / бессмертный",
+      "avatar": "img/heroes/victor.webp",
+      "color": "#658B6F",
+      "desc": "Тот, кого нельзя убить: регенерация и вторые шансы делают его вечной проблемой флангов. Встаёт снова и снова, пока враг не выдохнет. Полный разбор — скоро.",
+      "tags": "You,Can't,Kill Me",
+      "stats": {
+        "health": 800,
+        "moveSpeed": 6.3
+      }
+    },
+    {
+      "id": "vindicta",
+      "name": "Vindicta",
+      "role": "Снайпер",
+      "avatar": "img/heroes/vindicta.png",
+      "color": "#c0392b",
+      "desc": "Дальний урон с Assassin's Scope: наказывает за плохое позиционирование, но хрупкая и зависит от команды.",
+      "stats": {
+        "weaponDamage": 7.5,
+        "fireRate": 0.85,
+        "health": 500,
+        "moveSpeed": 6.5
+      }
+    },
+    {
+      "id": "violet",
+      "name": "Violet",
+      "role": "Мид / художница",
+      "avatar": "img/heroes/violet.webp",
+      "color": "#653cbc",
+      "desc": "Художница с живыми чернилами: краска усиливает пули в Flow State, Still Life «выписывает» врагов, а Abstract Landscape превращает побоище в её картину.",
+      "tags": "Ambitious,Nimble,Creative",
+      "stats": {
+        "health": 710,
+        "moveSpeed": 6.9
+      }
+    },
+    {
+      "id": "viscous",
+      "name": "Viscous",
+      "role": "Мид / гуталин",
+      "avatar": "img/heroes/viscous.webp",
+      "color": "#319826",
+      "desc": "Тягучий весельчак: goo-выстрелы склеивают врагов, Cube изолирует цель, а ульт-пилюли делают из него прыгучего титана. Дисраптор, которого трудно поймать.",
+      "tags": "Evasive,Disruptor,Gooey",
+      "stats": {
+        "health": 780,
+        "moveSpeed": 7.2
+      }
+    },
+    {
+      "id": "viper",
+      "name": "Vyper",
+      "role": "Убийца / стрелок",
+      "avatar": "img/heroes/viper.webp",
+      "color": "#A7AD00",
+      "desc": "Змеиный стрелок: шипящий темп огня и скользкий манёвр. Появится справа ровно тогда, когда вы смотрели влево.",
+      "tags": "Gunner,Slippery,Rat-a-Tat",
+      "stats": {
+        "health": 780,
+        "moveSpeed": 6.9
+      }
+    },
+    {
+      "id": "warden",
+      "name": "Warden",
+      "role": "Ближний бой / страж",
+      "avatar": "img/heroes/warden.webp",
+      "color": "#4D68A3",
+      "desc": "Полицейский-«один в поле воин»: огненный барьер закрывает подходы, метка долга требует расплаты за побег. Бесстрашный инициатор против численного перевеса.",
+      "tags": "Initiator,Fearless,One Man Army",
+      "stats": {
+        "health": 805,
+        "moveSpeed": 6.3
+      }
+    },
+    {
+      "id": "wraith",
+      "name": "Wraith",
+      "role": "Керри / бёрст",
+      "avatar": "img/heroes/wraith.webp",
+      "color": "#2fd8b5",
+      "desc": "Teleport Strike + Full Clip: мгновенный бёрст урона, быстро обнуляет отдельную цель. Зависит от таймингов кулдаунов.",
+      "stats": {
+        "weaponDamage": 6.5,
+        "fireRate": 1.1,
+        "health": 580,
+        "moveSpeed": 6.7
+      }
+    },
+    {
+      "id": "yamato",
+      "name": "Yamato",
+      "role": "Убийца / самурай",
+      "avatar": "img/heroes/yamato.webp",
+      "color": "#625789",
+      "desc": "Неукротимая самурай: рывки сквозь строй, дальние разрезы и теневая трансформация. Гонится за целью до самого конца арены.",
+      "tags": "Relentless,Acrobatics,Pursuer",
+      "stats": {
+        "health": 730,
+        "moveSpeed": 8.2
+      }
+    }
+  ]
+}

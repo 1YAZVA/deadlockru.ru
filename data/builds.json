@@ -1,0 +1,30 @@
+{
+  "updatedAt": "2026-10-29",
+  "note": "Стартовые примеры — уточните названия предметов под актуальный патч и поправьте в админке.",
+  "builds": [
+    {
+      "id": "b1",
+      "hero": "haze",
+      "title": "Haze — крит-билд (буллет-керри)",
+      "items": "High-Velocity Mag, Close Quarters, Hollow Point Ward, Headshot Booster, Pristine Emblem, Bullets in Bloom, Glass Cannon, Superior Stamina",
+      "desc": "Фокус на крит и скорость атаки. Ранняя игра — спокойный фарм до Point 3, дальше уходим в невидимость и наказываем отставших. Крит-мультипликатор обязателен: у Haze невысокая база, весь урон через тики.",
+      "tags": "крит, поздняя игра"
+    },
+    {
+      "id": "b2",
+      "hero": "seven",
+      "title": "Seven — спирит-билд",
+      "items": "Rune of Persistence, Ethereal Shift, Spirit Surge, Supernova, Colossus, Lucky Star, Sorcerer's Mask, Spirit Slap",
+      "desc": "Урон через способности: Chain Lightning + Static Hold. Первым берём предмет на спирит-масштабирование. По миду воевать только при поддержке союзников — Seven очень уязвим к раннему ганку.",
+      "tags": "спирит, мид"
+    },
+    {
+      "id": "b3",
+      "hero": "abrams",
+      "title": "Abrams — танк-дайвер",
+      "items": "Vampiric Gauntlet, Titan Slicer, Stacking Armor, Heal Beam, Respawn Ward, Bramble Veil, Passage, Bulletproof Soul",
+      "desc": "Берём защиту и лайфстил. Seismic Impact — вход в драку, ультимейт — изоляция керри врага от команды. Наращиваем щиты пара через стаки.",
+      "tags": "танк, оффлейн"
+    }
+  ]
+}
