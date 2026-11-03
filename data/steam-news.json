@@ -1,7 +1,14 @@
 {
-    "updatedAt":  "2026-10-28",
+    "updatedAt":  "2026-11-03",
     "source":  "https://store.steampowered.com/news/app/1422450",
     "posts":  [
+                  {
+                      "id":  "st680765564125186045",
+                      "date":  "2026-10-30",
+                      "title":  "Halloween 2026 + Gameplay Update",
+                      "text":  "As Halloween draws near, the residents of The Cursed Apple have put out some decorations to celebrate their favorite holiday. The Hideout gains a spooky new look, our heroes don masks, and NYC is now littered with pumpkins and curious Halloween Cauldrons that grant willing trick-or-treaters delicious candy.\n\nNew this year - Halloween Cauldrons: break a cauldron with a Heavy Melee to pick up a piece of Candy and stash it in your pocket. Consume the candy to grant yourself a boost of energy with the temporary Sugar Rush buff. The Halloween festivities are available in-game now through November 2nd, 2026.\n\nGameplay Update highlights:\n- Mid-Boss: health increased by 20%, bounty reduced from 3000 (+50/min) to 1500 (+25/min); the Rejuvenator now drops as 3 crystals placed evenly around the pit\n- Comeback gold from non-hero sources increased from 26% to 30%; Haunts bounty and growth increased by 10%\n- Move speed in tunnels reduced from +70% to +50%; Steam Vents now increase stamina regeneration by 150%\n- The latest 6 heroes are no longer categorized as \"new\": normal ranked unlock requirements apply and they can now be banned\n\nItems: High-Velocity Rounds bullet velocity 60% → 45%; Glass Cannon weapon damage 80% → 85%; Shadow Weave reworked (+50% Ambush weapon damage instead of fire rate/melee, builds up over 6s); Bullet/Spirit Lifesteal 13% → 15%; Metal Skin now increases gravity by 20% while active; and more.\n\nHeroes: Abrams base gun damage +5%; Nurse Harrow base gun damage −10%; Mirage Traveler reworked (channel 2s → 3s, T2 −65s Cooldown, T3 cannot be interrupted by damage); Solomon base bullet damage 30 → 25; Rat King base bullet damage −5%; Violet Still Life rework and more.\n\nПолный список изменений — по ссылке на источник.",
+                      "url":  "https://store.steampowered.com/news/app/1422450/view/680765564125186045"
+                  },
                   {
                       "id":  "st1846651706696737",
                       "date":  "2026-10-20",

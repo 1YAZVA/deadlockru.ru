@@ -1,0 +1,35 @@
+name: steam-news
+on:
+  schedule:
+    - cron: "25 * * * *"    # каждый час — свежие патчи попадают на сайт сами
+  workflow_dispatch: {}     # и по кнопке из вкладки Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: steam-news
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Refresh Steam news RSS
+        run: python .github/steam_news.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "deadlock-news-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/steam-news.json
+          if ! git diff --cached --quiet; then
+            git commit -m "news: refresh Steam RSS posts"
+            git push
+          fi
