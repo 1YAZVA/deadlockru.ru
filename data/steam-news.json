@@ -1,335 +1,405 @@
 {
-    "updatedAt":  "2026-11-03",
-    "source":  "https://store.steampowered.com/news/app/1422450",
-    "posts":  [
-                  {
-                      "id":  "st680765564125186045",
-                      "date":  "2026-10-30",
-                      "title":  "Halloween 2026 + Gameplay Update",
-                      "text":  "As Halloween draws near, the residents of The Cursed Apple have put out some decorations to celebrate their favorite holiday. The Hideout gains a spooky new look, our heroes don masks, and NYC is now littered with pumpkins and curious Halloween Cauldrons that grant willing trick-or-treaters delicious candy.\n\nNew this year - Halloween Cauldrons: break a cauldron with a Heavy Melee to pick up a piece of Candy and stash it in your pocket. Consume the candy to grant yourself a boost of energy with the temporary Sugar Rush buff. The Halloween festivities are available in-game now through November 2nd, 2026.\n\nGameplay Update highlights:\n- Mid-Boss: health increased by 20%, bounty reduced from 3000 (+50/min) to 1500 (+25/min); the Rejuvenator now drops as 3 crystals placed evenly around the pit\n- Comeback gold from non-hero sources increased from 26% to 30%; Haunts bounty and growth increased by 10%\n- Move speed in tunnels reduced from +70% to +50%; Steam Vents now increase stamina regeneration by 150%\n- The latest 6 heroes are no longer categorized as \"new\": normal ranked unlock requirements apply and they can now be banned\n\nItems: High-Velocity Rounds bullet velocity 60% → 45%; Glass Cannon weapon damage 80% → 85%; Shadow Weave reworked (+50% Ambush weapon damage instead of fire rate/melee, builds up over 6s); Bullet/Spirit Lifesteal 13% → 15%; Metal Skin now increases gravity by 20% while active; and more.\n\nHeroes: Abrams base gun damage +5%; Nurse Harrow base gun damage −10%; Mirage Traveler reworked (channel 2s → 3s, T2 −65s Cooldown, T3 cannot be interrupted by damage); Solomon base bullet damage 30 → 25; Rat King base bullet damage −5%; Violet Still Life rework and more.\n\nПолный список изменений — по ссылке на источник.",
-                      "url":  "https://store.steampowered.com/news/app/1422450/view/680765564125186045"
-                  },
-                  {
-                      "id":  "st1846651706696737",
-                      "date":  "2026-10-20",
-                      "title":  "Shh... This Won\u0027t Hurt a Bit.",
-                      "text":  "It\u0027s hard to know if that chill in the air is from the approaching fall breeze, or from the withering glare of Nurse Harrow, who now joins us on the streets of Manhattan. To some, her practices may seem unorthodox, her patients at the Marble Hill Possession Ward cannot say that the results aren\u0027t effective. With Leech Therapy, she throws a jar full of leeches that attach to oncoming enemies, draining their health and energy, before crawling back to deliver their haul. Cracking open one of her vials, she releases her Wretched Vapors, possessing her allies with a powerful boost of effectiveness - though subjects should be warned of the side effects when the vapors wear off. To efficiently keep her teammates fighting their best, she loads her syringe full of Healing Needles to inject medicine directly into their veins. And when her patience runs out, she opens her bag to release all the Lurking Terrors captured inside, making her adversaries run for cover. - \"Trust me, I know best.\"\n\nWith Nurse Harrow joining us today, that marks the end of our City Never Sleeps releases. We want to ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706696737"
-                  },
-                  {
-                      "id":  "st1846651706683085",
-                      "date":  "2026-10-16",
-                      "title":  "Paint the Town",
-                      "text":  "Brush in hand, Violet approaches the ritual with the same precision she does her art, wielding Living Ink that both empowers her bullets, and draws mere inspiration into reality. When entering Flow State, her ink glides easily, weaving towards danger to deal damage, or away from it to make a quick getaway. By creating a Still Life Violet can truly capture her enemies\u0027 likeness to stunning results. And with Abstract Landscape she surrounds herself and those nearby with her biggest and most ambitious piece yet, leaving onlookers completely speechless. - \"I worked too hard to get here, I can\u0027t stop now.\"\n\nViolet is available in-game now! Which means that our final hero - Nurse Harrow - will be joining us Next Tuesday October 20th at 2pm PDT. We want to thank everyone for participating in voting once again, and we\u0027ll see you next week for the culmination of our City Never Sleeps update. Have a good weekend!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706683085"
-                  },
-                  {
-                      "id":  "st1846651706676198",
-                      "date":  "2026-10-15",
-                      "title":  "Minor Update - 10-14-2026",
-                      "text":  "- Radiant Regeneration: Spirit scaling reduced from 0.04 to 0.035\n\n- Baba: Spirit Resistance scaling reduced from 0.12 to 0.1\n- Baba: Now has -7% Base Bullet Resistance\n- Baba: Threadsap - Spirit reduction on enemies now ends when Baba dies\n- Baba: Threadsap - Cooldown increased from 26s to 28s\n- Baba: Granny Long Legs - Cooldown increased from 30s to 32s\n- Baba: Granny Long Legs - Repeat light melees while airborne now have diminishing forward momentum\n- Baba: Granny Long Legs - Light melee upward launch reduced (looking up no longer lifts her as high)\n- Baba: Granny Long Legs - Heavy melee ground pound no longer gains horizontal speed when landing on slopes\n- Baba: Baba\u0027s Brew - Barrier scaling reduced from 1.2 to 0.7\n- Baba: Baba\u0027s Brew - Barrier reduced from 100 to 90\n- Baba: Baba\u0027s Brew - Cooldown increased from 25s to 27s (moved to T2)\n- Street Brawl: Baba Threadsap duration lasts 35% less\n\n- Deadman Danny: Health regen increased from 2.5 to 3.25\n- Deadman Danny: Base health increased from 680 to 730\n- Deadman Danny: Gun - Base bullet damage for uncharged shots from 12 to 15 ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706676198"
-                  },
-                  {
-                      "id":  "st1846018067945303",
-                      "date":  "2026-10-13",
-                      "title":  "Fairfax Industries Employee Spotlight",
-                      "text":  "Today, Fairfax Industries is proud to introduce their most valuable salesman: Deadman Danny. Wielding a rocket launcher and flying high above the streets of New York (courtesy of the Chimera Mk1 - the latest and greatest in self-adhered aviation technology), Danny rains his Strix Salvo missiles down upon foes, marking them for future attacks. Jettison Fuel is a handy trick that both expels heat from the Chimera System, while also dousing nearby enemies in the warm embrace of a fiery inferno. Yet his most impressive tactic has always been his ability to Close the Deal, wowing prospective customers with an explosive hands-on demonstration of all that Fairfax has to offer. - \"At Fairfax Industries we say \"All\u0027s Fair\", but that\u0027s not true! Because with the Fairfax Chimera Mark 1, you have the advantage.\"\n\nTake flight with Deadman Danny, available in-game now! With only two hero releases remaining, keep your votes coming to help determine who will be joining us on Friday October 16th at 2pm PDT.",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067945303"
-                  },
-                  {
-                      "id":  "st1846018067934643",
-                      "date":  "2026-10-09",
-                      "title":  "Make Your Move.",
-                      "text":  "Solomon remains calm and collected when facing a new challenger, so when the Patrons come calling, he approaches the city as if it\u0027s one giant chessboard. With Setup Bishop he advances, planting his loyal damage dealers ahead of him and sliding them across the streets with ease. Kingside Knight comes into play when it\u0027s time for defense, granting protection to allies and making tactical retreats when needed. Rook Battery charges forward with great force, stalling enemies in their tracks. And with his final move, Develop Queen, he locks down his enemies in an ultimate checkmate. - \"There\u0027s a lot you can learn from losing to a master.\"\n\nSolomon is available in-game now (just in time for National Chess Day)! We\u0027re halfway through our latest set of heroes, keep your votes coming to help determine who will be joining us next Tuesday at 2pm PDT. Have a great weekend!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067934643"
-                  },
-                  {
-                      "id":  "st1845383656397580",
-                      "date":  "2026-10-06",
-                      "title":  "Mind the Birds!",
-                      "text":  "It was a close contest, but today we find New York\u0027s notorious pigeon lady leaving her favorite perch in Central Park and joining the fight on the city streets. \n\nTourists in the park might not think much of ol\u0027 Baba sitting on her bench - sipping tea and talking to her birds - but the locals have always suspected that something more brews below the surface. In the heat of battle, Baba throws out her Threadsap, a chaotic spool of yarn that steals the very spirit of her enemies, granting her greater power. While her legs might not be what they used to, her trusty bench comes to life with a creak of metal, allowing her to run, jump, and kick with impressive vigor. Parkgoers know it\u0027s best to stay on Baba\u0027s good side, as at tea time you might find yourself splashed with one of Baba\u0027s Brews (some of them much sweeter than others), and when tea time is over - The Birds come out to play... \"They think they know magic? Oh I\u0027ll show \u0027em some magic.\"\n\nBaba and her pigeons are available now! We\u0027ll see you back here on Friday at 2pm PDT to introduce our next hero.\n\nAdditionally, the end date ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656397580"
-                  },
-                  {
-                      "id":  "st1845383656394833",
-                      "date":  "2026-10-05",
-                      "title":  "Minor Update - 10-05-2026",
-                      "text":  "- Fixed bugs that were causing troopers to walk too slowly in lane- Rat King: Scrap Grenade - Fixed some bugs with bouncing targeting- Rat King: Scrap Grenade - Damage increased from 65 to 70- Rat King: Scrap Grenade - T2 Damage increased from 65 to 70- Rat King: Rat Swarm - Base Cooldown reduced from 28s to 24s- Rat King: Rule, Ratannia! - Cooldown increased from 130 to 160- Rat King: Rule, Ratannia! - Damage Reduction reduced from 20% to 15%- Rat King: Rule, Ratannia! - Radius reduced from 24m to 20m- Rat King: Rule, Ratannia! - Charge Duration reduced from 12s to 10s- Rat King: Rule, Ratannia! - Bonus Move speed no longer scales with Spirit- Rat King: Rule, Ratannia! - Now falls faster while charging- Rat King: Rule, Ratannia! - T1 +1m/s Move Speed to +2m/s Move Speed- Rat King: Rule, Ratannia! - T1 No longer gives -20s cooldown (Total cooldown from 110s to 160s)- Rat King: Rule, Ratannia! - T2 No longer grants +8s Charge Duration (Total charge duration from 20s to 10s)- Rat King: Rule, Ratannia! - T2 Flag Duration reduced from +8s to +5s- Rat King: Rule, Ratannia! - T3 Damage ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656394833"
-                  },
-                  {
-                      "id":  "st1845383656387709",
-                      "date":  "2026-10-02",
-                      "title":  "Listen up, Crumbums! Your King is here.",
-                      "text":  "Scrap Grenade bouncing down Broadway, nor for his Swarm of Rats biting at their heels. By donning his Royal Pestments, the Rat King shakes off incoming damage, allowing him to bravely lead the charge into battle. His loyal subjects will feel awed and inspired when they see the great Banner of Ratannia waving in the middle of combat, and those who oppose him will rue the day they ever thought they could overthrow the king. - \"Oh the rats are taking over, baby!\"\n\nThe Rat King is available to play now! Have a great weekend and keep those votes coming, as our next hero will be joining us on Tuesday at 2pm PDT. We\u0027ll see you then!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656387709"
-                  },
-                  {
-                      "id":  "st1844751498235383",
-                      "date":  "2026-09-29",
-                      "title":  "City Never Sleeps",
-                      "text":  "The Cursed Apple is ever changing, and these streets are nothing like you remember. A massive visual update to the map and neutrals, six new heroes, HUD updates, numerous quality-of-life additions, accessibility options, and more.\n\nCheck out everything that\u0027s new at: https://www.playdeadlock.com/cityneversleeps\n\nWe also wanted to take this opportunity to talk about where we are with the development of the game and what to look forward to in the future. Our team has been incredibly happy and surprised with how passionate and supportive the community has been the past couple of years; every day someone shares something cool they\u0027ve seen from the community with the rest of the team, and we are thankful for the constant support and useful feedback, despite the game being unfinished. We think building a multiplayer game is very hard and risky, and the best way to minimize that risk to make sure that we are able to have it in players\u0027 hands from an early state to help us shape it and tell us what is fun and what isn\u0027t. So, we wanted to give you all more insight into what we\u0027ve been ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844751498235383"
-                  },
-                  {
-                      "id":  "st1844115010490072",
-                      "date":  "2026-09-16",
-                      "title":  "Minor Update - 09-16-2026",
-                      "text":  "\\[ General ]- Unstable Rift comeback resist max values now scale over the course of the game. Previously the max values were 35%. Now it is 10% + 1% per minute (around ~20% for the first one), with an upper limit of 40% at 30 minutes.- Removed a fixed amount of extra bonus souls you would get for being behind even a very slightly amount in net worth for both hero kill bounties as well as Unstable Rift bounties (this had a larger impact on the early to mid game)- Slightly reduced comeback bounties in general (this is in addition to the above change)- A portion of the comeback souls earned by players above enemy teams average net worth is instead distributed via the tick gold system that is given to the lowest 2 players (70% of the extra comeback value goes to them)- Guardian bounty increased by 10%- Walker bounty increased by 5%- Share for objectives bounty to nearby heroes reduced from 30% to 25% (the remaining gets split between all 6 players)- Respawn Time at 20 minutes increased from 35s to 38s (does not affect the max values later on, just a little higher earlier)- Using parry ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010490072"
-                  },
-                  {
-                      "id":  "st1841579228672283",
-                      "date":  "2026-08-22",
-                      "title":  "Minor Update - 08-22-2026",
-                      "text":  "- Radiant Regeneration: Heal on cast reduced from 70 to 65- Restorative Locket: Spirit Resistance reduced from 10% to 8%- Celeste: Dazzling Trick cooldown increased from 32s to 34s- Celeste: Dazzling Trick T2 barrier rescaled from \"+80 and +0.7 scaling\" to \"+70 and +0.76\"- Celeste: Dazzling Trick T3 cooldown increased from -18s to -20s- Celeste: Dazzling Trick T3 reduced from +1.5s Silence to +1.25s- Celeste: Radiant Daggers Spirit Amp per stack reduced from +8% to +7%- Celeste: Radiant Daggers T3 Spirit Amp per stack increased from +3% to +4%- Celeste: Shining Wonder bounce range reduced from 17.5m to 16.5m- Celeste: Shining Wonder damage reduced from 165 to 140- Celeste: Shining Wonder spirit scaling reduced from 0.9 to 0.6- Celeste: Shining Wonder T2 now also increases spirit scaling by +0.45",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1841579228672283"
-                  },
-                  {
-                      "id":  "st1840944183775204",
-                      "date":  "2026-08-12",
-                      "title":  "Minor Update - 08-12-2026",
-                      "text":  "- Apollo: Riposte melee resist reduction increased from -22% to -25%\n- Apollo: Riposte T2 changed from \"-30% Melee Resist\" to \"-25% Melee Resist and +0.4s Stun Duration\"\n- Apollo: Riposte T3 increased from 60% Lifesteal for 7s to 75% Lifesteal for 13s\n- Apollo: Fixed Itani Lo Sahn being canceled with movement abilities\n- Billy: Base health regen reduced from 2.5 to 2.0\n- Billy: Rising Ram T3 changed from \"On Impact: Deal 7% max health as spirit damage\" to \"On hero hit: +10% Max HP for 16s\"\n- Billy: Chain Gang spirit scaling reduced from 1 to 0.7\n- Doorman: Doorway range reduced from 70m to 65m\n- Doorman: Walker will no longer consider Luggage Cart dragged enemies as valid targets to trigger the stomp on until soon after they are dropped off\n- Doorman: Similar to the Walker change above, the turrets in the healing area in base now also wait on considering valid targets\n- Drifter: Rend spirit scaling reduced from 1.7 to 1.4\n- Drifter: Stalker\u0027s Mark cooldown increased from 24s to 26s\n- Drifter: Stalker\u0027s Mark T2 reduced from -12s Cooldown to -10s\n- Holliday: Powder Keg now does half ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840944183775204"
-                  },
-                  {
-                      "id":  "st1839676055886206",
-                      "date":  "2026-07-30",
-                      "title":  "Matchmaking Update",
-                      "text":  "This update includes a revamp to how the matchmaking system works, as well as the introduction of a new matchmaking mode. You can now choose to play in Standard Mode (unranked), or the new Ranked Mode introduced in this update.\n\nSTANDARD MODE\nStandard mode provides a lower-stakes way to play Deadlock with friends, without worrying about adjustments your Rank. There are no restrictions on party size or skill spread. You can also play in this mode to practice heroes you are less familiar with, as the matchmaker will adjust the game it puts you in to account for your experience with that hero. \n\nRANKED MODE\nRanked mode gives players a way to queue up for more competitive games against similarly-skilled players with higher stakes. Each season you\u0027ll be able to climb the Ranks and see how far you can go.\n\nUPDATED RANKS \u0026 BADGES: \nEach Rank has 6 Subranks within (I - VI).\n\nObscurus (uncalibrated)\n-\nInitiate\nSeeker\nAcolyte\nSentinel\nMystic\nRitualist\nEmissary\nOracle\n-\nPhantom\nAscendant\nEternus\n\nELIGIBILITY AND SEASONS:\nTo be eligible to queue for Ranked Mode, you must have at least 60 wins ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839676055886206"
-                  },
-                  {
-                      "id":  "st1839041357039193",
-                      "date":  "2026-07-28",
-                      "title":  "Minor Update - 07-28-2026",
-                      "text":  "\\[ General ]- Stamina bucket 3 heroes (slowest) have their ground dash time increased from 0.7s to 0.72s and air dash time from 0.49s to 0.51s- The Orb Spawners in base that give 10 souls on hit now split to nearby players on expire- Fixed the party member / team mate audio volume slider for voice communications\\[ Items ]- Crushing Fists: Max stacks stun duration increased from 0.5s to 0.75s- Crushing Fists: Bullet Resist reduction increased from -4% to -5% per stack- Cursed Relic: No longer has -14% Damage Output innate- Cursed Relic: Now applies a -25% Damage Output debuff for the 3.25s duration- Diviner\u0027s Kevlar: Spirit power increased from +35 to +40- Echo Shard: Now has a 0.5s post-cast time- Echo Shard: No longer grants +5% Fire Rate- Echo Shard: Cooldown increased from 35s to 30s + the cooldown of the imbued ability- Ethereal Shift: Cooldown increased from 35s to 37s- Frenzy: Now has +10% Bullet Lifesteal as an innate- Fury Trance: Active now grants +1m Move Speed- Fury Trance: Active removes move speed penalty when shooting (like Fleetfoot)- Lifestrike: When hitting a ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839041357039193"
-                  },
-                  {
-                      "id":  "st1836506165584438",
-                      "date":  "2026-07-09",
-                      "title":  "Minor Update - 07-09-2026",
-                      "text":  "- Urn Runner sprint bonus reduced from +2m to 0 (trailing bonus reduced from +7m to +5m)- Urn Runner move speed bonus reduced from +3.5m to +2m- Urn Runner Stamina Recovery increased from +15% to +25%- Urn talking frequency increased from every 8s to every 6s- Urn talking sound distance increased (easier to hear a nearby Urn Runner)- Unstable Rift warning time reduced from 25s to 20s- Rift Troopers now have Spirit Resist (30/35/40/45%)- Rift Troopers now have Melee Resistance (25%)- Rift Troopers spawn interval increased from every 0.3s to 0.5s (spawns slightly more staggered)- Unstable Rift comeback resist aura radius increased from 20m to 35m- Rift Troopers max comeback count increased from 12 to 14- Objectives bounty split for nearby heroes reduced from 40% to 30% (this means slightly more portion of the bounty is split team wide rather than towards an individual player)- Scourge: Max Health Per Second reduced from 2.6% to 2.5%- Billy: Rising Ram T3 spirit scaling reduced from 0.035 to 0.03- Doorman: Bullet damage rescaled from 29.26 + 1.1/boon to 26 + 1.19- Doorman: Crit scaling ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165584438"
-                  },
-                  {
-                      "id":  "st1836506165566600",
-                      "date":  "2026-07-01",
-                      "title":  "Minor Update - 07-01-2026",
-                      "text":  "- Shiv: Alt Fire ammo cost reduced from 5 to 4- Shiv: Weapon now has fixed pellet spread- Shiv: Slice and Dice is now back to doing spirit damage and reducing Spirit Resistance from enemies- Shiv: Slice and Dice damage increased from 60 to 75- Shiv: Killing Blow T3 reduced from +10% Enemy Health Threshold to +8%",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165566600"
-                  },
-                  {
-                      "id":  "st1836506165563227",
-                      "date":  "2026-06-30",
-                      "title":  "Minor Update - 06-30-2026",
-                      "text":  "\\[ Urn / King of the Hill ]- King of the Hill objective has been rethemed and renamed to \"Unstable Rift\"- Unstable Rift no longer requires an Urn delivery to trigger the start of the event. It now has a variable start time of +/- 1 minute. There is a global announcement 25s before it spawns. 60s before that there is also an in-world only visual effect to let you know which lane it\u0027ll randomly spawn in.- Unstable Rift spawn interval increased from every 6 minutes to every 7 minutes- Unstable Rift comeback bonuses (resists in the area, extra comeback bounty, and trailing/leading team claiming timer) now all scale linearly based on the amount of NW they are trailing (scales from no bonus at 0% NW behind to full bonus at 15% NW behind)- The team that secures the Unstable Rift now also has a wave of 5 Rift Troopers sent down from the rift location. When trailing, spawns up to 12 troopers instead (using the same linear ramp from 0% NW to -15% NW)- Rift Troopers drop no souls when killed- Rift Troopers spawn with 100% extra health and damage (they also look larger and have custom VFX). ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165563227"
-                  },
-                  {
-                      "id":  "st1835236783562074",
-                      "date":  "2026-06-12",
-                      "title":  "Minor Update - 06-11-2026",
-                      "text":  "- Urn give up time reduced from 75s to 60s- Urn bounty reduced by 10% (unreduced for trailing team)- Breakables health permanent bonus reduced from 15/25/35 to 15/20/30 for level 1/2/3- Kill comeback bounty values increased by 8%- Street Brawl: All ability and item range/radius values are reduced by 10%- Opening Rounds: Conditional Weapon Damage bonus reduced from 30% to 25%- Opening Rounds: Spirit Power increased from +4 to +7- Arcane Surge: Fixed various cases with the bonuses not working- Apollo: Disengaging Sigil velocity increased by 50%- Apollo: Disengaging Sigil velocity\u0027s vertical:horizontal ratio changed from 1.5:1 to 1:1- Apollo: Disengaging Sigil now allows input to alter the direction apollo launches himself (A/D biases to the left/right and W/S affect how much backwards motion is applied- Apollo: Disengaging Sigil T1 changed from \"+30 Damage\" to \"Gain +25% Fire Rate and Bullet Speed for 8s\"- Apollo: Disengaging Sigil T2 changed from \"Gain +30% Fire Rate and +50% Bullet Speed for 10s\" to \"On Player Hit: +1 Stamina restored and resets Air Jump/Dash limit\"- Apollo: ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783562074"
-                  },
-                  {
-                      "id":  "st1834602721188293",
-                      "date":  "2026-06-04",
-                      "title":  "Minor Update - 06-04-2026",
-                      "text":  "- Urn mechanics have been reworked.Primary details:- Delivering the urn now starts a king of the hill style capture point, rather than using melee to flip the urn back and forth.- Both teams can progress at the same time, but the urn will only be fully claimed once there is only one team in the circle.- The Urn runner now gets their normal 35% bonus bounty and stats immediately on initial deposit (rather than on deposit conclusion only if your team won it)Other Details:- Urn overall bounty reduced by 20% (unreduced for trailing team)- Progress radius is 20m- Progress rate is fixed regardless the number of allies in the area- Progress duration for favored/neutral/unfavored is 6/12/18s- If Urn has been in progress for over 75s, it will give up and throw all the souls as orbs into the sky (they will float for a long time)- Increased time allowed to run the urn before taking damage by 10s- Trailing team sprint speed bonus from +4m to +5m- Urn comeback resistance now also grants +35% Debuff Resistance ontop of the 35% Bullet and Spirit Resistance- Urn comeback resistance aura reduced ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1834602721188293"
-                  },
-                  {
-                      "id":  "st1833968530895860",
-                      "date":  "2026-05-31",
-                      "title":  "Minor Update - 05-31-2026",
-                      "text":  "- Apollo: Disengaging Sigil T2 increased from +20% Fire Rate to +30%- Apollo: Flawless Advance T1 heal from 30+0.75 to 35+1.0- Apollo: Flawless Advance T2 increased from -10s Cooldown to -12s- Apollo: Itani Lo Sahn damage increased from 190 to 200- Apollo: Itani Lo Sahn spirit scaling increased from 2.3 to 2.6- Graves: Jar of Dead damage reduced from 20 + 0.31/spirit to 17 + 0.27/spirit- Graves: Ghouls damage reduced by 15%- Graves: Ghouls bounty increased from 25+1/min to 35+2/min- McGinnis: Heavy Barrage range reduced from 50m to 36m- McGinnis: Heavy Barrage T1 Dash Slow reduced from 30% to 18% (regular slow still 30%)- McGinnis: Heavy Barrage T3 Damage Per Rocket reduced from +18 to +15- Pocket: Flying Cloak T3 reduced from -14s Cooldown to -13s- Pocket: Affliction T3 reduced from +18 DPS to +14- Silver: Slam Fire Current Health as Damage reduced from 3% to 2.5%- Silver: Slam Fire T3 reduced from 8% Current Health as Damage to 7%- Silver: Entangling Bola cooldown increased from 20s to 23s- Silver: Entangling Bola T2 increased from -5s Cooldown to -8s- Silver: Lycan Curse Fire ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530895860"
-                  },
-                  {
-                      "id":  "st1833968530888928",
-                      "date":  "2026-05-28",
-                      "title":  "Minor Update - 05-28-2026",
-                      "text":  "- Urn spawn time and interval changed from 10/15/20/25/etc to 12/18/24/30/etc- Urn timer now gets frozen with Frozen Shelter- Urn no longer provides the +35% Bullet and Spirit Resist aura for the behind team when it is being carried or dropped. The aura is now only active when it is being deposited. - Urn runner when behind now gains +35% Bullet and Spirit Resist for themselves only- Fixed the trailing team Urn runner\u0027s extra sprint bonus not working properly- Urn will do damage to the runner after a team has held it for 30s (was 50s before), however, this timer will freeze while there are enemies within a 40m radius of the urn runner.- Urn will now always add at least 2s to the team 30s held timer limit anytime it is picked up, even if it is instantly dropped- You are no longer prevented from picking up the urn for 12s after it is dropped after the previous 50s team held timer- The conditions for when the Urn decides to run back home have been reworked. The Urn will now stay in place on the ground as long as there are enemies in a 40m radius (enemies of the last person to have ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530888928"
-                  },
-                  {
-                      "id":  "st1833968530888746",
-                      "date":  "2026-05-28",
-                      "title":  "Minor Update - 05-25-2026",
-                      "text":  "- Urn drop off point is moved from the above bridge in the mid lane to under the bridge in the side lane\n- Urn timer extension when contested increased from 1.25s to 3s\n- Urn deposit timers for favored/neutral/unfavored increased from 3/5/10s to 5/10/15s\n- Urn comeback bullet and spirit resist auras reduced from 50% to 35%\n- Urn pickup spot is now where the old comeback drop off spots were for when your team is behind\n- Urn runner no longer has sprint disabled\n- Urn runner now has max sprint acceleration\n- Urn runner now gains +2m Sprint, +1 Stamina, +10% Dash Distance and +15% Stamina Regen\n- Urn runner for the team that is behind now gains an extra +4m Sprint\n- Urn collision radius increased by 20%\n- Various smaller urn holding timers and variables adjusted to account for the new location\n\nPlease continue to give feedback on the Urn as we work through iterations on it.",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530888746"
-                  },
-                  {
-                      "id":  "st1833334318572828",
-                      "date":  "2026-05-22",
-                      "title":  "Gameplay Update - 05-22-2026",
-                      "text":  "[ General ]- Base HP reduced by 10 for all heroes- HP per boon reduced by 3- Guardians scaling resistance from +75%-\u003e-50% over 12 minutes to +50%-\u003e-50% (takes more damage early)- Medium neutrals initial spawn time reduced from 6 minutes to 5 minutes- Breakables spawn time increased from 2 minutes to 3 minutes- Shrines are now invulnerable until one pair of Base Guardians are destroyed- Backdoor removal linger duration reduced from 20s to 14s- Knockup durations are now affected by debuff reduction- Removed two jump pads from around the middle of the map that point to outwards (to the left and right respectively)- Sliding no longer resets sprint speed- Stamina Regeneration is reduced by 25% for 5s after using a Wall Jump. This does not trigger when out of combat or when mantling soon after.- Bullet Velocity now stacks additively rather than diminishingly- Medic trooper heal duration increased from 2s to 4s (same overall heal amount)- When receiving multiple of the Medic trooper orb the duration will now be added ontop rather than stacking directly (so picking up 4 in a row will give ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318572828"
-                  },
-                  {
-                      "id":  "st1831432155569981",
-                      "date":  "2026-04-30",
-                      "title":  "Gameplay Update - 04-30-2026",
-                      "text":  "[ General ]- Base health per boon reduced by 7- Vitality Investment bonus increased from 8/10/13/17/34/39/44/48/52/56% to 9/12/15/20/38/42/46/50/56/62%- Weapon Investments bonus rescaled from 7/9/13/20/49/60/80/95/115/135% to 9/12/15/18/46/55/70/85/100/115%- Reduced bullet damage growth by 10% for the following heroes: Bebop, Pocket, Vyper- Reduced bullet damage growth by 5% for the following heroes: Victor- Increased bullet damage growth by 10% for the following heroes: Mo \u0026 Krill, Apollo- Guardians, Base Guardians and Shrines now have 10% Bullet Resistance- Walkers Bullet Resistance increased from 15% to 25%- Medic Trooper missing health percent heal reduced from 14% to 12%- Medic Trooper fixed regen growth per minute reduced from 3 to 2- Getting knocked off bounce pads now sends you downwards quickly rather than continuing the trajectory towards the bounce pad destination- Souls required for boons after 13.2k/15k/17k/+2k per boon to 13.2k/14.5k/+1.5k per boon (ends at 40k instead of 49k)- Fixed Alt Fire scaling for Yamato and Viscous not working recently\\[ Items ]- Added a new T4 ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155569981"
-                  },
-                  {
-                      "id":  "st1826362059925616",
-                      "date":  "2026-03-06",
-                      "title":  "Gameplay Update - 03-06-2026",
-                      "text":  "\\[ General ]- Can now jump during slide- Dash jump grants a very brief period with increased air control (30% for 0.25s)- Shrine is now easier to kill for the first one and harder for the second. HP from 8100 to 5000/10000 (HP updates after the first one dies, like Walkers)- Shrines attack no longer hits heroes under the shrine- Super troopers bonus DPS increased from +40% to +60% (the upgraded troopers when Shrine dies)- Middle Lane troopers now gets upgraded when either of the shrines die, rather than only when both die- Killing a pair of base guardians now spawns a zipline boosted trooper wave to reinforce your push- Medic Troopers DPS grows by 3% per minute- Troopers now gain 7 HP regen when out of combat- Trooper wave interval increased from every 25s to every 20s starting at 35 minutes- Guardians bounty increased from 1000 to 1500- Walkers bounty increased from 3500 to 4000- Walkers Health rescaled from 6800/9350/11900 to 6000/9000/12000- Walkers armor decay rescaled from \"+75% -\u003e -50%\" to \"+65% -\u003e -65%\", from over 20min to over 18min- Base Guardians bounty from 750 to 1000- ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1826362059925616"
-                  },
-                  {
-                      "id":  "st1824459501608168",
-                      "date":  "2026-02-12",
-                      "title":  "Apollo - A Cut Above",
-                      "text":  "Apollo\n{STEAM_CLAN_IMAGE}/45164767/0aab19877fe18e934963918a7cb4f80364adc22d.png\n\nAfter weeks of waiting, Apollo finally graces us with his presence. With Flawless Advance the fencer begins his approach, timing his strikes perfectly to inflict more damage. Counter-attacks aren\u0027t a concern for Apollo, as a flourish of his blade deflects the damage and triggers a quick Riposte, and Disengaging Sigil allows him to jump out of the fray with ease. For his final blow, Apollo dons his fencer\u0027s mask and channels Ixia\u0027s might with Itani Lo Sahn, leaving enemies defeated in his wake. - \"Sa la rex vogali!\"\n\nWith Apollo\u0027s release, that concludes the rollout of our Old Gods, New Blood update. Thank you to everyone for the warm welcome of our new Patrons, getting your hands dirty in Street Brawl, and voting for your favorite heroes!\n\nVoting Stats:\n\n 60,776,963 total votes were cast across the event\n Exactly 600 people had the foresight to only vote for the eventual winner each round\n The largest winning margin was Venator over Celeste at 11%\n The highest number of votes cast by an individual ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1824459501608168"
-                  },
-                  {
-                      "id":  "st1823825466506693",
-                      "date":  "2026-02-09",
-                      "title":  "Introducing The Dazzling Celeste",
-                      "text":  "Come one, come all! Today, we\u0027re introducing...\n\nCeleste\n{STEAM_CLAN_IMAGE}/45164767/a8b1361481f9292802bb6592cf79733971efa76f.png\n\nIt\u0027s not every day that Coney Island\u0027s biggest star, The Dazzling Celeste, performs on the streets of Manhattan. Her show begins with Light Eater, where a deep breath lit by her blazing baton coats enemies in front of her, and grants increased damage against them. Following that up, she envelops herself in the prismatic shield of her Dazzling Trick, which explodes and silences nearby enemies who break it. Try not to get distracted by her gliding gracefully through the air, or by the dance of her Radiant Daggers, as you\u0027ll regret being underneath them when they rain down from above. As for her memorable final act, the Shining Wonder will make her allies go OOH and her foes go AGGHHH! - \"You are about to see something rare and wonderful!\"\n\nCeleste is available to play in-game now! Join us on Thursday Feb 12th at 2pm for the release of Apollo and the conclusion of our Old Gods, New Blood update. We\u0027ll see you then!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466506693"
-                  },
-                  {
-                      "id":  "st1823825466497894",
-                      "date":  "2026-02-05",
-                      "title":  "Some Are Merciful, The Venator Is Not",
-                      "text":  "Evil stirs in New York, and the Venator is here to answer.\n\nVenator\n{STEAM_CLAN_IMAGE}/45164767/a8fcf6c0e81b0fc764cb294caeba6cfd583e69a3.png\n\nVenator doesn\u0027t walk the righteous path, he blazes the trail so that others may do so safely. His biggest challenge is knowing which weapon to use first. Firing a Consecrating Grenade into the fray softens up his enemies and keeps them from restoring health, and his Hex-Lined Snap Trap scatters across the ground to lock them in place. A Gutshot from his shotgun will knock back enemies who get too close, and when the time is right, Ira Domini will rid the world of evil once and for all. - \"Today, nine commandments will have to do.\"\n\nVenator joins the ritual now. The countdown for our final two heroes is upon us, and we\u0027ll see you back here on Monday February 9th at 2pm PST for our next release!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466497894"
-                  },
-                  {
-                      "id":  "st1823191198612358",
-                      "date":  "2026-02-02",
-                      "title":  "The Curse Beckons for Silver",
-                      "text":  "The votes are in and today\u0027s addition to the Cursed Apple is...\n\nSilver\n{STEAM_CLAN_IMAGE}/45164767/0841efa2500ec2bf46ca991f4df8150748d8defa.png\n\nSilver makes her living tracking down lowlifes, but today New York’s misanthrope lycanthrope plans on summoning a god. Fortunately, her career as a bounty hunter has prepared her well for all that the ritual requires. She makes quick work of adversaries by catching them with her Entangling Bola, Boot Kicking them in the face, and finishing them off with a Slam Fire from her rifle. But inevitably, the Lycan Curse comes calling whether she likes it or not, and her foes will regret being too close when it does. - \"This should be easy. Won\u0027t be, but I\u0027m really good at lying to myself.\"\n\nSilver is available to play now! The next hero from the Old Gods, New Blood update will be released on Thursday February 5th at 2pm PST. See you then!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823191198612358"
-                  },
-                  {
-                      "id":  "st1823191198603629",
-                      "date":  "2026-01-29",
-                      "title":  "Graves Prefers The Dead",
-                      "text":  "Today\u0027s bone-chilling addition to the Cursed Apple is none other than...\n\nGraves\n{STEAM_CLAN_IMAGE}/45164767/c167b4a0c1c8e9df56e26fa7989e1b8d8c2e58e2.png\n\nThe dead have been making a whole lot of demands lately, and only Graves has the courage to oblige. That severed lich hand she found in the cemetery has proven itself a valuable ally, allowing her to latch onto her enemies and steal their power for herself. Her curiosities about the passage of life are further put to use with Jar of Dead, collecting the remains of the fallen, shaking them up, and throwing them back at her enemies to grant those remorseful spirits a final shot at revenge. With Grasping Hands she strikes a deep crack in the earth, allowing those down below to grab onto enemies\u0027 ankles and stop them from escaping her reach. And when all else fails, a Borrowed Decree will summon the dead to fight alongside her. - Death is coming.\n\nGraves is available in-game now! Keep your votes coming over the weekend, as the third hero from our Old Gods, New Blood update will be released on Monday February 2nd at 2pm PST.",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823191198603629"
-                  },
-                  {
-                      "id":  "st1822556746167992",
-                      "date":  "2026-01-26",
-                      "title":  "Rem Enters The City That Never Sleeps",
-                      "text":  "The people have spoken, and the first new addition from the Old Gods, New Blood update is...\n\nRem\n\nAn accidental stowaway from the world of dreams, Rem has found himself stranded in the city that never sleeps. Pillow fights are Rem\u0027s preferred form of conflict, tossing his favorite pillow at enemies to knock them back when they\u0027re getting too close. His friends, however, he likes to keep nearby - leaping to their aid when things get dicey and taking a quick nap on their shoulder. His Lil Helpers are curious creatures, taking interest in everything the streets of New York have to offer, and cheering on his allies as they go. Ultimately when Naptime hits, no one will be able to keep their eyes open. - The best part of being asleep, is being asleep.\n\nKeep your votes coming, as the next hero will be released on Thursday at 2pm PST. See you then!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1822556746167992"
-                  },
-                  {
-                      "id":  "st1822556746160429",
-                      "date":  "2026-01-22",
-                      "title":  "Old Gods, New Blood",
-                      "text":  "{STEAM_CLAN_IMAGE}/45164767/0bc50241318e52395ab70077faf8e1f0e3cf7c1d.png\n\nThe ritual takes form... Overhauled Patrons and bases, six new heroes, a fast-paced game mode \u0027Street Brawl\u0027, HUD updates, many quality-of-life additions, revamped postgame with an MVP screen and more.\n\nView the Old Gods, New Blood update page.",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1822556746160429"
-                  },
-                  {
-                      "id":  "st1816849002015766",
-                      "date":  "2025-11-21",
-                      "title":  "11-21-2025 Update",
-                      "text":  "\\[ General ]- Trooper bounty mechanics have been reworked. The first half of the souls still fly out as deniable orb, however rather than the other half being instantly given to nearby players it will fall to the ground as an orb that you need to get near to pick up. It has a 18m capture radius where it\u0027ll travel to you once you get within. Only one player needs to claim it, share rules remain the same as before.- They last for 18s on the ground. Duration increases by 2s per minute up to 40s after 10 minutes.- Enemy orbs are visible as faint colorless soul orbs to your team, but cannot be claimed.- Amount of souls in the flying orb that can be secured/denied reduced from 50% to 40%- Very small tweaks to the secure/deny lag calculation to improve it- Increased trooper range to be considered in range for souls to drop from 35m to 45m- Medic troopers no longer have a passive healing pulse ability- Medic troopers now drop a medic pack when you kill them. Has same pickup range/duration mechanics as the soul orbs on the ground. Heals everyone in a 30m radius for 10% of their missing ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1816849002015766"
-                  },
-                  {
-                      "id":  "st1809235871630816",
-                      "date":  "2025-08-29",
-                      "title":  "You Can\u0027t Kill Victor",
-                      "text":  "Hero Spotlight: Victor\n{STEAM_CLAN_IMAGE}/45164767/5f17579aa198931ee073ad9540e2b044b80ea333.png\nA man who walks the line between life and death. Victor has learned to harness pain into power, shocking himself with Jumpstart to get his adrenaline rushing and his faulty heart pumping. He welcomes incoming damage with open (albeit mismatched) arms, channeling it into his Pain Battery and granting enemies a taste of the pain he endures. Get too close and risk getting caught in his Aura of Suffering, but hey, at least you\u0027ll be suffering together! And just when you think you\u0027ve taken him down... Think again. - \u0027They don\u0027t have what it takes to kill me.\u0027\n\nWith Victor joining us today in the Cursed Apple, that concludes the rollout of our Six Hero Update. Thank you to everyone for participating in voting, we have loved seeing all the discourse and heart-felt campaigns for your favorite heroes over the last two weeks.\n\nQuick Voting Stats:\n\n Nearly 6 million votes were cast in total by the community\n The highest number of votes cast by an individual player was 203\n Billy won with the largest ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1809235871630816"
-                  },
-                  {
-                      "id":  "st1809235871564856",
-                      "date":  "2025-08-27",
-                      "title":  "Drifter Emerges from the Shadows",
-                      "text":  "Hero Spotlight: Drifter\n{STEAM_CLAN_IMAGE}/45164767/effac101dabe092cef4b6eacc2fe486de845816f.png\nSomething ancient has arrived in New York... a nameless horror known only as the Drifter. Relentless as time, as certain as death, once Drifter sets his eyes on a victim there\u0027s nothing they can do to stop him. They can try to run, but his Bloodscent drives him forward, leading him to isolated prey. Even if they manage to escape it doesn\u0027t matter, as Stalker\u0027s Mark allows Drifter to appear right behind his enemies before lunging in for the kill with a vicious Rend. Soon Eternal Night comes, and a faint whistling in the breeze will be joined by a chorus of screams. - \u0027Everyone\u0027s got weaknesses, but mercy ain\u0027t one of mine.\u0027\n\nYou\u0027ll be able to find the Drifter lurking right behind you in games starting today. We\u0027ll be back here on Friday at 2pm PDT for the conclusion of our hero update with the release of Victor. See you then!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1809235871564856"
-                  },
-                  {
-                      "id":  "st1808601382586972",
-                      "date":  "2025-08-25",
-                      "title":  "Paige Writes Her Own Story",
-                      "text":  "It\u0027s Monday, and today we\u0027re excited to announce the next hero joining us in the Cursed Apple is...\n\nHero Spotlight: Paige\n{STEAM_CLAN_IMAGE}/45164767/32461f95d508f369b02dd703d0a9c254c037bb34.png\nCitizens of Manhattan will learn to appreciate the power of the written word when Paige joins the fight. With the mere toss of a book she can Conjure Dragons that sear enemies who get too close, or bind them to the ground with Captivating Read. Waning allies will find themselves emboldened by Defend and Fight, granting them the courage to fight another day. Fantasy becomes reality with Rallying Charge, summoning an entire cavalry to gallop across the city. - \u0027We can\u0027t wait to see how this story plays out.\u0027\n\nYour votes will decide if Drifter or Victor will be joining us on Wednesday at 2pm PDT, we\u0027ll see you then!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1808601382586972"
-                  },
-                  {
-                      "id":  "st1808601382489176",
-                      "date":  "2025-08-22",
-                      "title":  "The Doorman, at your Service",
-                      "text":  "Hero Spotlight: The Doorman\n{STEAM_CLAN_IMAGE}/45164767/c92f11d8ea510f5eea50f229f2ad06a0e56ba708.png\nHe\u0027s proper, he\u0027s polite, but the humble Doorman of The Baroness Hotel is more than meets the eye. A brisk ring of his Call Bell leaves nearby enemies disoriented, and his high-speed Luggage Cart knocks them right off their feet. Do you find yourself getting lost easily in the streets of Manhattan? Don\u0027t worry, The Doorman is here to provide a shortcut with his Doorway whenever the need arises. And only the most special of enemies get to experience the trip of a lifetime to The Baroness Hotel. - Please, stay as long as you\u0027d like.\n\nYou can check out The Doorman in game now. Keep your votes coming over the weekend as our next hero will be released on Monday August 25th at 2pm PST.",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1808601382489176"
-                  },
-                  {
-                      "id":  "st1808601382422164",
-                      "date":  "2025-08-20",
-                      "title":  "Billy Comes in Swinging",
-                      "text":  "The votes are in! Today we are excited to announce that the next hero joining us in the Cursed Apple is... Billy!\n\nHero Spotlight: Billy\n\nA white hot ball of rage, furious at the very notion of... something. Billy is a chaotic front-liner who never backs down from a challenge. With Rising Ram he gets up close and personal, before slamming down with Bashdown to create shockwaves through his enemies. Running isn\u0027t even an option when Billy can use his ultimate Chain Gang to grapple enemies and pull them back in. A quick swig from his bottle gets him Blasted, and his enemies totally wrecked. - \u0027The hell are you staring at, buddy?\u0027\n\nKeep your votes coming. The next hero will be released at 2pm PST on Friday. See you then!",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1808601382422164"
-                  },
-                  {
-                      "id":  "st1808061939479652",
-                      "date":  "2025-08-18",
-                      "title":  "Six New Heroes",
-                      "text":  "{STEAM_CLAN_IMAGE}/45164767/f67ecaff28204a3d8d9ab86f495a3e4465df3135.pngSix new heroes have been spotted on the streets of the Cursed Apple: Mina the vampire, Billy the demonic goat, Paige who can bring books to life, The Doorman who\u0027s always at your service, Victor the monster who can\u0027t be stopped, and Drifter who terrorizes the city. Rather than enabling all these new heroes at once, we\u0027re trying a new approach where we\u0027ll be staggering their release, unlocking one every other day with the first starting today. From there, you’ll help decide which hero unlocks next by casting votes in the new pre-game lobby called \u0027The Hideout\u0027. Along with the new heroes and Hideout are various map visual updates as well as a new character select screen.The Hideout{STEAM_CLAN_IMAGE}/45164767/8da57587ca0ad65cf902f1207706694082164525.pngWelcome to the Hideout! The Hideout replaces the existing Dashboard UI and is your personal area to play around in while waiting for a match. You can invite friends to your hideout, or join them in theirs. We hope it will be a fun place to spend time as well as ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1808061939479652"
-                  },
-                  {
-                      "id":  "st1799088287841594",
-                      "date":  "2025-05-08",
-                      "title":  "Shop Rework Update",
-                      "text":  "{STEAM_CLAN_IMAGE}/45164767/0908b05b0e83747ca99a9337d401daf3a662f85d.png\n\n[ Shop Redesign ]\n\n- Full shop rework, including many new items.\n- Item slots are now all universal, rather than tree specific.\n- Total slot count reduced from 16 to 12.\n- Item costs are now discounted when you own the component.\n- New artwork for all item icons.\n- Reworked how tier bonuses work in the shop. They are no longer based on each item you buy, but instead based on your total spend in a tree. Bonuses are not linear (maxing out one tree fully isn\u0027t optimal bonus-wise).\n- Various item names have been changed.\n- Items now glow when there is an upgrade you can buy.\n\n[ Build Authoring ]\n\n- The Build Browser has been reworked and is now its own fullscreen UI.\n- Added a \"Create Build\" button when hovering over a player in post-game. This will create a local unpublished build based on the items the player purchased in that match (including imbue targets and the order in which items were sold).\n- Added a new feature: build tags. Build tags are a way to compactly describe the theme of a build. A tag has an ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1799088287841594"
-                  },
-                  {
-                      "id":  "st1792116353369036",
-                      "date":  "2025-02-25",
-                      "title":  "Map Rework Update",
-                      "text":  "{STEAM_CLAN_IMAGE}/45164767/8b22eef56ea0534b4630004b9f7c30019b19280f.jpg\n\nToday\u0027s update introduces a reworked map layout, alongside a variety of improvements and bug fixes. \n\n[ Map Rework ]\n- The map has been redesigned around being 3 lanes rather than 4. This has a large range of accompanying map-wide changes regarding visuals, building layouts, pathways, neutral camps, air vents, breakables, powerup buffs, juke spots, mid boss, etc.\n\n- Added a new feature called \"Explore Map\" where you can run around an empty city to test movement and navigation. You can find this under the \u0027Play\u0027 menu.\n\n[ Soul Orb Mechanics ]\n- Troopers no longer need to be last hit by a player in order to generate souls, as long as you are nearby. Troopers no longer have the \"near death\" flashing behavior.\n\n- Soul Orb lifetime in the air reduced significantly.\n- Soul Orb denies changed from 65/35% to 50/50%.\n- Soul Orb physical radius increased by 10%.\n- Reduced horizontal movement of soul orbs from troopers.\n\n- Gaining souls from kills now shows a visual effect of souls flying towards you.\n\n[ Sprint ]\n- ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1792116353369036"
-                  },
-                  {
-                      "id":  "st1789039014375669",
-                      "date":  "2025-01-17",
-                      "title":  "Holliday, Vyper, Calico, and The Magnificent Sinclair",
-                      "text":  "Today\u0027s update adds four new heroes to matchmaking: Holliday, Vyper, Calico, and The Magnificent Sinclair.\n\nExpanding our roster is one of our major goals in 2025. While some of these characters have a much higher degree of temporary art than usual, we are excited to see how they perform on the battlefield. \n\nSo who are the new faces you’ll be seeing on the streets of New York?\n\nHOLLIDAY\nArmed with an heirloom revolver and a spirit lasso, Holliday\u0027s investigations have led her to New York... and when she finds the killer she\u0027s looking for she\u0027s bringing him in dead, not alive.\n\nVYPER\nDid you know that when you slide your gun has infinite ammo? Vyper does. That’s why you’ll find her sliding around the battlefield spraying lead and poison.\n\nTHE MAGNIFICENT SINCLAIR\nMystify your rivals with combat tricks so vexing that they won’t believe their eyes! Summon a spectral assistant, polymorph foes into rabbits, and turn the enemies own abilities against them! Impossible? Not for THE MAGNIFICENT SINCLAIR…\n\nCALICO\nA feared assassin; Calico uses the shadows to her advantage, weaving in and out ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1789039014375669"
-                  },
-                  {
-                      "id":  "st1785774543697622",
-                      "date":  "2024-12-17",
-                      "title":  "Winter Visual Update",
-                      "text":  "Season\u0027s Greetings! Today\u0027s winter-themed visual update will be our last patch for the year, but we\u0027ll continue to ship bug fixes and any urgent balance adjustments as needed throughout the break. Thanks to everyone for all the useful feedback that you\u0027ve given us this year, we\u0027re looking forward to sharing more of what\u0027s to come for Deadlock in 2025. For now, we hope that everyone has a magical season full of joy, souls, and surprises...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1785774543697622"
-                  },
-                  {
-                      "id":  "st1785321795648842",
-                      "date":  "2024-12-06",
-                      "title":  "12-06-2024 Update",
-                      "text":  "[ General Changes ]\n\n- Added a new hero, Raven, to Hero Labs.\n\n- Added park theming to purple lane.\n- Added park backdrop to park side of map.\n- Updated tree models to new visual style and added player collision to canopies.\n\n- For each player on the main leaderboard, you can see their top 3 heroes as well as their overall skill rating.\n- Moved the post-game survey to the final score screen.\n- Added text box field to the post-game survey.\n- Muting a player now also silences map drawing, pings, and chatwheel messages.\n\n- Various rendering performance improvements on map assets.\n- Added two new setting options \"Force English Hero Names\" and \"Force English Item Names\", which will display those values in English regardless of your chosen language.\n- Added Toggle Crouch as a new keybind.\n- Added a new setting option: \"Additional Build Search Language\", which lets you select a language to search for when requesting builds in addition to the current display language of the client.\n- Fixed shop search not working in the shop when opened from Resources.\n- Revisions to melee parry effect and ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1785321795648842"
-                  },
-                  {
-                      "id":  "st6148070194801611991",
-                      "date":  "2024-11-08",
-                      "title":  "11-07-2024 Update",
-                      "text":  "[ General Changes ]\n\n- Added Trapper to Hero Labs.\n- Added support for Hero Labs in Private Lobbies, Private Bot Games and Sandbox that can be used at any time.\n- Various adjustments to Experimental Heroes are listed in the in-game notes for Hero Labs.\n\n- Added Quickbuy - You can now right-click items in the shop to add them to your Quickbuy queue. When you return to the shop, you will automatically purchase the items you can afford in your set order. An indicator on the hud will light up when you can afford the next item on your list. In Settings you may change the purchase mode to use a hotkey while in range of the shop rather than auto-purchase.\n\n- The shaders, map and various other resources will now pre-compile on the dashboard to improve loading times when getting into a match. This also reduces in-game hitching in some cases.\n\n- Added a visual indicator when browsing builds that shows which item types are most present in the build (Weapon, Vitality, Spirit).\n\n- Added a Recent Purchases log to the Shop that displays all items bought by players during a match, ordered by most ...",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/6148070194801611991"
-                  },
-                  {
-                      "id":  "st6212245217911837451",
-                      "date":  "2024-10-24",
-                      "title":  "10-24-2024 Update",
-                      "text":  "Today\u0027s update adds Hero Labs (a new experimental hero matchmaking mode that adds six new in-progress heroes), player commends, as well as updates to character shaders and environment lighting, among the usual assortment of improvements, fixes, and balance adjustments. \n\nFor the full patch notes, visit the Deadlock forums here: https://forums.playdeadlock.com/threads/10-24-2024-update.40951/\n\nExample of the new character shader changes:\n\n{STEAM_CLAN_IMAGE}/45164767/d937a6e939528a54b0c25ff5caf9e4dff86121c9.png",
-                      "url":  "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/6212245217911837451"
-                  }
-              ]
+  "updatedAt": "2026-11-03",
+  "source": "https://store.steampowered.com/news/app/1422450",
+  "posts": [
+    {
+      "id": "st0765564125186045",
+      "date": "2026-10-30",
+      "title": "Halloween 2026 + Gameplay Update",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/680765564125186045"
+    },
+    {
+      "id": "st9505296465396778",
+      "date": "2026-10-20",
+      "title": "Shh... This Won't Hurt a Bit.",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/669505296465396778"
+    },
+    {
+      "id": "st9505296465396531",
+      "date": "2026-10-16",
+      "title": "Paint the Town",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/669505296465396531"
+    },
+    {
+      "id": "st9505296465396213",
+      "date": "2026-10-15",
+      "title": "Minor Update - 10-14-2026",
+      "text": "- Radiant Regeneration: Spirit scaling reduced from 0.04 to 0.035  - Baba: Spirit Resistance scaling reduced from 0.12 to 0.1 - Baba: Now has -7% Base Bullet Resistance - Baba: Threadsap - Spirit reduction on enemies now ends when Baba dies - Baba: Threadsap - Cooldown increased from 26s to 28s - Baba: Granny Long Legs - Cooldown increased from 30s to 32s - Baba: Granny Long Legs - Repeat light melees while airborne now have diminishing forward momentum - Baba: Granny Long Legs - Light melee upward launch reduced (looking up no longer lifts her as high) - Baba: Granny Long Legs - Heavy melee ground pound no longer gains horizontal speed when landing on slopes - Baba: Baba's Brew - Barrier scaling reduced from 1.2 to 0.7 - Baba: Baba's Brew - Barrier reduced from 100 to 90 - Baba: Baba's Brew - Cooldown increased from 25s to 27s (moved to T2) - Street Brawl: Baba Threadsap duration lasts 35% less  - Deadman Danny: Health regen increased from 2.5 to 3.25 - Deadman Danny: Base health increased from 680 to 730 - Deadman Danny: Gun - Base bullet damage for uncharged shots from 12 to 15 and charged shots from 44 to 48 - Deadman Danny: Chimera Mk1 - Cooldown boon scaling increased from -0.25 to -0.45 - Deadman Danny: Chimera Mk1 - Heal on hit spirit scaling increased from 1 to 2 - Deadman Danny: Chimera Mk1 weapon scaling increased from 1.15 to 1.4 - Deadman Danny: Strix Salvo - Coold…",
+      "url": "https://store.steampowered.com/news/app/1422450/view/669505296465396213"
+    },
+    {
+      "id": "st3281660030880788",
+      "date": "2026-10-13",
+      "title": "Fairfax Industries Employee Spotlight",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/703281660030880788"
+    },
+    {
+      "id": "st3281660030879519",
+      "date": "2026-10-09",
+      "title": "Make Your Move.",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/703281660030879519"
+    },
+    {
+      "id": "st3281025618282871",
+      "date": "2026-10-06",
+      "title": "Mind the Birds!",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/703281025618282871"
+    },
+    {
+      "id": "st3281025618282632",
+      "date": "2026-10-05",
+      "title": "Minor Update - 10-05-2026",
+      "text": "- Fixed bugs that were causing troopers to walk too slowly in lane\n- Rat King: Scrap Grenade - Fixed some bugs with bouncing targeting\n- Rat King: Scrap Grenade - Damage increased from 65 to 70\n- Rat King: Scrap Grenade - T2 Damage increased from 65 to 70\n- Rat King: Rat Swarm - Base Cooldown reduced from 28s to 24s\n- Rat King: Rule, Ratannia! - Cooldown increased from 130 to 160\n- Rat King: Rule, Ratannia! - Damage Reduction reduced from 20% to 15%\n- Rat King: Rule, Ratannia! - Radius reduced from 24m to 20m\n- Rat King: Rule, Ratannia! - Charge Duration reduced from 12s to 10s\n- Rat King: Rule, Ratannia! - Bonus Move speed no longer scales with Spirit\n- Rat King: Rule, Ratannia! - Now falls faster while charging\n- Rat King: Rule, Ratannia! - T1 +1m/s Move Speed to +2m/s Move Speed\n- Rat King: Rule, Ratannia! - T1 No longer gives -20s cooldown (Total cooldown from 110s to 160s)\n- Rat King: Rule, Ratannia! - T2 No longer grants +8s Charge Duration (Total charge duration from 20s to 10s)\n- Rat King: Rule, Ratannia! - T2 Flag Duration reduced from +8s to +5s\n- Rat King: Rule, Ratannia! - T3 Damage Reduction reduced from 15% to 10% (Total Damage Reduction from 35% to 25%)\n- Sinclair: Base HP Regen reduced from 2 to 1\n- Sinclair: Gun - Falloff range reduced from 25-61 to 20-60\n- Sinclair: Gun - Reduced bullet base damage from 17.76 to 16.5\n- Sinclair: Vexing Bolt - Now does half dam…",
+      "url": "https://store.steampowered.com/news/app/1422450/view/703281025618282632"
+    },
+    {
+      "id": "st3281025618281704",
+      "date": "2026-10-02",
+      "title": "Listen up, Crumbums! Your King is here.",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/703281025618281704"
+    },
+    {
+      "id": "st4273194214819790",
+      "date": "2026-09-29",
+      "title": "City Never Sleeps",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/694273194214819790"
+    },
+    {
+      "id": "st680765564125186045",
+      "date": "2026-10-30",
+      "title": "Halloween 2026 + Gameplay Update",
+      "text": "As Halloween draws near, the residents of The Cursed Apple have put out some decorations to celebrate their favorite holiday. The Hideout gains a spooky new look, our heroes don masks, and NYC is now littered with pumpkins and curious Halloween Cauldrons that grant willing trick-or-treaters delicious candy.\n\nNew this year - Halloween Cauldrons: break a cauldron with a Heavy Melee to pick up a piece of Candy and stash it in your pocket. Consume the candy to grant yourself a boost of energy with the temporary Sugar Rush buff. The Halloween festivities are available in-game now through November 2nd, 2026.\n\nGameplay Update highlights:\n- Mid-Boss: health increased by 20%, bounty reduced from 3000 (+50/min) to 1500 (+25/min); the Rejuvenator now drops as 3 crystals placed evenly around the pit\n- Comeback gold from non-hero sources increased from 26% to 30%; Haunts bounty and growth increased by 10%\n- Move speed in tunnels reduced from +70% to +50%; Steam Vents now increase stamina regeneration by 150%\n- The latest 6 heroes are no longer categorized as \"new\": normal ranked unlock requirements apply and they can now be banned\n\nItems: High-Velocity Rounds bullet velocity 60% → 45%; Glass Cannon weapon damage 80% → 85%; Shadow Weave reworked (+50% Ambush weapon damage instead of fire rate/melee, builds up over 6s); Bullet/Spirit Lifesteal 13% → 15%; Metal Skin now increases gravity by 20% while active; and more.\n\nHeroes: Abrams base gun damage +5%; Nurse Harrow base gun damage −10%; Mirage Traveler reworked (channel 2s → 3s, T2 −65s Cooldown, T3 cannot be interrupted by damage); Solomon base bullet damage 30 → 25; Rat King base bullet damage −5%; Violet Still Life rework and more.\n\nПолный список изменений — по ссылке на источник.",
+      "url": "https://store.steampowered.com/news/app/1422450/view/680765564125186045"
+    },
+    {
+      "id": "st1846651706696737",
+      "date": "2026-10-20",
+      "title": "Shh... This Won't Hurt a Bit.",
+      "text": "It's hard to know if that chill in the air is from the approaching fall breeze, or from the withering glare of Nurse Harrow, who now joins us on the streets of Manhattan. To some, her practices may seem unorthodox, her patients at the Marble Hill Possession Ward cannot say that the results aren't effective. With Leech Therapy, she throws a jar full of leeches that attach to oncoming enemies, draining their health and energy, before crawling back to deliver their haul. Cracking open one of her vials, she releases her Wretched Vapors, possessing her allies with a powerful boost of effectiveness - though subjects should be warned of the side effects when the vapors wear off. To efficiently keep her teammates fighting their best, she loads her syringe full of Healing Needles to inject medicine directly into their veins. And when her patience runs out, she opens her bag to release all the Lurking Terrors captured inside, making her adversaries run for cover. - \"Trust me, I know best.\"\n\nWith Nurse Harrow joining us today, that marks the end of our City Never Sleeps releases. We want to ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706696737"
+    },
+    {
+      "id": "st1846651706683085",
+      "date": "2026-10-16",
+      "title": "Paint the Town",
+      "text": "Brush in hand, Violet approaches the ritual with the same precision she does her art, wielding Living Ink that both empowers her bullets, and draws mere inspiration into reality. When entering Flow State, her ink glides easily, weaving towards danger to deal damage, or away from it to make a quick getaway. By creating a Still Life Violet can truly capture her enemies' likeness to stunning results. And with Abstract Landscape she surrounds herself and those nearby with her biggest and most ambitious piece yet, leaving onlookers completely speechless. - \"I worked too hard to get here, I can't stop now.\"\n\nViolet is available in-game now! Which means that our final hero - Nurse Harrow - will be joining us Next Tuesday October 20th at 2pm PDT. We want to thank everyone for participating in voting once again, and we'll see you next week for the culmination of our City Never Sleeps update. Have a good weekend!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706683085"
+    },
+    {
+      "id": "st1846651706676198",
+      "date": "2026-10-15",
+      "title": "Minor Update - 10-14-2026",
+      "text": "- Radiant Regeneration: Spirit scaling reduced from 0.04 to 0.035\n\n- Baba: Spirit Resistance scaling reduced from 0.12 to 0.1\n- Baba: Now has -7% Base Bullet Resistance\n- Baba: Threadsap - Spirit reduction on enemies now ends when Baba dies\n- Baba: Threadsap - Cooldown increased from 26s to 28s\n- Baba: Granny Long Legs - Cooldown increased from 30s to 32s\n- Baba: Granny Long Legs - Repeat light melees while airborne now have diminishing forward momentum\n- Baba: Granny Long Legs - Light melee upward launch reduced (looking up no longer lifts her as high)\n- Baba: Granny Long Legs - Heavy melee ground pound no longer gains horizontal speed when landing on slopes\n- Baba: Baba's Brew - Barrier scaling reduced from 1.2 to 0.7\n- Baba: Baba's Brew - Barrier reduced from 100 to 90\n- Baba: Baba's Brew - Cooldown increased from 25s to 27s (moved to T2)\n- Street Brawl: Baba Threadsap duration lasts 35% less\n\n- Deadman Danny: Health regen increased from 2.5 to 3.25\n- Deadman Danny: Base health increased from 680 to 730\n- Deadman Danny: Gun - Base bullet damage for uncharged shots from 12 to 15 ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846651706676198"
+    },
+    {
+      "id": "st1846018067945303",
+      "date": "2026-10-13",
+      "title": "Fairfax Industries Employee Spotlight",
+      "text": "Today, Fairfax Industries is proud to introduce their most valuable salesman: Deadman Danny. Wielding a rocket launcher and flying high above the streets of New York (courtesy of the Chimera Mk1 - the latest and greatest in self-adhered aviation technology), Danny rains his Strix Salvo missiles down upon foes, marking them for future attacks. Jettison Fuel is a handy trick that both expels heat from the Chimera System, while also dousing nearby enemies in the warm embrace of a fiery inferno. Yet his most impressive tactic has always been his ability to Close the Deal, wowing prospective customers with an explosive hands-on demonstration of all that Fairfax has to offer. - \"At Fairfax Industries we say \"All's Fair\", but that's not true! Because with the Fairfax Chimera Mark 1, you have the advantage.\"\n\nTake flight with Deadman Danny, available in-game now! With only two hero releases remaining, keep your votes coming to help determine who will be joining us on Friday October 16th at 2pm PDT.",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067945303"
+    },
+    {
+      "id": "st1846018067934643",
+      "date": "2026-10-09",
+      "title": "Make Your Move.",
+      "text": "Solomon remains calm and collected when facing a new challenger, so when the Patrons come calling, he approaches the city as if it's one giant chessboard. With Setup Bishop he advances, planting his loyal damage dealers ahead of him and sliding them across the streets with ease. Kingside Knight comes into play when it's time for defense, granting protection to allies and making tactical retreats when needed. Rook Battery charges forward with great force, stalling enemies in their tracks. And with his final move, Develop Queen, he locks down his enemies in an ultimate checkmate. - \"There's a lot you can learn from losing to a master.\"\n\nSolomon is available in-game now (just in time for National Chess Day)! We're halfway through our latest set of heroes, keep your votes coming to help determine who will be joining us next Tuesday at 2pm PDT. Have a great weekend!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1846018067934643"
+    },
+    {
+      "id": "st1845383656397580",
+      "date": "2026-10-06",
+      "title": "Mind the Birds!",
+      "text": "It was a close contest, but today we find New York's notorious pigeon lady leaving her favorite perch in Central Park and joining the fight on the city streets. \n\nTourists in the park might not think much of ol' Baba sitting on her bench - sipping tea and talking to her birds - but the locals have always suspected that something more brews below the surface. In the heat of battle, Baba throws out her Threadsap, a chaotic spool of yarn that steals the very spirit of her enemies, granting her greater power. While her legs might not be what they used to, her trusty bench comes to life with a creak of metal, allowing her to run, jump, and kick with impressive vigor. Parkgoers know it's best to stay on Baba's good side, as at tea time you might find yourself splashed with one of Baba's Brews (some of them much sweeter than others), and when tea time is over - The Birds come out to play... \"They think they know magic? Oh I'll show 'em some magic.\"\n\nBaba and her pigeons are available now! We'll see you back here on Friday at 2pm PDT to introduce our next hero.\n\nAdditionally, the end date ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656397580"
+    },
+    {
+      "id": "st1845383656394833",
+      "date": "2026-10-05",
+      "title": "Minor Update - 10-05-2026",
+      "text": "- Fixed bugs that were causing troopers to walk too slowly in lane- Rat King: Scrap Grenade - Fixed some bugs with bouncing targeting- Rat King: Scrap Grenade - Damage increased from 65 to 70- Rat King: Scrap Grenade - T2 Damage increased from 65 to 70- Rat King: Rat Swarm - Base Cooldown reduced from 28s to 24s- Rat King: Rule, Ratannia! - Cooldown increased from 130 to 160- Rat King: Rule, Ratannia! - Damage Reduction reduced from 20% to 15%- Rat King: Rule, Ratannia! - Radius reduced from 24m to 20m- Rat King: Rule, Ratannia! - Charge Duration reduced from 12s to 10s- Rat King: Rule, Ratannia! - Bonus Move speed no longer scales with Spirit- Rat King: Rule, Ratannia! - Now falls faster while charging- Rat King: Rule, Ratannia! - T1 +1m/s Move Speed to +2m/s Move Speed- Rat King: Rule, Ratannia! - T1 No longer gives -20s cooldown (Total cooldown from 110s to 160s)- Rat King: Rule, Ratannia! - T2 No longer grants +8s Charge Duration (Total charge duration from 20s to 10s)- Rat King: Rule, Ratannia! - T2 Flag Duration reduced from +8s to +5s- Rat King: Rule, Ratannia! - T3 Damage ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656394833"
+    },
+    {
+      "id": "st1845383656387709",
+      "date": "2026-10-02",
+      "title": "Listen up, Crumbums! Your King is here.",
+      "text": "Scrap Grenade bouncing down Broadway, nor for his Swarm of Rats biting at their heels. By donning his Royal Pestments, the Rat King shakes off incoming damage, allowing him to bravely lead the charge into battle. His loyal subjects will feel awed and inspired when they see the great Banner of Ratannia waving in the middle of combat, and those who oppose him will rue the day they ever thought they could overthrow the king. - \"Oh the rats are taking over, baby!\"\n\nThe Rat King is available to play now! Have a great weekend and keep those votes coming, as our next hero will be joining us on Tuesday at 2pm PDT. We'll see you then!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656387709"
+    },
+    {
+      "id": "st1844751498235383",
+      "date": "2026-09-29",
+      "title": "City Never Sleeps",
+      "text": "The Cursed Apple is ever changing, and these streets are nothing like you remember. A massive visual update to the map and neutrals, six new heroes, HUD updates, numerous quality-of-life additions, accessibility options, and more.\n\nCheck out everything that's new at: https://www.playdeadlock.com/cityneversleeps\n\nWe also wanted to take this opportunity to talk about where we are with the development of the game and what to look forward to in the future. Our team has been incredibly happy and surprised with how passionate and supportive the community has been the past couple of years; every day someone shares something cool they've seen from the community with the rest of the team, and we are thankful for the constant support and useful feedback, despite the game being unfinished. We think building a multiplayer game is very hard and risky, and the best way to minimize that risk to make sure that we are able to have it in players' hands from an early state to help us shape it and tell us what is fun and what isn't. So, we wanted to give you all more insight into what we've been ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844751498235383"
+    },
+    {
+      "id": "st1844115010490072",
+      "date": "2026-09-16",
+      "title": "Minor Update - 09-16-2026",
+      "text": "\\[ General ]- Unstable Rift comeback resist max values now scale over the course of the game. Previously the max values were 35%. Now it is 10% + 1% per minute (around ~20% for the first one), with an upper limit of 40% at 30 minutes.- Removed a fixed amount of extra bonus souls you would get for being behind even a very slightly amount in net worth for both hero kill bounties as well as Unstable Rift bounties (this had a larger impact on the early to mid game)- Slightly reduced comeback bounties in general (this is in addition to the above change)- A portion of the comeback souls earned by players above enemy teams average net worth is instead distributed via the tick gold system that is given to the lowest 2 players (70% of the extra comeback value goes to them)- Guardian bounty increased by 10%- Walker bounty increased by 5%- Share for objectives bounty to nearby heroes reduced from 30% to 25% (the remaining gets split between all 6 players)- Respawn Time at 20 minutes increased from 35s to 38s (does not affect the max values later on, just a little higher earlier)- Using parry ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1844115010490072"
+    },
+    {
+      "id": "st1841579228672283",
+      "date": "2026-08-22",
+      "title": "Minor Update - 08-22-2026",
+      "text": "- Radiant Regeneration: Heal on cast reduced from 70 to 65- Restorative Locket: Spirit Resistance reduced from 10% to 8%- Celeste: Dazzling Trick cooldown increased from 32s to 34s- Celeste: Dazzling Trick T2 barrier rescaled from \"+80 and +0.7 scaling\" to \"+70 and +0.76\"- Celeste: Dazzling Trick T3 cooldown increased from -18s to -20s- Celeste: Dazzling Trick T3 reduced from +1.5s Silence to +1.25s- Celeste: Radiant Daggers Spirit Amp per stack reduced from +8% to +7%- Celeste: Radiant Daggers T3 Spirit Amp per stack increased from +3% to +4%- Celeste: Shining Wonder bounce range reduced from 17.5m to 16.5m- Celeste: Shining Wonder damage reduced from 165 to 140- Celeste: Shining Wonder spirit scaling reduced from 0.9 to 0.6- Celeste: Shining Wonder T2 now also increases spirit scaling by +0.45",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1841579228672283"
+    },
+    {
+      "id": "st1840944183775204",
+      "date": "2026-08-12",
+      "title": "Minor Update - 08-12-2026",
+      "text": "- Apollo: Riposte melee resist reduction increased from -22% to -25%\n- Apollo: Riposte T2 changed from \"-30% Melee Resist\" to \"-25% Melee Resist and +0.4s Stun Duration\"\n- Apollo: Riposte T3 increased from 60% Lifesteal for 7s to 75% Lifesteal for 13s\n- Apollo: Fixed Itani Lo Sahn being canceled with movement abilities\n- Billy: Base health regen reduced from 2.5 to 2.0\n- Billy: Rising Ram T3 changed from \"On Impact: Deal 7% max health as spirit damage\" to \"On hero hit: +10% Max HP for 16s\"\n- Billy: Chain Gang spirit scaling reduced from 1 to 0.7\n- Doorman: Doorway range reduced from 70m to 65m\n- Doorman: Walker will no longer consider Luggage Cart dragged enemies as valid targets to trigger the stomp on until soon after they are dropped off\n- Doorman: Similar to the Walker change above, the turrets in the healing area in base now also wait on considering valid targets\n- Drifter: Rend spirit scaling reduced from 1.7 to 1.4\n- Drifter: Stalker's Mark cooldown increased from 24s to 26s\n- Drifter: Stalker's Mark T2 reduced from -12s Cooldown to -10s\n- Holliday: Powder Keg now does half ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1840944183775204"
+    },
+    {
+      "id": "st1839676055886206",
+      "date": "2026-07-30",
+      "title": "Matchmaking Update",
+      "text": "This update includes a revamp to how the matchmaking system works, as well as the introduction of a new matchmaking mode. You can now choose to play in Standard Mode (unranked), or the new Ranked Mode introduced in this update.\n\nSTANDARD MODE\nStandard mode provides a lower-stakes way to play Deadlock with friends, without worrying about adjustments your Rank. There are no restrictions on party size or skill spread. You can also play in this mode to practice heroes you are less familiar with, as the matchmaker will adjust the game it puts you in to account for your experience with that hero. \n\nRANKED MODE\nRanked mode gives players a way to queue up for more competitive games against similarly-skilled players with higher stakes. Each season you'll be able to climb the Ranks and see how far you can go.\n\nUPDATED RANKS & BADGES: \nEach Rank has 6 Subranks within (I - VI).\n\nObscurus (uncalibrated)\n-\nInitiate\nSeeker\nAcolyte\nSentinel\nMystic\nRitualist\nEmissary\nOracle\n-\nPhantom\nAscendant\nEternus\n\nELIGIBILITY AND SEASONS:\nTo be eligible to queue for Ranked Mode, you must have at least 60 wins ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839676055886206"
+    },
+    {
+      "id": "st1839041357039193",
+      "date": "2026-07-28",
+      "title": "Minor Update - 07-28-2026",
+      "text": "\\[ General ]- Stamina bucket 3 heroes (slowest) have their ground dash time increased from 0.7s to 0.72s and air dash time from 0.49s to 0.51s- The Orb Spawners in base that give 10 souls on hit now split to nearby players on expire- Fixed the party member / team mate audio volume slider for voice communications\\[ Items ]- Crushing Fists: Max stacks stun duration increased from 0.5s to 0.75s- Crushing Fists: Bullet Resist reduction increased from -4% to -5% per stack- Cursed Relic: No longer has -14% Damage Output innate- Cursed Relic: Now applies a -25% Damage Output debuff for the 3.25s duration- Diviner's Kevlar: Spirit power increased from +35 to +40- Echo Shard: Now has a 0.5s post-cast time- Echo Shard: No longer grants +5% Fire Rate- Echo Shard: Cooldown increased from 35s to 30s + the cooldown of the imbued ability- Ethereal Shift: Cooldown increased from 35s to 37s- Frenzy: Now has +10% Bullet Lifesteal as an innate- Fury Trance: Active now grants +1m Move Speed- Fury Trance: Active removes move speed penalty when shooting (like Fleetfoot)- Lifestrike: When hitting a ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1839041357039193"
+    },
+    {
+      "id": "st1836506165584438",
+      "date": "2026-07-09",
+      "title": "Minor Update - 07-09-2026",
+      "text": "- Urn Runner sprint bonus reduced from +2m to 0 (trailing bonus reduced from +7m to +5m)- Urn Runner move speed bonus reduced from +3.5m to +2m- Urn Runner Stamina Recovery increased from +15% to +25%- Urn talking frequency increased from every 8s to every 6s- Urn talking sound distance increased (easier to hear a nearby Urn Runner)- Unstable Rift warning time reduced from 25s to 20s- Rift Troopers now have Spirit Resist (30/35/40/45%)- Rift Troopers now have Melee Resistance (25%)- Rift Troopers spawn interval increased from every 0.3s to 0.5s (spawns slightly more staggered)- Unstable Rift comeback resist aura radius increased from 20m to 35m- Rift Troopers max comeback count increased from 12 to 14- Objectives bounty split for nearby heroes reduced from 40% to 30% (this means slightly more portion of the bounty is split team wide rather than towards an individual player)- Scourge: Max Health Per Second reduced from 2.6% to 2.5%- Billy: Rising Ram T3 spirit scaling reduced from 0.035 to 0.03- Doorman: Bullet damage rescaled from 29.26 + 1.1/boon to 26 + 1.19- Doorman: Crit scaling ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165584438"
+    },
+    {
+      "id": "st1836506165566600",
+      "date": "2026-07-01",
+      "title": "Minor Update - 07-01-2026",
+      "text": "- Shiv: Alt Fire ammo cost reduced from 5 to 4- Shiv: Weapon now has fixed pellet spread- Shiv: Slice and Dice is now back to doing spirit damage and reducing Spirit Resistance from enemies- Shiv: Slice and Dice damage increased from 60 to 75- Shiv: Killing Blow T3 reduced from +10% Enemy Health Threshold to +8%",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165566600"
+    },
+    {
+      "id": "st1836506165563227",
+      "date": "2026-06-30",
+      "title": "Minor Update - 06-30-2026",
+      "text": "\\[ Urn / King of the Hill ]- King of the Hill objective has been rethemed and renamed to \"Unstable Rift\"- Unstable Rift no longer requires an Urn delivery to trigger the start of the event. It now has a variable start time of +/- 1 minute. There is a global announcement 25s before it spawns. 60s before that there is also an in-world only visual effect to let you know which lane it'll randomly spawn in.- Unstable Rift spawn interval increased from every 6 minutes to every 7 minutes- Unstable Rift comeback bonuses (resists in the area, extra comeback bounty, and trailing/leading team claiming timer) now all scale linearly based on the amount of NW they are trailing (scales from no bonus at 0% NW behind to full bonus at 15% NW behind)- The team that secures the Unstable Rift now also has a wave of 5 Rift Troopers sent down from the rift location. When trailing, spawns up to 12 troopers instead (using the same linear ramp from 0% NW to -15% NW)- Rift Troopers drop no souls when killed- Rift Troopers spawn with 100% extra health and damage (they also look larger and have custom VFX). ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1836506165563227"
+    },
+    {
+      "id": "st1835236783562074",
+      "date": "2026-06-12",
+      "title": "Minor Update - 06-11-2026",
+      "text": "- Urn give up time reduced from 75s to 60s- Urn bounty reduced by 10% (unreduced for trailing team)- Breakables health permanent bonus reduced from 15/25/35 to 15/20/30 for level 1/2/3- Kill comeback bounty values increased by 8%- Street Brawl: All ability and item range/radius values are reduced by 10%- Opening Rounds: Conditional Weapon Damage bonus reduced from 30% to 25%- Opening Rounds: Spirit Power increased from +4 to +7- Arcane Surge: Fixed various cases with the bonuses not working- Apollo: Disengaging Sigil velocity increased by 50%- Apollo: Disengaging Sigil velocity's vertical:horizontal ratio changed from 1.5:1 to 1:1- Apollo: Disengaging Sigil now allows input to alter the direction apollo launches himself (A/D biases to the left/right and W/S affect how much backwards motion is applied- Apollo: Disengaging Sigil T1 changed from \"+30 Damage\" to \"Gain +25% Fire Rate and Bullet Speed for 8s\"- Apollo: Disengaging Sigil T2 changed from \"Gain +30% Fire Rate and +50% Bullet Speed for 10s\" to \"On Player Hit: +1 Stamina restored and resets Air Jump/Dash limit\"- Apollo: ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1835236783562074"
+    },
+    {
+      "id": "st1834602721188293",
+      "date": "2026-06-04",
+      "title": "Minor Update - 06-04-2026",
+      "text": "- Urn mechanics have been reworked.Primary details:- Delivering the urn now starts a king of the hill style capture point, rather than using melee to flip the urn back and forth.- Both teams can progress at the same time, but the urn will only be fully claimed once there is only one team in the circle.- The Urn runner now gets their normal 35% bonus bounty and stats immediately on initial deposit (rather than on deposit conclusion only if your team won it)Other Details:- Urn overall bounty reduced by 20% (unreduced for trailing team)- Progress radius is 20m- Progress rate is fixed regardless the number of allies in the area- Progress duration for favored/neutral/unfavored is 6/12/18s- If Urn has been in progress for over 75s, it will give up and throw all the souls as orbs into the sky (they will float for a long time)- Increased time allowed to run the urn before taking damage by 10s- Trailing team sprint speed bonus from +4m to +5m- Urn comeback resistance now also grants +35% Debuff Resistance ontop of the 35% Bullet and Spirit Resistance- Urn comeback resistance aura reduced ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1834602721188293"
+    },
+    {
+      "id": "st1833968530895860",
+      "date": "2026-05-31",
+      "title": "Minor Update - 05-31-2026",
+      "text": "- Apollo: Disengaging Sigil T2 increased from +20% Fire Rate to +30%- Apollo: Flawless Advance T1 heal from 30+0.75 to 35+1.0- Apollo: Flawless Advance T2 increased from -10s Cooldown to -12s- Apollo: Itani Lo Sahn damage increased from 190 to 200- Apollo: Itani Lo Sahn spirit scaling increased from 2.3 to 2.6- Graves: Jar of Dead damage reduced from 20 + 0.31/spirit to 17 + 0.27/spirit- Graves: Ghouls damage reduced by 15%- Graves: Ghouls bounty increased from 25+1/min to 35+2/min- McGinnis: Heavy Barrage range reduced from 50m to 36m- McGinnis: Heavy Barrage T1 Dash Slow reduced from 30% to 18% (regular slow still 30%)- McGinnis: Heavy Barrage T3 Damage Per Rocket reduced from +18 to +15- Pocket: Flying Cloak T3 reduced from -14s Cooldown to -13s- Pocket: Affliction T3 reduced from +18 DPS to +14- Silver: Slam Fire Current Health as Damage reduced from 3% to 2.5%- Silver: Slam Fire T3 reduced from 8% Current Health as Damage to 7%- Silver: Entangling Bola cooldown increased from 20s to 23s- Silver: Entangling Bola T2 increased from -5s Cooldown to -8s- Silver: Lycan Curse Fire ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530895860"
+    },
+    {
+      "id": "st1833968530888928",
+      "date": "2026-05-28",
+      "title": "Minor Update - 05-28-2026",
+      "text": "- Urn spawn time and interval changed from 10/15/20/25/etc to 12/18/24/30/etc- Urn timer now gets frozen with Frozen Shelter- Urn no longer provides the +35% Bullet and Spirit Resist aura for the behind team when it is being carried or dropped. The aura is now only active when it is being deposited. - Urn runner when behind now gains +35% Bullet and Spirit Resist for themselves only- Fixed the trailing team Urn runner's extra sprint bonus not working properly- Urn will do damage to the runner after a team has held it for 30s (was 50s before), however, this timer will freeze while there are enemies within a 40m radius of the urn runner.- Urn will now always add at least 2s to the team 30s held timer limit anytime it is picked up, even if it is instantly dropped- You are no longer prevented from picking up the urn for 12s after it is dropped after the previous 50s team held timer- The conditions for when the Urn decides to run back home have been reworked. The Urn will now stay in place on the ground as long as there are enemies in a 40m radius (enemies of the last person to have ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530888928"
+    },
+    {
+      "id": "st1833968530888746",
+      "date": "2026-05-28",
+      "title": "Minor Update - 05-25-2026",
+      "text": "- Urn drop off point is moved from the above bridge in the mid lane to under the bridge in the side lane\n- Urn timer extension when contested increased from 1.25s to 3s\n- Urn deposit timers for favored/neutral/unfavored increased from 3/5/10s to 5/10/15s\n- Urn comeback bullet and spirit resist auras reduced from 50% to 35%\n- Urn pickup spot is now where the old comeback drop off spots were for when your team is behind\n- Urn runner no longer has sprint disabled\n- Urn runner now has max sprint acceleration\n- Urn runner now gains +2m Sprint, +1 Stamina, +10% Dash Distance and +15% Stamina Regen\n- Urn runner for the team that is behind now gains an extra +4m Sprint\n- Urn collision radius increased by 20%\n- Various smaller urn holding timers and variables adjusted to account for the new location\n\nPlease continue to give feedback on the Urn as we work through iterations on it.",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833968530888746"
+    },
+    {
+      "id": "st1833334318572828",
+      "date": "2026-05-22",
+      "title": "Gameplay Update - 05-22-2026",
+      "text": "[ General ]- Base HP reduced by 10 for all heroes- HP per boon reduced by 3- Guardians scaling resistance from +75%->-50% over 12 minutes to +50%->-50% (takes more damage early)- Medium neutrals initial spawn time reduced from 6 minutes to 5 minutes- Breakables spawn time increased from 2 minutes to 3 minutes- Shrines are now invulnerable until one pair of Base Guardians are destroyed- Backdoor removal linger duration reduced from 20s to 14s- Knockup durations are now affected by debuff reduction- Removed two jump pads from around the middle of the map that point to outwards (to the left and right respectively)- Sliding no longer resets sprint speed- Stamina Regeneration is reduced by 25% for 5s after using a Wall Jump. This does not trigger when out of combat or when mantling soon after.- Bullet Velocity now stacks additively rather than diminishingly- Medic trooper heal duration increased from 2s to 4s (same overall heal amount)- When receiving multiple of the Medic trooper orb the duration will now be added ontop rather than stacking directly (so picking up 4 in a row will give ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1833334318572828"
+    },
+    {
+      "id": "st1831432155569981",
+      "date": "2026-04-30",
+      "title": "Gameplay Update - 04-30-2026",
+      "text": "[ General ]- Base health per boon reduced by 7- Vitality Investment bonus increased from 8/10/13/17/34/39/44/48/52/56% to 9/12/15/20/38/42/46/50/56/62%- Weapon Investments bonus rescaled from 7/9/13/20/49/60/80/95/115/135% to 9/12/15/18/46/55/70/85/100/115%- Reduced bullet damage growth by 10% for the following heroes: Bebop, Pocket, Vyper- Reduced bullet damage growth by 5% for the following heroes: Victor- Increased bullet damage growth by 10% for the following heroes: Mo & Krill, Apollo- Guardians, Base Guardians and Shrines now have 10% Bullet Resistance- Walkers Bullet Resistance increased from 15% to 25%- Medic Trooper missing health percent heal reduced from 14% to 12%- Medic Trooper fixed regen growth per minute reduced from 3 to 2- Getting knocked off bounce pads now sends you downwards quickly rather than continuing the trajectory towards the bounce pad destination- Souls required for boons after 13.2k/15k/17k/+2k per boon to 13.2k/14.5k/+1.5k per boon (ends at 40k instead of 49k)- Fixed Alt Fire scaling for Yamato and Viscous not working recently\\[ Items ]- Added a new T4 ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1831432155569981"
+    },
+    {
+      "id": "st1826362059925616",
+      "date": "2026-03-06",
+      "title": "Gameplay Update - 03-06-2026",
+      "text": "\\[ General ]- Can now jump during slide- Dash jump grants a very brief period with increased air control (30% for 0.25s)- Shrine is now easier to kill for the first one and harder for the second. HP from 8100 to 5000/10000 (HP updates after the first one dies, like Walkers)- Shrines attack no longer hits heroes under the shrine- Super troopers bonus DPS increased from +40% to +60% (the upgraded troopers when Shrine dies)- Middle Lane troopers now gets upgraded when either of the shrines die, rather than only when both die- Killing a pair of base guardians now spawns a zipline boosted trooper wave to reinforce your push- Medic Troopers DPS grows by 3% per minute- Troopers now gain 7 HP regen when out of combat- Trooper wave interval increased from every 25s to every 20s starting at 35 minutes- Guardians bounty increased from 1000 to 1500- Walkers bounty increased from 3500 to 4000- Walkers Health rescaled from 6800/9350/11900 to 6000/9000/12000- Walkers armor decay rescaled from \"+75% -> -50%\" to \"+65% -> -65%\", from over 20min to over 18min- Base Guardians bounty from 750 to 1000- ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1826362059925616"
+    },
+    {
+      "id": "st1824459501608168",
+      "date": "2026-02-12",
+      "title": "Apollo - A Cut Above",
+      "text": "Apollo\n{STEAM_CLAN_IMAGE}/45164767/0aab19877fe18e934963918a7cb4f80364adc22d.png\n\nAfter weeks of waiting, Apollo finally graces us with his presence. With Flawless Advance the fencer begins his approach, timing his strikes perfectly to inflict more damage. Counter-attacks aren't a concern for Apollo, as a flourish of his blade deflects the damage and triggers a quick Riposte, and Disengaging Sigil allows him to jump out of the fray with ease. For his final blow, Apollo dons his fencer's mask and channels Ixia's might with Itani Lo Sahn, leaving enemies defeated in his wake. - \"Sa la rex vogali!\"\n\nWith Apollo's release, that concludes the rollout of our Old Gods, New Blood update. Thank you to everyone for the warm welcome of our new Patrons, getting your hands dirty in Street Brawl, and voting for your favorite heroes!\n\nVoting Stats:\n\n 60,776,963 total votes were cast across the event\n Exactly 600 people had the foresight to only vote for the eventual winner each round\n The largest winning margin was Venator over Celeste at 11%\n The highest number of votes cast by an individual ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1824459501608168"
+    },
+    {
+      "id": "st1823825466506693",
+      "date": "2026-02-09",
+      "title": "Introducing The Dazzling Celeste",
+      "text": "Come one, come all! Today, we're introducing...\n\nCeleste\n{STEAM_CLAN_IMAGE}/45164767/a8b1361481f9292802bb6592cf79733971efa76f.png\n\nIt's not every day that Coney Island's biggest star, The Dazzling Celeste, performs on the streets of Manhattan. Her show begins with Light Eater, where a deep breath lit by her blazing baton coats enemies in front of her, and grants increased damage against them. Following that up, she envelops herself in the prismatic shield of her Dazzling Trick, which explodes and silences nearby enemies who break it. Try not to get distracted by her gliding gracefully through the air, or by the dance of her Radiant Daggers, as you'll regret being underneath them when they rain down from above. As for her memorable final act, the Shining Wonder will make her allies go OOH and her foes go AGGHHH! - \"You are about to see something rare and wonderful!\"\n\nCeleste is available to play in-game now! Join us on Thursday Feb 12th at 2pm for the release of Apollo and the conclusion of our Old Gods, New Blood update. We'll see you then!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466506693"
+    },
+    {
+      "id": "st1823825466497894",
+      "date": "2026-02-05",
+      "title": "Some Are Merciful, The Venator Is Not",
+      "text": "Evil stirs in New York, and the Venator is here to answer.\n\nVenator\n{STEAM_CLAN_IMAGE}/45164767/a8fcf6c0e81b0fc764cb294caeba6cfd583e69a3.png\n\nVenator doesn't walk the righteous path, he blazes the trail so that others may do so safely. His biggest challenge is knowing which weapon to use first. Firing a Consecrating Grenade into the fray softens up his enemies and keeps them from restoring health, and his Hex-Lined Snap Trap scatters across the ground to lock them in place. A Gutshot from his shotgun will knock back enemies who get too close, and when the time is right, Ira Domini will rid the world of evil once and for all. - \"Today, nine commandments will have to do.\"\n\nVenator joins the ritual now. The countdown for our final two heroes is upon us, and we'll see you back here on Monday February 9th at 2pm PST for our next release!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823825466497894"
+    },
+    {
+      "id": "st1823191198612358",
+      "date": "2026-02-02",
+      "title": "The Curse Beckons for Silver",
+      "text": "The votes are in and today's addition to the Cursed Apple is...\n\nSilver\n{STEAM_CLAN_IMAGE}/45164767/0841efa2500ec2bf46ca991f4df8150748d8defa.png\n\nSilver makes her living tracking down lowlifes, but today New York’s misanthrope lycanthrope plans on summoning a god. Fortunately, her career as a bounty hunter has prepared her well for all that the ritual requires. She makes quick work of adversaries by catching them with her Entangling Bola, Boot Kicking them in the face, and finishing them off with a Slam Fire from her rifle. But inevitably, the Lycan Curse comes calling whether she likes it or not, and her foes will regret being too close when it does. - \"This should be easy. Won't be, but I'm really good at lying to myself.\"\n\nSilver is available to play now! The next hero from the Old Gods, New Blood update will be released on Thursday February 5th at 2pm PST. See you then!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823191198612358"
+    },
+    {
+      "id": "st1823191198603629",
+      "date": "2026-01-29",
+      "title": "Graves Prefers The Dead",
+      "text": "Today's bone-chilling addition to the Cursed Apple is none other than...\n\nGraves\n{STEAM_CLAN_IMAGE}/45164767/c167b4a0c1c8e9df56e26fa7989e1b8d8c2e58e2.png\n\nThe dead have been making a whole lot of demands lately, and only Graves has the courage to oblige. That severed lich hand she found in the cemetery has proven itself a valuable ally, allowing her to latch onto her enemies and steal their power for herself. Her curiosities about the passage of life are further put to use with Jar of Dead, collecting the remains of the fallen, shaking them up, and throwing them back at her enemies to grant those remorseful spirits a final shot at revenge. With Grasping Hands she strikes a deep crack in the earth, allowing those down below to grab onto enemies' ankles and stop them from escaping her reach. And when all else fails, a Borrowed Decree will summon the dead to fight alongside her. - Death is coming.\n\nGraves is available in-game now! Keep your votes coming over the weekend, as the third hero from our Old Gods, New Blood update will be released on Monday February 2nd at 2pm PST.",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1823191198603629"
+    },
+    {
+      "id": "st1822556746167992",
+      "date": "2026-01-26",
+      "title": "Rem Enters The City That Never Sleeps",
+      "text": "The people have spoken, and the first new addition from the Old Gods, New Blood update is...\n\nRem\n\nAn accidental stowaway from the world of dreams, Rem has found himself stranded in the city that never sleeps. Pillow fights are Rem's preferred form of conflict, tossing his favorite pillow at enemies to knock them back when they're getting too close. His friends, however, he likes to keep nearby - leaping to their aid when things get dicey and taking a quick nap on their shoulder. His Lil Helpers are curious creatures, taking interest in everything the streets of New York have to offer, and cheering on his allies as they go. Ultimately when Naptime hits, no one will be able to keep their eyes open. - The best part of being asleep, is being asleep.\n\nKeep your votes coming, as the next hero will be released on Thursday at 2pm PST. See you then!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1822556746167992"
+    },
+    {
+      "id": "st1822556746160429",
+      "date": "2026-01-22",
+      "title": "Old Gods, New Blood",
+      "text": "{STEAM_CLAN_IMAGE}/45164767/0bc50241318e52395ab70077faf8e1f0e3cf7c1d.png\n\nThe ritual takes form... Overhauled Patrons and bases, six new heroes, a fast-paced game mode 'Street Brawl', HUD updates, many quality-of-life additions, revamped postgame with an MVP screen and more.\n\nView the Old Gods, New Blood update page.",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1822556746160429"
+    },
+    {
+      "id": "st1816849002015766",
+      "date": "2025-11-21",
+      "title": "11-21-2025 Update",
+      "text": "\\[ General ]- Trooper bounty mechanics have been reworked. The first half of the souls still fly out as deniable orb, however rather than the other half being instantly given to nearby players it will fall to the ground as an orb that you need to get near to pick up. It has a 18m capture radius where it'll travel to you once you get within. Only one player needs to claim it, share rules remain the same as before.- They last for 18s on the ground. Duration increases by 2s per minute up to 40s after 10 minutes.- Enemy orbs are visible as faint colorless soul orbs to your team, but cannot be claimed.- Amount of souls in the flying orb that can be secured/denied reduced from 50% to 40%- Very small tweaks to the secure/deny lag calculation to improve it- Increased trooper range to be considered in range for souls to drop from 35m to 45m- Medic troopers no longer have a passive healing pulse ability- Medic troopers now drop a medic pack when you kill them. Has same pickup range/duration mechanics as the soul orbs on the ground. Heals everyone in a 30m radius for 10% of their missing ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1816849002015766"
+    },
+    {
+      "id": "st1809235871630816",
+      "date": "2025-08-29",
+      "title": "You Can't Kill Victor",
+      "text": "Hero Spotlight: Victor\n{STEAM_CLAN_IMAGE}/45164767/5f17579aa198931ee073ad9540e2b044b80ea333.png\nA man who walks the line between life and death. Victor has learned to harness pain into power, shocking himself with Jumpstart to get his adrenaline rushing and his faulty heart pumping. He welcomes incoming damage with open (albeit mismatched) arms, channeling it into his Pain Battery and granting enemies a taste of the pain he endures. Get too close and risk getting caught in his Aura of Suffering, but hey, at least you'll be suffering together! And just when you think you've taken him down... Think again. - 'They don't have what it takes to kill me.'\n\nWith Victor joining us today in the Cursed Apple, that concludes the rollout of our Six Hero Update. Thank you to everyone for participating in voting, we have loved seeing all the discourse and heart-felt campaigns for your favorite heroes over the last two weeks.\n\nQuick Voting Stats:\n\n Nearly 6 million votes were cast in total by the community\n The highest number of votes cast by an individual player was 203\n Billy won with the largest ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1809235871630816"
+    },
+    {
+      "id": "st1809235871564856",
+      "date": "2025-08-27",
+      "title": "Drifter Emerges from the Shadows",
+      "text": "Hero Spotlight: Drifter\n{STEAM_CLAN_IMAGE}/45164767/effac101dabe092cef4b6eacc2fe486de845816f.png\nSomething ancient has arrived in New York... a nameless horror known only as the Drifter. Relentless as time, as certain as death, once Drifter sets his eyes on a victim there's nothing they can do to stop him. They can try to run, but his Bloodscent drives him forward, leading him to isolated prey. Even if they manage to escape it doesn't matter, as Stalker's Mark allows Drifter to appear right behind his enemies before lunging in for the kill with a vicious Rend. Soon Eternal Night comes, and a faint whistling in the breeze will be joined by a chorus of screams. - 'Everyone's got weaknesses, but mercy ain't one of mine.'\n\nYou'll be able to find the Drifter lurking right behind you in games starting today. We'll be back here on Friday at 2pm PDT for the conclusion of our hero update with the release of Victor. See you then!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1809235871564856"
+    },
+    {
+      "id": "st1808601382586972",
+      "date": "2025-08-25",
+      "title": "Paige Writes Her Own Story",
+      "text": "It's Monday, and today we're excited to announce the next hero joining us in the Cursed Apple is...\n\nHero Spotlight: Paige\n{STEAM_CLAN_IMAGE}/45164767/32461f95d508f369b02dd703d0a9c254c037bb34.png\nCitizens of Manhattan will learn to appreciate the power of the written word when Paige joins the fight. With the mere toss of a book she can Conjure Dragons that sear enemies who get too close, or bind them to the ground with Captivating Read. Waning allies will find themselves emboldened by Defend and Fight, granting them the courage to fight another day. Fantasy becomes reality with Rallying Charge, summoning an entire cavalry to gallop across the city. - 'We can't wait to see how this story plays out.'\n\nYour votes will decide if Drifter or Victor will be joining us on Wednesday at 2pm PDT, we'll see you then!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1808601382586972"
+    },
+    {
+      "id": "st1808601382489176",
+      "date": "2025-08-22",
+      "title": "The Doorman, at your Service",
+      "text": "Hero Spotlight: The Doorman\n{STEAM_CLAN_IMAGE}/45164767/c92f11d8ea510f5eea50f229f2ad06a0e56ba708.png\nHe's proper, he's polite, but the humble Doorman of The Baroness Hotel is more than meets the eye. A brisk ring of his Call Bell leaves nearby enemies disoriented, and his high-speed Luggage Cart knocks them right off their feet. Do you find yourself getting lost easily in the streets of Manhattan? Don't worry, The Doorman is here to provide a shortcut with his Doorway whenever the need arises. And only the most special of enemies get to experience the trip of a lifetime to The Baroness Hotel. - Please, stay as long as you'd like.\n\nYou can check out The Doorman in game now. Keep your votes coming over the weekend as our next hero will be released on Monday August 25th at 2pm PST.",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1808601382489176"
+    },
+    {
+      "id": "st1808601382422164",
+      "date": "2025-08-20",
+      "title": "Billy Comes in Swinging",
+      "text": "The votes are in! Today we are excited to announce that the next hero joining us in the Cursed Apple is... Billy!\n\nHero Spotlight: Billy\n\nA white hot ball of rage, furious at the very notion of... something. Billy is a chaotic front-liner who never backs down from a challenge. With Rising Ram he gets up close and personal, before slamming down with Bashdown to create shockwaves through his enemies. Running isn't even an option when Billy can use his ultimate Chain Gang to grapple enemies and pull them back in. A quick swig from his bottle gets him Blasted, and his enemies totally wrecked. - 'The hell are you staring at, buddy?'\n\nKeep your votes coming. The next hero will be released at 2pm PST on Friday. See you then!",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1808601382422164"
+    },
+    {
+      "id": "st1808061939479652",
+      "date": "2025-08-18",
+      "title": "Six New Heroes",
+      "text": "{STEAM_CLAN_IMAGE}/45164767/f67ecaff28204a3d8d9ab86f495a3e4465df3135.pngSix new heroes have been spotted on the streets of the Cursed Apple: Mina the vampire, Billy the demonic goat, Paige who can bring books to life, The Doorman who's always at your service, Victor the monster who can't be stopped, and Drifter who terrorizes the city. Rather than enabling all these new heroes at once, we're trying a new approach where we'll be staggering their release, unlocking one every other day with the first starting today. From there, you’ll help decide which hero unlocks next by casting votes in the new pre-game lobby called 'The Hideout'. Along with the new heroes and Hideout are various map visual updates as well as a new character select screen.The Hideout{STEAM_CLAN_IMAGE}/45164767/8da57587ca0ad65cf902f1207706694082164525.pngWelcome to the Hideout! The Hideout replaces the existing Dashboard UI and is your personal area to play around in while waiting for a match. You can invite friends to your hideout, or join them in theirs. We hope it will be a fun place to spend time as well as ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1808061939479652"
+    },
+    {
+      "id": "st1799088287841594",
+      "date": "2025-05-08",
+      "title": "Shop Rework Update",
+      "text": "{STEAM_CLAN_IMAGE}/45164767/0908b05b0e83747ca99a9337d401daf3a662f85d.png\n\n[ Shop Redesign ]\n\n- Full shop rework, including many new items.\n- Item slots are now all universal, rather than tree specific.\n- Total slot count reduced from 16 to 12.\n- Item costs are now discounted when you own the component.\n- New artwork for all item icons.\n- Reworked how tier bonuses work in the shop. They are no longer based on each item you buy, but instead based on your total spend in a tree. Bonuses are not linear (maxing out one tree fully isn't optimal bonus-wise).\n- Various item names have been changed.\n- Items now glow when there is an upgrade you can buy.\n\n[ Build Authoring ]\n\n- The Build Browser has been reworked and is now its own fullscreen UI.\n- Added a \"Create Build\" button when hovering over a player in post-game. This will create a local unpublished build based on the items the player purchased in that match (including imbue targets and the order in which items were sold).\n- Added a new feature: build tags. Build tags are a way to compactly describe the theme of a build. A tag has an ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1799088287841594"
+    },
+    {
+      "id": "st1792116353369036",
+      "date": "2025-02-25",
+      "title": "Map Rework Update",
+      "text": "{STEAM_CLAN_IMAGE}/45164767/8b22eef56ea0534b4630004b9f7c30019b19280f.jpg\n\nToday's update introduces a reworked map layout, alongside a variety of improvements and bug fixes. \n\n[ Map Rework ]\n- The map has been redesigned around being 3 lanes rather than 4. This has a large range of accompanying map-wide changes regarding visuals, building layouts, pathways, neutral camps, air vents, breakables, powerup buffs, juke spots, mid boss, etc.\n\n- Added a new feature called \"Explore Map\" where you can run around an empty city to test movement and navigation. You can find this under the 'Play' menu.\n\n[ Soul Orb Mechanics ]\n- Troopers no longer need to be last hit by a player in order to generate souls, as long as you are nearby. Troopers no longer have the \"near death\" flashing behavior.\n\n- Soul Orb lifetime in the air reduced significantly.\n- Soul Orb denies changed from 65/35% to 50/50%.\n- Soul Orb physical radius increased by 10%.\n- Reduced horizontal movement of soul orbs from troopers.\n\n- Gaining souls from kills now shows a visual effect of souls flying towards you.\n\n[ Sprint ]\n- ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1792116353369036"
+    },
+    {
+      "id": "st1789039014375669",
+      "date": "2025-01-17",
+      "title": "Holliday, Vyper, Calico, and The Magnificent Sinclair",
+      "text": "Today's update adds four new heroes to matchmaking: Holliday, Vyper, Calico, and The Magnificent Sinclair.\n\nExpanding our roster is one of our major goals in 2025. While some of these characters have a much higher degree of temporary art than usual, we are excited to see how they perform on the battlefield. \n\nSo who are the new faces you’ll be seeing on the streets of New York?\n\nHOLLIDAY\nArmed with an heirloom revolver and a spirit lasso, Holliday's investigations have led her to New York... and when she finds the killer she's looking for she's bringing him in dead, not alive.\n\nVYPER\nDid you know that when you slide your gun has infinite ammo? Vyper does. That’s why you’ll find her sliding around the battlefield spraying lead and poison.\n\nTHE MAGNIFICENT SINCLAIR\nMystify your rivals with combat tricks so vexing that they won’t believe their eyes! Summon a spectral assistant, polymorph foes into rabbits, and turn the enemies own abilities against them! Impossible? Not for THE MAGNIFICENT SINCLAIR…\n\nCALICO\nA feared assassin; Calico uses the shadows to her advantage, weaving in and out ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1789039014375669"
+    },
+    {
+      "id": "st1785774543697622",
+      "date": "2024-12-17",
+      "title": "Winter Visual Update",
+      "text": "Season's Greetings! Today's winter-themed visual update will be our last patch for the year, but we'll continue to ship bug fixes and any urgent balance adjustments as needed throughout the break. Thanks to everyone for all the useful feedback that you've given us this year, we're looking forward to sharing more of what's to come for Deadlock in 2025. For now, we hope that everyone has a magical season full of joy, souls, and surprises...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1785774543697622"
+    },
+    {
+      "id": "st1785321795648842",
+      "date": "2024-12-06",
+      "title": "12-06-2024 Update",
+      "text": "[ General Changes ]\n\n- Added a new hero, Raven, to Hero Labs.\n\n- Added park theming to purple lane.\n- Added park backdrop to park side of map.\n- Updated tree models to new visual style and added player collision to canopies.\n\n- For each player on the main leaderboard, you can see their top 3 heroes as well as their overall skill rating.\n- Moved the post-game survey to the final score screen.\n- Added text box field to the post-game survey.\n- Muting a player now also silences map drawing, pings, and chatwheel messages.\n\n- Various rendering performance improvements on map assets.\n- Added two new setting options \"Force English Hero Names\" and \"Force English Item Names\", which will display those values in English regardless of your chosen language.\n- Added Toggle Crouch as a new keybind.\n- Added a new setting option: \"Additional Build Search Language\", which lets you select a language to search for when requesting builds in addition to the current display language of the client.\n- Fixed shop search not working in the shop when opened from Resources.\n- Revisions to melee parry effect and ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1785321795648842"
+    },
+    {
+      "id": "st6148070194801611991",
+      "date": "2024-11-08",
+      "title": "11-07-2024 Update",
+      "text": "[ General Changes ]\n\n- Added Trapper to Hero Labs.\n- Added support for Hero Labs in Private Lobbies, Private Bot Games and Sandbox that can be used at any time.\n- Various adjustments to Experimental Heroes are listed in the in-game notes for Hero Labs.\n\n- Added Quickbuy - You can now right-click items in the shop to add them to your Quickbuy queue. When you return to the shop, you will automatically purchase the items you can afford in your set order. An indicator on the hud will light up when you can afford the next item on your list. In Settings you may change the purchase mode to use a hotkey while in range of the shop rather than auto-purchase.\n\n- The shaders, map and various other resources will now pre-compile on the dashboard to improve loading times when getting into a match. This also reduces in-game hitching in some cases.\n\n- Added a visual indicator when browsing builds that shows which item types are most present in the build (Weapon, Vitality, Spirit).\n\n- Added a Recent Purchases log to the Shop that displays all items bought by players during a match, ordered by most ...",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/6148070194801611991"
+    },
+    {
+      "id": "st6212245217911837451",
+      "date": "2024-10-24",
+      "title": "10-24-2024 Update",
+      "text": "Today's update adds Hero Labs (a new experimental hero matchmaking mode that adds six new in-progress heroes), player commends, as well as updates to character shaders and environment lighting, among the usual assortment of improvements, fixes, and balance adjustments. \n\nFor the full patch notes, visit the Deadlock forums here: https://forums.playdeadlock.com/threads/10-24-2024-update.40951/\n\nExample of the new character shader changes:\n\n{STEAM_CLAN_IMAGE}/45164767/d937a6e939528a54b0c25ff5caf9e4dff86121c9.png",
+      "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/6212245217911837451"
+    }
+  ]
 }
