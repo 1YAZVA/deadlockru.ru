@@ -3,6 +3,13 @@
   "source": "https://store.steampowered.com/news/app/1422450",
   "posts": [
     {
+      "id": "st0766308468391944",
+      "date": "2026-11-05",
+      "title": "Minor Update - 11-04-2026",
+      "text": "- Healbane: Stacks now diminish 20% more aggressively (at 2 stacks 57.8%->54.7%, at 4 stacks 82.2% to 72%)\n- Apollo: Riposte - Pommel Hit now also disarms the enemy\n- Apollo: Riposte - Pummel hit now ends any preexisting parry on the target\n- Apollo: Riposte - T2 increased from +0.6s duration to +0.7s\n- Apollo: Itani Lo Sahn - T3 bonus damage increased from +50% to +60%\n- Baba: Spirit Resistance scaling reduced from 0.7 to 0.5\n- Baba: Melee damage per boon reduced by 10%\n- Baba: Baba's Brew - Cooldown increased from 27s to 28s\n- Baba: Baba's Brew - Burn DPS spirit scaling reduced from 0.15 to 0.13\n- Baba: Baba's Brew - Cycle time increased from 1.5s to 1.6s\n- Baba: Granny Long Legs - Melee Resist reduced from 30% to 25%\n- Baba: Granny Long Legs - Debuff Resist reduced from 30% to 25%\n- Celeste: Dazzling Trick - T3 silence duration reduced from +1.25s to +0.75s\n- Celeste: Radiant Daggers - Cast range reduced from 30m to 25m (moved to T2)\n- Celeste: Radiant Daggers - Spirit Amp per Stack reduced from +7% to +6% (moved to T3)\n- Celeste: Shining Wonder - Slow reduced from -32% Movement to -28%\n- Celeste: Shining Wonder - Cooldown increased from 160s to 170s\n- Celeste: Shining Wonder - Bounce range reduced from 15.5m to 15m\n- Celeste: Shining Wonder - T1 move speed slow reduced from -16% to -14%\n- Celeste: Shining Wonder - T2 bonus damage reduced from +90 to +80\n- Deadman Danny: Clo…",
+      "url": "https://store.steampowered.com/news/app/1422450/view/680766308468391944"
+    },
+    {
       "id": "st0765564125186045",
       "date": "2026-10-30",
       "title": "Halloween 2026 + Gameplay Update",
@@ -66,13 +73,6 @@
       "url": "https://store.steampowered.com/news/app/1422450/view/703281025618281704"
     },
     {
-      "id": "st4273194214819790",
-      "date": "2026-09-29",
-      "title": "City Never Sleeps",
-      "text": "",
-      "url": "https://store.steampowered.com/news/app/1422450/view/694273194214819790"
-    },
-    {
       "id": "st680765564125186045",
       "date": "2026-10-30",
       "title": "Halloween 2026 + Gameplay Update",
@@ -134,6 +134,13 @@
       "title": "Listen up, Crumbums! Your King is here.",
       "text": "Scrap Grenade bouncing down Broadway, nor for his Swarm of Rats biting at their heels. By donning his Royal Pestments, the Rat King shakes off incoming damage, allowing him to bravely lead the charge into battle. His loyal subjects will feel awed and inspired when they see the great Banner of Ratannia waving in the middle of combat, and those who oppose him will rue the day they ever thought they could overthrow the king. - \"Oh the rats are taking over, baby!\"\n\nThe Rat King is available to play now! Have a great weekend and keep those votes coming, as our next hero will be joining us on Tuesday at 2pm PDT. We'll see you then!",
       "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656387709"
+    },
+    {
+      "id": "st4273194214819790",
+      "date": "2026-09-29",
+      "title": "City Never Sleeps",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/694273194214819790"
     },
     {
       "id": "st1844751498235383",
