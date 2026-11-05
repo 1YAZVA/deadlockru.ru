@@ -3,6 +3,13 @@
   "source": "https://store.steampowered.com/news/app/1422450",
   "posts": [
     {
+      "id": "st0766201707627248",
+      "date": "2026-11-05",
+      "title": "Ranked - Beta Season 2",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/680766201707627248"
+    },
+    {
       "id": "st0766308468391944",
       "date": "2026-11-05",
       "title": "Minor Update - 11-04-2026",
@@ -66,13 +73,6 @@
       "url": "https://store.steampowered.com/news/app/1422450/view/703281025618282632"
     },
     {
-      "id": "st3281025618281704",
-      "date": "2026-10-02",
-      "title": "Listen up, Crumbums! Your King is here.",
-      "text": "",
-      "url": "https://store.steampowered.com/news/app/1422450/view/703281025618281704"
-    },
-    {
       "id": "st680765564125186045",
       "date": "2026-10-30",
       "title": "Halloween 2026 + Gameplay Update",
@@ -127,6 +127,13 @@
       "title": "Minor Update - 10-05-2026",
       "text": "- Fixed bugs that were causing troopers to walk too slowly in lane- Rat King: Scrap Grenade - Fixed some bugs with bouncing targeting- Rat King: Scrap Grenade - Damage increased from 65 to 70- Rat King: Scrap Grenade - T2 Damage increased from 65 to 70- Rat King: Rat Swarm - Base Cooldown reduced from 28s to 24s- Rat King: Rule, Ratannia! - Cooldown increased from 130 to 160- Rat King: Rule, Ratannia! - Damage Reduction reduced from 20% to 15%- Rat King: Rule, Ratannia! - Radius reduced from 24m to 20m- Rat King: Rule, Ratannia! - Charge Duration reduced from 12s to 10s- Rat King: Rule, Ratannia! - Bonus Move speed no longer scales with Spirit- Rat King: Rule, Ratannia! - Now falls faster while charging- Rat King: Rule, Ratannia! - T1 +1m/s Move Speed to +2m/s Move Speed- Rat King: Rule, Ratannia! - T1 No longer gives -20s cooldown (Total cooldown from 110s to 160s)- Rat King: Rule, Ratannia! - T2 No longer grants +8s Charge Duration (Total charge duration from 20s to 10s)- Rat King: Rule, Ratannia! - T2 Flag Duration reduced from +8s to +5s- Rat King: Rule, Ratannia! - T3 Damage ...",
       "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1845383656394833"
+    },
+    {
+      "id": "st3281025618281704",
+      "date": "2026-10-02",
+      "title": "Listen up, Crumbums! Your King is here.",
+      "text": "",
+      "url": "https://store.steampowered.com/news/app/1422450/view/703281025618281704"
     },
     {
       "id": "st1845383656387709",
