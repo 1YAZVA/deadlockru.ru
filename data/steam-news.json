@@ -12,64 +12,64 @@
     {
       "id": "st0766308468391944",
       "date": "2026-11-05",
-      "title": "Невелике оновлення від 04 листопада 2026 року",
-      "text": "— Згубне зцілення — значення ефекту тепер зменшуються на 20% швидше (від 57,8% до >54,7% при 2 зарядах, від 82,2% до 72% при 4 зарядах).\n— Аполлон: Відсіч — влучання ефесом тепер також роззброює ворога.\n— Аполлон: Відсіч — влучання ефесом тепер завершує будь-яке парирування, яке ціль уже виконувала.\n— Аполлон: Відсіч — збільшено час дії на другому ступені (+0,6 с → +0,7 с).\n— Аполлон: Ітані-ло-сан — збільшено додаткову шкоду на третьому ступені (+50% → +60%).\n— Баба: зменшено коефіцієнт приросту духовного опору від духовної сили (0,7 → 0,5).\n— Баба: ближню шкоду за перевагу зменшено на 10%.\n— Баба: Вариво Баби — збільшено час зарядки (27 с → 28 с).\n— Баба: Вариво Баби — зменшено духовне зростання від вогняної ШЗС (0,15 → 0,13).\n— Баба: Вариво Баби — збільшено інтервал (1,5 с → 1,6 с).\n— Баба: Довгонога бабуся — зменшено опір ближньому бою (30% → 25%).\n— Баба: Довгонога бабуся — зменшено опір ослабленню (30% → 25%).\n— Селеста: Запаморочливий трюк — зменшено час знемовлення дії на третьому ступені (+1,25 с → +0,75 с).\n— Селеста: Сяйливі кинджали — зменшено дальність застосування (30 м → 25 м; переміщено на другий ступінь).\n— Селеста: Сяйливі кинджали — зменшено духовне посилення за поєднання (+7% → +6%; переміщено на третій ступінь).\n— Селеста: Осяйне диво — зменшено сповільнення (-32% швидкості руху → -28%).\n— Селеста: Осяйне диво — збільшено час зарядки (160 с → 170 с).\n— Селес…",
+      "title": "Minor Update - 11-04-2026",
+      "text": "- Healbane: Stacks now diminish 20% more aggressively (at 2 stacks 57.8%->54.7%, at 4 stacks 82.2% to 72%)\n- Apollo: Riposte - Pommel Hit now also disarms the enemy\n- Apollo: Riposte - Pummel hit now ends any preexisting parry on the target\n- Apollo: Riposte - T2 increased from +0.6s duration to +0.7s\n- Apollo: Itani Lo Sahn - T3 bonus damage increased from +50% to +60%\n- Baba: Spirit Resistance scaling reduced from 0.7 to 0.5\n- Baba: Melee damage per boon reduced by 10%\n- Baba: Baba's Brew - Cooldown increased from 27s to 28s\n- Baba: Baba's Brew - Burn DPS spirit scaling reduced from 0.15 to 0.13\n- Baba: Baba's Brew - Cycle time increased from 1.5s to 1.6s\n- Baba: Granny Long Legs - Melee Resist reduced from 30% to 25%\n- Baba: Granny Long Legs - Debuff Resist reduced from 30% to 25%\n- Celeste: Dazzling Trick - T3 silence duration reduced from +1.25s to +0.75s\n- Celeste: Radiant Daggers - Cast range reduced from 30m to 25m (moved to T2)\n- Celeste: Radiant Daggers - Spirit Amp per Stack reduced from +7% to +6% (moved to T3)\n- Celeste: Shining Wonder - Slow reduced from -32% Movement to -28%\n- Celeste: Shining Wonder - Cooldown increased from 160s to 170s\n- Celeste: Shining Wonder - Bounce range reduced from 15.5m to 15m\n- Celeste: Shining Wonder - T1 move speed slow reduced from -16% to -14%\n- Celeste: Shining Wonder - T2 bonus damage reduced from +90 to +80\n- Deadman Danny: Clo…",
       "url": "https://store.steampowered.com/news/app/1422450/view/680766308468391944"
     },
     {
       "id": "st0765564125186045",
       "date": "2026-10-30",
-      "title": "Геловін 2026 та оновлення ігроладу",
+      "title": "Halloween 2026 + Gameplay Update",
       "text": "",
       "url": "https://store.steampowered.com/news/app/1422450/view/680765564125186045"
     },
     {
       "id": "st9505296465396778",
       "date": "2026-10-20",
-      "title": "Тс-с… Боляче не буде.",
+      "title": "Shh... This Won't Hurt a Bit.",
       "text": "",
       "url": "https://store.steampowered.com/news/app/1422450/view/669505296465396778"
     },
     {
       "id": "st9505296465396531",
       "date": "2026-10-16",
-      "title": "Не таке це місто страшне, як його малюють",
+      "title": "Paint the Town",
       "text": "",
       "url": "https://store.steampowered.com/news/app/1422450/view/669505296465396531"
     },
     {
       "id": "st9505296465396213",
       "date": "2026-10-15",
-      "title": "Невелике оновлення від 14 жовтня 2026 року",
-      "text": "— Сяюче відновлення: зменшено коефіцієнт приросту від духовної сили (0,04 → 0,035).  — Баба: зменшено коефіцієнт приросту духовного опору від духовної сили (0,12 → 0,1). — Баба: базовий опір шкоді від куль тепер становить −7%. — Баба: ефект зменшення духовної сили ворогів від нитчастої живиці тепер зникає зі смертю Баби. — Баба: збільшено час зарядки нитчастої живиці (26 с → 28 с). — Баба: збільшено час зарядки довгоногої бабусі (30 с → 32 с). — Баба: під час дії довгоногої бабусі кожен наступний легкий ближній удар у повітрі тепер надає менший поштовх уперед. — Баба: зменшено висоту підкидання героїні від легкого ближнього удару під час дії довгоногої бабусі (якщо дивитися вгору, вона більше не злітає так високо). — Баба: під час дії довгоногої бабусі важкий ближній удар об землю більше не збільшує горизонтальну швидкість у разі приземлення на схил. — Баба: зменшено коефіцієнт приросту міцності бар’єра варива Баби від духовної сили (1,2 → 0,7). — Баба: зменшено міцність бар’єра варива Баби (100 → 90). — Баба: збільшено час зарядки варива Баби (25 с → 27 с; різницю компенсовано на другому ступені). — Вулична бійка: зменшено тривалість дії нитчастої живиці Баби на 35%.  — Дохлий Денні: збільшено регенерацію здоров’я (2,5 → 3,25). — Дохлий Денні: збільшено базове здоров’я (680 → 730). — Дохлий Денні: збільшено базову шкоду від куль для незаряджених пострілів (12 → 15) і заряджени…",
+      "title": "Minor Update - 10-14-2026",
+      "text": "- Radiant Regeneration: Spirit scaling reduced from 0.04 to 0.035  - Baba: Spirit Resistance scaling reduced from 0.12 to 0.1 - Baba: Now has -7% Base Bullet Resistance - Baba: Threadsap - Spirit reduction on enemies now ends when Baba dies - Baba: Threadsap - Cooldown increased from 26s to 28s - Baba: Granny Long Legs - Cooldown increased from 30s to 32s - Baba: Granny Long Legs - Repeat light melees while airborne now have diminishing forward momentum - Baba: Granny Long Legs - Light melee upward launch reduced (looking up no longer lifts her as high) - Baba: Granny Long Legs - Heavy melee ground pound no longer gains horizontal speed when landing on slopes - Baba: Baba's Brew - Barrier scaling reduced from 1.2 to 0.7 - Baba: Baba's Brew - Barrier reduced from 100 to 90 - Baba: Baba's Brew - Cooldown increased from 25s to 27s (moved to T2) - Street Brawl: Baba Threadsap duration lasts 35% less  - Deadman Danny: Health regen increased from 2.5 to 3.25 - Deadman Danny: Base health increased from 680 to 730 - Deadman Danny: Gun - Base bullet damage for uncharged shots from 12 to 15 and charged shots from 44 to 48 - Deadman Danny: Chimera Mk1 - Cooldown boon scaling increased from -0.25 to -0.45 - Deadman Danny: Chimera Mk1 - Heal on hit spirit scaling increased from 1 to 2 - Deadman Danny: Chimera Mk1 weapon scaling increased from 1.15 to 1.4 - Deadman Danny: Strix Salvo - Coold…",
       "url": "https://store.steampowered.com/news/app/1422450/view/669505296465396213"
     },
     {
       "id": "st3281660030880788",
       "date": "2026-10-13",
-      "title": "Знайомтеся із зіркою «Фейрфакс Індастріс»",
+      "title": "Fairfax Industries Employee Spotlight",
       "text": "",
       "url": "https://store.steampowered.com/news/app/1422450/view/703281660030880788"
     },
     {
       "id": "st3281660030879519",
       "date": "2026-10-09",
-      "title": "Ваш хід.",
+      "title": "Make Your Move.",
       "text": "",
       "url": "https://store.steampowered.com/news/app/1422450/view/703281660030879519"
     },
     {
       "id": "st3281025618282871",
       "date": "2026-10-06",
-      "title": "Стережіться птахів!",
+      "title": "Mind the Birds!",
       "text": "",
       "url": "https://store.steampowered.com/news/app/1422450/view/703281025618282871"
     },
     {
       "id": "st3281025618282632",
       "date": "2026-10-05",
-      "title": "Невелике оновлення від 05 жовтня 2026 року",
-      "text": "— Виправлено помилки, через які вояки надто повільно рухалися лінією.\n— Щурячий король: виправлено помилки наведення гранати з брухту під час відскоків.\n— Щурячий король: збільшено шкоду від гранати з брухту (65 → 70).\n— Щурячий король: збільшено додаткову шкоду гранати з брухту другого ступеня (65 → 70).\n— Щурячий король: зменшено базовий час зарядки щурячої зграї (28 с → 24 с).\n— Щурячий король: «Прав, Щуританіє!» — Збільшено час зарядки (130 с → 160 с).\n— Щурячий король: «Прав, Щуританіє!» — Послаблено ефект зменшення вхідної шкоди (20% → 15%).\n— Щурячий король: «Прав, Щуританіє!» — Зменшено радіус (24 м → 20 м).\n— Щурячий король: «Прав, Щуританіє!» — Зменшено максимальний час утримання стяга перед установленням (12 с → 10 с).\n— Щурячий король: «Прав, Щуританіє!» — Додаткова швидкість руху більше не залежить від духовної сили.\n— Щурячий король: «Прав, Щуританіє!» — Збільшено швидкість падіння героя під час утримання стяга.\n— Щурячий король: «Прав, Щуританіє!» — Збільшено додаткову швидкість руху на першому ступені (+1 м/с → +2 м/с).\n— Щурячий король: «Прав, Щуританіє!» — Перший ступінь більше не скорочує час зарядки на 20 с (загальний час зарядки: 110 с → 160 с).\n— Щурячий король: «Прав, Щуританіє!» — Другий ступінь більше не подовжує час утримання стяга на 8 с (загальний час утримання: 20 с → 10 с).\n— Щурячий король: «Прав, Щуританіє!» — Зменшено бонус до тривалості дії стя…",
+      "title": "Minor Update - 10-05-2026",
+      "text": "- Fixed bugs that were causing troopers to walk too slowly in lane\n- Rat King: Scrap Grenade - Fixed some bugs with bouncing targeting\n- Rat King: Scrap Grenade - Damage increased from 65 to 70\n- Rat King: Scrap Grenade - T2 Damage increased from 65 to 70\n- Rat King: Rat Swarm - Base Cooldown reduced from 28s to 24s\n- Rat King: Rule, Ratannia! - Cooldown increased from 130 to 160\n- Rat King: Rule, Ratannia! - Damage Reduction reduced from 20% to 15%\n- Rat King: Rule, Ratannia! - Radius reduced from 24m to 20m\n- Rat King: Rule, Ratannia! - Charge Duration reduced from 12s to 10s\n- Rat King: Rule, Ratannia! - Bonus Move speed no longer scales with Spirit\n- Rat King: Rule, Ratannia! - Now falls faster while charging\n- Rat King: Rule, Ratannia! - T1 +1m/s Move Speed to +2m/s Move Speed\n- Rat King: Rule, Ratannia! - T1 No longer gives -20s cooldown (Total cooldown from 110s to 160s)\n- Rat King: Rule, Ratannia! - T2 No longer grants +8s Charge Duration (Total charge duration from 20s to 10s)\n- Rat King: Rule, Ratannia! - T2 Flag Duration reduced from +8s to +5s\n- Rat King: Rule, Ratannia! - T3 Damage Reduction reduced from 15% to 10% (Total Damage Reduction from 35% to 25%)\n- Sinclair: Base HP Regen reduced from 2 to 1\n- Sinclair: Gun - Falloff range reduced from 25-61 to 20-60\n- Sinclair: Gun - Reduced bullet base damage from 17.76 to 16.5\n- Sinclair: Vexing Bolt - Now does half dam…",
       "url": "https://store.steampowered.com/news/app/1422450/view/703281025618282632"
     },
     {
