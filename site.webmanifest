@@ -1,0 +1,19 @@
+{
+  "name": "Deadlock//RU",
+  "short_name": "DeadlockRU",
+  "icons": [
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#0c2431",
+  "background_color": "#08130d",
+  "display": "standalone"
+}
