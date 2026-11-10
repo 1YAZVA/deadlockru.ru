@@ -6,7 +6,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<'
 const fmtNum = (n) => n == null ? '…' : Number(n).toLocaleString('ru-RU');
 
 const APPID = 1422450; // Deadlock
-const state = { heroes: [], builds: [], notes: [], items: [] };
+const state = { heroes: [], builds: [], notes: [], items: [], meta: null };
 window.state = state; // админка правит состояние через window.state
 
 // ---------- навигация ----------
@@ -123,9 +123,9 @@ async function loadJSON(path) {
 }
 
 async function initData() {
-  const [h, b, n, sn, it] = await Promise.all([
+  const [h, b, n, sn, it, mt] = await Promise.all([
     loadJSON('data/heroes.json'), loadJSON('data/builds.json'), loadJSON('data/patchnotes.json'),
-    loadJSON('data/steam-news.json'), loadJSON('data/items.json')
+    loadJSON('data/steam-news.json'), loadJSON('data/items.json'), loadJSON('data/meta.json')
   ]);
   state.heroes = h?.heroes || []; state.heroesUpdatedAt = h?.updatedAt;
   state.builds = b?.builds || [];
@@ -133,6 +133,7 @@ async function initData() {
   state.steamPosts = sn?.posts || [];
   state.steamSource = sn?.source || '';
   state.items = it?.items || [];
+  state.meta = mt;
   if (!h && !b && !n) {
     // скорее всего открыто как file://
     document.body.insertAdjacentHTML('afterbegin',
@@ -411,6 +412,128 @@ async function loadSteamNews() {
   box.innerHTML = '<span class="muted">Не удалось загрузить RSS (CORS). Прямая ссылка: <a href="https://store.steampowered.com/news/app/1422450" target="_blank" rel="noopener">steamcommunity/news</a></span>';
 }
 
+// ---------- мета героев: два раздела — общий винрейт и Этернус ----------
+const META_TIERS = [
+  { key: 'S+', name: 'S+', color: '#ffd766' },
+  { key: 'S', name: 'S', color: '#ff9d66' },
+  { key: 'A', name: 'A', color: '#e8652a' },
+  { key: 'B', name: 'B', color: '#33b573' },
+  { key: 'C', name: 'C', color: '#4a7fe8' },
+  { key: 'D', name: 'D', color: '#7a5fb8' },
+];
+
+function metaWrClass(wr) {
+  if (wr >= 53) return 'wr-up';
+  if (wr >= 48) return 'wr-mid';
+  return 'wr-down';
+}
+
+// percentile-тиры как на tracklock: S+ 5%, S 10%, A 25%, B 50%, C 70%, остальные D
+function metaTierMap(entries) {
+  const sorted = entries.slice().sort((a, b) => b.wr - a.wr);
+  const total = sorted.length || 1;
+  const cuts = [0.05, 0.10, 0.25, 0.50, 0.70].map((p) => Math.floor(total * p));
+  const out = new Map();
+  sorted.forEach((e, i) => {
+    let tier = 'D';
+    if (i < cuts[0]) tier = 'S+';
+    else if (i < cuts[1]) tier = 'S';
+    else if (i < cuts[2]) tier = 'A';
+    else if (i < cuts[3]) tier = 'B';
+    else if (i < cuts[4]) tier = 'C';
+    out.set(e.id, tier);
+  });
+  return out;
+}
+
+function metaCardHTML(h, wr) {
+  const pct = typeof wr === 'number' ? wr.toFixed(1).replace('.', ',') + '%' : '—';
+  return `<div class="meta-card" data-hero="${esc(h.id)}" title="Открыть профиль героя">
+    ${h.avatar ? `<img src="${esc(h.avatar)}" alt="" loading="lazy">` : `<span class="ava-mono">${esc((h.name || '?').charAt(0))}</span>`}
+    <span class="mc-t"><b>${esc(h.name)}</b><span class="wr ${metaWrClass(typeof wr === 'number' ? wr : 0)}">${pct}</span></span>
+  </div>`;
+}
+
+function metaSectionHTML(title, subtitle, entries, note) {
+  if (!entries.length) {
+    return `<div class="meta-sec">
+      <h3 class="meta-sec-title">${esc(title)} <small>${esc(subtitle)}</small></h3>
+      <p class="muted meta-empty">Нет данных за выбранный период.</p>
+    </div>`;
+  }
+  const tiers = metaTierMap(entries);
+  const bands = META_TIERS.map((t) => {
+    const inTier = entries.filter((e) => tiers.get(e.id) === t.key).sort((a, b) => b.wr - a.wr);
+    if (!inTier.length) return '';
+    return `<div class="tier-band">
+      <div class="tier-badge t-${t.key === 'S+' ? 'S' : t.key}">${t.name}<small>${inTier.length} гер.</small></div>
+      <div class="tier-heroes">${inTier.map((e) => metaCardHTML(e.h, e.wr)).join('')}</div>
+    </div>`;
+  }).join('');
+  return `<div class="meta-sec">
+    <h3 class="meta-sec-title">${esc(title)} <small>${esc(subtitle)}</small></h3>
+    ${note ? `<p class="meta-note">${esc(note)}</p>` : ''}
+    ${bands}
+  </div>`;
+}
+
+function renderMeta() {
+  const list = $('#meta-list'), filters = $('#meta-filters'), summary = $('#meta-summary');
+  if (!list) return;
+  const m = state.meta;
+  if (filters) filters.innerHTML = '';
+
+  const heroesMap = m?.heroes || {};
+  const made = (key, minMatches) => {
+    const out = [];
+    for (const h of state.heroes) {
+      const row = heroesMap[h.id];
+      if (!row) continue;
+      const wr = key === 'e' ? row.wrE : row.wr;
+      const matches = key === 'e' ? row.matchesE : row.matches;
+      if (typeof wr !== 'number' || wr <= 0) continue;
+      if (typeof matches === 'number' && matches < minMatches) continue;
+      out.push({ id: h.id, h, wr, matches });
+    }
+    return out;
+  };
+  const overall = made('a', 30);
+  const eternus = made('e', 5);
+
+  if (!overall.length && !eternus.length) {
+    list.innerHTML = `<p class="muted meta-empty">Данные меты ещё не собраны — они подтягиваются автоматически из deadlock-api.com.</p>`;
+    if (summary) summary.innerHTML = '';
+    return;
+  }
+
+  if (summary) {
+    summary.innerHTML = (m.updatedAt ? `<span>Обновлено: ${esc(String(m.updatedAt).replace('T', ' ').slice(0, 16))}</span>` : '')
+      + (m.windowDays ? `<span>Период: ${esc(String(m.windowDays))} дней</span>` : '')
+      + (m.mode ? `<span>Режим: ${esc(m.mode === 'ranked' ? 'ранкед' : String(m.mode))}</span>` : '')
+      + `<span>Источник: deadlock-api.com</span>`;
+  }
+
+  list.innerHTML =
+    metaSectionHTML('Общий винрейт', 'все ранги', overall) +
+    metaSectionHTML(
+      'Этернус', 'винрейт высшего ранга',
+      eternus,
+      eternus.length
+        ? 'Только матчи на высшем ранге — выборка меньше, цифры резче: один сильный игрок может сдвинуть процент.'
+        : ''
+    );
+}
+
+$('#tab-meta')?.addEventListener('click', (e) => {
+  const card = e.target.closest('.meta-card[data-hero]');
+  if (card) {
+    const h = state.heroes.find((x) => x.id === card.dataset.hero);
+    if (h?.profile) openHeroPage(h.id);
+    else jumpToCalc(h.id);
+  }
+});
+window.renderMeta = renderMeta; // вызывается после правок в админке
+
 // ---------- профиль героя: клик по герою открывает его способности и статы ----------
 function abilityHTML(ab) {
   const rows = Array.isArray(ab.rows) ? ab.rows : [];
@@ -665,7 +788,7 @@ document.addEventListener('input', (e) => {
   const heroes = state.heroes;
   $('#calc-hero').innerHTML = '<option value="">— вручную —</option>' +
     heroes.map(h => `<option value="${esc(h.id)}">${esc(h.name)}</option>`).join('');
-  renderNews(); renderHeroes(); renderBuilds(); renderItems();
+  renderNews(); renderHeroes(); renderBuilds(); renderItems(); renderMeta();
   window.renderNews = renderNews; window.renderBuilds = renderBuilds; window.renderHeroesGrid = renderHeroes;
   startOnlineLoop();
   loadSteamNews();

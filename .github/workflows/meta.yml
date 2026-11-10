@@ -1,0 +1,35 @@
+name: meta-hero-winrates
+on:
+  schedule:
+    - cron: "17 4 * * *"   # раз в день, 04:17 UTC
+  workflow_dispatch: {}     # и по кнопке из вкладки Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: meta-hero-winrates
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Collect hero winrates (overall + Eternus)
+        run: python .github/meta.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "deadlock-meta-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/meta.json
+          if ! git diff --cached --quiet; then
+            git commit -m "meta: refresh hero winrates (overall + Eternus)"
+            git push
+          fi

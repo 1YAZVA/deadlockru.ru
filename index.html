@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=25">
+<link rel="stylesheet" href="css/style.css?v=26">
 </head>
 <body>
 
@@ -19,6 +19,7 @@
       <button data-tab="home">Главная</button>
       <button data-tab="news">Новости</button>
       <button data-tab="heroes">Герои</button>
+      <button data-tab="meta">Мета</button>
       <button data-tab="items">Предметы</button>
       <button data-tab="builds">Сборки</button>
       <button data-tab="calc">DPS</button>
@@ -105,6 +106,19 @@
     <div style="padding-top:28px">
       <button type="button" class="hc-back" data-goto="heroes">← Все герои</button>
       <div id="hero-page"></div>
+    </div>
+  </section>
+
+  <!-- МЕТА: тир-лист и винрейты героев -->
+  <section id="tab-meta">
+    <div style="padding-top:40px">
+      <h2 class="sec-title">Мета героев</h2>
+      <p class="lead">Кто сейчас силён, а кто проседает. Два среза: общий винрейт и винрейт высшего
+        ранга — Этернус. Данные собираются автоматически раз в день.</p>
+      <div id="meta-summary" class="meta-summary"></div>
+      <div id="meta-list"></div>
+      <p class="muted meta-src">Источник: <a href="https://deadlock-api.com" target="_blank" rel="noopener">deadlock-api.com ↗</a>
+        — статистика ранкед-матчей. Выборка Этернуса меньше, поэтому проценты могут скакать.</p>
     </div>
   </section>
 
@@ -206,7 +220,7 @@
 
 <script src="js/admin.js?v=18"></script>
 <script src="js/dps.js?v=15"></script>
-<script src="js/app.js?v=25"></script>
+<script src="js/app.js?v=27"></script>
 <script src="js/souls.js?v=9"></script>
 </body>
 </html>

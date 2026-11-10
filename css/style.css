@@ -472,3 +472,49 @@ main{position:relative;z-index:1}
   .hd-abilities{grid-template-columns:1fr}
   .hd-top{flex-direction:column}
 }
+
+/* ===== Мета героев: тир-лист с винрейтами ===== */
+#tab-meta{padding-bottom:40px}
+.meta-filters{display:flex;gap:8px;margin:18px 0 14px;flex-wrap:wrap}
+.meta-filters button{background:var(--panel);border:1px solid var(--line);color:var(--muted);
+  padding:8px 18px;border-radius:9999px;cursor:pointer;font-size:13px;font-weight:600;transition:.15s}
+.meta-filters button:hover{color:var(--text);border-color:rgba(200,169,106,.5)}
+.meta-filters button.active{color:#fff;border-color:rgba(200,169,106,.6)}
+.meta-filters button.active[data-rank="all"]{background:linear-gradient(135deg,rgba(200,169,106,.25),rgba(200,169,106,.08))}
+.meta-filters button.active[data-rank="eter"]{background:linear-gradient(135deg,rgba(105,168,255,.3),rgba(105,168,255,.08))}
+.meta-summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.meta-summary span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:5px 12px;
+  border-radius:8px;background:rgba(200,169,106,.07);border:1px solid rgba(200,169,106,.2);color:var(--muted)}
+.meta-sec{margin-bottom:38px}
+.meta-sec-title{font-family:var(--font-display);font-size:21px;font-weight:700;margin:0 0 4px}
+.meta-sec-title small{font-family:var(--font-body,inherit);font-size:12px;font-weight:500;
+  color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-left:8px}
+.meta-note{margin:0 0 14px;font-size:12.5px;color:var(--muted);max-width:760px}
+.meta-src{font-size:12px;margin-top:8px}
+.tier-band{display:flex;gap:16px;margin-bottom:16px;border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;background:var(--panel)}
+.tier-badge{flex:none;width:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;font-family:var(--font-display);font-weight:700;font-size:30px;color:#08130d}
+.tier-badge small{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;opacity:.75}
+.tier-badge.t-S{background:linear-gradient(160deg,#ffd766,#e8a020)}
+.tier-badge.t-A{background:linear-gradient(160deg,#ff9d66,#e8652a)}
+.tier-badge.t-B{background:linear-gradient(160deg,#8fd6a8,#33b573)}
+.tier-badge.t-C{background:linear-gradient(160deg,#8fb8ff,#4a7fe8)}
+.tier-badge.t-D{background:linear-gradient(160deg,#b8a6d6,#7a5fb8)}
+.tier-heroes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:14px;flex:1;min-width:0}
+.meta-card{display:flex;align-items:center;gap:10px;background:var(--panel2,#12241b);border:1px solid var(--line);
+  border-radius:10px;padding:8px 10px;cursor:pointer;transition:border-color .15s}
+.meta-card:hover{border-color:rgba(200,169,106,.55)}
+.meta-card img{width:38px;height:38px;border-radius:8px;object-fit:cover;flex:none}
+.meta-card .ava-mono{width:38px;height:38px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;
+  background:#0b1a12;border:1px solid rgba(200,169,106,.3);font-weight:700;color:var(--accent)}
+.meta-card .mc-t{min-width:0;display:flex;flex-direction:column}
+.meta-card .mc-t b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta-card .mc-t .wr{font-size:11.5px;font-weight:600}
+.wr-up{color:#4ade80}.wr-mid{color:#c8a96a}.wr-down{color:#ff7a6a}
+.meta-empty{text-align:center;padding:24px}
+@media (max-width:600px){
+  .tier-band{flex-direction:column}
+  .tier-badge{width:100%;flex-direction:row;padding:8px 0;font-size:24px}
+  .tier-heroes{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+}
