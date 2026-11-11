@@ -143,30 +143,63 @@ async function initData() {
 }
 
 // ---------- рендеры ----------
+function newsTag(p) {
+  const t = p.title || '';
+  if (/хеллоуин|событи|ивент|праздн|акци|конкурс|спотлайт|фильм|трейлер/i.test(t)) return 'Событие';
+  if (/обновлен|патч|баланс|фикс|сезон|ранг|изменен|нерф|бафф/i.test(t)) return 'Патч Valve';
+  return 'Официально';
+}
+
+// баннер = первая картинка поста; в раскрытом тексте её убираем, чтобы не дублировалась
+function newsBodyHTML(p) {
+  const banner = (p.images && p.images[0]) || '';
+  if (!banner) return p.contents;
+  const safe = banner.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return p.contents.replace(new RegExp('<img[^>]*src="' + safe + '"[^>]*>'), '');
+}
+
 function renderNews() {
   const box = $('#news-list');
   // свои заметки (редактируются в панели) + официальные посты Valve из data/steam-news.json
   const own = state.notes.map(n => ({ ...n, own: true }));
-  const steam = (state.steamPosts || []).map(p => ({
-    ...p,
-    tag: /patch|update|balance/i.test(p.title) ? 'Патч Valve' : 'Официально',
-    own: false
-  }));
+  const steam = (state.steamPosts || []).map(p => ({ ...p, tag: newsTag(p), own: false }));
   const all = [...own, ...steam].sort((a, b) => b.date.localeCompare(a.date));
-  const steamCount = steam.length;
+  const richCount = steam.filter(p => p.contents).length;
 
   box.innerHTML = `
     <p class="muted" style="text-align:center;font-size:12.5px;margin-bottom:18px">
-      Официальные обновления Valve (${steamCount}) — загружаются из Steam.
+      Официальные новости Valve (${steam.length}${richCount ? ` · полных: ${richCount}` : ''}) —
+      полный текст на русском и картинки, обновляется автоматически раз в час.
       Свои заметки сообщества можно добавить в режиме редактора.</p>`
     + (all.length
-      ? all.map(n => `
+      ? all.map(n => {
+          if (!n.own && n.contents) {
+            const banner = (n.images && n.images[0]) || '';
+            const autoTag = n.lang === 'en→ru'
+              ? '<span class="tag tag-auto">авто-перевод</span>' : '';
+            return `
+      <article class="note news-rich" data-nid="${esc(n.id)}">
+        ${banner ? `<div class="news-banner"><img src="${esc(banner)}" alt="" loading="lazy"></div>` : ''}
+        <div class="note-body">
+          <div class="meta"><span class="tag">${esc(n.tag)}</span><span>${esc(n.date)}</span>${autoTag}</div>
+          <h3>${esc(n.title)}</h3>
+          <p class="news-preview muted">${esc(n.text)}</p>
+          <div class="news-full"><div class="news-clip"><div class="news-body">${newsBodyHTML(n)}</div></div></div>
+          <div class="news-actions">
+            <button class="news-more" type="button">Читать полностью</button>
+            ${n.url ? `<a class="note-src" href="${esc(n.url)}" target="_blank" rel="noopener">оригинал в Steam ↗</a>` : ''}
+          </div>
+        </div>
+      </article>`;
+          }
+          return `
       <article class="note" ${n.own ? `data-id="${esc(n.id)}"` : ''}>
         <div class="meta"><span class="tag">${esc(n.tag || 'новость')}</span><span>${esc(n.date)}</span></div>
         <h3 style="font-family:var(--font-display);font-size:17px;margin-bottom:4px">${esc(n.title)}</h3>
         <p class="muted" style="white-space:pre-wrap">${esc(n.text)}</p>
         ${n.url ? `<a class="note-src" href="${esc(n.url)}" target="_blank" rel="noopener">источник в Steam ↗</a>` : ''}
-      </article>`).join('')
+      </article>`;
+        }).join('')
       : '<p class="muted">Новостей пока нет.</p>');
 
   const latest = all[0];
@@ -797,6 +830,17 @@ function jumpToCalc(id) {
 
 // клики: сетка героев → вкладка героя; внутри вкладки — вкладки категорий, «к калькулятору», снятие предмета
 document.addEventListener('click', (e) => {
+  // новости: раскрытие/сворачивание полного текста
+  const more = e.target.closest('.news-more');
+  if (more) {
+    const art = more.closest('.news-rich');
+    if (art) {
+      const open = art.classList.toggle('news-open');
+      more.textContent = open ? 'Свернуть' : 'Читать полностью';
+      more.classList.toggle('is-open', open);
+    }
+    return;
+  }
   if (e.target.closest('[data-hcalc-scroll]')) { $('#hero-calc')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
   const cat = e.target.closest('[data-hccat]');
   if (cat) {
@@ -846,7 +890,6 @@ document.addEventListener('input', (e) => {
   renderNews(); renderHeroes(); renderBuilds(); renderItems(); renderMeta();
   window.renderNews = renderNews; window.renderBuilds = renderBuilds; window.renderHeroesGrid = renderHeroes;
   startOnlineLoop();
-  loadSteamNews();
   window.DPS?.update();
   const hash = location.hash.replace('#', '');
   if (window.AdminUI && window.AdminUI.isUnlocked()) { window.AdminUI.enter(); return; } // секретный URL → режим правки
