@@ -17,6 +17,9 @@ function go(tab) {
   document.querySelectorAll('#main-nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   location.hash = tab;
   window.scrollTo({ top: 0 });
+  // тяжёлые данные — лениво, при первом открытии вкладки
+  if (tab === 'news') ensureNewsData();
+  if (tab === 'items') ensureItemsData();
 }
 
 $('#main-nav').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) go(b.dataset.tab); });
@@ -111,28 +114,73 @@ $('#items-panel')?.addEventListener('click', (e) => {
 });
 
 // ---------- загрузка данных ----------
-async function loadJSON(path) {
+// Кэш JSON в localStorage с TTL 10 минут: повторные заходы открываются мгновенно,
+// между визитами работает браузерный кэш GitHub Pages (max-age=600).
+// Раньше здесь было '?t=' + Date.now() + no-store — телефон заново качал
+// ~300 КБ JSON при каждом открытии сайта.
+const JSON_TTL = 10 * 60e3;
+
+function cacheGet(key) {
   try {
-    const r = await fetch(path + '?t=' + Date.now(), { cache: 'no-store' });
+    const hit = JSON.parse(localStorage.getItem('dl_cache:' + key) || 'null');
+    return (hit && Date.now() - hit.t < JSON_TTL) ? hit.v : null;
+  } catch (_) { return null; }
+}
+function cacheSet(key, v) {
+  try { localStorage.setItem('dl_cache:' + key, JSON.stringify({ t: Date.now(), v })); } catch (_) {}
+}
+// админка вызывает после коммита, чтобы перезагрузка показала свежие правки
+function dlClearDataCache() {
+  Object.keys(localStorage).filter(k => k.startsWith('dl_cache:')).forEach(k => localStorage.removeItem(k));
+}
+window.dlClearDataCache = dlClearDataCache;
+
+async function loadJSON(path, { fresh = false } = {}) {
+  if (!fresh) { const hit = cacheGet(path); if (hit) return hit; }
+  try {
+    const r = await fetch(path, fresh ? { cache: 'no-store' } : {});
     if (!r.ok) throw new Error(r.status);
-    return await r.json();
+    const j = await r.json();
+    if (!fresh) cacheSet(path, j);
+    return j;
   } catch (e) {
     console.warn('loadJSON failed:', path, e);
     return null;
   }
 }
 
+// При старте грузим только лёгкие данные (~44 КБ): герои, сборки, заметки, мета.
+// Тяжёлые steam-news.json (~150 КБ) и items.json (~100 КБ) — лениво,
+// при первом открытии вкладок «Новости» и «Предметы».
+let newsLoaded = false, itemsLoaded = false;
+async function ensureNewsData() {
+  if (newsLoaded) return;
+  newsLoaded = true;
+  const sn = await loadJSON('data/steam-news.json');
+  state.steamPosts = sn?.posts || [];
+  state.steamSource = sn?.source || '';
+  renderNews(); // доспорживаем список новостей и пилюлю «Свежий патч»
+}
+async function ensureItemsData() {
+  if (itemsLoaded) return;
+  itemsLoaded = true;
+  if (!state.items.length) {
+    const p = $('#items-panel');
+    if (p) p.innerHTML = '<p class="muted" style="padding:24px;text-align:center">Загружаю предметы…</p>';
+  }
+  const it = await loadJSON('data/items.json');
+  state.items = it?.items || [];
+  renderItems();
+}
+
 async function initData() {
-  const [h, b, n, sn, it, mt] = await Promise.all([
-    loadJSON('data/heroes.json'), loadJSON('data/builds.json'), loadJSON('data/patchnotes.json'),
-    loadJSON('data/steam-news.json'), loadJSON('data/items.json'), loadJSON('data/meta.json')
+  const [h, b, n, mt] = await Promise.all([
+    loadJSON('data/heroes.json'), loadJSON('data/builds.json'),
+    loadJSON('data/patchnotes.json'), loadJSON('data/meta.json')
   ]);
   state.heroes = h?.heroes || []; state.heroesUpdatedAt = h?.updatedAt;
   state.builds = b?.builds || [];
   state.notes = n?.notes || [];
-  state.steamPosts = sn?.posts || [];
-  state.steamSource = sn?.source || '';
-  state.items = it?.items || [];
   state.meta = mt;
   if (!h && !b && !n) {
     // скорее всего открыто как file://
@@ -156,6 +204,17 @@ function newsBodyHTML(p) {
   if (!banner) return p.contents;
   const safe = banner.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return p.contents.replace(new RegExp('<img[^>]*src="' + safe + '"[^>]*>'), '');
+}
+
+// у Steam-постов в превью попадаются служебные плейсхолдеры картинок вида
+// {STEAM_CLAN_IMAGE}/45164767/<hash>.png — они выглядят мусором и, что хуже,
+// являются «словом» на 60+ символов: не переносятся и растягивают страницу
+// на телефоне за границы экрана. Из превью убираем их полностью.
+function newsPreview(text) {
+  return String(text || '')
+    .replace(/\{STEAM_CLAN_[A-Z_]+\}\/\S*/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function renderNews() {
@@ -183,7 +242,7 @@ function renderNews() {
         <div class="note-body">
           <div class="meta"><span class="tag">${esc(n.tag)}</span><span>${esc(n.date)}</span>${autoTag}</div>
           <h3>${esc(n.title)}</h3>
-          <p class="news-preview muted">${esc(n.text)}</p>
+          <p class="news-preview muted">${esc(newsPreview(n.text))}</p>
           <div class="news-full"><div class="news-clip"><div class="news-body">${newsBodyHTML(n)}</div></div></div>
           <div class="news-actions">
             <button class="news-more" type="button">Читать полностью</button>
@@ -880,6 +939,32 @@ document.addEventListener('input', (e) => {
   if (!$('#hero-page')?.contains(e.target)) return;
   heroCalcUpdate(state.heroes.find(x => x.id === HC.heroId));
 });
+
+// ---------- фоновое видео главной: только desktop ----------
+// Раньше iframe VK-видео стоял прямо в HTML и грузился всем подряд — на мобильном
+// интернете HD-видео занимало канал, и сайт «висел» до полной загрузки.
+// Теперь видео подключается только на широких экранах, после полной загрузки
+// страницы и не в режиме экономии трафика. На телефонах — статичный градиент из CSS.
+function injectHeroVideo() {
+  const bg = document.querySelector('#tab-home .hero-bg');
+  if (!bg || bg.querySelector('iframe')) return;
+  const conn = navigator.connection;
+  if (conn && (conn.saveData || /2g/.test(conn.effectiveType || ''))) return;
+  if (!window.matchMedia('(min-width: 1024px)').matches) return;
+  const f = document.createElement('iframe');
+  f.src = 'https://vkvideo.ru/video_ext.php?oid=-223127459&id=456239026&autoplay=1&loop=1&mute=1&hd=2&no_ads=1';
+  f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+  f.setAttribute('frameborder', '0');
+  f.setAttribute('scrolling', 'no');
+  f.setAttribute('title', '');
+  f.setAttribute('aria-hidden', 'true');
+  bg.insertBefore(f, bg.firstChild); // под затемняющим слоем .hero-bg-shade
+}
+(function scheduleHeroVideo() {
+  const start = () => setTimeout(injectHeroVideo, 1500); // пауза — пусть первым грузится контент
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, { once: true });
+})();
 
 // ---------- init ----------
 (async function init() {

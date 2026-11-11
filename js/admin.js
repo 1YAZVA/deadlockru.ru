@@ -498,6 +498,7 @@ window.AdminUI = (function () {
         dirty.items = false;
       }
       redrawToolbar();
+      window.dlClearDataCache?.(); // сбросить JSON-кэш (TTL 10 мин), чтобы перезагрузка показала свежие правки
       toast('Сохранено коммитами! GitHub Pages обновит сайт через 1–3 мин.', 'ok');
     } catch (e) {
       redrawToolbar();

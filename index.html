@@ -13,8 +13,13 @@
 <meta name="description" content="Всё о Deadlock на русском: онлайн игры, патчи, карточки героев, сборки и DPS-калькулятор.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=31">
+<!-- Шрифты — асинхронно: раньше этот CSS блокировал рендер, и на мобильных
+     сетях, где Google Fonts отвечает медленно, страница стояла пустой.
+     Теперь текст рендерится сразу системным шрифтом, Google-шрифты подгружаются следом. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap"></noscript>
+<link rel="stylesheet" href="css/style.css?v=34">
 </head>
 <body>
 
@@ -39,12 +44,10 @@
 
   <!-- ГЛАВНАЯ: hero как в page.tsx -->
   <section id="tab-home" class="active">
-    <!-- фоновое видео (VK, без звука, зациклено) + затемнение поверх -->
+    <!-- Фон главной: статичный градиент из CSS. VK-видео подгружается скриптом
+         (js/app.js → injectHeroVideo) только на десктопе после загрузки страницы —
+         на мобильном оно съедало трафик и тормозило открытие сайта. -->
     <div class="hero-bg" aria-hidden="true">
-      <iframe
-        src="https://vkvideo.ru/video_ext.php?oid=-223127459&id=456239026&autoplay=1&loop=1&mute=1&hd=2&no_ads=1"
-        allow="autoplay; encrypted-media; fullscreen; picture-in-picture" frameborder="0" scrolling="no"
-        loading="lazy" title=""></iframe>
       <div class="hero-bg-shade"></div>
     </div>
     <div class="hero">
@@ -242,9 +245,9 @@
   </div>
 </footer>
 
-<script src="js/admin.js?v=18"></script>
+<script src="js/admin.js?v=19"></script>
 <script src="js/dps.js?v=15"></script>
-<script src="js/app.js?v=32"></script>
+<script src="js/app.js?v=34"></script>
 <script src="js/souls.js?v=9"></script>
 <script src="js/roulette.js?v=4"></script>
 </body>

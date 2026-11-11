@@ -56,10 +56,10 @@ h2.sec-title{font-family:var(--font-display);font-size:27px;font-weight:700;marg
 .hero-sub{font-family:var(--font-display);font-size:clamp(18px,4vw,27px);font-weight:700;margin-top:18px;display:block}
 .hero-sub .w{color:var(--weapon)}.hero-sub .s{color:var(--spirit)}.hero-sub .v{color:var(--vitality)}
 .hero .lead{margin-top:22px}
-.patch-pill{display:flex;align-items:center;gap:12px;max-width:560px;margin:24px auto 0;border:1px solid var(--line);background:var(--panel);border-radius:9999px;padding:10px 20px;font-size:14px;transition:border-color .15s;cursor:pointer;text-align:left}
+.patch-pill{display:flex;align-items:center;gap:12px;max-width:min(560px,100%);margin:24px auto 0;border:1px solid var(--line);background:var(--panel);border-radius:9999px;padding:10px 20px;font-size:14px;transition:border-color .15s;cursor:pointer;text-align:left}
 .patch-pill:hover{border-color:rgba(200,169,106,.6)}
 .patch-pill .dot{background:var(--vitality)}
-.patch-pill .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.patch-pill .t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .patch-pill .d{margin-left:auto;flex:none;font-size:12px;color:var(--muted)}
 .sparkline{margin-top:8px}
 
@@ -120,11 +120,25 @@ h2.sec-title{font-family:var(--font-display);font-size:27px;font-weight:700;marg
 /* мобильная: вкладки категорий горизонтально сверху панели, названия видны сразу */
 @media (max-width:860px){
   .shop-wrap{grid-template-columns:1fr}
-  .shop-side{flex-direction:row;flex-wrap:wrap;width:100%;padding:8px;position:sticky;top:57px}
+  .shop-side{flex-direction:row;flex-wrap:wrap;width:100%;padding:8px;position:sticky;top:82px}
   .shop-side:hover{width:100%}
   .side-tab{height:52px;flex:1 1 auto;justify-content:center;padding:0 12px}
   .side-tab .lbl{opacity:1;transform:none}
   .tiers-flow{grid-template-columns:1fr}
+}
+
+/* длинные «слова» (URL, хэши) в текстах новостей и билдов не должны
+   растягивать страницу за границы экрана — переносим в любом месте */
+.note, .build, .rss-item { overflow-wrap: anywhere; }
+
+/* мобильная шапка: логотип на своей строке, вкладки — горизонтальной
+   прокруткой (раньше 8 кнопок + виджет онлайна вылезали за экран и
+   растягивали документ до ~912px на телефоне) */
+@media (max-width:860px){
+  .header-row{height:auto;flex-wrap:wrap;row-gap:6px;padding:10px 0 4px}
+  nav#main-nav{order:2;flex-basis:100%;overflow-x:auto;gap:16px;padding:2px 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  #main-nav::-webkit-scrollbar{display:none}
+  #main-nav .online-widget{flex:none}
 }
 .muted{color:var(--muted);font-size:13px}
 .btn-mini{display:inline-block;margin-top:14px;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:9999px;padding:6px 15px;font-size:12px;cursor:pointer;font-family:inherit;transition:color .15s}
@@ -400,6 +414,12 @@ body.edit-on .edit-badge { display: inline-flex !important; }
 #tab-home .hero-bg {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none; overflow: hidden;
+  /* фон-заглушка: виден на мобильных (видео туда не грузим) и на десктопе
+     в первые секунды, пока VK-плеер не стартовал */
+  background:
+    radial-gradient(ellipse 80% 60% at 72% 18%, rgba(210,166,79,.13), transparent 62%),
+    radial-gradient(ellipse 70% 55% at 15% 85%, rgba(47,216,160,.09), transparent 60%),
+    linear-gradient(160deg, #0b1a13 0%, #0a1410 55%, #071009 100%);
 }
 #tab-home .hero-bg iframe {
   position: absolute; left: 50%; top: 50%;
