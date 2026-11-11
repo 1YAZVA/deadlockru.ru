@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=26">
+<link rel="stylesheet" href="css/style.css?v=28">
 </head>
 <body>
 
@@ -25,6 +25,7 @@
       <button data-tab="home">Главная</button>
       <button data-tab="news">Новости</button>
       <button data-tab="heroes">Герои</button>
+      <button data-tab="guides">Гайды</button>
       <button data-tab="meta">Мета</button>
       <button data-tab="items">Предметы</button>
       <button data-tab="builds">Сборки</button>
@@ -95,6 +96,23 @@
       <div id="news-list"></div>
       <h2 class="section-label" style="margin:34px 0 6px">Официальные новости Steam</h2>
       <div id="rss-list"><span class="muted">загрузка…</span></div>
+    </div>
+  </section>
+
+  <!-- ГАЙДЫ -->
+  <section id="tab-guides">
+    <div style="padding-top:40px">
+      <h2 class="sec-title">Гайды</h2>
+      <p class="lead">Полные разборы героев: способности с цифрами, плюсы и минусы, контрпики, сборки и макро-стратегия.</p>
+      <div class="list guides-grid" id="guides-grid">
+        <a class="guide-card" href="/heroes/abrams.html" style="--hcol:#e04f2e">
+          <img src="/img/heroes/abrams.webp" alt="Abrams" width="72" height="72">
+          <span class="gc-t"><b>Abrams</b><small>Танк / оффлейн</small>
+          <span>Способности · контрпики · 3 сборки · макро-гайд</span></span>
+          <span class="gc-btn">Читать гайд →</span>
+        </a>
+      </div>
+      <p class="muted" style="margin-top:18px">Гайды на остальных героев в работе — следите за обновлениями.</p>
     </div>
   </section>
 
@@ -226,7 +244,7 @@
 
 <script src="js/admin.js?v=18"></script>
 <script src="js/dps.js?v=15"></script>
-<script src="js/app.js?v=27"></script>
+<script src="js/app.js?v=28"></script>
 <script src="js/souls.js?v=9"></script>
 </body>
 </html>

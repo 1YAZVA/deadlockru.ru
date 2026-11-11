@@ -554,6 +554,9 @@ function abilityHTML(ab) {
   </div>`;
 }
 
+// страницы полных гайдов: герой -> URL (если гайда нет, кнопка не показывается)
+const HERO_GUIDES = { abrams: '/heroes/abrams.html' };
+
 function heroDetailHTML(h) {
   const p = h.profile || {};
   const chip = (v) => `<span class="hd-chip">${esc(v)}</span>`;
@@ -567,6 +570,7 @@ function heroDetailHTML(h) {
         ${fine ? `<span class="hd-fine">${esc(fine)}</span>` : ''}
         <div class="hd-acts">
           <button type="button" class="btn btn-sm" data-hcalc-scroll>↓ К калькулятору</button>
+          ${HERO_GUIDES[h.id] ? `<a class="btn btn-sm" href="${esc(HERO_GUIDES[h.id])}">📖 Полный гайд</a>` : ''}
           ${p.weapon ? `<span class="hd-weapon">⚔ ${esc(p.weapon.name)} — ${esc(p.weapon.subtitle || '')}</span>` : ''}
         </div>
       </div>
