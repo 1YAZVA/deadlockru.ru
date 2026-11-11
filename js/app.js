@@ -14,7 +14,8 @@ function go(tab) {
   document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
   const sec = $('#tab-' + tab);
   if (sec) sec.classList.add('active');
-  document.querySelectorAll('#main-nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('#main-nav button, #nav-menu-panel button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  closeNavMenu(); // выбор вкладки в бургер-меню закрывает его
   location.hash = tab;
   window.scrollTo({ top: 0 });
   // тяжёлые данные — лениво, при первом открытии вкладки
@@ -28,6 +29,24 @@ document.addEventListener('click', (e) => {
   if (g) { e.preventDefault(); go(g.dataset.goto); }
 });
 $('#go-home').addEventListener('click', () => go('home'));
+
+// ---------- бургер-меню: кнопка со стрелкой вниз, список вкладок по алфавиту ----------
+const navMenu = $('#nav-menu'), navMenuBtn = $('#nav-menu-btn'), navMenuPanel = $('#nav-menu-panel');
+function closeNavMenu() {
+  if (!navMenuPanel || navMenuPanel.hidden) return;
+  navMenuPanel.hidden = true;
+  navMenu.classList.remove('open'); // стрелка возвращается вниз
+  navMenuBtn.setAttribute('aria-expanded', 'false');
+}
+navMenuBtn.addEventListener('click', () => {
+  const willOpen = navMenuPanel.hidden;
+  navMenuPanel.hidden = !willOpen;
+  navMenu.classList.toggle('open', willOpen);
+  navMenuBtn.setAttribute('aria-expanded', String(willOpen));
+});
+navMenuPanel.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) go(b.dataset.tab); });
+document.addEventListener('click', (e) => { if (!navMenu.contains(e.target)) closeNavMenu(); }); // клик вне меню закрывает
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNavMenu(); });
 
 // ---------- вкладка «Предметы»: вкладки категорий справа + магазин тиров ----------
 const TIER_COST = { 1: 800, 2: 1600, 3: 3200, 4: 6400 }; // цена тира в соулах — как в игре

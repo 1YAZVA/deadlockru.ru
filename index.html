@@ -19,24 +19,35 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap"></noscript>
-<link rel="stylesheet" href="css/style.css?v=34">
+<link rel="stylesheet" href="css/style.css?v=35">
 </head>
 <body>
 
 <header>
   <div class="container header-row">
     <div class="logo" id="go-home">Deadlock<span>//</span>RU</div>
+    <!-- «Главная» и «Новости» — всегда на виду, остальные вкладки — в бургер-меню.
+         Список в панели отсортирован по алфавиту: русские сверху, латиница (DPS) в конце. -->
     <nav id="main-nav">
       <button data-tab="home">Главная</button>
       <button data-tab="news">Новости</button>
-      <button data-tab="heroes">Герои</button>
-      <button data-tab="guides">Гайды</button>
-      <button data-tab="meta">Мета</button>
-      <button data-tab="items">Предметы</button>
-      <button data-tab="builds">Сборки</button>
-      <button data-tab="calc">DPS</button>
       <span class="online-widget" title="Мониторинг онлайна Deadlock в Steam"><span class="dot"></span><span>Онлайн:</span> <b id="online-count">…</b></span>
     </nav>
+    <div class="nav-menu" id="nav-menu">
+      <button type="button" class="nav-menu-btn" id="nav-menu-btn" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-panel">
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>Меню</span>
+        <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-menu-panel" id="nav-menu-panel" hidden>
+        <button data-tab="guides">Гайды</button>
+        <button data-tab="heroes">Герои</button>
+        <button data-tab="meta">Мета</button>
+        <button data-tab="items">Предметы</button>
+        <button data-tab="builds">Сборки</button>
+        <button data-tab="calc">DPS</button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -247,7 +258,7 @@
 
 <script src="js/admin.js?v=19"></script>
 <script src="js/dps.js?v=15"></script>
-<script src="js/app.js?v=34"></script>
+<script src="js/app.js?v=35"></script>
 <script src="js/souls.js?v=9"></script>
 <script src="js/roulette.js?v=4"></script>
 </body>

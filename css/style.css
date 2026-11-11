@@ -40,6 +40,23 @@ nav a.active,nav button.active{color:var(--text)}
 .online-widget.stale .dot{background:var(--muted);animation:none}
 @keyframes pulse{50%{opacity:.35}}
 
+/* ---------- бургер-меню: «Главная» и «Новости» — на виду,
+   остальные вкладки — в выпадающем списке по кнопке «Меню» ---------- */
+nav#main-nav{margin-left:auto} /* группа «навигация + меню» прижата вправо, как раньше */
+.nav-menu{position:relative}
+.nav-menu-btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--panel);border-radius:9999px;padding:7px 14px;font-family:inherit;font-size:14px;color:var(--text);cursor:pointer;transition:border-color .15s}
+.nav-menu-btn:hover{border-color:rgba(200,169,106,.6)}
+.nav-menu-btn .bars{display:inline-flex;flex-direction:column;gap:3px;width:15px;flex:none}
+.nav-menu-btn .bars i{height:2px;border-radius:1px;background:currentColor;display:block}
+.nav-menu-btn .chev{width:11px;height:11px;flex:none;color:var(--muted);transition:transform .2s}
+.nav-menu.open .chev{transform:rotate(180deg)} /* стрелка вниз показывает, что список разворачивается */
+.nav-menu-panel{position:absolute;top:calc(100% + 10px);right:0;z-index:70;min-width:min(240px,calc(100vw - 32px));padding:6px;border:1px solid var(--line);border-radius:14px;background:rgba(13,17,16,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 18px 44px rgba(0,0,0,.55);animation:navdrop .16s ease}
+@keyframes navdrop{from{opacity:0;transform:translateY(-6px)}}
+.nav-menu-panel[hidden]{display:none}
+.nav-menu-panel button{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;padding:11px 14px;border-radius:9px;font:inherit;font-size:14px;color:var(--muted);text-align:left;cursor:pointer;transition:background .12s,color .12s}
+.nav-menu-panel button:hover{background:rgba(255,255,255,.05);color:var(--text)}
+.nav-menu-panel button.active{color:var(--accent);background:rgba(200,169,106,.09)}
+
 /* ---------- типографика секций: как h1/h2 в page.tsx ---------- */
 main{flex:1;padding-bottom:96px}
 section{display:none}
@@ -131,21 +148,25 @@ h2.sec-title{font-family:var(--font-display);font-size:27px;font-weight:700;marg
    растягивать страницу за границы экрана — переносим в любом месте */
 .note, .build, .rss-item { overflow-wrap: anywhere; }
 
-/* мобильная шапка: логотип на своей строке, вкладки — горизонтальной
-   прокруткой (раньше 8 кнопок + виджет онлайна вылезали за экран и
-   растягивали документ до ~912px на телефоне) */
+/* мобильная шапка в 2 строки: сверху логотип + кнопка «Меню»,
+   ниже — «Главная», «Новости» и виджет онлайна. Раньше все 8 вкладок
+   шли горизонтальной прокруткой и растягивали документ до ~912px */
 @media (max-width:860px){
-  .header-row{height:auto;flex-wrap:wrap;row-gap:6px;padding:10px 0 4px}
-  nav#main-nav{order:2;flex-basis:100%;overflow-x:auto;gap:16px;padding:2px 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  #main-nav::-webkit-scrollbar{display:none}
-  #main-nav .online-widget{flex:none}
+  .header-row{height:auto;flex-wrap:wrap;row-gap:10px;padding:10px 0 6px}
+  .logo{order:1}
+  .nav-menu{order:2;margin-left:auto}
+  nav#main-nav{order:3;margin-left:0;flex-basis:100%;flex-wrap:wrap;gap:18px;padding:2px 0 4px}
+  #main-nav .online-widget{margin-left:auto}
 }
 .muted{color:var(--muted);font-size:13px}
 .btn-mini{display:inline-block;margin-top:14px;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:9999px;padding:6px 15px;font-size:12px;cursor:pointer;font-family:inherit;transition:color .15s}
 .btn-mini:hover{color:var(--text)}
 
 /* ---------- герои: строки как в hero-grid.tsx ---------- */
+/* min-width:0 — чтобы карточки сжимались под трек грида и не растягивали страницу
+   на узких экранах (320px): minmax(auto,1fr) без этого раздувает трек по min-content */
 .list{display:grid;gap:16px;grid-template-columns:1fr}
+.list > *, .grid > *{min-width:0}
 @media(min-width:640px){.list{grid-template-columns:1fr 1fr}}
 @media(min-width:1024px){.list{grid-template-columns:1fr 1fr 1fr}}
 .hero-card{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;cursor:pointer;transition:border-color .15s}
