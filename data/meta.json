@@ -1,272 +1,272 @@
 {
-  "updatedAt": "2026-11-10T14:09:00Z",
+  "updatedAt": "2026-11-11T05:13:56Z",
   "windowDays": 30,
   "mode": "ranked",
   "source": "api.deadlock-api.com",
   "heroes": {
     "abrams": {
       "wr": 52.3,
-      "matches": 249895,
+      "matches": 255161,
       "wrE": 50.9,
-      "matchesE": 3283
+      "matchesE": 3230
     },
     "apollo": {
-      "wr": 51.7,
-      "matches": 162852,
-      "wrE": 49.9,
-      "matchesE": 1784
+      "wr": 51.8,
+      "matches": 166109,
+      "wrE": 49.8,
+      "matchesE": 1748
     },
     "baba": {
-      "wr": 56.1,
-      "matches": 164704,
-      "wrE": 58.3,
-      "matchesE": 4233
+      "wr": 56.2,
+      "matches": 157575,
+      "wrE": 58.1,
+      "matchesE": 4086
     },
     "bebop": {
       "wr": 47.5,
-      "matches": 347049,
-      "wrE": 51.8,
-      "matchesE": 4831
+      "matches": 352853,
+      "wrE": 51.9,
+      "matchesE": 4747
     },
     "billy": {
-      "wr": 49.4,
-      "matches": 211266,
+      "wr": 49.5,
+      "matches": 216159,
       "wrE": 47.3,
-      "matchesE": 1937
+      "matchesE": 1896
     },
     "calico": {
-      "wr": 50.2,
-      "matches": 141011,
-      "wrE": 49.5,
-      "matchesE": 1837
+      "wr": 50.3,
+      "matches": 142853,
+      "wrE": 49.9,
+      "matchesE": 1800
     },
     "celeste": {
-      "wr": 48.5,
-      "matches": 177158,
-      "wrE": 53.5,
-      "matchesE": 3093
+      "wr": 48.4,
+      "matches": 179411,
+      "wrE": 53.6,
+      "matchesE": 3047
     },
     "chrono": {
       "wr": 46.0,
-      "matches": 217690,
+      "matches": 222960,
       "wrE": 47.1,
-      "matchesE": 3364
+      "matchesE": 3306
     },
     "deadman-danny": {
       "wr": 47.5,
-      "matches": 348682,
+      "matches": 353623,
       "wrE": 43.6,
       "matchesE": 4783
     },
     "doorman": {
-      "wr": 45.9,
-      "matches": 102244,
-      "wrE": 47.9,
-      "matchesE": 633
+      "wr": 45.8,
+      "matches": 104035,
+      "wrE": 47.7,
+      "matchesE": 621
     },
     "drifter": {
-      "wr": 50.8,
-      "matches": 321379,
-      "wrE": 50.4,
-      "matchesE": 4283
+      "wr": 50.7,
+      "matches": 327106,
+      "wrE": 50.3,
+      "matchesE": 4213
     },
     "dynamo": {
       "wr": 51.4,
-      "matches": 193665,
-      "wrE": 50.0,
-      "matchesE": 1474
+      "matches": 197159,
+      "wrE": 49.8,
+      "matchesE": 1448
     },
     "forge": {
-      "wr": 49.4,
-      "matches": 97789,
-      "wrE": 50.4,
-      "matchesE": 1057
+      "wr": 49.5,
+      "matches": 99674,
+      "wrE": 50.5,
+      "matchesE": 1023
     },
     "ghost": {
-      "wr": 50.9,
-      "matches": 206085,
+      "wr": 51.2,
+      "matches": 213692,
       "wrE": 51.0,
-      "matchesE": 1263
+      "matchesE": 1242
     },
     "graves": {
       "wr": 55.2,
-      "matches": 306179,
-      "wrE": 51.2,
-      "matchesE": 1974
+      "matches": 311253,
+      "wrE": 51.0,
+      "matchesE": 1957
     },
     "grey-talon": {
       "wr": 45.7,
-      "matches": 144871,
+      "matches": 148104,
       "wrE": 45.6,
-      "matchesE": 3894
+      "matchesE": 3832
     },
     "haze": {
-      "wr": 52.5,
-      "matches": 442401,
+      "wr": 52.4,
+      "matches": 447028,
       "wrE": 50.5,
-      "matchesE": 6158
+      "matchesE": 6026
     },
     "holliday": {
       "wr": 49.2,
-      "matches": 175894,
-      "wrE": 52.9,
-      "matchesE": 3168
+      "matches": 179041,
+      "wrE": 53.0,
+      "matchesE": 3104
     },
     "infernus": {
       "wr": 47.9,
-      "matches": 354901,
-      "wrE": 48.6,
-      "matchesE": 2114
+      "matches": 359617,
+      "wrE": 48.5,
+      "matchesE": 2074
     },
     "ivy": {
       "wr": 53.1,
-      "matches": 194834,
+      "matches": 198613,
       "wrE": 53.3,
-      "matchesE": 3652
+      "matchesE": 3575
     },
     "kelvin": {
-      "wr": 54.7,
-      "matches": 145957,
-      "wrE": 52.1,
-      "matchesE": 1996
+      "wr": 54.6,
+      "matches": 148843,
+      "wrE": 52.5,
+      "matchesE": 1944
     },
     "lash": {
       "wr": 51.4,
-      "matches": 329398,
+      "matches": 334114,
       "wrE": 50.6,
-      "matchesE": 3982
+      "matchesE": 3917
     },
     "mina": {
-      "wr": 45.9,
-      "matches": 267464,
+      "wr": 45.8,
+      "matches": 270989,
       "wrE": 46.5,
-      "matchesE": 4140
+      "matchesE": 4049
     },
     "mirage": {
-      "wr": 42.1,
-      "matches": 73251,
-      "wrE": 44.3,
-      "matchesE": 931
+      "wr": 42.0,
+      "matches": 74110,
+      "wrE": 44.1,
+      "matchesE": 909
     },
     "mo-krill": {
-      "wr": 49.1,
-      "matches": 203498,
-      "wrE": 50.3,
-      "matchesE": 2756
+      "wr": 49.0,
+      "matches": 204591,
+      "wrE": 50.2,
+      "matchesE": 2715
     },
     "nurse": {
       "wr": 50.0,
-      "matches": 265811,
+      "matches": 270581,
       "wrE": 50.3,
       "matchesE": 4320
     },
     "paige": {
       "wr": 54.2,
-      "matches": 287583,
-      "wrE": 51.3,
-      "matchesE": 3073
+      "matches": 291402,
+      "wrE": 51.1,
+      "matchesE": 2975
     },
     "ratking": {
-      "wr": 54.4,
-      "matches": 446067,
-      "wrE": 50.8,
-      "matchesE": 5589
+      "wr": 54.3,
+      "matches": 438647,
+      "wrE": 50.7,
+      "matchesE": 5396
     },
     "rem": {
-      "wr": 45.8,
-      "matches": 190793,
-      "wrE": 48.2,
-      "matchesE": 1472
+      "wr": 45.6,
+      "matches": 193683,
+      "wrE": 48.1,
+      "matchesE": 1418
     },
     "seven": {
       "wr": 53.4,
-      "matches": 252715,
+      "matches": 256829,
       "wrE": 51.1,
-      "matchesE": 1532
+      "matchesE": 1500
     },
     "shiv": {
       "wr": 45.8,
-      "matches": 253947,
-      "wrE": 48.4,
-      "matchesE": 4688
+      "matches": 258458,
+      "wrE": 48.6,
+      "matchesE": 4590
     },
     "silver": {
       "wr": 48.1,
-      "matches": 155972,
+      "matches": 158976,
       "wrE": 49.4,
-      "matchesE": 1811
+      "matchesE": 1793
     },
     "sinclair": {
       "wr": 46.3,
-      "matches": 71058,
-      "wrE": 47.6,
-      "matchesE": 997
+      "matches": 71950,
+      "wrE": 47.7,
+      "matchesE": 982
     },
     "solomon": {
-      "wr": 46.0,
-      "matches": 181610,
-      "wrE": 47.7,
-      "matchesE": 2997
+      "wr": 46.3,
+      "matches": 171791,
+      "wrE": 48.4,
+      "matchesE": 2841
     },
     "synth": {
       "wr": 45.2,
-      "matches": 153874,
-      "wrE": 46.6,
-      "matchesE": 2311
+      "matches": 156414,
+      "wrE": 46.7,
+      "matchesE": 2271
     },
     "venator": {
       "wr": 47.1,
-      "matches": 286776,
-      "wrE": 46.9,
-      "matchesE": 4822
+      "matches": 291275,
+      "wrE": 47.0,
+      "matchesE": 4737
     },
     "victor": {
       "wr": 53.2,
-      "matches": 234278,
+      "matches": 237772,
       "wrE": 49.5,
-      "matchesE": 2345
+      "matchesE": 2301
     },
     "vindicta": {
       "wr": 50.4,
-      "matches": 232811,
-      "wrE": 50.3,
-      "matchesE": 2868
+      "matches": 235664,
+      "wrE": 50.1,
+      "matchesE": 2799
     },
     "violet": {
       "wr": 49.1,
-      "matches": 302307,
+      "matches": 306163,
       "wrE": 47.9,
       "matchesE": 4787
     },
     "viper": {
       "wr": 50.5,
-      "matches": 96179,
-      "wrE": 53.0,
-      "matchesE": 1894
+      "matches": 97316,
+      "wrE": 53.1,
+      "matchesE": 1859
     },
     "viscous": {
-      "wr": 46.6,
-      "matches": 94766,
-      "wrE": 49.8,
-      "matchesE": 1134
+      "wr": 46.5,
+      "matches": 96534,
+      "wrE": 49.7,
+      "matchesE": 1108
     },
     "warden": {
-      "wr": 47.6,
-      "matches": 101807,
+      "wr": 47.7,
+      "matches": 104974,
       "wrE": 48.0,
-      "matchesE": 1000
+      "matchesE": 997
     },
     "wraith": {
       "wr": 52.0,
-      "matches": 337857,
-      "wrE": 53.0,
-      "matchesE": 6171
+      "matches": 342834,
+      "wrE": 53.1,
+      "matchesE": 6049
     },
     "yamato": {
       "wr": 48.8,
-      "matches": 202230,
+      "matches": 205023,
       "wrE": 53.1,
-      "matchesE": 3696
+      "matchesE": 3604
     }
   }
 }
