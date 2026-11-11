@@ -1,0 +1,34 @@
+name: Обновление онлайна Deadlock (data/live.json)
+
+on:
+  schedule:
+    - cron: "*/5 * * * *" # каждые 5 минут; GitHub может сдвигать запуск на несколько минут — это нормально
+  workflow_dispatch: {} # кнопка «Run workflow» для ручного запуска и проверки
+
+permissions:
+  contents: write # нужно для коммита data/live.json
+
+concurrency:
+  group: update-live
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Собрать данные Steam и записать data/live.json
+        run: python3 scripts/update_live.py
+
+      - name: Закоммитить (если изменилось)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/live.json
+          if git diff --cached --quiet; then
+            echo "Данные не изменились — коммит не нужен"
+          else
+            git commit -m "Обновление онлайна Deadlock [skip ci]"
+            git push
+          fi

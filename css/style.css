@@ -37,6 +37,7 @@ nav a.active,nav button.active{color:var(--text)}
 .online-widget{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);border-radius:9999px;padding:4px 12px;font-size:13px;color:var(--muted);white-space:nowrap}
 .online-widget b{color:var(--text);font-weight:600}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--vitality);animation:pulse 2s infinite;flex:none}
+.online-widget.stale .dot{background:var(--muted);animation:none}
 @keyframes pulse{50%{opacity:.35}}
 
 /* ---------- типографика секций: как h1/h2 в page.tsx ---------- */
