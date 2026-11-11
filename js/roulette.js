@@ -94,11 +94,37 @@
     return h;
   };
   const metaOf = (id) => window.state.meta?.heroes?.[id];
+  // Valve переименовывал предметы («Hollow Point Ward» → «Hollow Point»,
+  // «High-Velocity Mag» → «High Velocity Rounds»), а builds.json писался в разное
+  // время — сопоставляем без пунктуации и по префиксу, иначе иконки терялись.
+  const norm = (s) => String(s || '').toLowerCase().replace(/[^a-zа-я0-9]+/g, '');
   const itemIcon = (name) => {
-    const it = (window.state.items || []).find((x) => (x.name || '').toLowerCase() === String(name).trim().toLowerCase());
+    const want = String(name || '').trim();
+    if (!want) return null;
+    const items = window.state.items || [];
+    const wn = norm(want);
+    let it = items.find((x) => (x.name || '').toLowerCase() === want.toLowerCase()); // точное совпадение
+    if (!it && wn) it = items.find((x) => norm(x.name) === wn); // то же без пунктуации
+    if (!it && wn) {
+      // старое/новое название Valve: сравниваем начало нормализованного имени
+      // («highvelocitymag» → «High-Velocity Rounds»), берём самое длинное совпадение
+      const key = wn.slice(0, 10);
+      it = items
+        .filter((x) => norm(x.name).indexOf(key) === 0)
+        .sort((a, b) => norm(b.name).length - norm(a.name).length)[0];
+    }
     return it?.icon || null;
   };
   const buildOf = (id) => (window.state.builds || []).find((b) => b.hero === id);
+
+  // Предметы грузятся лениво (app.js: ensureItemsData, при первом открытии «Предметов»),
+  // а рулетке билда нужен полный список — подгружаем по требованию.
+  let itemsLoad = null;
+  function ensureItems() {
+    if ((window.state.items || []).length) return Promise.resolve();
+    if (typeof window.ensureItemsData !== 'function') return Promise.resolve();
+    return itemsLoad || (itemsLoad = window.ensureItemsData().catch(() => {}));
+  }
 
   // ---------- лента ----------
   function cardHTML(h) {
@@ -130,6 +156,12 @@
   function spin() {
     if (spinning) return;
     if (!heroesReady()) { spinBtn.textContent = 'Загружаю героев…'; waitData().then(() => { spinBtn.textContent = '🎲 Крутить рулетку'; spin(); }); return; }
+    if (!(window.state.items || []).length) {
+      // предметы нужны карточке результата (иконки сборки) и рулетке билда
+      spinBtn.textContent = 'Загружаю предметы…';
+      ensureItems().then(() => { spinBtn.textContent = '🎲 Крутить рулетку'; spin(); });
+      return;
+    }
     spinning = true;
     spinBtn.disabled = true; spinBtn.classList.add('busy');
     audio(); // разблокируем звук жестом
@@ -250,8 +282,19 @@
     return out;
   }
 
-  function spinBuild() {
+  async function spinBuild() {
     if (building || !lastHero) return;
+    if (!(window.state.items || []).length) {
+      // первый запуск до ленивой загрузки: подкачиваем предметы и крутим заново
+      const btn0 = document.getElementById('rl-bspin');
+      building = true;
+      if (btn0) { btn0.disabled = true; btn0.textContent = 'Загружаю предметы…'; }
+      await ensureItems();
+      building = false;
+      if (btn0) { btn0.disabled = false; btn0.textContent = '🎲 Собрать случайный билд'; }
+      if ((window.state.items || []).length) spinBuild(); // предметы готовы — крутим
+      return;
+    }
     const items = window.state.items || [];
     if (!items.length) return;
     building = true;
