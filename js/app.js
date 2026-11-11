@@ -189,12 +189,45 @@ function heroAvatar(h) {
     : esc(letter);
 }
 
+function heroWrHTML(h) {
+  // винрейт героя из meta.json (общий, за 30 дней) — на строке с именем, справа
+  const row = state.meta?.heroes?.[h.id];
+  const wr = row && typeof row.wr === 'number' && row.wr > 0 ? row.wr : null;
+  if (wr === null) return '';
+  const cls = metaWrClass(wr);
+  const matches = typeof row.matches === 'number' && row.matches > 0
+    ? ` · ${row.matches.toLocaleString('ru-RU')} ${heroMatchWord(row.matches)}` : '';
+  return `<span class="hero-wr ${cls}" title="Винрейт за 30 дней${matches}">${heroTrendArrow(cls)}${wr.toFixed(1).replace('.', ',')}%</span>`;
+}
+
+function heroTrendArrow(cls) {
+  // зигзаг-стрелка как на биржевых графиках: вверх (сильный), ровно (середина), вниз (слабый)
+  const shapes = {
+    'wr-up':   ['2.5 16.5 8 11 11 14 18 7.5', 'M13.5 7.5 L18 7.5 L18 12.5'],
+    'wr-mid':  ['2.5 12 7 9 10 14 14 10 18.5 12', 'M14.5 8.5 L18.5 12 L14.5 15.5'],
+    'wr-down': ['2.5 7.5 8 13 11 10 18 16.5', 'M13.5 16.5 L18 16.5 L18 11.5'],
+  };
+  const [pts, head] = shapes[cls] || shapes['wr-mid'];
+  return `<svg class="wr-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="${pts}"/><path d="${head}"/></svg>`;
+}
+
+function heroMatchWord(n) {
+  // русское склонение: 1 матч / 2 матча / 5 матчей
+  const d100 = n % 100, d10 = n % 10;
+  if (d10 === 1 && d100 !== 11) return 'матч';
+  if (d10 >= 2 && d10 <= 4 && (d100 < 12 || d100 > 14)) return 'матча';
+  return 'матчей';
+}
+
 function renderHeroes() {
   $('#heroes-grid').innerHTML = state.heroes.map(h => `
     <div class="hero-card${h.profile ? ' has-profile' : ''}" data-hero="${esc(h.id)}" title="${h.profile ? 'Открыть профиль героя' : 'Открыть в DPS-калькуляторе'}">
       <span class="ava-letter" data-letter="${esc((h.name || '?').charAt(0).toUpperCase())}">${heroAvatar(h)}</span>
-      <span style="min-width:0">
-        <h4>${esc(h.name)}${h.profile ? ' <span class="prof-chip">профиль</span>' : ''}</h4>
+      <span style="flex:1;min-width:0">
+        <span class="hero-name-row">
+          <h4>${esc(h.name)}${h.profile ? ' <span class="prof-chip">профиль</span>' : ''}</h4>
+          ${heroWrHTML(h)}
+        </span>
         <span class="en">${esc(h.role || '')}</span>
         <span class="tags">
           ${h.tags ? String(h.tags).split(',').filter(Boolean).map(t => `<span class="tag-pill">${esc(t.trim())}</span>`).join('') : ''}
@@ -423,8 +456,11 @@ const META_TIERS = [
 ];
 
 function metaWrClass(wr) {
-  if (wr >= 53) return 'wr-up';
-  if (wr >= 48) return 'wr-mid';
+  // шкала: зелёный >51%, жёлтый 49–51%, красный <49%.
+  // сравниваем по значению с 1 знаком (как показываем на экране), чтобы «49,0%» всегда было жёлтым
+  const v = Math.round(wr * 10) / 10;
+  if (v > 51) return 'wr-up';
+  if (v >= 49) return 'wr-mid';
   return 'wr-down';
 }
 
