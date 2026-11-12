@@ -19,7 +19,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=Limelight&display=swap"></noscript>
-<link rel="stylesheet" href="css/style.css?v=35">
+<link rel="stylesheet" href="css/style.css?v=36">
 </head>
 <body>
 
@@ -45,6 +45,7 @@
         <button data-tab="meta">Мета</button>
         <button data-tab="items">Предметы</button>
         <button data-tab="builds">Сборки</button>
+        <button data-tab="stats">Статистика</button>
         <button data-tab="calc">DPS</button>
       </div>
     </div>
@@ -225,6 +226,32 @@
     </div>
   </section>
 
+  <!-- СТАТИСТИКА АККАУНТА STEAM: вводишь Steam ID/ссылку/ник — получаешь
+       ранг, историю матчей, души/мин и героев (API: deadlock-api.com, CORS открыт) -->
+  <section id="tab-stats">
+    <div style="padding-top:40px">
+      <h2 class="sec-title">Статистика аккаунта Steam</h2>
+      <p class="lead">Введи Steam ID, ссылку на профиль Steam или никнейм — покажем ранг,
+        историю матчей, души в минуту, любимых и лучших героев по винрейту.
+        Данные — публичная статистика матчей deadlock-api.com.</p>
+      <div class="steam-search">
+        <input id="steam-lookup" type="text" spellcheck="false" autocomplete="off"
+          placeholder="7656119… · steamcommunity.com/id/… · STEAM_1:0:… · никнейм" aria-label="Steam ID или никнейм">
+        <button id="steam-lookup-btn" type="button">Показать</button>
+      </div>
+      <div class="list" id="steam-candidates" hidden></div>
+      <div id="steam-player" aria-live="polite">
+        <div class="steam-empty card">
+          <h3>Что здесь будет</h3>
+          <p class="muted">Ранг со значком и прогрессом · количество игр, часов и KDA · души в минуту ·
+            история последних матчей с К/Д/П · любимые герои · лучшие герои по винрейту ·
+            активность за 30 дней и текущая серия побед.</p>
+          <p class="muted">Например, попробуй: <button type="button" class="steam-example">1661281475</button></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
@@ -258,7 +285,7 @@
 
 <script src="js/admin.js?v=19"></script>
 <script src="js/dps.js?v=15"></script>
-<script src="js/app.js?v=35"></script>
+<script src="js/app.js?v=36"></script>
 <script src="js/souls.js?v=9"></script>
 <script src="js/roulette.js?v=5"></script>
 </body>

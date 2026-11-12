@@ -715,3 +715,76 @@ main{position:relative;z-index:1}
   .rl-bslots{grid-template-columns:repeat(3,1fr)}
 }
 
+
+/* ---------- статистика аккаунта Steam ---------- */
+.steam-search{display:flex;gap:10px;max-width:640px;margin:0 0 22px}
+.steam-search input{flex:1;min-width:0;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--text);font:inherit;font-size:14.5px;padding:11px 14px}
+.steam-search input:focus{outline:none;border-color:rgba(200,169,106,.6)}
+.steam-search input::placeholder{color:var(--muted)}
+.steam-search button{flex:none;border:1px solid var(--line);background:linear-gradient(180deg,#D8BC7E,#B3945A);color:var(--bg);border-radius:10px;font:inherit;font-weight:700;padding:11px 20px;cursor:pointer;transition:filter .15s}
+.steam-search button:hover{filter:brightness(1.08)}
+.steam-example{background:none;border:1px dashed var(--line);border-radius:8px;color:var(--accent);font:inherit;font-size:13px;padding:3px 10px;cursor:pointer}
+.steam-example:hover{border-color:rgba(200,169,106,.6)}
+.steam-empty{margin-top:4px}
+.steam-msg{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;color:var(--muted);font-size:14px}
+.steam-msg.err{border-left:2px solid var(--danger)}
+/* профиль: шапка */
+.sp-head{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;flex-wrap:wrap}
+.sp-ava{width:64px;height:64px;border-radius:12px;border:1px solid var(--line);object-fit:cover;flex:none}
+.sp-who{min-width:0}
+.sp-who b{font-size:18px;font-weight:700;overflow-wrap:anywhere}
+.sp-who .sp-sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.sp-who .sp-link{color:var(--accent);font-size:12.5px}
+.sp-rank{margin-left:auto;display:flex;align-items:center;gap:12px;flex:none}
+.sp-rank img{width:56px;height:56px;flex:none;filter:drop-shadow(0 0 14px rgba(200,169,106,.25))}
+.sp-rank .sp-tier{text-align:right}
+.sp-rank .sp-tier b{font-family:var(--font-display);font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.sp-rank .sp-tier small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+/* плитки показателей */
+.sp-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.sp-tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
+.sp-tile .n{font-family:var(--font-display);font-size:21px;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+.sp-tile .n small{font-size:12px;color:var(--muted);font-family:var(--font-body);font-weight:400}
+.sp-tile .t{font-size:11.5px;color:var(--muted);margin-top:3px;letter-spacing:.02em}
+.sp-tile.hot .n{color:var(--accent)}
+.sp-tile .n .up{color:var(--ok)} .sp-tile .n .down{color:var(--bad)}
+/* прогресс ранга */
+.sp-block{margin-top:22px}
+.sp-block > h3{font-family:var(--font-display);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
+.sp-spark{width:100%;height:76px;display:block}
+/* герои */
+.sp-heroes{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sp-hero{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:0}
+.sp-hero img{width:40px;height:40px;border-radius:9px;border:1px solid var(--line);object-fit:cover;flex:none}
+.sp-hero .ava-letter{width:40px;height:40px;font-size:15px;flex:none}
+.sp-hero .sp-hinfo{min-width:0;flex:1}
+.sp-hero .sp-hinfo b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-hero .sp-hinfo small{display:block;color:var(--muted);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-hero .sp-hwr{margin-left:auto;flex:none;text-align:right;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.sp-hero .sp-hwr small{display:block;font-weight:400;color:var(--muted);font-size:11px}
+/* история матчей */
+.sp-hist{display:grid;gap:8px}
+.sp-match{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-left-width:3px;border-radius:10px;padding:9px 14px;min-width:0}
+.sp-match.w{border-left-color:var(--ok)} .sp-match.l{border-left-color:var(--bad)}
+.sp-match img{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);object-fit:cover;flex:none}
+.sp-match .ava-letter{width:34px;height:34px;font-size:13px;flex:none}
+.sp-match .sp-mhero{min-width:0;flex:1}
+.sp-match .sp-mhero b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-match .sp-mhero small{display:block;color:var(--muted);font-size:11.5px}
+.sp-match .sp-mkda{flex:none;font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted)}
+.sp-match .sp-mkda b{color:var(--text)}
+.sp-match .sp-msouls{flex:none;font-size:12.5px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.sp-match .sp-mdur{flex:none;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sp-match .sp-mdelta{flex:none;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.sp-mdelta.up{color:var(--ok)} .sp-mdelta.down{color:var(--bad)}
+.soul-dot{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFDF9E,#C8A96A 55%,#8A6F3C);box-shadow:0 0 6px rgba(200,169,106,.6);display:inline-block;flex:none}
+@media (max-width:640px){
+  .steam-search{flex-wrap:wrap}
+  .steam-search input{flex-basis:100%}
+  .steam-search button{flex:1}
+  .sp-rank{margin-left:0}
+  .sp-heroes{grid-template-columns:1fr}
+  .sp-match{flex-wrap:wrap;row-gap:4px}
+  .sp-match .sp-msouls{margin-left:auto}
+  .sp-match .sp-mdelta{margin-left:0}
+}

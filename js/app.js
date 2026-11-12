@@ -985,6 +985,229 @@ function injectHeroVideo() {
   else window.addEventListener('load', start, { once: true });
 })();
 
+// ---------- статистика аккаунта Steam: deadlock-api.com (CORS открыт) ----------
+const DL_API = 'https://api.deadlock-api.com/v1';
+const STEAM64_BASE = 76561197960265728n; // steam64 = base + account_id
+
+// числовые id героев API → [имя, файл аватара в img/heroes] ('' — буква вместо аватара)
+const DL_HEROES = {
+  1:['Infernus','infernus.webp'],2:['Seven','seven.webp'],3:['Vindicta','vindicta.png'],4:['Lady Geist','ghost.webp'],
+  6:['Abrams','abrams.webp'],7:['Wraith','wraith.webp'],8:['McGinnis','forge.webp'],10:['Paradox',''],
+  11:['Dynamo','dynamo.webp'],12:['Kelvin','kelvin.webp'],13:['Haze','haze.webp'],14:['Holliday','holliday.webp'],
+  15:['Bebop','bebop.webp'],16:['Calico','calico.webp'],17:['Grey Talon','grey-talon.webp'],18:['Mo & Krill','mo-krill.webp'],
+  19:['Shiv','shiv.webp'],20:['Ivy','ivy.webp'],25:['Warden','warden.webp'],27:['Yamato','yamato.webp'],
+  31:['Lash','lash.webp'],35:['Viscous','viscous.webp'],50:['Pocket','synth.webp'],52:['Mirage','mirage.webp'],
+  58:['Vyper','viper.webp'],60:['Sinclair','sinclair.webp'],63:['Mina','mina.webp'],64:['Drifter','drifter.webp'],
+  65:['Venator','venator.webp'],66:['Victor','victor.webp'],67:['Paige','paige.webp'],69:['The Doorman','doorman.webp'],
+  72:['Billy','billy.webp'],76:['Graves','graves.webp'],77:['Apollo','apollo.webp'],78:['Deadman Danny','deadman-danny.webp'],
+  79:['Rem','rem.webp'],80:['Silver','silver.webp'],81:['Celeste','celeste.webp'],84:['Rat King','ratking.webp'],
+  85:['Solomon','solomon.webp'],86:['Violet','violet.webp'],87:['Nurse Harrow','nurse.webp'],88:['Baba','baba.webp'],
+};
+// тировые ранги 0–11 (имена и цвета — /v1/assets/ranks); subrank — I…VI
+const DL_RANKS = ['Obscurus','Initiate','Seeker','Acolyte','Sentinel','Mystic','Ritualist','Emissary','Oracle','Phantom','Ascendant','Eternus'];
+const DL_RANK_COLORS = ['#333333','#6A3E1E','#882355','#5C6DAB','#719C47','#DDA326','#EE4F57','#B47FEB','#955138','#7C7C7C','#C39751','#5CE9A9'];
+const DL_ROMAN = ['I','II','III','IV','V','VI'];
+
+const dlHeroName = (id) => (DL_HEROES[id] ? DL_HEROES[id][0] : 'Герой #' + id);
+function dlHeroAvatar(id) {
+  const h = DL_HEROES[id];
+  return (h && h[1])
+    ? `<img src="img/heroes/${h[1]}" alt="${esc(h[0])}" loading="lazy">`
+    : `<span class="ava-letter">${esc((h ? h[0] : '?').charAt(0))}</span>`;
+}
+function dlRankInfo(rank) {
+  const t = Number(rank && rank.rank) || 0, s = Number(rank && rank.subrank) || 0;
+  if (!t) return null;
+  const i = Math.min(t, 11);
+  return {
+    name: DL_RANKS[i] + ' ' + (DL_ROMAN[Math.min(Math.max(s, 1), 6) - 1] || ''),
+    img: `https://assets-bucket.deadlock-api.com/assets-api-res/images/ranks/rank${String(i).padStart(2, '0')}_lg.webp`,
+    color: DL_RANK_COLORS[i],
+  };
+}
+// «Steam ID / ссылка / STEAM_X:Y:Z / никнейм» → {id} или {nick}
+function parseSteamInput(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return null;
+  let m = s.match(/steamcommunity\.com\/profiles\/(\d{17})/i);
+  if (m) return { id: Number(BigInt(m[1]) - STEAM64_BASE) };
+  m = s.match(/steamcommunity\.com\/id\/([^/?#]+)/i);
+  if (m) return { nick: m[1] };
+  m = s.match(/^STEAM_[01]:([01]):(\d+)$/i);
+  if (m) return { id: Number(m[2]) * 2 + Number(m[1]) };
+  if (/^\d{17}$/.test(s)) return { id: Number(BigInt(s) - STEAM64_BASE) };
+  if (/^\d{1,10}$/.test(s)) return { id: Number(s) };
+  return { nick: s };
+}
+// fetch к deadlock-api с кэшем в localStorage (тот же TTL 10 минут, что и у данных сайта)
+async function dlFetch(path) {
+  const key = 'steam:' + path;
+  const hit = cacheGet(key);
+  if (hit) return hit;
+  let r;
+  try { r = await fetch(DL_API + path, { cache: 'no-store' }); }
+  catch (_) { throw new Error('Сеть недоступна — проверь соединение и попробуй ещё раз'); }
+  if (r.status === 503 || r.status === 504) throw new Error('API перегружен — подожди минуту и попробуй снова');
+  if (!r.ok) throw new Error('API ответил ошибкой ' + r.status);
+  const j = await r.json();
+  cacheSet(key, j);
+  return j;
+}
+const dlDur = (s) => Math.floor(s / 60) + ':' + String(Math.round(s) % 60).padStart(2, '0');
+const dlPlural = (n, one, few, many) => { const a = Math.abs(n) % 100, b = a % 10; return (a > 10 && a < 20) ? many : b === 1 ? one : b >= 2 && b <= 4 ? few : many; };
+
+function spSparkSVG(vals, color) {
+  if (!vals || vals.length < 2) return '';
+  const w = 600, h = 76, pad = 8;
+  const min = Math.min(...vals), max = Math.max(...vals), span = max - min;
+  const pts = vals.map((v, i) => [
+    (pad + i * (w - 2 * pad) / (vals.length - 1)).toFixed(1),
+    (h - pad - (span ? (v - min) / span : 0.5) * (h - 2 * pad)).toFixed(1),
+  ].join(',')).join(' ');
+  return `<svg class="sp-spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+
+function spHeroCard(h) {
+  const wr = h.matches_played ? Math.round(h.wins / h.matches_played * 100) : 0;
+  return `<div class="sp-hero">${dlHeroAvatar(h.hero_id)}
+    <span class="sp-hinfo"><b>${esc(dlHeroName(h.hero_id))}</b>
+      <small>${fmtNum(h.matches_played)} матчей · ${fmtNum(Math.round(h.networth_per_min || 0))} душ/мин</small></span>
+    <span class="sp-hwr">${wr}%<small>винрейт</small></span></div>`;
+}
+
+function spMatchRow(m) {
+  const win = m.player_match_outcome === 1;
+  const d = m.ranked_delta;
+  return `<div class="sp-match ${win ? 'w' : 'l'}">${dlHeroAvatar(m.hero_id)}
+    <span class="sp-mhero"><b>${esc(dlHeroName(m.hero_id))}</b>
+      <small>${new Date(m.start_time * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })} · ${win ? 'победа' : 'поражение'}</small></span>
+    <span class="sp-mkda"><b>${m.player_kills}/${m.player_deaths}/${m.player_assists}</b> К/Д/П</span>
+    <span class="sp-msouls"><i class="soul-dot"></i>${fmtNum(m.net_worth)}</span>
+    <span class="sp-mdur">${dlDur(m.match_duration_s)}</span>
+    ${d != null ? `<span class="sp-mdelta ${d >= 0 ? 'up' : 'down'}">${d >= 0 ? '+' : ''}${d}</span>` : ''}
+  </div>`;
+}
+
+async function dlShowPlayer(accountId) {
+  const box = $('#steam-player');
+  $('#steam-candidates').hidden = true;
+  box.innerHTML = '<div class="steam-msg">Загружаю статистику — профиль, ранг, матчи, герои…</div>';
+  try {
+    const [steamArr, rank, history, heroStats] = await Promise.all([
+      dlFetch('/players/steam?account_ids=' + accountId),
+      dlFetch('/players/' + accountId + '/rank').catch(() => null),
+      dlFetch('/players/' + accountId + '/match-history'),
+      dlFetch('/players/hero-stats?account_ids=' + accountId),
+    ]);
+    const profile = Array.isArray(steamArr) ? (steamArr.find((p) => p.account_id === accountId) || steamArr[0]) : null;
+    if (!history.length && !(heroStats || []).length) {
+      box.innerHTML = '<div class="steam-msg err">Аккаунт есть, но матчей Deadlock нет — игрок скрыл статистику или не играл. ' +
+        (profile ? `Профиль: <b>${esc(profile.personaname)}</b>.` : '') + '</div>';
+      return;
+    }
+    const hs = heroStats || [];
+    const recent = (history || []).slice(0, 50);
+    const valid = recent.filter((x) => x.match_duration_s > 60 && x.net_worth > 0);
+    const totalM = hs.reduce((a, h) => a + h.matches_played, 0);
+    const totalW = hs.reduce((a, h) => a + h.wins, 0);
+    const wr = totalM ? Math.round(totalW / totalM * 100) : 0;
+    const hours = Math.round(hs.reduce((a, h) => a + (h.time_played || 0), 0) / 360) / 10;
+    const spmN = valid.slice(0, 20);
+    const spm = spmN.length ? Math.round(spmN.reduce((a, x) => a + x.net_worth / (x.match_duration_s / 60), 0) / spmN.length) : 0;
+    const k50 = recent.reduce((a, x) => a + x.player_kills, 0), d50 = recent.reduce((a, x) => a + x.player_deaths, 0), a50 = recent.reduce((a, x) => a + x.player_assists, 0);
+    const kda = d50 ? ((k50 + a50) / d50).toFixed(2) : '—';
+    const avgDur = recent.length ? recent.reduce((a, x) => a + x.match_duration_s, 0) / recent.length : 0;
+    let streak = 0, streakType = '';
+    for (const x of history || []) {
+      if (x.player_match_outcome !== 1 && x.player_match_outcome !== 2) continue;
+      streakType = x.player_match_outcome === 1 ? 'w' : 'l';
+      streak = 1;
+      for (const y of (history || []).slice(history.indexOf(x) + 1)) {
+        if (y.player_match_outcome !== x.player_match_outcome) break;
+        streak++;
+      }
+      break;
+    }
+    const rk = dlRankInfo(rank);
+    const deltas = (history || []).slice(0, 50).slice().reverse().filter((x) => x.ranked_delta != null).map((x) => x.ranked_delta);
+    let cum = 0; const cumDeltas = deltas.map((d) => (cum += d));
+    const subParts = [profile && profile.realname, profile && profile.countrycode ? 'Страна: ' + profile.countrycode : '', 'ID: ' + accountId].filter(Boolean);
+    const tiles = [
+      { n: fmtNum(totalM), t: 'матчей всего' },
+      { n: wr + '%', t: 'винрейт', hot: true },
+      { n: fmtNum(spm), t: 'душ/мин · последние 20' },
+      { n: kda, t: 'KDA · последние 50' },
+      { n: hours, t: 'часов в игре' },
+      { n: fmtNum(profile && profile.matches_played_last_30d), t: 'матчей за 30 дней' },
+      { n: streak ? (streakType === 'w' ? streak + ' ' + dlPlural(streak, 'победа', 'победы', 'побед') : streak + ' ' + dlPlural(streak, 'поражение', 'поражения', 'поражений')) : '—',
+        t: 'текущая серия', cls: streakType === 'w' ? 'up' : streakType === 'l' ? 'down' : '' },
+      { n: avgDur ? dlDur(avgDur) : '—', t: 'средний матч' },
+    ];
+    const fav = hs.slice().sort((a, b) => b.matches_played - a.matches_played).slice(0, 5);
+    const qualified = hs.filter((h) => h.matches_played >= 5);
+    const best = (qualified.length ? qualified : hs).slice()
+      .sort((a, b) => b.wins / b.matches_played - a.wins / a.matches_played).slice(0, 5);
+    box.innerHTML = `
+      <div class="sp-head">
+        ${profile && profile.avatarfull ? `<img class="sp-ava" src="${esc(profile.avatarfull)}" alt="${esc(profile.personaname || '')}">` : ''}
+        <span class="sp-who"><b>${esc(profile && profile.personaname || 'Аккаунт ' + accountId)}</b>
+          <span class="sp-sub">${esc(subParts.join(' · '))}</span>
+          ${profile && profile.profileurl ? `<a class="sp-link" href="${esc(profile.profileurl)}" target="_blank" rel="noopener">Открыть в Steam ↗</a>` : ''}</span>
+        <span class="sp-rank">${rk ? `<img src="${rk.img}" alt="${esc(rk.name)}">` : ''}
+          <span class="sp-tier">${rk ? `<b style="color:${rk.color}">${esc(rk.name)}</b>` : '<b>Ранг не определён</b>'}
+          <small>${rk ? 'звание · ' + (rank.badge || 0) : 'нет ранговых матчей'}</small></span></span>
+      </div>
+      <div class="sp-tiles">${tiles.map((t) => `<div class="sp-tile${t.hot ? ' hot' : ''}"><div class="n ${t.cls || ''}">${t.n}</div><div class="t">${t.t}</div></div>`).join('')}</div>
+      ${cumDeltas.length > 1 ? `<div class="sp-block"><h3>Движение по рангу · последние ${cumDeltas.length} ранговых матчей</h3>${spSparkSVG(cumDeltas, rk ? rk.color : '#C8A96A')}</div>` : ''}
+      <div class="sp-block sp-heroes">
+        <div><h3>Любимые герои</h3>${fav.map(spHeroCard).join('')}</div>
+        <div><h3>Лучшие по винрейту</h3>${best.map(spHeroCard).join('')}</div>
+      </div>
+      <div class="sp-block"><h3>История матчей · последние ${Math.min((history || []).length, 15)}</h3>
+        <div class="sp-hist">${(history || []).slice(0, 15).map(spMatchRow).join('')}</div></div>`;
+  } catch (e) {
+    box.innerHTML = '<div class="steam-msg err">' + esc(e.message || 'Не удалось загрузить статистику') + '</div>';
+  }
+}
+
+async function dlSearchNick(nick) {
+  const box = $('#steam-player'), cand = $('#steam-candidates');
+  box.innerHTML = '<div class="steam-msg">Ищу игроков по запросу «' + esc(nick) + '»…</div>';
+  try {
+    const res = await dlFetch('/players/steam-search?search_query=' + encodeURIComponent(nick) + '&limit=8');
+    if (!res.length) {
+      cand.hidden = true;
+      box.innerHTML = '<div class="steam-msg err">Никого не нашёл по «' + esc(nick) + '». Введи Steam ID цифрами (узнать: steamid.io) или ссылку на профиль Steam.</div>';
+      return;
+    }
+    box.innerHTML = '<div class="steam-msg">Нашёл ' + res.length + ' ' + dlPlural(res.length, 'игрока', 'игроков', 'игроков') + ' — выбери свой аккаунт:</div>';
+    cand.innerHTML = res.map((p) => `<button type="button" class="sp-hero" data-acc="${p.account_id}">
+        ${p.avatarmedium ? `<img src="${esc(p.avatarmedium)}" alt="" loading="lazy">` : '<span class="ava-letter">?</span>'}
+        <span class="sp-hinfo"><b>${esc(p.personaname)}</b><small>${fmtNum(p.matches_played_last_30d)} матчей за 30 дней</small></span>
+        <span class="sp-hwr">ID<small>${p.account_id}</small></span></button>`).join('');
+    cand.hidden = false;
+  } catch (e) {
+    box.innerHTML = '<div class="steam-msg err">' + esc(e.message || 'Поиск не удался') + '</div>';
+  }
+}
+
+async function dlLookup(raw) {
+  const p = parseSteamInput(raw);
+  if (!p) { $('#steam-player').innerHTML = '<div class="steam-msg err">Введи Steam ID, ссылку на профиль или никнейм.</div>'; return; }
+  if (p.id != null) return dlShowPlayer(p.id);
+  return dlSearchNick(p.nick);
+}
+
+$('#steam-lookup-btn').addEventListener('click', () => dlLookup($('#steam-lookup').value));
+$('#steam-lookup').addEventListener('keydown', (e) => { if (e.key === 'Enter') dlLookup(e.target.value); });
+document.addEventListener('click', (e) => {
+  const ex = e.target.closest('.steam-example');
+  if (ex) { $('#steam-lookup').value = ex.textContent.trim(); return dlLookup(ex.textContent.trim()); }
+  const c = e.target.closest('#steam-candidates [data-acc]');
+  if (c) { $('#steam-lookup').value = c.dataset.acc; return dlShowPlayer(Number(c.dataset.acc)); }
+});
+
 // ---------- init ----------
 (async function init() {
   await initData();
