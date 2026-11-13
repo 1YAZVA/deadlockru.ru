@@ -1048,55 +1048,73 @@ function parseSteamInput(raw) {
   return { nick: s };
 }
 // fetch к deadlock-api с кэшем в localStorage (тот же TTL 10 минут, что и у данных сайта).
-// API живёт за Cloudflare, и из некоторых сетей РФ прямой путь умирает по таймауту
-// (маленькие запросы проходят, большие — нет). Поэтому: прямой путь → при сетевом
-// сбое запасные CORS-прокси → понятная ошибка с подсказкой. Рабочий маршрут
-// запоминается в sessionStorage, чтобы не терять по 12 секунд на мёртвом прямом.
-// cors.eu.org отдаёт ответ как есть; у allorigins /raw в браузере падает по
-// content-encoding, поэтому берём /get с распаковкой contents.
+// API живёт за Cloudflare, и из некоторых сетей РФ прямой путь умирает (блокировка
+// TLS/ECH), а публичные CORS-прокси то и дело лежат или ловят лимиты (429/522/520).
+// Поэтому все маршруты запускаются ПАРАЛЛЕЛЬНО (гонка): побеждает первый ответивший,
+// остальные отменяются — ожидание ограничено таймаутом самого медленного, а не суммой.
+// Маршруты: свой Worker на /dlapi/ (если развёрнут на своём домене — самый надёжный
+// путь; без него просто 404 и он отпадает мгновенно) → прямой путь (12 с) →
+// публичные прокси (по 25-30 с). У allorigins два варианта (/get с распаковкой
+// contents и /raw), r.jina.ai отдаёт текстом — распаковываем первый JSON в нём.
+// Прокси оживают волнами, поэтому при полном провале гонка повторяется до 3 раз.
 const DL_ROUTES = [
-  { url: (u) => u },
-  { url: (u) => 'https://cors.eu.org/' + u },
-  { url: (u) => 'https://api.allorigins.win/get?url=' + encodeURIComponent(u),
+  { tmo: 15000, url: (u) => location.origin + '/dlapi/?url=' + encodeURIComponent(u) },
+  { tmo: 12000, url: (u) => u },
+  { tmo: 30000, url: (u) => 'https://cors.eu.org/' + u },
+  { tmo: 30000, url: (u) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u) },
+  { tmo: 30000, url: (u) => 'https://api.allorigins.win/get?url=' + encodeURIComponent(u),
     unwrap: (j) => (typeof j.contents === 'string' ? JSON.parse(j.contents) : j.contents) },
+  { tmo: 30000, url: (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u) },
+  { tmo: 30000, url: (u) => 'https://api.cors.lol/?url=' + encodeURIComponent(u) },
+  { tmo: 25000, text: true, url: (u) => 'https://r.jina.ai/' + u,
+    unwrap: (t) => {
+      const i = ['[', '{'].map((c) => t.indexOf(c)).filter((x) => x >= 0).sort((a, b) => a - b)[0];
+      return JSON.parse(t.slice(i));
+    } },
 ];
 async function dlFetch(path) {
   const key = 'steam:' + path;
   const hit = cacheGet(key);
   if (hit) return hit;
-  const saved = Number(sessionStorage.getItem('dl_route')) || 0;
-  const order = [saved, ...DL_ROUTES.map((_, i) => i).filter((i) => i !== saved)];
-  let lastErr = null;
-  for (const i of order) {
-    const route = DL_ROUTES[i];
-    // прямой путь сдаёмся быстро (12 с — если маршрут мёртв, быстрее уйти на прокси),
-    // запасным прокси даём больше (30 с — они качают ответ с нуля)
-    const ctrl = new AbortController();
-    const to = setTimeout(() => ctrl.abort(), i === 0 ? 12000 : 30000);
-    let j;
+  let aggErr = null;
+  for (let round = 0; round < 3; round++) { // прокси оживают волнами — до трёх попыток
+    if (round) await new Promise((res) => setTimeout(res, round === 1 ? 3000 : 8000));
+    const ctrls = new Map();
+    const attempts = DL_ROUTES.map(async (route, i) => {
+      const direct = i === 1; // индекс прямого пути в DL_ROUTES
+      const ctrl = new AbortController();
+      ctrls.set(i, ctrl);
+      const to = setTimeout(() => ctrl.abort(), route.tmo);
+      try {
+        const r = await fetch(route.url(DL_API + path), { cache: 'no-store', signal: ctrl.signal });
+        if (direct) { // от самого API — честные сообщения
+          if (r.status === 429) throw Object.assign(new Error('Слишком много запросов к API — подожди минуту и попробуй снова'), { noProxy: true });
+          if (r.status === 503 || r.status === 504) throw new Error('API перегружен — подожди минуту и попробуй снова');
+        }
+        if (!r.ok) throw new Error('маршрут ответил ' + r.status); // прокси: 429/522 — маршрут не годится
+        let j;
+        if (route.text) j = route.unwrap(await r.text());
+        else { j = await r.json(); if (route.unwrap) j = route.unwrap(j); }
+        return { i, j };
+      } finally { clearTimeout(to); }
+    });
     try {
-      const r = await fetch(route.url(DL_API + path), { cache: 'no-store', signal: ctrl.signal });
-      if (r.status === 429) { // лимит API честно показываем, через прокси не ретраим
-        throw Object.assign(new Error('Слишком много запросов к API — подожди минуту и попробуй снова'), { noProxy: true });
-      }
-      if (r.status === 503 || r.status === 504) throw new Error('API перегружен — подожди минуту и попробуй снова');
-      if (!r.ok) throw new Error('API ответил ошибкой ' + r.status);
-      j = await r.json();
-      if (route.unwrap) j = route.unwrap(j);
+      const { j } = await Promise.any(attempts); // побеждает первый ответивший маршрут
+      for (const c of ctrls.values()) c.abort(); // остальные останавливаем
+      cacheSet(key, j);
+      return j;
     } catch (e) {
-      if (e && e.noProxy) throw e;
-      lastErr = e;
-      continue; // следующий маршрут
+      aggErr = e;
+      const noProxy = e && e.errors && e.errors.find((x) => x && x.noProxy);
+      if (noProxy) throw noProxy; // лимит самого API — ретраить бессмысленно
     }
-    finally { clearTimeout(to); }
-    if (i !== saved) try { sessionStorage.setItem('dl_route', i); } catch (_) {}
-    cacheSet(key, j);
-    return j;
   }
-  const base = lastErr && lastErr.name === 'AbortError'
+  const errs = (aggErr && aggErr.errors) || [];
+  const pick = errs.find((x) => x && x.noProxy) || errs[1] || errs[0]; // errs[1] — прямой путь
+  const base = pick && pick.name === 'AbortError'
     ? 'API не ответил за отведённое время'
-    : (lastErr && lastErr.message) || 'Сеть недоступна';
-  throw new Error(base + ' — пробовал прямой путь и запасные прокси; возможно, API недоступен из твоего региона, помогает VPN');
+    : (pick && pick.message) || 'Сеть недоступна';
+  throw new Error(base + ' — перепробовал все маршруты несколько раз; возможно, API недоступен из твоего региона, помогает VPN');
 }
 const dlDur = (s) => Math.floor(s / 60) + ':' + String(Math.round(s) % 60).padStart(2, '0');
 const dlPlural = (n, one, few, many) => { const a = Math.abs(n) % 100, b = a % 10; return (a > 10 && a < 20) ? many : b === 1 ? one : b >= 2 && b <= 4 ? few : many; };
