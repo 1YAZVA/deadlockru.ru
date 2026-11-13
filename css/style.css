@@ -595,7 +595,7 @@ main{position:relative;z-index:1}
   .tier-heroes{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
 }
 
-/* ===== ����� (������� ������� + ��������) ===== */
+/* ===== Гайды (вкладка «Гайды» + переходы) ===== */
 .guides-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:20px}
 .guide-card{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--line);
   border-radius:14px;background:var(--panel);text-decoration:none;color:var(--text);
@@ -747,7 +747,11 @@ main{position:relative;z-index:1}
 .sp-tile .n small{font-size:12px;color:var(--muted);font-family:var(--font-body);font-weight:400}
 .sp-tile .t{font-size:11.5px;color:var(--muted);margin-top:3px;letter-spacing:.02em}
 .sp-tile.hot .n{color:var(--accent)}
+.sp-tile .s{font-size:10.5px;color:var(--muted);opacity:.75;margin-top:2px;line-height:1.3}
 .sp-tile .n .up{color:var(--ok)} .sp-tile .n .down{color:var(--bad)}
+.sp-note{margin-top:14px;font-size:12px;color:var(--muted);line-height:1.55}
+.sp-note a{color:var(--muted)}
+.steam-retry{margin-left:10px;background:var(--accent);border:0;border-radius:8px;color:#1a1408;font-family:var(--font-body);font-weight:600;font-size:13px;padding:6px 14px;cursor:pointer}
 /* прогресс ранга */
 .sp-block{margin-top:22px}
 .sp-block > h3{font-family:var(--font-display);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
@@ -765,7 +769,7 @@ main{position:relative;z-index:1}
 /* история матчей */
 .sp-hist{display:grid;gap:8px}
 .sp-match{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-left-width:3px;border-radius:10px;padding:9px 14px;min-width:0}
-.sp-match.w{border-left-color:var(--ok)} .sp-match.l{border-left-color:var(--bad)}
+.sp-match.w{border-left-color:var(--ok)} .sp-match.l{border-left-color:var(--bad)} .sp-match.u{border-left-color:var(--line);opacity:.6}
 .sp-match img{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);object-fit:cover;flex:none}
 .sp-match .ava-letter{width:34px;height:34px;font-size:13px;flex:none}
 .sp-match .sp-mhero{min-width:0;flex:1}

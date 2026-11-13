@@ -146,7 +146,15 @@ function cacheGet(key) {
   } catch (_) { return null; }
 }
 function cacheSet(key, v) {
-  try { localStorage.setItem('dl_cache:' + key, JSON.stringify({ t: Date.now(), v })); } catch (_) {}
+  try { localStorage.setItem('dl_cache:' + key, JSON.stringify({ t: Date.now(), v })); }
+  catch (_) {
+    // квота localStorage переполнена (история матчей — ~1,7 МБ): выкидываем
+    // старые steam-кэши и пробуем ещё раз, иначе просто не кэшируем
+    try {
+      Object.keys(localStorage).filter(k => k.startsWith('dl_cache:steam:')).forEach(k => localStorage.removeItem(k));
+      localStorage.setItem('dl_cache:' + key, JSON.stringify({ t: Date.now(), v }));
+    } catch (_) {}
+  }
 }
 // админка вызывает после коммита, чтобы перезагрузка показала свежие правки
 function dlClearDataCache() {
@@ -1039,19 +1047,56 @@ function parseSteamInput(raw) {
   if (/^\d{1,10}$/.test(s)) return { id: Number(s) };
   return { nick: s };
 }
-// fetch к deadlock-api с кэшем в localStorage (тот же TTL 10 минут, что и у данных сайта)
+// fetch к deadlock-api с кэшем в localStorage (тот же TTL 10 минут, что и у данных сайта).
+// API живёт за Cloudflare, и из некоторых сетей РФ прямой путь умирает по таймауту
+// (маленькие запросы проходят, большие — нет). Поэтому: прямой путь → при сетевом
+// сбое запасные CORS-прокси → понятная ошибка с подсказкой. Рабочий маршрут
+// запоминается в sessionStorage, чтобы не терять по 12 секунд на мёртвом прямом.
+// cors.eu.org отдаёт ответ как есть; у allorigins /raw в браузере падает по
+// content-encoding, поэтому берём /get с распаковкой contents.
+const DL_ROUTES = [
+  { url: (u) => u },
+  { url: (u) => 'https://cors.eu.org/' + u },
+  { url: (u) => 'https://api.allorigins.win/get?url=' + encodeURIComponent(u),
+    unwrap: (j) => (typeof j.contents === 'string' ? JSON.parse(j.contents) : j.contents) },
+];
 async function dlFetch(path) {
   const key = 'steam:' + path;
   const hit = cacheGet(key);
   if (hit) return hit;
-  let r;
-  try { r = await fetch(DL_API + path, { cache: 'no-store' }); }
-  catch (_) { throw new Error('Сеть недоступна — проверь соединение и попробуй ещё раз'); }
-  if (r.status === 503 || r.status === 504) throw new Error('API перегружен — подожди минуту и попробуй снова');
-  if (!r.ok) throw new Error('API ответил ошибкой ' + r.status);
-  const j = await r.json();
-  cacheSet(key, j);
-  return j;
+  const saved = Number(sessionStorage.getItem('dl_route')) || 0;
+  const order = [saved, ...DL_ROUTES.map((_, i) => i).filter((i) => i !== saved)];
+  let lastErr = null;
+  for (const i of order) {
+    const route = DL_ROUTES[i];
+    // прямой путь сдаёмся быстро (12 с — если маршрут мёртв, быстрее уйти на прокси),
+    // запасным прокси даём больше (30 с — они качают ответ с нуля)
+    const ctrl = new AbortController();
+    const to = setTimeout(() => ctrl.abort(), i === 0 ? 12000 : 30000);
+    let j;
+    try {
+      const r = await fetch(route.url(DL_API + path), { cache: 'no-store', signal: ctrl.signal });
+      if (r.status === 429) { // лимит API честно показываем, через прокси не ретраим
+        throw Object.assign(new Error('Слишком много запросов к API — подожди минуту и попробуй снова'), { noProxy: true });
+      }
+      if (r.status === 503 || r.status === 504) throw new Error('API перегружен — подожди минуту и попробуй снова');
+      if (!r.ok) throw new Error('API ответил ошибкой ' + r.status);
+      j = await r.json();
+      if (route.unwrap) j = route.unwrap(j);
+    } catch (e) {
+      if (e && e.noProxy) throw e;
+      lastErr = e;
+      continue; // следующий маршрут
+    }
+    finally { clearTimeout(to); }
+    if (i !== saved) try { sessionStorage.setItem('dl_route', i); } catch (_) {}
+    cacheSet(key, j);
+    return j;
+  }
+  const base = lastErr && lastErr.name === 'AbortError'
+    ? 'API не ответил за отведённое время'
+    : (lastErr && lastErr.message) || 'Сеть недоступна';
+  throw new Error(base + ' — пробовал прямой путь и запасные прокси; возможно, API недоступен из твоего региона, помогает VPN');
 }
 const dlDur = (s) => Math.floor(s / 60) + ':' + String(Math.round(s) % 60).padStart(2, '0');
 const dlPlural = (n, one, few, many) => { const a = Math.abs(n) % 100, b = a % 10; return (a > 10 && a < 20) ? many : b === 1 ? one : b >= 2 && b <= 4 ? few : many; };
@@ -1077,11 +1122,13 @@ function spHeroCard(h) {
 }
 
 function spMatchRow(m) {
+  // исход: 1 = победа, 2 = поражение, 5 = «не учёт», 0 — исхода нет в базе
   const win = m.player_match_outcome === 1;
+  const unknown = m.player_match_outcome !== 1 && m.player_match_outcome !== 2;
   const d = m.ranked_delta;
-  return `<div class="sp-match ${win ? 'w' : 'l'}">${dlHeroAvatar(m.hero_id)}
+  return `<div class="sp-match ${win ? 'w' : unknown ? 'u' : 'l'}">${dlHeroAvatar(m.hero_id)}
     <span class="sp-mhero"><b>${esc(dlHeroName(m.hero_id))}</b>
-      <small>${new Date(m.start_time * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })} · ${win ? 'победа' : 'поражение'}</small></span>
+      <small>${new Date(m.start_time * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })} · ${unknown ? 'не учёт' : win ? 'победа' : 'поражение'}</small></span>
     <span class="sp-mkda"><b>${m.player_kills}/${m.player_deaths}/${m.player_assists}</b> К/Д/П</span>
     <span class="sp-msouls"><i class="soul-dot"></i>${fmtNum(m.net_worth)}</span>
     <span class="sp-mdur">${dlDur(m.match_duration_s)}</span>
@@ -1089,86 +1136,134 @@ function spMatchRow(m) {
   </div>`;
 }
 
+const errMsg = (r) => (r && (r.reason || r) && (r.reason || r).message) || 'ошибка сети';
+
 async function dlShowPlayer(accountId) {
   const box = $('#steam-player');
   $('#steam-candidates').hidden = true;
   box.innerHTML = '<div class="steam-msg">Загружаю статистику — профиль, ранг, матчи, герои…</div>';
-  try {
-    const [steamArr, rank, history, heroStats] = await Promise.all([
-      dlFetch('/players/steam?account_ids=' + accountId),
-      dlFetch('/players/' + accountId + '/rank').catch(() => null),
-      dlFetch('/players/' + accountId + '/match-history'),
-      dlFetch('/players/hero-stats?account_ids=' + accountId),
-    ]);
-    const profile = Array.isArray(steamArr) ? (steamArr.find((p) => p.account_id === accountId) || steamArr[0]) : null;
-    if (!history.length && !(heroStats || []).length) {
-      box.innerHTML = '<div class="steam-msg err">Аккаунт есть, но матчей Deadlock нет — игрок скрыл статистику или не играл. ' +
-        (profile ? `Профиль: <b>${esc(profile.personaname)}</b>.` : '') + '</div>';
+  // Фаза 1: профиль + ранг. Каждый запрос живёт своей жизнью — падение одного
+  // не убивает весь блок (раньше один сбой в Promise.all оставлял пустоту).
+  const [steamR, rankR] = await Promise.allSettled([
+    dlFetch('/players/steam?account_ids=' + accountId),
+    dlFetch('/players/' + accountId + '/rank'),
+  ]);
+  const profile = (() => { const a = steamR.status === 'fulfilled' ? steamR.value : null; return Array.isArray(a) ? (a.find((p) => p.account_id === accountId) || a[0]) : null; })();
+  if (steamR.status === 'rejected' && rankR.status === 'rejected') {
+    box.innerHTML = '<div class="steam-msg err">' + esc(errMsg(steamR)) +
+      ` <button type="button" class="steam-retry" data-acc="${accountId}">Повторить</button></div>`;
+    return;
+  }
+  const rk = rankR.status === 'fulfilled' ? dlRankInfo(rankR.value) : null;
+  const rankFail = rankR.status === 'rejected';
+  const subParts = [profile && profile.realname, profile && profile.countrycode ? 'Страна: ' + profile.countrycode : '', 'ID: ' + accountId].filter(Boolean);
+  box.innerHTML = `
+    <div class="sp-head">
+      ${profile && profile.avatarfull ? `<img class="sp-ava" src="${esc(profile.avatarfull)}" alt="${esc(profile.personaname || '')}">` : ''}
+      <span class="sp-who"><b>${esc(profile && profile.personaname || 'Аккаунт ' + accountId)}</b>
+        <span class="sp-sub">${esc(subParts.join(' · '))}</span>
+        ${profile && profile.profileurl ? `<a class="sp-link" href="${esc(profile.profileurl)}" target="_blank" rel="noopener">Открыть в Steam ↗</a>` : ''}</span>
+      <span class="sp-rank">${rk ? `<img src="${rk.img}" alt="${esc(rk.name)}">` : ''}
+        <span class="sp-tier">${rk ? `<b style="color:${rk.color}">${esc(rk.name)}</b>` : '<b>Ранг не определён</b>'}
+        <small>${rk ? 'звание · ' + (rankR.value.badge || 0) : rankFail ? 'ранг не загрузился' : 'нет ранговых матчей'}</small></span></span>
+    </div>`;
+  // Фаза 2: история матчей (~1,7 МБ) и статистика по героям грузятся НЕЗАВИСИМО —
+  // каждая часть отрисовывается сразу, как только пришла, со своим «Повторить» при сбое.
+  box.insertAdjacentHTML('beforeend', '<div id="steam-lifetime"><div class="steam-msg">Считаю матчи, героев и историю…</div></div>');
+  const parts = { hist: null, hs: null, histErr: '', hsErr: '' };
+  const refresh = () => {
+    const host = $('#steam-lifetime');
+    if (!host) return;
+    const hist = parts.hist, hs = parts.hs || []; // hs может ещё не прийти, если история быстрее
+    if (!hist && !hs && (parts.histErr || parts.hsErr)) {
+      host.innerHTML = '<div class="steam-msg err">' + esc(parts.histErr || parts.hsErr) +
+        ` <button type="button" class="steam-retry" data-acc="${accountId}">Повторить</button></div>`;
       return;
     }
-    const hs = heroStats || [];
-    const recent = (history || []).slice(0, 50);
-    const valid = recent.filter((x) => x.match_duration_s > 60 && x.net_worth > 0);
-    const totalM = hs.reduce((a, h) => a + h.matches_played, 0);
-    const totalW = hs.reduce((a, h) => a + h.wins, 0);
-    const wr = totalM ? Math.round(totalW / totalM * 100) : 0;
-    const hours = Math.round(hs.reduce((a, h) => a + (h.time_played || 0), 0) / 360) / 10;
-    const spmN = valid.slice(0, 20);
-    const spm = spmN.length ? Math.round(spmN.reduce((a, x) => a + x.net_worth / (x.match_duration_s / 60), 0) / spmN.length) : 0;
-    const k50 = recent.reduce((a, x) => a + x.player_kills, 0), d50 = recent.reduce((a, x) => a + x.player_deaths, 0), a50 = recent.reduce((a, x) => a + x.player_assists, 0);
-    const kda = d50 ? ((k50 + a50) / d50).toFixed(2) : '—';
-    const avgDur = recent.length ? recent.reduce((a, x) => a + x.match_duration_s, 0) / recent.length : 0;
-    let streak = 0, streakType = '';
-    for (const x of history || []) {
-      if (x.player_match_outcome !== 1 && x.player_match_outcome !== 2) continue;
-      streakType = x.player_match_outcome === 1 ? 'w' : 'l';
-      streak = 1;
-      for (const y of (history || []).slice(history.indexOf(x) + 1)) {
-        if (y.player_match_outcome !== x.player_match_outcome) break;
-        streak++;
-      }
-      break;
+    if (!hist && !hs) {
+      host.innerHTML = '<div class="steam-msg err">Аккаунт есть, но матчей Deadlock нет — игрок скрыл статистику или не играл.</div>';
+      return;
     }
-    const rk = dlRankInfo(rank);
-    const deltas = (history || []).slice(0, 50).slice().reverse().filter((x) => x.ranked_delta != null).map((x) => x.ranked_delta);
-    let cum = 0; const cumDeltas = deltas.map((d) => (cum += d));
-    const subParts = [profile && profile.realname, profile && profile.countrycode ? 'Страна: ' + profile.countrycode : '', 'ID: ' + accountId].filter(Boolean);
-    const tiles = [
-      { n: fmtNum(totalM), t: 'матчей всего' },
-      { n: wr + '%', t: 'винрейт', hot: true },
-      { n: fmtNum(spm), t: 'душ/мин · последние 20' },
-      { n: kda, t: 'KDA · последние 50' },
-      { n: hours, t: 'часов в игре' },
-      { n: fmtNum(profile && profile.matches_played_last_30d), t: 'матчей за 30 дней' },
-      { n: streak ? (streakType === 'w' ? streak + ' ' + dlPlural(streak, 'победа', 'победы', 'побед') : streak + ' ' + dlPlural(streak, 'поражение', 'поражения', 'поражений')) : '—',
-        t: 'текущая серия', cls: streakType === 'w' ? 'up' : streakType === 'l' ? 'down' : '' },
-      { n: avgDur ? dlDur(avgDur) : '—', t: 'средний матч' },
-    ];
+    // Тоталы — по ПОЛНОЙ истории матчей (она шире hero-stats и включает уличные стычки).
+    // Исход известен не для всех матчей: 1 = победа, 2 = поражение, 5 = «не учёт», 0 — исхода нет в базе.
+    const sum = (arr, k) => arr.reduce((a, x) => a + (Number(x[k]) || 0), 0);
+    let tiles, cumDeltas = [], histBlock = '', sparkBlock = '';
+    if (hist) {
+      const known = hist.filter((x) => x.player_match_outcome === 1 || x.player_match_outcome === 2);
+      const knownW = known.filter((x) => x.player_match_outcome === 1).length;
+      const wr = known.length >= 10 ? Math.round(knownW / known.length * 100) : 0;
+      const recent = hist.slice(0, 50);
+      const valid = recent.filter((x) => x.match_duration_s > 60 && x.net_worth > 0);
+      const spmN = valid.slice(0, 20);
+      const spm = spmN.length ? Math.round(spmN.reduce((a, x) => a + x.net_worth / (x.match_duration_s / 60), 0) / spmN.length) : 0;
+      const k50 = sum(recent, 'player_kills'), d50 = sum(recent, 'player_deaths'), a50 = sum(recent, 'player_assists');
+      const kda = d50 ? ((k50 + a50) / d50).toFixed(2) : '—';
+      const avgDur = recent.length ? recent.reduce((a, x) => a + x.match_duration_s, 0) / recent.length : 0;
+      let streak = 0, streakType = '';
+      for (const x of hist) {
+        if (x.player_match_outcome !== 1 && x.player_match_outcome !== 2) continue;
+        streakType = x.player_match_outcome === 1 ? 'w' : 'l';
+        streak = 1;
+        for (const y of hist.slice(hist.indexOf(x) + 1)) {
+          if (y.player_match_outcome !== x.player_match_outcome) break;
+          streak++;
+        }
+        break;
+      }
+      const deltas = hist.slice(0, 50).slice().reverse().filter((x) => x.ranked_delta != null).map((x) => x.ranked_delta);
+      let cum = 0; cumDeltas = deltas.map((d) => (cum += d));
+      tiles = [
+        { n: fmtNum(hist.length), t: 'матчей в базе API', s: 'включая уличные стычки' },
+        { n: wr ? wr + '%' : '—', t: 'винрейт', hot: true, s: known.length ? 'по ' + known.length + ' матчам с известным исходом' : 'у API нет исходов матчей' },
+        { n: fmtNum(spm), t: 'душ/мин · последние 20' },
+        { n: kda, t: 'KDA · последние 50' },
+        { n: fmtNum(Math.round(sum(hist, 'match_duration_s') / 3600)), t: 'часов в матчах', s: 'в Steam больше: + меню и лобби' },
+        { n: fmtNum(profile && profile.matches_played_last_30d), t: 'матчей за 30 дней' },
+        { n: streak ? (streakType === 'w' ? streak + ' ' + dlPlural(streak, 'победа', 'победы', 'побед') : streak + ' ' + dlPlural(streak, 'поражение', 'поражения', 'поражений')) : '—',
+          t: 'текущая серия', cls: streakType === 'w' ? 'up' : streakType === 'l' ? 'down' : '' },
+        { n: avgDur ? dlDur(avgDur) : '—', t: 'средний матч' },
+        { n: fmtNum(sum(hist, 'net_worth')), t: 'душ собрано', s: 'за матчи в базе API' },
+        { n: fmtNum(sum(hist, 'player_kills')), t: 'убийств' },
+        { n: fmtNum(sum(hist, 'player_assists')), t: 'помощи' },
+        { n: fmtNum(sum(hist, 'last_hits')), t: 'добиваний' },
+        { n: fmtNum(sum(hist, 'denies')), t: 'укр. шаров' },
+      ];
+      sparkBlock = cumDeltas.length > 1 ? `<div class="sp-block"><h3>Движение по рангу · последние ${cumDeltas.length} ранговых матчей</h3>${spSparkSVG(cumDeltas, rk ? rk.color : '#C8A96A')}</div>` : '';
+      histBlock = `<div class="sp-block"><h3>История матчей · последние ${Math.min(hist.length, 15)}</h3>
+        <div class="sp-hist">${hist.slice(0, 15).map(spMatchRow).join('')}</div></div>`;
+    } else {
+      // история ещё не пришла — быстрая предварительная раскладка по героям
+      const m = sum(hs, 'matches_played'), w = sum(hs, 'wins');
+      tiles = [
+        { n: fmtNum(m), t: 'матчей в базе API', s: 'по героям · история ещё считается' },
+        { n: m ? Math.round(w / m * 100) + '%' : '—', t: 'винрейт', hot: true, s: 'по героям · уточнится по истории' },
+        { n: fmtNum(Math.round(sum(hs, 'time_played') / 3600)), t: 'часов в матчах', s: 'в Steam больше: + меню и лобби' },
+        { n: fmtNum(profile && profile.matches_played_last_30d), t: 'матчей за 30 дней' },
+      ];
+    }
     const fav = hs.slice().sort((a, b) => b.matches_played - a.matches_played).slice(0, 5);
     const qualified = hs.filter((h) => h.matches_played >= 5);
     const best = (qualified.length ? qualified : hs).slice()
       .sort((a, b) => b.wins / b.matches_played - a.wins / a.matches_played).slice(0, 5);
-    box.innerHTML = `
-      <div class="sp-head">
-        ${profile && profile.avatarfull ? `<img class="sp-ava" src="${esc(profile.avatarfull)}" alt="${esc(profile.personaname || '')}">` : ''}
-        <span class="sp-who"><b>${esc(profile && profile.personaname || 'Аккаунт ' + accountId)}</b>
-          <span class="sp-sub">${esc(subParts.join(' · '))}</span>
-          ${profile && profile.profileurl ? `<a class="sp-link" href="${esc(profile.profileurl)}" target="_blank" rel="noopener">Открыть в Steam ↗</a>` : ''}</span>
-        <span class="sp-rank">${rk ? `<img src="${rk.img}" alt="${esc(rk.name)}">` : ''}
-          <span class="sp-tier">${rk ? `<b style="color:${rk.color}">${esc(rk.name)}</b>` : '<b>Ранг не определён</b>'}
-          <small>${rk ? 'звание · ' + (rank.badge || 0) : 'нет ранговых матчей'}</small></span></span>
-      </div>
-      <div class="sp-tiles">${tiles.map((t) => `<div class="sp-tile${t.hot ? ' hot' : ''}"><div class="n ${t.cls || ''}">${t.n}</div><div class="t">${t.t}</div></div>`).join('')}</div>
-      ${cumDeltas.length > 1 ? `<div class="sp-block"><h3>Движение по рангу · последние ${cumDeltas.length} ранговых матчей</h3>${spSparkSVG(cumDeltas, rk ? rk.color : '#C8A96A')}</div>` : ''}
-      <div class="sp-block sp-heroes">
+    const failed = [];
+    if (parts.histErr) failed.push('история матчей: ' + parts.histErr);
+    if (parts.hsErr) failed.push('статистика по героям: ' + parts.hsErr);
+    host.innerHTML = `
+      <div class="sp-tiles">${tiles.map((t) => `<div class="sp-tile${t.hot ? ' hot' : ''}"><div class="n ${t.cls || ''}">${t.n}</div><div class="t">${t.t}</div>${t.s ? `<div class="s">${t.s}</div>` : ''}</div>`).join('')}</div>
+      ${sparkBlock}
+      ${hs.length ? `<div class="sp-block sp-heroes">
         <div><h3>Любимые герои</h3>${fav.map(spHeroCard).join('')}</div>
         <div><h3>Лучшие по винрейту</h3>${best.map(spHeroCard).join('')}</div>
-      </div>
-      <div class="sp-block"><h3>История матчей · последние ${Math.min((history || []).length, 15)}</h3>
-        <div class="sp-hist">${(history || []).slice(0, 15).map(spMatchRow).join('')}</div></div>`;
-  } catch (e) {
-    box.innerHTML = '<div class="steam-msg err">' + esc(e.message || 'Не удалось загрузить статистику') + '</div>';
-  }
+      </div>` : ''}
+      ${histBlock}
+      <div class="sp-note">Цифры — из открытой базы deadlock-api.com: в ней нет части матчей и исходов матчей до сентября 2026, поэтому итоги могут быть меньше внутриигровых. «Часов в Steam» дополнительно включает время в меню и лобби.${failed.length ? ' Не загрузилось: ' + esc(failed.join('; ')) + ' — можно повторить поиск.' : ''}</div>`;
+  };
+  dlFetch('/players/' + accountId + '/match-history')
+    .then((j) => { parts.hist = Array.isArray(j) ? j : []; refresh(); })
+    .catch((e) => { parts.histErr = errMsg(e); refresh(); });
+  dlFetch('/players/hero-stats?account_ids=' + accountId)
+    .then((j) => { parts.hs = Array.isArray(j) ? j : []; refresh(); })
+    .catch((e) => { parts.hsErr = errMsg(e); refresh(); });
 }
 
 async function dlSearchNick(nick) {
@@ -1204,6 +1299,8 @@ $('#steam-lookup').addEventListener('keydown', (e) => { if (e.key === 'Enter') d
 document.addEventListener('click', (e) => {
   const ex = e.target.closest('.steam-example');
   if (ex) { $('#steam-lookup').value = ex.textContent.trim(); return dlLookup(ex.textContent.trim()); }
+  const rt = e.target.closest('.steam-retry');
+  if (rt) return dlShowPlayer(Number(rt.dataset.acc));
   const c = e.target.closest('#steam-candidates [data-acc]');
   if (c) { $('#steam-lookup').value = c.dataset.acc; return dlShowPlayer(Number(c.dataset.acc)); }
 });
