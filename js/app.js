@@ -145,6 +145,14 @@ function cacheGet(key) {
     return (hit && Date.now() - hit.t < JSON_TTL) ? hit.v : null;
   } catch (_) { return null; }
 }
+// протухший кэш (старше TTL, но сохранён): если все маршруты мертвы, лучше
+// показать данные прошлой загрузки с пометкой, чем пустоту с ошибкой
+function cacheGetStale(key) {
+  try {
+    const hit = JSON.parse(localStorage.getItem('dl_cache:' + key) || 'null');
+    return (hit && hit.v != null) ? { v: hit.v, t: hit.t } : null;
+  } catch (_) { return null; }
+}
 function cacheSet(key, v) {
   try { localStorage.setItem('dl_cache:' + key, JSON.stringify({ t: Date.now(), v })); }
   catch (_) {
@@ -1054,19 +1062,21 @@ function parseSteamInput(raw) {
 // остальные отменяются — ожидание ограничено таймаутом самого медленного, а не суммой.
 // Маршруты: свой Worker на /dlapi/ (если развёрнут на своём домене — самый надёжный
 // путь; без него просто 404 и он отпадает мгновенно) → прямой путь (12 с) →
-// публичные прокси (по 25-30 с). У allorigins два варианта (/get с распаковкой
+// публичные прокси (по 15 с). У allorigins два варианта (/get с распаковкой
 // contents и /raw), r.jina.ai отдаёт текстом — распаковываем первый JSON в нём.
-// Прокси оживают волнами, поэтому при полном провале гонка повторяется до 3 раз.
+// Прокси оживают волнами, поэтому при полном провале гонка повторяется до 2 раз.
+// Таймауты короткие сознательно: гонка выигрывает первый ответивший маршрут,
+// а при полном провале лучше быстро показать «Повторить», чем держать спиннер 2 минуты.
 const DL_ROUTES = [
   { tmo: 15000, url: (u) => location.origin + '/dlapi/?url=' + encodeURIComponent(u) },
   { tmo: 12000, url: (u) => u },
-  { tmo: 30000, url: (u) => 'https://cors.eu.org/' + u },
-  { tmo: 30000, url: (u) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u) },
-  { tmo: 30000, url: (u) => 'https://api.allorigins.win/get?url=' + encodeURIComponent(u),
+  { tmo: 15000, url: (u) => 'https://cors.eu.org/' + u },
+  { tmo: 15000, url: (u) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u) },
+  { tmo: 15000, url: (u) => 'https://api.allorigins.win/get?url=' + encodeURIComponent(u),
     unwrap: (j) => (typeof j.contents === 'string' ? JSON.parse(j.contents) : j.contents) },
-  { tmo: 30000, url: (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u) },
-  { tmo: 30000, url: (u) => 'https://api.cors.lol/?url=' + encodeURIComponent(u) },
-  { tmo: 25000, text: true, url: (u) => 'https://r.jina.ai/' + u,
+  { tmo: 15000, url: (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u) },
+  { tmo: 15000, url: (u) => 'https://api.cors.lol/?url=' + encodeURIComponent(u) },
+  { tmo: 12000, text: true, url: (u) => 'https://r.jina.ai/' + u,
     unwrap: (t) => {
       const i = ['[', '{'].map((c) => t.indexOf(c)).filter((x) => x >= 0).sort((a, b) => a - b)[0];
       return JSON.parse(t.slice(i));
@@ -1077,8 +1087,8 @@ async function dlFetch(path) {
   const hit = cacheGet(key);
   if (hit) return hit;
   let aggErr = null;
-  for (let round = 0; round < 3; round++) { // прокси оживают волнами — до трёх попыток
-    if (round) await new Promise((res) => setTimeout(res, round === 1 ? 3000 : 8000));
+  for (let round = 0; round < 2; round++) { // прокси оживают волнами — до двух попыток
+    if (round) await new Promise((res) => setTimeout(res, 2000));
     const ctrls = new Map();
     const attempts = DL_ROUTES.map(async (route, i) => {
       const direct = i === 1; // индекс прямого пути в DL_ROUTES
@@ -1117,6 +1127,8 @@ async function dlFetch(path) {
   throw new Error(base + ' — перепробовал все маршруты несколько раз; возможно, API недоступен из твоего региона, помогает VPN');
 }
 const dlDur = (s) => Math.floor(s / 60) + ':' + String(Math.round(s) % 60).padStart(2, '0');
+// сохранённый (протухший) ответ прошлого раза — используется, когда все маршруты мертвы
+const dlStale = (path) => cacheGetStale('steam:' + path);
 const dlPlural = (n, one, few, many) => { const a = Math.abs(n) % 100, b = a % 10; return (a > 10 && a < 20) ? many : b === 1 ? one : b >= 2 && b <= 4 ? few : many; };
 
 function spSparkSVG(vals, color) {
@@ -1160,14 +1172,37 @@ async function dlShowPlayer(accountId) {
   const box = $('#steam-player');
   $('#steam-candidates').hidden = true;
   box.innerHTML = '<div class="steam-msg">Загружаю статистику — профиль, ранг, матчи, герои…</div>';
+  // если все маршруты тупят, через 13 с меняем текст — чтобы не выглядело зависанием
+  const slowTo = setTimeout(() => {
+    const m = box.querySelector('.steam-msg');
+    if (m && box.contains(m)) m.textContent = 'Маршруты отвечают медленно — идёт повторная попытка…';
+  }, 13000);
   // Фаза 1: профиль + ранг. Каждый запрос живёт своей жизнью — падение одного
   // не убивает весь блок (раньше один сбой в Promise.all оставлял пустоту).
   const [steamR, rankR] = await Promise.allSettled([
     dlFetch('/players/steam?account_ids=' + accountId),
     dlFetch('/players/' + accountId + '/rank'),
   ]);
+  clearTimeout(slowTo);
   const profile = (() => { const a = steamR.status === 'fulfilled' ? steamR.value : null; return Array.isArray(a) ? (a.find((p) => p.account_id === accountId) || a[0]) : null; })();
   if (steamR.status === 'rejected' && rankR.status === 'rejected') {
+    // все маршруты мертвы: если этот аккаунт раньше загружался — показываем
+    // сохранённый профиль, а не пустоту
+    const stale = dlStale('/players/steam?account_ids=' + accountId);
+    if (stale && Array.isArray(stale.v) && stale.v.length) {
+      const sp = stale.v.find((p) => p.account_id === accountId) || stale.v[0];
+      box.innerHTML = `
+        <div class="sp-head">
+          ${sp && sp.avatarfull ? `<img class="sp-ava" src="${esc(sp.avatarfull)}" alt="${esc(sp.personaname || '')}">` : ''}
+          <span class="sp-who"><b>${esc(sp && sp.personaname || 'Аккаунт ' + accountId)}</b>
+            <span class="sp-sub">ID: ${accountId}</span>
+            ${sp && sp.profileurl ? `<a class="sp-link" href="${esc(sp.profileurl)}" target="_blank" rel="noopener">Открыть в Steam ↗</a>` : ''}</span>
+        </div>
+        <div class="sp-note">Маршруты загрузки сейчас недоступны (прямой путь и прокси). Показаны сохранённые данные от
+          ${new Date(stale.t).toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })} —
+          подробности можно повторить позже. <button type="button" class="steam-retry" data-acc="${accountId}">Повторить</button></div>`;
+      return;
+    }
     box.innerHTML = '<div class="steam-msg err">' + esc(errMsg(steamR)) +
       ` <button type="button" class="steam-retry" data-acc="${accountId}">Повторить</button></div>`;
     return;
@@ -1274,14 +1309,24 @@ async function dlShowPlayer(accountId) {
         <div><h3>Лучшие по винрейту</h3>${best.map(spHeroCard).join('')}</div>
       </div>` : ''}
       ${histBlock}
-      <div class="sp-note">Цифры — из открытой базы deadlock-api.com: в ней нет части матчей и исходов матчей до сентября 2026, поэтому итоги могут быть меньше внутриигровых. «Часов в Steam» дополнительно включает время в меню и лобби.${failed.length ? ' Не загрузилось: ' + esc(failed.join('; ')) + ' — можно повторить поиск.' : ''}</div>`;
+      <div class="sp-note">${parts.staleAt ? `Свежая загрузка не удалась — показаны сохранённые данные от ${new Date(parts.staleAt).toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}. ` : ''}Цифры — из открытой базы deadlock-api.com: в ней нет части матчей и исходов матчей до сентября 2026, поэтому итоги могут быть меньше внутриигровых. «Часов в Steam» дополнительно включает время в меню и лобби.${failed.length ? ' Не загрузилось: ' + esc(failed.join('; ')) + ' — можно повторить поиск.' : ''}</div>`;
   };
   dlFetch('/players/' + accountId + '/match-history')
     .then((j) => { parts.hist = Array.isArray(j) ? j : []; refresh(); })
-    .catch((e) => { parts.histErr = errMsg(e); refresh(); });
+    .catch((e) => {
+      const stale = dlStale('/players/' + accountId + '/match-history'); // была ли старая загрузка
+      if (stale && Array.isArray(stale.v) && stale.v.length) { parts.hist = stale.v; parts.staleAt = stale.t; }
+      else parts.histErr = errMsg(e);
+      refresh();
+    });
   dlFetch('/players/hero-stats?account_ids=' + accountId)
     .then((j) => { parts.hs = Array.isArray(j) ? j : []; refresh(); })
-    .catch((e) => { parts.hsErr = errMsg(e); refresh(); });
+    .catch((e) => {
+      const stale = dlStale('/players/hero-stats?account_ids=' + accountId);
+      if (stale && Array.isArray(stale.v) && stale.v.length) { parts.hs = stale.v; parts.staleAt = stale.t; }
+      else parts.hsErr = errMsg(e);
+      refresh();
+    });
 }
 
 async function dlSearchNick(nick) {
