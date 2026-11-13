@@ -390,9 +390,12 @@ function renderBuilds() {
 }
 
 // ---------- онлайновый счётчик ----------
-// Каскад: официальный счётчик Steam → пик за сутки из Steam Charts.
-// api.steampowered.com и RSS без CORS-заголовков, поэтому пробуем прямые запросы,
-// затем цепочку публичных CORS-прокси (они бесплатны и иногда недоступны — потому их несколько).
+// Данные для счётчика берём ТОЛЬКО из своего же data/live.json (его обновляет
+// GitHub Actions на стороне GitHub, откуда Steam доступен без блокировок).
+// Браузер больше НЕ ходит за онлайном на steamspy/store/charts через прокси:
+// steamspy отдаёт устаревшие средние числа, а при сбое код подменял текущий
+// онлайн пиком за сутки — счётчик «прыгал» между ~190 и ~96 тыс. и серел.
+// PROXIES и fetchText ниже остаются только для загрузки RSS-новостей.
 const PROXIES = [
   (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
   (u) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u),
@@ -402,78 +405,21 @@ const PROXIES = [
 let directTried = false;
 let proxyStart = 0; // ротация начала, чтобы нагрузка распределялась по прокси
 
-async function fetchJSON(url) {
-  const chain = [];
-  if (!directTried) { // прямая попытка — один раз за загрузку страницы
-    directTried = true;
-    chain.push(url);
-  }
-  for (let i = 0; i < PROXIES.length; i++) {
-    chain.push(PROXIES[(proxyStart + i) % PROXIES.length](url));
-  }
-  proxyStart++;
-  for (const u of chain) {
-    const c = new AbortController(); const to = setTimeout(() => c.abort(), 9000);
-    try {
-      const r = await fetch(u, { cache: 'no-store', signal: c.signal });
-      clearTimeout(to);
-      if (r.ok) return await r.json();
-    } catch (_) { clearTimeout(to); }
-  }
-  throw new Error('live: все источники недоступны');
-}
-
 async function fetchOnlineStats() {
-  // Возвращает {live, peak, stale?, updated?}: live — текущий онлайн, peak — пик за 24 ч.
-  // Источник №0: наш же data/live.json — его каждые 5 минут обновляет GitHub Actions
-  // (свой файл → ни CORS, ни прокси; самый быстрый и надёжный путь).
-  let live = null, peak = null, staleAt = null;
+  // Возвращает {live, peak, updated, stale?}: live — текущий онлайн, peak — пик за 24 ч.
+  // Источник один: data/live.json — свой файл, ни CORS, ни прокси, мгновенный ответ.
+  // GitHub нередко сдвигает cron-запуски, коммиты приходят с интервалом до ~1 часа,
+  // поэтому «свежими» считаем данные младше 90 минут — счётчик не мигает серым,
+  // а число всегда настоящие «сейчас», а не пик за сутки.
   try {
     const j = await (await fetch('data/live.json?t=' + Date.now(), { cache: 'no-store' })).json();
-    const ageMs = Date.now() - Date.parse(j.updated);
-    const fresh = ageMs < 25 * 60e3 && ageMs > -60e3; // старше 25 мин считаем протухшим
-    if (fresh && typeof j.live === 'number') live = j.live;
-    // пик из live.json берём всегда: Charts-API иногда не отвечает в браузере,
-    // а в workflow мы его пишем в тот же файл
-    if (fresh && typeof j.peak === 'number') peak = j.peak;
-    // протухший файл запоминаем как «последнее известное»: покажем его с пометкой,
-    // если внешние источники тоже не ответят — вместо «н/д»
-    const ageH = ageMs / 60e3 / 60;
-    if (!fresh && ageH < 24 && (typeof j.live === 'number' || typeof j.peak === 'number'))
-      staleAt = { live: typeof j.live === 'number' ? j.live : null, peak: typeof j.peak === 'number' ? j.peak : null, updated: j.updated };
-  } catch (_) {}
-  // Свежий файл = источник истины, внешние запросы не нужны (грузятся до 30 с)
-  if (live != null) return { live, peak };
-
-  // Далее параллельные внешние источники — на случай, если Actions ещё не начал работать.
-  const jobStore = fetchText(`https://store.steampowered.com/charts/mostplayed`);
-  const jobExact = fetchJSON(`https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=${APPID}`);
-  const jobSpy = fetchJSON(`https://steamspy.com/api.php?request=appdetails&appid=${APPID}`);
-  const jobCharts = fetchJSON('https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/');
-  const [store, steam, spy, charts] = await Promise.allSettled([jobStore, jobExact, jobSpy, jobCharts]);
-
-  if (live == null && store.status === 'fulfilled' && store.value) {
-    const m = store.value.match(/1422450[\s\S]{0,200}?nConcurrentInGame\\?":(\d+)/);
-    if (m) live = parseInt(m[1], 10);
-  }
-  if (live == null && steam.status === 'fulfilled') {
-    const c = steam.value?.response?.player_count;
-    if (typeof c === 'number') live = c;
-  }
-  if (live == null && spy.status === 'fulfilled') {
-    const ccu = spy.value?.ccu;
-    if (typeof ccu === 'number' && ccu > 0) live = ccu;
-  }
-  if (charts.status === 'fulfilled') {
-    const row = charts.value?.response?.ranks?.find((x) => x.appid === APPID);
-    if (row?.peak_in_game) peak = row.peak_in_game;
-  }
-  if (live == null && peak == null) {
-    // внешние источники тоже молчат: отдаём последнее известное с пометкой «протухло»
-    if (staleAt) return { ...staleAt, stale: true };
-    return null;
-  }
-  return { live, peak };
+    const ageMin = (Date.now() - Date.parse(j.updated)) / 60e3;
+    if (!(ageMin > -1 && ageMin < 24 * 60)) return null; // сутки — предел для «последнего известного»
+    const live = typeof j.live === 'number' ? j.live : null;
+    const peak = typeof j.peak === 'number' ? j.peak : null;
+    if (live == null && peak == null) return null;
+    return { live, peak, updated: j.updated, stale: ageMin >= 90 };
+  } catch (_) { return null; }
 }
 
 function drawSpark() {
@@ -495,46 +441,49 @@ function drawSpark() {
 let sparkTimer = null;
 async function refreshOnline() {
   // Онлайн показываем ТОЛЬКО в шапке (`.online-widget`, правый верхний угол).
-  // Главную страницу не загружали лишними блоками; если элементы home-— не найдены, пропускаем.
+  // В шапке ВСЕГДА текущий онлайн (или последнее известное его значение) —
+  // пик за сутки живёт отдельной строкой на главной и в шапку не подменяется.
   const res = await fetchOnlineStats();
   const live = $('#online-count'), homeLive = $('#home-online'), homePeak = $('#home-peak');
   const note = $('#home-online-note');
   const widget = $('.online-widget');
-  // протухшие данные: серая точка + время среза в тултипе (обновлятор временно не работает)
-  widget?.classList.toggle('stale', !!(res?.stale));
   const utcHM = (iso) => { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + ' UTC'; };
-  if (res?.live != null) {
-    // есть настоящий live-онлайн
-    [live, homeLive].forEach((el) => { if (el) el.textContent = fmtNum(res.live); });
-    if (homeLive) homeLive.style.color = 'var(--vitality)';
-    if (note) note.textContent = res.stale ? 'онлайн на момент ' + utcHM(res.updated) + ' — обновление данных временно не работает' : 'играют прямо сейчас';
-    widget && (widget.title = res.stale ? 'Данные на ' + utcHM(res.updated) + '. Обновление онлайна временно не работает — показано последнее известное значение.' : 'Одновременно играющих в Steam');
-    if (homePeak && res.peak != null) { homePeak.textContent = 'Пик за 24 ч: ' + fmtNum(res.peak); homePeak.style.display = ''; }
-  } else if (res?.peak != null) {
-    // Steam пока не отдаёт live (Valve закрыл статистику) — показываем пик без пометок, только число
-    [live, homeLive].forEach((el) => { if (el) el.textContent = fmtNum(res.peak); });
-    if (homeLive) homeLive.style.color = 'var(--accent2)';
-    if (note) note.textContent = res.stale ? 'пик онлайна за 24 ч на момент ' + utcHM(res.updated) : 'пик онлайна за 24 ч · точный «сейчас» Steam пока не отдаёт';
-    widget && (widget.title = res.stale
-      ? 'Пик онлайна за 24 ч, данные на ' + utcHM(res.updated) + '. Обновление временно не работает — показано последнее известное.'
-      : 'Пик одновременного онлайна за 24 ч (Steam Charts). Текущий онлайн Valve пока не публикует для этой игры.');
-    if (homePeak) { homePeak.style.display = 'none'; }
+  let shown = null, shownUpdated = null, stale = false, peak24 = null;
+  if (res && res.live != null) {
+    shown = res.live; shownUpdated = res.updated; stale = !!res.stale; peak24 = res.peak;
   } else {
-    // внешние запросы не удались: показываем последнее известное значение — только число
-    const last = JSON.parse(localStorage.getItem('dl_online_last') || 'null');
-    if (last) {
-      const label = fmtNum(last.value);
-      [live, homeLive].forEach((el) => { if (el) el.textContent = label; });
-      if (note) note.textContent = 'внешние запросы недоступны — показано последнее значение';
-    } else {
-      [live, homeLive].forEach((el) => { if (el) el.textContent = 'н/д'; });
+    // live.json недоступен или остался без live: показываем последнее известное
+    // значение live (НЕ пик за сутки — именно эта подмена чисел глючила раньше)
+    let last = null;
+    try { last = JSON.parse(localStorage.getItem('dl_online_last') || 'null'); } catch (_) {}
+    if (last && typeof last.value === 'number') {
+      shown = last.value;
+      shownUpdated = last.updated || null;
+      stale = (Date.now() - (last.t || 0)) / 60e3 >= 90;
+      peak24 = res?.peak ?? null;
     }
   }
-  if (res) {
-    localStorage.setItem('dl_online_last', JSON.stringify({ t: Date.now(), value: res.live ?? res.peak, kind: res.live != null ? 'live' : 'peak' }));
+  widget?.classList.toggle('stale', stale || shown == null);
+  if (shown != null) {
+    [live, homeLive].forEach((el) => { if (el) el.textContent = fmtNum(shown); });
+    if (homeLive) homeLive.style.color = 'var(--vitality)'; // счётчик всегда зелёный
+    if (note) note.textContent = stale ? 'онлайн на момент ' + utcHM(shownUpdated) : 'играют прямо сейчас';
+    widget && (widget.title = stale
+      ? 'Данные на ' + utcHM(shownUpdated) + ' — обновление временно не работает, показано последнее известное значение.'
+      : 'Одновременно играющих в Steam');
+  } else {
+    [live, homeLive].forEach((el) => { if (el) el.textContent = 'н/д'; });
+  }
+  if (homePeak) {
+    if (peak24 != null) { homePeak.textContent = 'Пик за 24 ч: ' + fmtNum(peak24); homePeak.style.display = ''; }
+    else homePeak.style.display = 'none';
+  }
+  // запоминаем ТОЛЬКО настоящие live-значения — пик за сутки в историю не пишем
+  if (res && res.live != null) {
+    localStorage.setItem('dl_online_last', JSON.stringify({ t: Date.now(), updated: res.updated, value: res.live }));
     const hist = JSON.parse(localStorage.getItem('dl_online_hist') || '[]');
     const now = Date.now();
-    if (!hist.length || now - hist[hist.length - 1].t > 55e3) hist.push({ t: now, c: res.live ?? res.peak });
+    if (!hist.length || now - hist[hist.length - 1].t > 55e3) hist.push({ t: now, c: res.live });
     while (hist.length > 48) hist.shift();
     localStorage.setItem('dl_online_hist', JSON.stringify(hist));
   }
