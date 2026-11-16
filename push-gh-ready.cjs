@@ -18,8 +18,8 @@ fs.mkdirSync(TMP, { recursive: true });
 let seq = 0;
 
 const DELETE = [
-  ".github/workflows/pages-deploy.yml",
-  ".github/workflows/data-sync.yml",
+  // уже удалены в 4ce37544; повторные sha:null по несуществующим путям ломают
+  // создание дерева (GitRPC::BadObjectState 422)
 ];
 const MSG = [
   "feat: deadlockru-github-ready — author's GitHub Pages build",
@@ -56,7 +56,7 @@ function gh(method, p, bodyObj, tries = 6, tag = "") {
       let body = "";
       try { body = fs.readFileSync(respFile, "utf8"); } catch {}
       if (status >= 200 && status < 300) return body ? JSON.parse(body) : null;
-      if (status >= 400 && status < 500 && status !== 429) {
+      if (status >= 400 && status < 500 && status !== 429 && status !== 422) {
         throw Object.assign(new Error("HTTP " + status + " @ " + p + " :: " + body.slice(0, 300)), { httpFatal: true });
       }
       console.log("retryable HTTP", status, tag);
