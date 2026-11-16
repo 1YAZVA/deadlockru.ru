@@ -1,0 +1,247 @@
+// Deadlock//RU — база данных сайта
+// Источники данных: api.deadlock-api.com, Steam Web API, Steam RSS
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- Каталог игры ----------
+
+model Hero {
+  id             Int      @id // hero_id из API
+  name           String
+  className      String
+  searchName     String   @default("")
+  description    String   @default("")
+  // Официальная русская локализация из deadlock-api (?language=russian):
+  // лор/описание и теги на русском, чтобы сайт не зависел от внешних переводчиков
+  nameRu         String   @default("")
+  descriptionRu  String   @default("")
+  tagsRuJson     String   @default("[]")
+  tagsJson       String   @default("[]")
+  heroRole       String   @default("") // роль героя из описания API
+  heroType       String   @default("") // mystic | marksman | brawler | assassin | ""
+  complexity     Int      @default(1)
+  colorHex       String   @default("#C8A96A")
+  iconCard       String   @default("")
+  iconSmall      String   @default("")
+  startingStats  String   @default("{}") // JSON
+  levelInfo      String   @default("{}") // JSON
+  playerSelectable Boolean @default(true)
+  disabled       Boolean  @default(false)
+  inDevelopment  Boolean  @default(false)
+  updatedAt      DateTime @updatedAt
+}
+
+model Item {
+  id          String   @id // id из API (BigInt -> строка)
+  className   String
+  name        String
+  nameRu      String   @default("") // официальное русское название из API
+  type        String   @default("upgrade") // upgrade | weapon | ability
+  slotType    String   @default("") // weapon | spirit | vitality | ""
+  tier        Int      @default(0)
+  cost        Int      @default(0)
+  description String   @default("")
+  descriptionRu String @default("") // официальное русское описание
+  propsRuJson String   @default("[]") // свойства с русскими подписями
+  image       String   @default("")
+  shopImage   String   @default("")
+  isActive    Boolean  @default(false)
+  shopable    Boolean  @default(false)
+  propsJson   String   @default("[]") // ключевые свойства: [{label, value, cssClass}]
+  componentsJson String @default("[]") // class_name компонентов апгрейда (component_items) — для правил рулетки билдов
+  heroesJson  String   @default("[]") // для способностей: id героев
+  abilityType String   @default("")
+  disabled    Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+}
+
+// Глобальная статистика предметов (все герои)
+model ItemStat {
+  itemId    String   @id
+  wins      Int      @default(0)
+  matches   Int      @default(0)
+  players   Int      @default(0)
+  winRate   Float    @default(0)
+  buyTimeRel Float   @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+// ---------- Мета и аналитика ----------
+
+model HeroStat {
+  heroId      Int      @id
+  wins        Int      @default(0)
+  losses      Int      @default(0)
+  matches     Int      @default(0)
+  kills       Int      @default(0)
+  deaths      Int      @default(0)
+  assists     Int      @default(0)
+  netWorth    Float    @default(0)
+  playerDamage Float   @default(0)
+  damageTaken Float    @default(0)
+  lastHits    Float    @default(0)
+  winRate     Float    @default(0)
+  pickRate    Float    @default(0)
+  kda         Float    @default(0)
+  avgNetWorth Float    @default(0)
+  updatedAt   DateTime @updatedAt
+}
+
+// Снимки винрейта — для анализа влияния патчей
+model HeroStatHistory {
+  id       Int      @id @default(autoincrement())
+  heroId   Int
+  winRate  Float
+  pickRate Float
+  matches  Int
+  at       DateTime
+  @@index([at])
+  @@index([heroId, at])
+}
+
+// Топ-предметы, контрпики, автобилд, способности — по каждому герою
+model HeroExtra {
+  heroId       Int      @id
+  topItemsJson String   @default("[]")
+  countersJson String   @default("[]")
+  buildsJson   String   @default("[]")
+  abilitiesJson String  @default("[]")
+  updatedAt    DateTime @updatedAt
+}
+
+// ---------- Лидерборд и ранги ----------
+
+model LeaderboardEntry {
+  id            String   @id // "{region}-{rank}"
+  region        String   // Europe | NAmerica | SAmerica | Asia | Oceania
+  rank          Int      // позиция в регионе
+  accountName   String
+  accountIdsJson String  @default("[]")
+  topHeroIdsJson String  @default("[]")
+  updatedAt     DateTime @updatedAt
+  @@index([region, rank])
+}
+
+// Аватарки игроков Steam для лидерборда.
+// Парсим публичный XML профиля steamcommunity (без ключа API), кэшируем на 14 дней.
+model PlayerAvatar {
+  accountId Int      @id // steamid3 (32-битный account id)
+  avatarUrl String   @default("")
+  fetchedAt DateTime @updatedAt
+}
+
+model RankTier {
+  id         Int     @id // tier 0..11
+  name       String
+  imageLarge String  @default("")
+  imageSmall String  @default("")
+}
+
+model BadgeDist {
+  badge     Int      @id
+  name      String   @default("")
+  players   Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+// ---------- Новости и патчи ----------
+
+model Patch {
+  id        String   @id // guid
+  title     String
+  pubDate   DateTime
+  source    String   @default("steam") // steam | forums
+  link      String   @default("")
+  category  String   @default("")
+  author    String   @default("")
+  content   String   @default("")
+  // Официальный русский перевод от Valve (RSS Steam с l=russian) — по тому же guid
+  titleRu   String   @default("")
+  contentRu String   @default("")
+  imageUrl  String   @default("") // превью: первая картинка из текста анонса
+  isPatch   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  @@index([pubDate])
+}
+
+// ---------- Живые данные ----------
+
+model OnlinePoint {
+  id    Int      @id @default(autoincrement())
+  count Int
+  at    DateTime
+  @@index([at])
+}
+
+// ---------- Автоматизация ----------
+
+model SyncLog {
+  id        Int      @id @default(autoincrement())
+  task      String
+  status    String   @default("ok") // ok | error | running
+  records   Int      @default(0)
+  message   String   @default("")
+  durationMs Int     @default(0)
+  at        DateTime @default(now())
+  @@index([at])
+}
+
+model SyncState {
+  key       String   @id
+  value     String   @default("")
+  updatedAt DateTime @updatedAt
+}
+
+// ---------- Киберспорт ----------
+
+model Tournament {
+  id          String   @id @default(cuid())
+  name        String
+  organizer   String   @default("")
+  region      String   @default("")
+  status      String   @default("upcoming") // upcoming | ongoing | completed
+  format      String   @default("")
+  prizePool   String   @default("")
+  startDate   DateTime?
+  endDate     DateTime?
+  teamsCount  Int      @default(0)
+  description String   @default("")
+  source      String   @default("")
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model EsportsTeam {
+  id          String   @id @default(cuid())
+  name        String
+  tag         String   @default("")
+  region      String   @default("")
+  rosterJson  String   @default("[]")
+  wins        Int      @default(0)
+  losses      Int      @default(0)
+  points      Int      @default(0)
+  description String   @default("")
+  createdAt   DateTime @default(now())
+}
+
+model EsportsMatch {
+  id             String    @id @default(cuid())
+  tournamentName String    @default("")
+  stage          String    @default("")
+  teamA          String    @default("TBD")
+  teamB          String    @default("TBD")
+  scoreA         Int       @default(0)
+  scoreB         Int       @default(0)
+  status         String    @default("upcoming") // upcoming | live | finished
+  format         String    @default("Bo3")
+  scheduledAt    DateTime?
+  vodUrl         String    @default("")
+  createdAt      DateTime  @default(now())
+}
