@@ -102,6 +102,7 @@ export function Roulette({
     if (items.length > 0 || heroes.length === 0) return;
     let alive = true;
     const t = setTimeout(() => {
+      // STATIC_MODE: apiGet сам подставит /api/items.json
       apiGet<{ items: ItemRow[] }>("/api/items")
         .then((d) => {
           if (alive && d?.items) setItems(d.items);

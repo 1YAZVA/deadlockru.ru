@@ -4,8 +4,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Activity, CheckCircle2, Database, Play, RefreshCw, XCircle, Zap } from "lucide-react";
 import type { SyncStatus } from "@/lib/site";
-import { apiGet, fmtDateTime, fmtInt, timeAgo } from "@/lib/site";
-import { GH_PAGES } from "@/lib/gh-data";
+import { apiGet, fmtDateTime, fmtInt, timeAgo, STATIC_MODE } from "@/lib/site";
 import { Spinner } from "./shared";
 
 const SOURCES = [
@@ -20,16 +19,13 @@ export function ToolSync() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
-  // GitHub Pages: сервера нет, синками занимается GitHub Action по расписанию —
-  // ручной запуск скрыт, вместо журналов показываем пояснение
-  const gh = GH_PAGES;
 
   const load = useCallback(() => {
-    if (gh) { setLoading(false); return; }
+    if (STATIC_MODE) return; // в статике синком рулит GitHub Actions, ручного запуска нет
     apiGet<SyncStatus>("/api/sync")
       .then(setStatus)
       .finally(() => setLoading(false));
-  }, [gh]);
+  }, []);
 
   useEffect(() => {
     load();
@@ -38,7 +34,6 @@ export function ToolSync() {
   }, [load]);
 
   const runTask = async (task: string) => {
-    if (gh) return;
     setBusy(task);
     setMessage(null);
     try {
@@ -59,22 +54,30 @@ export function ToolSync() {
 
   if (loading) return <Spinner label="Читаем журналы автоматизации..." />;
 
-  if (gh) {
+  // статическая версия (GitHub Pages): сервера синка нет — данные обновляет Actions по расписанию
+  if (STATIC_MODE) {
     return (
       <div>
-        <div className="mb-5 flex items-start gap-2 rounded-lg border border-[var(--line)] bg-[var(--panel2)] p-3 text-xs text-[var(--muted2)]">
-          <Zap className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" aria-hidden />
-          <span>
-            Версия сайта на GitHub Pages обновляется <b>GitHub Action</b> по расписанию: лидерборды и активные матчи —
-            каждые 30 минут, мета и герои — раз в 2 часа, новости и патчи — раз в час. Ручной запуск и журналы
-            доступны в действиях репозитория (вкладка Actions на GitHub).
-          </span>
+        <div className="card-dl p-6">
+          <h3 className="mb-2 flex items-center gap-2 font-display text-base font-bold">
+            <Zap className="h-4 w-4 text-[var(--accent)]" aria-hidden /> Центр автоматизации — версия для GitHub
+          </h3>
+          <p className="text-sm leading-relaxed text-[var(--muted2)]">
+            Сайт развёрнут как статический (GitHub Pages): обновление данных делает GitHub Actions
+            по расписанию — раз в 2 часа он скачивает свежие винрейты, лидерборды, новости и
+            киберспортивную сетку и пересобирает файлы данных.
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--muted2)]">
+            Ручной запуск здесь не нужен: следующий автоматический прогон подтянет всё свежее.
+            Время последнего обновления разделов видно в футере сайта.
+          </p>
         </div>
-        <div className="rounded-lg border border-[var(--line)] bg-[var(--panel2)] p-4 text-sm text-[var(--muted2)]">
+        <div className="mt-4 grid gap-2 md:grid-cols-2">
           {SOURCES.map((s) => (
-            <div key={s.name} className="mb-2 last:mb-0">
-              <b className="text-[var(--fg)]">{s.name}</b> — {s.what}
-            </div>
+            <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="card-dl block p-4 text-xs transition-colors hover:border-[var(--accent)]">
+              <span className="block font-bold text-[var(--ink)]">{s.name} ↗</span>
+              <span className="mt-1 block text-[var(--muted2)]">{s.what}</span>
+            </a>
           ))}
         </div>
       </div>

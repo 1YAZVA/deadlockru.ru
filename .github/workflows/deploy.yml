@@ -1,0 +1,97 @@
+name: build & deploy (GitHub Pages)
+
+# Три способа запуска:
+#  - push в main: пересборка сайта после правок кода;
+#  - cron каждые 2 часа: синк данных с внешних API + пересборка JSON;
+#  - ручной запуск из вкладки Actions.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "db/**"
+      - "HANDOFF.md"
+      - "GITHUB-SETUP.md"
+      - "**.md"
+  schedule:
+    - cron: "41 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write # коммит кэша базы обратно в репозиторий
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Зависимости
+        run: |
+          npm install --no-audit --no-fund || npm install --no-audit --no-fund --legacy-peer-deps
+
+      - name: Prisma client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: "file:${{ github.workspace }}/db/custom.db"
+
+      - name: Синк данных (внешние API → база)
+        run: npx tsx scripts/run-sync.ts all
+        env:
+          DATABASE_URL: "file:${{ github.workspace }}/db/custom.db"
+
+      - name: Восстановление кэша картинок
+        uses: actions/cache@v4
+        with:
+          path: .img-mirror
+          key: img-mirror-${{ github.run_id }}
+          restore-keys: |
+            img-mirror-
+
+      - name: Экспорт статических JSON + зеркалирование картинок
+        run: node scripts/export-data.mjs
+        env:
+          DATABASE_URL: "file:${{ github.workspace }}/db/custom.db"
+          MIRROR: "1"
+
+      - name: Кэш базы (аватарки Steam) — коммит обратно
+        run: |
+          git config user.name "deadlockru-bot"
+          git config user.email "deadlockru.ru@gmail.com"
+          git add db/custom.db
+          git diff --cached --quiet || (git commit -m "chore(db): кэш аватарок и состояний синка [skip ci]" && git push)
+
+      - name: Статическая сборка Next.js
+        run: |
+          rm -rf src/app/api src/instrumentation.ts
+          npx next build
+        env:
+          BUILD_STATIC: "1"
+          NEXT_PUBLIC_STATIC: "1"
+          NEXT_PUBLIC_API_BASE: ${{ vars.API_BASE }}
+
+      - name: Загрузка артефакта Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -52,3 +52,8 @@ prompt
 server.log
 # Skills directory
 /skills/
+# статическая экспорт-версия (генерируется в Actions)
+public/api/
+public/img-mirror/
+.img-mirror/
+out/

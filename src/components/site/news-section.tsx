@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown, ExternalLink, FileText, Languages, Search } from "lucide-react";
 import type { PatchRow } from "@/lib/site";
-import { apiGet, fmtDateTime, sanitizeHtml, viaImgProxy } from "@/lib/site";
+import { apiGet, fmtDateTime, sanitizeHtml, viaImgProxy, STATIC_MODE } from "@/lib/site";
 import { SectionHeader, Spinner, FreshChip, countLabel } from "./shared";
 
 type Filter = "all" | "patches" | "news";
@@ -19,20 +19,42 @@ export function NewsSection() {
   // какие записи показываем в оригинале (если есть официальный русский перевод)
   const [showOriginal, setShowOriginal] = useState<Set<string>>(new Set());
   const [lastAt, setLastAt] = useState<string | null>(null);
+  // в статике весь список грузится одним файлом — фильтры и пагинация локально
+  const allRef = useRef<PatchRow[] | null>(null);
 
-  const load = useCallback(async (f: Filter, p: number, q: string) => {
-    setLoading(true);
-    try {
-      const data = await apiGet<{ total: number; items: PatchRow[] }>(
-        `/api/patches?filter=${f}&page=${p}&pageSize=8&search=${encodeURIComponent(q)}`
-      );
-      setItems(data.items);
-      setTotal(data.total);
-      if (data.items.length > 0) setLastAt(data.items[0].pubDate);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const load = useCallback(
+    async (f: Filter, p: number, q: string) => {
+      setLoading(true);
+      try {
+        if (STATIC_MODE) {
+          if (!allRef.current) {
+            const d = await apiGet<{ total: number; items: PatchRow[] }>("/api/patches");
+            allRef.current = d.items;
+            if (d.items.length > 0) setLastAt(d.items[0].pubDate);
+          }
+          const all = allRef.current ?? [];
+          const ql = q.trim().toLowerCase();
+          const filtered = all.filter(
+            (x) =>
+              (f === "all" || (f === "patches") === !!x.isPatch) &&
+              (!ql || (x.titleRu ?? x.title).toLowerCase().includes(ql) || x.title.toLowerCase().includes(ql))
+          );
+          setItems(filtered.slice((p - 1) * 8, p * 8));
+          setTotal(filtered.length);
+        } else {
+          const data = await apiGet<{ total: number; items: PatchRow[] }>(
+            `/api/patches?filter=${f}&page=${p}&pageSize=8&search=${encodeURIComponent(q)}`
+          );
+          setItems(data.items);
+          setTotal(data.total);
+          if (data.items.length > 0) setLastAt(data.items[0].pubDate);
+        }
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     void load(filter, page, search);

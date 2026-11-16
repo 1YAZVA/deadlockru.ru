@@ -114,31 +114,60 @@ export type MetaResponse = {
   updatedAt: string | null;
 };
 
-import { ghFetch, GH_PAGES } from "./gh-data";
+/**
+ * Режимы работы сайта:
+ *  - серверный (по умолчанию): все /api/* обслуживают роуты Next.js;
+ *  - статический (NEXT_PUBLIC_STATIC=1, сборка для GitHub Pages): /api/* заменяются
+ *    на заранее сгенерированные JSON-файлы в public/api (см. scripts/export-data.mjs),
+ *    картинки идут напрямую (уже зеркалированы в /img-mirror экспортёром);
+ *  - «живые» моторчики (поиск игрока и статистика аккаунта) в статике обслуживает
+ *    бесплатная функция Яндекс.Облака — её адрес в NEXT_PUBLIC_API_BASE.
+ */
+export const STATIC_MODE = process.env.NEXT_PUBLIC_STATIC === "1";
+export const REMOTE_API = process.env.NEXT_PUBLIC_API_BASE ?? "";
+
+function mapStaticUrl(url: string): string {
+  if (!url.startsWith("/api/")) return url;
+  const qi = url.indexOf("?");
+  const path = qi === -1 ? url : url.slice(0, qi);
+  const params = new URLSearchParams(qi === -1 ? "" : url.slice(qi + 1));
+
+  // живые моторчики — всегда на удалённом API (функция Яндекс.Облака)
+  if (path === "/api/player") return `${REMOTE_API}/api/player${qi === -1 ? "" : url.slice(qi)}`;
+  if (path === "/api/search") return `${REMOTE_API}/api/search${qi === -1 ? "" : url.slice(qi)}`;
+
+  // /api/hero/123 → /api/hero/123.json
+  if (path.startsWith("/api/hero/")) return `${path}.json`;
+  // /api/meta/history?hours=168 → /api/meta-history-168.json
+  if (path === "/api/meta/history") return `/api/meta-history-${params.get("hours") ?? "168"}.json`;
+  // /api/leaderboard?region=X&… → /api/leaderboard/X.json (полный список региона —
+  // пагинация и поиск делаются на клиенте)
+  if (path === "/api/leaderboard") return `/api/leaderboard/${params.get("region") ?? "Global"}.json`;
+  // /api/patches?filter=&page=&search= → /api/patches.json (полный список — фильтры на клиенте)
+  if (path === "/api/patches") return "/api/patches.json";
+  if (path === "/api/sync") return "/api/sync.json";
+
+  return `${path}.json`;
+}
 
 export async function apiGet<T>(url: string, init?: RequestInit): Promise<T> {
-  // На GitHub Pages (NEXT_PUBLIC_GH_PAGES=1) запросы уходят в статические
-  // JSON-снапшоты /data/*.json — обновляемые GitHub Action.
-  if (GH_PAGES) return ghFetch<T>(url, init);
-  const res = await fetch(url, { cache: "no-store", ...init });
+  const res = await fetch(STATIC_MODE ? mapStaticUrl(url) : url, { cache: "no-store", ...init });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return (await res.json()) as T;
 }
 
 /**
  * Картинки из внешних CDN (assets-bucket.deadlock-api.com, steamstatic и т.д.)
- * отдаём через собственный прокси-кэш /api/img — иначе у части пользователей
- * (особенно из РФ) картинки с этих CDN не грузятся. Локальные пути (/img/...)
- * проксировать не нужно.
+ * в серверном режиме отдаём через собственный прокси-кэш /api/img — иначе у части
+ * пользователей (особенно из РФ) картинки с этих CDN не грузятся.
+ * В статическом режиме все нужные картинки уже зеркалированы в /img-mirror
+ * экспортёром (scripts/export-data.mjs), поэтому отдаём ссылку как есть.
  */
 export function viaImgProxy(url?: string | null): string {
   const src = url ?? "";
   if (!src) return "";
   if (src.startsWith("/")) return src;
-  // GitHub Pages: прокси /api/img недоступен — прямые ссылки (проксирует нечего,
-  // а CDN обычно доступны; иначе картинка просто не загрузится)
-  if (GH_PAGES) return src;
-  if (/^https:\/\//i.test(src)) return `/api/img?u=${encodeURIComponent(src)}`;
+  if (/^https:\/\//i.test(src)) return STATIC_MODE ? src : `/api/img?u=${encodeURIComponent(src)}`;
   return src;
 }
 

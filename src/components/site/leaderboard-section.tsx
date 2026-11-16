@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Crown, Medal, Search, Timer, Trophy, UserSearch, X } from "lucide-react";
 import type { HeroRow, LbResponse } from "@/lib/site";
-import { apiGet, REGION_RU, fmtInt, fmtDateTime, timeAgo } from "@/lib/site";
+import { apiGet, REGION_RU, fmtInt, fmtDateTime, timeAgo, STATIC_MODE } from "@/lib/site";
 import { HeroIcon, SafeImg, SectionHeader, Spinner } from "./shared";
 
 type SearchResultRow = { account_id: number; personaname: string; profileurl?: string; avatar?: string };
@@ -15,7 +15,7 @@ export function LeaderboardSection({ heroes }: { heroes: HeroRow[] }) {
   const [region, setRegion] = useState<(typeof REGIONS)[number]>("Global");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [data, setData] = useState<LbResponse | null>(null);
+  const [full, setFull] = useState<LbResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [nextIn, setNextIn] = useState(30 * 60);
 
@@ -25,33 +25,54 @@ export function LeaderboardSection({ heroes }: { heroes: HeroRow[] }) {
   const [searching, setSearching] = useState(false);
   const [found, setFound] = useState<SearchResultRow[]>([]);
 
-  const load = useCallback(async (r: string, p: number, q: string) => {
+  const load = useCallback(async (r: string) => {
     setLoading(true);
     try {
-      const d = await apiGet<LbResponse>(`/api/leaderboard?region=${r}&page=${p}&pageSize=25&search=${encodeURIComponent(q)}`);
-      setData(d);
+      const d = await apiGet<LbResponse>(`/api/leaderboard?region=${r}`);
+      setFull(d);
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    void load(region, page, search);
-  }, [load, region, page, search]);
+    void load(region);
+  }, [load, region]);
+
+  // в статике грузим весь регион одним файлом — пагинация и поиск локально;
+  // на сервере — как раньше, по запросу
+  const filteredRows = useMemo(() => {
+    const all = full?.rows ?? [];
+    const q = search.trim().toLowerCase();
+    return q ? all.filter((r) => r.accountName.toLowerCase().includes(q)) : all;
+  }, [full, search]);
+
+  const data = useMemo(() => {
+    if (!full) return null;
+    if (!STATIC_MODE) return full;
+    const pageSize = 25;
+    return {
+      ...full,
+      rows: filteredRows.slice((page - 1) * pageSize, page * pageSize),
+      total: filteredRows.length,
+      page,
+      pageSize,
+    };
+  }, [full, filteredRows, page]);
 
   // авт refresh каждые 60с + обратный отсчёт до серверной синхронизации (30 мин)
   useEffect(() => {
     const t = setInterval(() => {
       setNextIn((v) => {
         if (v <= 1) {
-          void load(region, page, search);
+          void load(region);
           return 30 * 60;
         }
         return v - 1;
       });
     }, 1000);
     return () => clearInterval(t);
-  }, [load, region, page, search]);
+  }, [load, region]);
 
   useEffect(() => {
     if (data?.updatedAt) {

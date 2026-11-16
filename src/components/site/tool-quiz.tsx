@@ -165,7 +165,14 @@ export function ToolQuiz() {
       const d = await apiGet<QuizResponse>("/api/quiz");
       if (!d.questions.length) throw new Error("банк вопросов пуст");
       setBank(d.bank);
-      setQs(d.questions);
+      // в статике отдаётся весь банк (~200 вопросов) — на партию выбираем 12 случайных,
+      // чтобы вопросы не повторялись от игры к игре
+      const pool = [...d.questions];
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      setQs(pool.slice(0, 12));
       setPhase("play");
     } catch {
       setErr("Не удалось собрать вопросы — попробуй ещё раз.");

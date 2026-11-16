@@ -8,10 +8,34 @@
 import { useCallback, useRef, useState } from "react";
 import { ExternalLink, Search } from "lucide-react";
 import type { HeroRow } from "@/lib/site";
-import { fmtInt, viaImgProxy, rankLocalIcon, RANK_NAMES, RANK_ROMAN, RANK_TIER_COLORS, HERO_TYPE_RU } from "@/lib/site";
-import { GH_PAGES } from "@/lib/gh-data";
-import { ghResolve, ghStats, type ResolveResponse, type StatsResponse } from "@/lib/gh-player";
+import { fmtInt, viaImgProxy, rankLocalIcon, RANK_NAMES, RANK_ROMAN, RANK_TIER_COLORS, HERO_TYPE_RU, STATIC_MODE, REMOTE_API } from "@/lib/site";
 import { HeroIcon, SectionHeader } from "./shared";
+
+type ResolveResponse = {
+  accountId?: number;
+  profile?: {
+    account_id: number; personaname?: string; realname?: string; avatarfull?: string;
+    profileurl?: string; countrycode?: string; matches_played_last_30d?: number;
+  } | null;
+  rank?: { tier: number; subrank: number; badge: number } | null;
+  resolvedBy?: string;
+  error?: string;
+  mode?: "candidates";
+  candidates?: { account_id: number; personaname?: string; avatarmedium?: string; matches_played_last_30d?: number }[];
+  query?: string;
+  plural?: string;
+};
+
+type StatsResponse = {
+  accountId: number;
+  tiles: { n: string; t: string; s?: string; hot?: boolean; cls?: string }[];
+  rankMovement: number[];
+  historyRows: { matchId: number; heroId: number; date: string; outcome: "w" | "l" | "u"; kda: string; souls: number; duration: string; delta: number | null }[];
+  favHeroes: { heroId: number; matches: number; wr: number; soulsPerMin: number }[];
+  bestHeroes: { heroId: number; matches: number; wr: number; soulsPerMin: number }[];
+  heroesWithStats: number;
+  error?: string;
+};
 
 function Spark({ vals, color }: { vals: number[]; color: string }) {
   if (vals.length < 2) return null;
@@ -41,19 +65,18 @@ export function AccountSection({ heroes }: { heroes: HeroRow[] }) {
 
   const heroById = useCallback((id: number) => heroes.find((h) => h.id === id), [heroes]);
 
+  // в статике моторчик «Аккаунта» живёт на бесплатной функции Яндекс.Облака (NEXT_PUBLIC_API_BASE)
+  const remote = STATIC_MODE ? REMOTE_API : "";
+
   const showPlayer = useCallback(async (accountId: number) => {
     setLoading(true);
     setMsg({ text: "Загружаю профиль и ранг…" });
     setCandidates([]);
     setStats(null);
     try {
-      const d: ResolveResponse = GH_PAGES
-        ? await ghResolve("", accountId)
-        : await (async () => {
-            const r = await fetch(`/api/player?phase=resolve&account_id=${accountId}`, { cache: "no-store" });
-            return (await r.json()) as ResolveResponse;
-          })();
-      if (d.error) {
+      const r = await fetch(`${remote}/api/player?phase=resolve&account_id=${accountId}`, { cache: "no-store" });
+      const d = (await r.json()) as ResolveResponse;
+      if (!r.ok || d.error) {
         setMsg({ text: d.error ?? "Профиль не найден", err: true });
         setResolved(null);
         return;
@@ -61,20 +84,18 @@ export function AccountSection({ heroes }: { heroes: HeroRow[] }) {
       setResolved(d);
       setMsg(null);
       // фаза 2: считаем матчей и героев независимо от шапки
-      (GH_PAGES ? ghStats(accountId) : (async () => {
-        const r2 = await fetch(`/api/player?phase=stats&account_id=${accountId}`, { cache: "no-store" });
-        return (await r2.json()) as StatsResponse;
-      })())
-        .then((d2: StatsResponse) => {
-          if (d2.error) {
+      fetch(`${remote}/api/player?phase=stats&account_id=${accountId}`, { cache: "no-store" })
+        .then(async (r2) => {
+          const d2 = (await r2.json()) as StatsResponse;
+          if (!r2.ok || d2.error) {
             setMsg({ text: d2.error ?? "Статистика недоступна", err: true });
             return;
           }
           setStats(d2);
         })
         .catch(() => setMsg({ text: "Статистика не загрузилась — повтори поиск", err: true }));
-    } catch (e) {
-      setMsg({ text: e instanceof Error ? e.message : "Сервер не ответил — попробуй ещё раз", err: true });
+    } catch {
+      setMsg({ text: "Сервер не ответил — попробуй ещё раз", err: true });
     } finally {
       setLoading(false);
     }
@@ -92,13 +113,9 @@ export function AccountSection({ heroes }: { heroes: HeroRow[] }) {
     setStats(null);
     setCandidates([]);
     try {
-      const d: ResolveResponse = GH_PAGES
-        ? await ghResolve(s)
-        : await (async () => {
-            const r = await fetch(`/api/player?phase=resolve&input=${encodeURIComponent(s)}`, { cache: "no-store" });
-            return (await r.json()) as ResolveResponse;
-          })();
-      if (d.error) {
+      const r = await fetch(`${remote}/api/player?phase=resolve&input=${encodeURIComponent(s)}`, { cache: "no-store" });
+      const d = (await r.json()) as ResolveResponse;
+      if (!r.ok || d.error) {
         setMsg({ text: d.error ?? "Не удалось выполнить поиск", err: true });
         return;
       }
