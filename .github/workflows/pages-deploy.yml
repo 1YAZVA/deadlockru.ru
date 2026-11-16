@@ -3,11 +3,13 @@ name: Deploy site (Next.js static export)
 # Сайт = статический экспорт Next.js в GitHub Pages.
 # Обновляется при каждом пуше в main (исходники/public) и вручную.
 
+# Триггер push ВРЕМЕННО ОТКЛЮЧЁН (откат на старый сайт, см. deploy-legacy.yml).
+# Вернуть новый сайт: раскомментировать push-блок ниже и запустить workflow_dispatch.
 on:
-  push:
-    branches: [main]
-    paths: ["src/**", "public/**", "next.config.ts", "package.json", "prisma/**", "scripts/**", ".github/workflows/pages-deploy.yml"]
   workflow_dispatch:
+#  push:
+#    branches: [main]
+#    paths: ["src/**", "public/**", "next.config.ts", "package.json", "prisma/**", "scripts/**", ".github/workflows/pages-deploy.yml"]
 
 permissions:
   contents: read

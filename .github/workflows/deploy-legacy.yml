@@ -1,0 +1,46 @@
+name: Deploy legacy static site (rollback)
+
+# ОТКАТ: выкладывает старый статический сайт (index.html, css/, js/, data/,
+# img/, heroes/, worker/) артефактом на Pages. Запускается ТОЛЬКО вручную.
+# Вернуть новый сайт: workflow_dispatch у «Deploy site (Next.js static export)»
+# (предварительно вернув триггер push в pages-deploy.yml).
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble legacy site
+        run: |
+          mkdir -p _site
+          cp -r index.html CNAME robots.txt sitemap.xml site.webmanifest \
+                favicon.ico favicon-16.png favicon-32.png favicon-64.png \
+                apple-touch-icon.png android-chrome-512x512.png _site/
+          for d in css js data img heroes worker; do
+            cp -r "$d" _site/
+          done
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
