@@ -6,8 +6,10 @@ name: Sync data + snapshots
 # Коммит триггерит pages-deploy.yml — сайт обновляется данными автоматически.
 
 on:
-  schedule:
-    - cron: "*/30 * * * *"   # каждые 30 минут
+  # РАСПИСАНИЕ ОТКЛЮЧЕНО (откат на старый сайт). Вернуть новый сайт:
+  # раскомментировать cron и запустить workflow_dispatch.
+  # schedule:
+  #   - cron: "*/30 * * * *"   # каждые 30 минут
   workflow_dispatch:
 
 permissions:
