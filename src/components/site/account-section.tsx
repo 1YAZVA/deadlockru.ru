@@ -67,6 +67,10 @@ export function AccountSection({ heroes }: { heroes: HeroRow[] }) {
 
   // в статике моторчик «Аккаунта» живёт на бесплатной функции Яндекс.Облака (NEXT_PUBLIC_API_BASE)
   const remote = STATIC_MODE ? REMOTE_API : "";
+  // Прямые вызовы functions.yandexcloud.net/<id> не поддерживают подпути —
+  // в статике путь функции роутим через query-параметр ?path=/api/player.
+  const playerEp = (qs: string) =>
+    STATIC_MODE ? `${remote}?path=/api/player&${qs}` : `${remote}/api/player?${qs}`;
 
   const showPlayer = useCallback(async (accountId: number) => {
     setLoading(true);
@@ -74,7 +78,7 @@ export function AccountSection({ heroes }: { heroes: HeroRow[] }) {
     setCandidates([]);
     setStats(null);
     try {
-      const r = await fetch(`${remote}/api/player?phase=resolve&account_id=${accountId}`, { cache: "no-store" });
+      const r = await fetch(playerEp(`phase=resolve&account_id=${accountId}`), { cache: "no-store" });
       const d = (await r.json()) as ResolveResponse;
       if (!r.ok || d.error) {
         setMsg({ text: d.error ?? "Профиль не найден", err: true });
@@ -84,7 +88,7 @@ export function AccountSection({ heroes }: { heroes: HeroRow[] }) {
       setResolved(d);
       setMsg(null);
       // фаза 2: считаем матчей и героев независимо от шапки
-      fetch(`${remote}/api/player?phase=stats&account_id=${accountId}`, { cache: "no-store" })
+      fetch(playerEp(`phase=stats&account_id=${accountId}`), { cache: "no-store" })
         .then(async (r2) => {
           const d2 = (await r2.json()) as StatsResponse;
           if (!r2.ok || d2.error) {
@@ -113,7 +117,7 @@ export function AccountSection({ heroes }: { heroes: HeroRow[] }) {
     setStats(null);
     setCandidates([]);
     try {
-      const r = await fetch(`${remote}/api/player?phase=resolve&input=${encodeURIComponent(s)}`, { cache: "no-store" });
+      const r = await fetch(playerEp(`phase=resolve&input=${encodeURIComponent(s)}`), { cache: "no-store" });
       const d = (await r.json()) as ResolveResponse;
       if (!r.ok || d.error) {
         setMsg({ text: d.error ?? "Не удалось выполнить поиск", err: true });

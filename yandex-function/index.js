@@ -371,10 +371,16 @@ exports.handler = async function (event) {
     return { statusCode: 204, headers: CORS, body: "", isBase64Encoded: false };
   }
 
-  const path = (event.url ? new URL(event.url).pathname : event.path) || "";
+  // Прямые вызовы functions.yandexcloud.net/<id> не поддерживают подпути:
+  // путь передаём через query-параметр ?path=/api/player (или /api/search, /health).
+  const qp = event.queryStringParameters || {};
+  const rawPath = (event.url ? new URL(event.url).pathname : event.path) || "";
+  const path = qp.path
+    ? "/" + String(qp.path).replace(/^\/+/, "")
+    : (rawPath || "/");
   const sp = new URLSearchParams();
   for (const [k, v] of Object.entries(event.queryStringParameters || {})) {
-    if (v != null) sp.set(k, String(v));
+    if (v != null && k !== "path") sp.set(k, String(v));
   }
 
   if (path === "/health" || path === "/") {
