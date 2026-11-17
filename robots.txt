@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /fav_gen.html
-Disallow: /worker/
-
-Sitemap: https://deadlockru.ru/sitemap.xml
