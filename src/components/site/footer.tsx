@@ -48,9 +48,6 @@ const POLICY_TEXT: { h: string; p: string }[] = [
   },
 ];
 
-/** Оператор персональных данных (ФЗ-152): ФИО физического лица — владельца сайта. */
-const OPERATOR = "Иус Владислав Александрович";
-
 export function SiteFooter({ lastSyncAt }: { lastSyncAt: string | null }) {
   const [policyOpen, setPolicyOpen] = useState(false);
 
@@ -127,8 +124,12 @@ export function SiteFooter({ lastSyncAt }: { lastSyncAt: string | null }) {
         <nav className="flex flex-col gap-2 text-sm text-[var(--muted2)]" aria-label="Ссылки">
           <a href="mailto:deadlockru.ru@gmail.com" className="transition-colors hover:text-[var(--ink)]">Обратная связь: deadlockru.ru@gmail.com</a>
           <span className="text-xs leading-relaxed">
-            Оператор персональных данных: {OPERATOR} (физическое лицо) ·{" "}
+            Владелец сайта — физическое лицо, контакт:{" "}
             <a href="mailto:deadlockru.ru@gmail.com" className="text-[var(--accent)] transition-colors hover:text-[var(--ink)]">deadlockru.ru@gmail.com</a>
+            {" · "}
+            <button type="button" onClick={() => setPolicyOpen(true)} className="underline decoration-[var(--line)] underline-offset-2 transition-colors hover:text-[var(--ink)]">
+              сведения об операторе ПД — в политике
+            </button>
           </span>
           <a href="https://steamdb.info/app/1422450/charts/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--ink)]">Онлайн в Steam ↗</a>
           <a href="https://www.playdeadlock.com" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--ink)]">Официальный сайт игры ↗</a>
