@@ -122,15 +122,10 @@ export function SiteFooter({ lastSyncAt }: { lastSyncAt: string | null }) {
         </div>
 
         <nav className="flex flex-col gap-2 text-sm text-[var(--muted2)]" aria-label="Ссылки">
-          <a href="mailto:deadlockru.ru@gmail.com" className="transition-colors hover:text-[var(--ink)]">Обратная связь: deadlockru.ru@gmail.com</a>
-          <span className="text-xs leading-relaxed">
-            Владелец сайта — физическое лицо, контакт:{" "}
-            <a href="mailto:deadlockru.ru@gmail.com" className="text-[var(--accent)] transition-colors hover:text-[var(--ink)]">deadlockru.ru@gmail.com</a>
-            {" · "}
-            <button type="button" onClick={() => setPolicyOpen(true)} className="underline decoration-[var(--line)] underline-offset-2 transition-colors hover:text-[var(--ink)]">
-              сведения об операторе ПД — в политике
-            </button>
-          </span>
+          <a href="mailto:deadlockru.ru@gmail.com" className="group inline-flex flex-wrap items-baseline gap-x-1.5 transition-colors hover:text-[var(--ink)]">
+            <span>Обратная связь:</span>
+            <span className="font-semibold text-[var(--accent)] transition-colors group-hover:text-[var(--ink)]">deadlockru.ru@gmail.com</span>
+          </a>
           <a href="https://steamdb.info/app/1422450/charts/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--ink)]">Онлайн в Steam ↗</a>
           <a href="https://www.playdeadlock.com" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--ink)]">Официальный сайт игры ↗</a>
           <button
@@ -157,8 +152,7 @@ export function SiteFooter({ lastSyncAt }: { lastSyncAt: string | null }) {
             Все материалы носят информационный характер и являются мнением авторов. Deadlock и все связанные
             материалы — торговые марки Valve Corporation. Данные: deadlock-api.com, Steam Web API, Steam RSS,
             Liquipedia (CC BY-SA), collegedeadlock.com, коллективные данные сообщества. По всем вопросам и
-            предложениям — пишите на почту{" "}
-            <a href="mailto:deadlockru.ru@gmail.com" className="whitespace-nowrap text-[var(--accent)] transition-colors hover:text-[var(--ink)]">deadlockru.ru@gmail.com</a>.
+            предложениям — через обратную связь в футере.
           </p>
         </div>
       </div>
