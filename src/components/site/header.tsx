@@ -60,10 +60,13 @@ export function SiteHeader({
           >
             Deadlock<span className="text-[var(--accent)]">{"//"}</span>RU
           </button>
-          {/* возрастная маркировка информационной продукции — ФЗ-436 */}
+          {/* возрастная маркировка информационной продукции — ФЗ-436:
+              графический знак (чёрный квадрат с белой надписью) */}
           <span
-            className="rounded-md border border-[var(--line)] px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-[var(--muted2)]"
-            title="Возрастная категория 18+"
+            className="inline-flex h-6 w-6 shrink-0 items-center justify-center bg-black text-[9px] font-bold leading-none text-white"
+            title="18+ — информация для совершеннолетних"
+            role="img"
+            aria-label="Возрастная категория 18+"
           >
             18+
           </span>

@@ -68,7 +68,7 @@ export default function RootLayout({
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
     })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114300683', 'ym');
 
-    ym(114300683, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});`}
+    ym(114300683, 'init', {ssr:true, webvisor:false, clickmap:false, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});`}
         </Script>
         {children}
         <Toaster />
