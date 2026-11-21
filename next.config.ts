@@ -11,6 +11,10 @@ const isStaticExport = process.env.BUILD_STATIC === "1";
 
 const nextConfig: NextConfig = {
   output: isStaticExport ? "export" : "standalone",
+  /* GitHub Pages отдаёт /heroes/abrams/ как directory index, а не /heroes/abrams.
+     trailingSlash гарантирует, что экспорт создаёт <slug>/index.html и ссылки
+     ведут на рабочие адреса. */
+  trailingSlash: isStaticExport,
   /* config options here */
   typescript: {
     ignoreBuildErrors: true,

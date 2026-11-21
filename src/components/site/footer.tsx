@@ -128,6 +128,9 @@ export function SiteFooter({ lastSyncAt }: { lastSyncAt: string | null }) {
           </a>
           <a href="https://steamdb.info/app/1422450/charts/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--ink)]">Онлайн в Steam ↗</a>
           <a href="https://www.playdeadlock.com" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-[var(--ink)]">Официальный сайт игры ↗</a>
+          <a href="/heroes/" className="transition-colors hover:text-[var(--ink)]">Все герои</a>
+          <a href="/items/" className="transition-colors hover:text-[var(--ink)]">Все предметы</a>
+          <a href="/patches/" className="transition-colors hover:text-[var(--ink)]">Патчи и обновления</a>
           <button
             type="button"
             onClick={() => setPolicyOpen(true)}

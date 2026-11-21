@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import type { HeroRow } from "@/lib/site";
 import { HERO_TYPE_RU } from "@/lib/site";
+import { heroSlug } from "@/lib/slugs";
 import { HeroIcon, SafeImg, SectionHeader, TypeChip, WinRateBadge, WrBar, countLabel, DropdownSelect } from "./shared";
 
 type SortKey = "name" | "winRate" | "matches" | "pickRate";
@@ -85,11 +86,18 @@ export function HeroesSection({ heroes, onOpenHero }: { heroes: HeroRow[]; onOpe
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {list.map((h) => (
-          <button
+          <div
             key={h.id}
-            type="button"
+            role="button"
+            tabIndex={0}
             onClick={() => onOpenHero(h.id)}
-            className="group card-dl overflow-hidden text-left transition-transform hover:-translate-y-0.5"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onOpenHero(h.id);
+              }
+            }}
+            className="group card-dl cursor-pointer overflow-hidden text-left transition-transform hover:-translate-y-0.5"
             style={{ borderTop: `2px solid ${h.colorHex}` }}
           >
             {/* портретный формат 280/380 — родной пропорции арта из deadlock-api:
@@ -131,8 +139,15 @@ export function HeroesSection({ heroes, onOpenHero }: { heroes: HeroRow[]; onOpe
                   </div>
                 </div>
               ) : null}
+              <a
+                href={`/heroes/${heroSlug(h)}/`}
+                onClick={(e) => e.stopPropagation()}
+                className="mt-2 inline-block text-[11px] text-[var(--accent)] hover:underline"
+              >
+                Страница героя →
+              </a>
             </div>
-          </button>
+          </div>
         ))}
       </div>
     </section>

@@ -4,6 +4,9 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://deadlockru.ru"),
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
   title: "Deadlock//RU — глобальный портал: герои, предметы, патчи, лидерборд и мета",
   description:
     "Всё о Deadlock на русском: живой онлайн Steam, все герои и предметы, автопереваренные патчи Valve, лидерборды пяти регионов, киберспорт, мета-аналитика, сравнение героев и калькулятор билдов. Данные обновляются автоматически.",

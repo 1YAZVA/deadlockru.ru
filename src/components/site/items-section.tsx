@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Crosshair, Sparkles, HeartPulse, X, Search } from "lucide-react";
 import type { ItemRow } from "@/lib/site";
 import { SLOT_RU, fmtInt, fmtPct, wrColor, sanitizeHtml } from "@/lib/site";
+import { itemSlug } from "@/lib/slugs";
 import { ItemIcon, SectionHeader } from "./shared";
 
 type SlotKey = "weapon" | "spirit" | "vitality";
@@ -227,6 +228,12 @@ function ItemDialog({ item, onClose }: { item: ItemRow; onClose: () => void }) {
               </div>
             </div>
           ) : null}
+          <a
+            href={`/items/${itemSlug(item)}/`}
+            className="mt-3 inline-block text-xs text-[var(--accent)] hover:underline"
+          >
+            Открыть страницу предмета →
+          </a>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown, ExternalLink, FileText, Languages, Search } from "lucide-react";
 import type { PatchRow } from "@/lib/site";
 import { apiGet, fmtDateTime, sanitizeHtml, viaImgProxy, STATIC_MODE } from "@/lib/site";
+import { patchSlug } from "@/lib/slugs";
 import { SectionHeader, Spinner, FreshChip, countLabel } from "./shared";
 
 type Filter = "all" | "patches" | "news";
@@ -175,6 +176,12 @@ export function NewsSection() {
                   <div className="fade-in border-t border-[var(--line)] px-5 pb-5 pt-4">
                     <div className="patch-content" dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }} />
                     <div className="mt-4 flex flex-wrap items-center gap-4">
+                      <a
+                        href={`/patches/${patchSlug(p)}/`}
+                        className="inline-flex items-center gap-1.5 text-sm text-[var(--accent)] hover:underline"
+                      >
+                        Открыть страницу патча →
+                      </a>
                       <a
                         href={p.link}
                         target="_blank"
