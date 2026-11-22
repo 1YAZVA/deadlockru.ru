@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { ArrowRight, Radio, RefreshCw, Swords, Trophy, Users, Zap, BookOpen, Wrench, ShoppingBag, Shield } from "lucide-react";
 import type { HeroRow, MetaResponse, StateData } from "@/lib/site";
@@ -19,46 +19,106 @@ const OnlineChart = dynamic(() => import("./online-chart").then((m) => m.OnlineC
 });
 
 /**
- * Фон обложки — в три слоя, чтобы обложка никогда не выглядела пусто:
+ * Фон обложки — в несколько слоёв, чтобы обложка никогда не выглядела пусто:
  *   1) статичный постер (self-host /img/hero-poster.jpg — грузится всегда и везде);
- *   2) если пользователь положил файл /video/hero.mp4 — самодостаточный <video> (без VK);
- *   3) иначе — фоновое видео VK Video, как на deadlockru.ru (в РФ VK доступен).
- * Видео — только десктоп и после отрисовки контента; шейд сверху сохраняет читаемость.
+ *   2) интро-ролик — один раз при входе/перезагрузке страницы;
+ *   3) зацикленный ролик — он уже играет под интро, поэтому переход идёт
+ *      кроссфейдом: без чёрного кадра, повторной загрузки и «прыжка»;
+ *   4) если WebM/VP9 не поддержан или локальные файлы не загрузились — VK Video.
+ * Видео — только десктоп и только без prefers-reduced-motion; на мобильном остаётся
+ * статичный фон (ноль трафика на видео). Шейд сверху сохраняет читаемость.
  */
 const VK_VIDEO_SRC =
   "https://vkvideo.ru/video_ext.php?oid=-223127459&id=456239026&autoplay=1&loop=1&mute=1&hd=2&no_ads=1";
+const INTRO_SRC = "/video/hero-intro.webm";
+const LOOP_SRC = "/video/hero-loop.webm";
 
 function HeroVideoBg() {
-  const [ready, setReady] = useState(false);
-  const [mp4, setMp4] = useState(false);
+  const [enabled, setEnabled] = useState(false);
+  const [mode, setMode] = useState<"local" | "vk" | "none">("none");
+  const [introOn, setIntroOn] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
+  const [introGone, setIntroGone] = useState(false);
+  const [introOk, setIntroOk] = useState(true);
+  const [loopOk, setLoopOk] = useState(true);
+  const loopRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    // свой файл приоритетнее: положи public/video/hero.mp4 — подхватится сам
-    fetch("/video/hero.mp4", { method: "HEAD" })
-      .then((r) => {
-        if (r.ok) {
-          const ct = r.headers.get("content-type") ?? "";
-          if (!ct.includes("text/html")) setMp4(true);
-        }
-      })
-      .catch(() => {});
     const desktop = window.matchMedia("(min-width: 768px)").matches;
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!desktop || noMotion) return;
-    // пауза — пусть первым грузится контент, как на deadlockru.ru
-    const t = setTimeout(() => setReady(true), 1200);
-    return () => clearTimeout(t);
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (!desktop || noMotion || saveData) return;
+    // VP9/WebM: Chrome, Edge, Firefox и Safari 16+. Иначе — VK, как раньше.
+    const probe = document.createElement("video");
+    const canLocal =
+      probe.canPlayType('video/webm; codecs="vp9"') !== "" || probe.canPlayType("video/webm") !== "";
+    setEnabled(true);
+    setMode(canLocal ? "local" : "vk");
   }, []);
+
+  // оба локальных ролика не пошли — последний резерв: VK Video
+  useEffect(() => {
+    if (enabled && mode === "local" && !introOk && !loopOk) setMode("vk");
+  }, [enabled, mode, introOk, loopOk]);
+
+  // интро закончилось (или сломалось) — гасим его кроссфейдом поверх уже играющего цикла
+  const endIntro = () => {
+    setIntroDone(true);
+    loopRef.current?.play().catch(() => {});
+  };
+
+  // страховка: если transitionend не пришёл, всё равно снимаем интро с экрана
+  useEffect(() => {
+    if (!introDone) return;
+    const t = setTimeout(() => setIntroGone(true), 1100);
+    return () => clearTimeout(t);
+  }, [introDone]);
 
   return (
     <div className="hero-video-dl" aria-hidden>
       {/* слой 1: постер — всегда */}
       <div className="hero-poster-dl" />
-      {/* слой 2: локальное видео, если файл есть */}
-      {mp4 ? (
-        <video src="/video/hero.mp4" autoPlay muted loop playsInline />
-      ) : ready ? (
-        // слой 3: VK Video, как на deadlockru.ru
+      {/* слой 2: интро + зацикленный фон (только десктоп, WebM) */}
+      {enabled && mode === "local" ? (
+        <>
+          {loopOk ? (
+            <video
+              ref={loopRef}
+              className="hero-film"
+              src={LOOP_SRC}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onError={() => setLoopOk(false)}
+            />
+          ) : null}
+          {introOk && !introGone ? (
+            <video
+              className={`hero-film hero-film-intro${introOn ? " is-on" : ""}`}
+              src={INTRO_SRC}
+              autoPlay
+              muted
+              loop={!loopOk}
+              playsInline
+              preload="auto"
+              poster="/img/hero-poster.jpg"
+              onPlaying={() => setIntroOn(true)}
+              onEnded={endIntro}
+              onError={() => {
+                setIntroOk(false);
+                endIntro();
+              }}
+              onTransitionEnd={(e) => {
+                if (e.propertyName === "opacity" && introDone) setIntroGone(true);
+              }}
+            />
+          ) : null}
+        </>
+      ) : null}
+      {/* слой 3: VK Video — если локальные файлы недоступны */}
+      {enabled && mode === "vk" ? (
         <iframe
           src={VK_VIDEO_SRC}
           allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
