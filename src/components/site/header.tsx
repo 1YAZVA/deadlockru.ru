@@ -122,27 +122,26 @@ export function SiteHeader({
               Меню
               <ChevronDown className={`h-3 w-3 transition-transform ${menuOpen ? "rotate-180" : ""}`} aria-hidden />
             </button>
-            {menuOpen ? (
-              <div
-                role="menu"
-                className="fade-in absolute right-0 top-[calc(100%+8px)] w-56 overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--panel)] p-1.5 shadow-2xl"
-              >
-                {MENU_ORDER.map((t) => (
-                  <a
-                    key={t}
-                    {...tabLink(t)}
-                    role="menuitem"
-                    className={`block w-full rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--accent-hover)] ${active === t ? "text-[var(--accent)]" : "text-[var(--ink)]"}`}
-                  >
-                    {TAB_LABELS[t]}
-                  </a>
-                ))}
-                <div className="deco-line my-1.5" />
-                <div className="px-3 py-1.5 text-[11px] text-[var(--muted2)]">
-                  Все данные обновляются автоматически
-                </div>
+            <div
+              role="menu"
+              aria-hidden={!menuOpen}
+              className={`${menuOpen ? "fade-in" : "hidden"} absolute right-0 top-[calc(100%+8px)] w-56 overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--panel)] p-1.5 shadow-2xl`}
+            >
+              {MENU_ORDER.map((t) => (
+                <a
+                  key={t}
+                  {...tabLink(t)}
+                  role="menuitem"
+                  className={`block w-full rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--accent-hover)] ${active === t ? "text-[var(--accent)]" : "text-[var(--ink)]"}`}
+                >
+                  {TAB_LABELS[t]}
+                </a>
+              ))}
+              <div className="deco-line my-1.5" />
+              <div className="px-3 py-1.5 text-[11px] text-[var(--muted2)]">
+                Все данные обновляются автоматически
               </div>
-            ) : null}
+            </div>
           </div>
         </nav>
 
@@ -159,25 +158,23 @@ export function SiteHeader({
         </button>
       </div>
 
-      {mobileOpen ? (
-        <div className="fade-in border-t border-[var(--line)] bg-[var(--panel2)] md:hidden">
-          <div className="container-dl grid grid-cols-2 gap-1 py-3">
-            {(Object.keys(TAB_LABELS) as TabKey[]).map((t) => (
-              <a
-                key={t}
-                {...tabLink(t)}
-                className={`rounded-lg px-3 py-2.5 text-left text-sm ${active === t ? "bg-[var(--accent-hover)] text-[var(--accent)]" : "text-[var(--ink)]"}`}
-              >
-                {TAB_LABELS[t]}
-              </a>
-            ))}
-            <div className="col-span-2 mt-1 flex items-center justify-center gap-2 rounded-full border border-[var(--line)] px-3 py-1.5 text-xs text-[var(--muted2)]">
-              <span className="dot-dl" />
-              Онлайн Steam: <b className="text-[var(--ink)]">{online ? online.count.toLocaleString("ru-RU") : "…"}</b>
-            </div>
+      <div className={`${mobileOpen ? "fade-in" : "hidden"} border-t border-[var(--line)] bg-[var(--panel2)] md:hidden`}>
+        <div className="container-dl grid grid-cols-2 gap-1 py-3">
+          {(Object.keys(TAB_LABELS) as TabKey[]).map((t) => (
+            <a
+              key={t}
+              {...tabLink(t)}
+              className={`rounded-lg px-3 py-2.5 text-left text-sm ${active === t ? "bg-[var(--accent-hover)] text-[var(--accent)]" : "text-[var(--ink)]"}`}
+            >
+              {TAB_LABELS[t]}
+            </a>
+          ))}
+          <div className="col-span-2 mt-1 flex items-center justify-center gap-2 rounded-full border border-[var(--line)] px-3 py-1.5 text-xs text-[var(--muted2)]">
+            <span className="dot-dl" />
+            Онлайн Steam: <b className="text-[var(--ink)]">{online ? online.count.toLocaleString("ru-RU") : "…"}</b>
           </div>
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }
