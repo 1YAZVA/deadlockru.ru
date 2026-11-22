@@ -55,11 +55,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body className={`${"antialiased"} bg-background text-foreground`}>
-        {/* Ровно три preload на шрифты первого экрана. React 19 сам поднимает
-            <link rel="preload"> в <head>; раньше эти же теги дублировались из <head>. */}
-        <link rel="preload" href="/fonts/golos-text-400-normal-cyrillic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/golos-text-600-normal-cyrillic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/unbounded-700-normal-cyrillic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        {/* Шрифты подключаются через @font-face в globals.css. Ручные
+            <link rel="preload"> Next дублирует в <head> (получалось 6 тегов на 3
+            файла), поэтому полагаемся на обычное обнаружение шрифтов из CSS. */}
         {/* Яндекс.Метрика (интерфейсная часть — сразу после открытия body) */}
         <noscript>
           <div>
