@@ -48,9 +48,8 @@ export default function RootLayout({
         {/* Шрифты (Golos Text, Unbounded, Limelight) лежат в /public/fonts и подключены
             через @font-face в globals.css — без Google Fonts, чтобы сайт открывался
             из РФ без заблокированных/тормозящих внешних сервисов. */}
-        <link rel="preload" href="/fonts/golos-text-400-normal-cyrillic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/golos-text-600-normal-cyrillic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/unbounded-700-normal-cyrillic.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        {/* Шрифты Golos Text и Unbounded Next предзагружает сам из @font-face —
+            ручные <link rel="preload"> дублировали их (в head висело 6 тегов). */}
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

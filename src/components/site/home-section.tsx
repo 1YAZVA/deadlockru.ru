@@ -1,13 +1,22 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { ArrowRight, Radio, RefreshCw, Swords, Trophy, Users, Zap, BookOpen, Wrench, ShoppingBag, Shield } from "lucide-react";
-import { AreaChart, Area, ResponsiveContainer, Tooltip, XAxis, YAxis, ReferenceLine } from "recharts";
 import type { HeroRow, MetaResponse, StateData } from "@/lib/site";
 import { fmtInt, fmtDate, fmtSouls, timeAgo, HERO_TYPE_RU, wrColor } from "@/lib/site";
 import { HeroIcon, StatCard, WrBar, SectionHeader, FreshChip } from "./shared";
-import { Roulette } from "./roulette";
 import type { TabKey } from "./header";
+
+// тяжёлые блоки — отдельными чанками, чтобы не раздувать стартовый JS
+const Roulette = dynamic(() => import("./roulette").then((m) => m.Roulette), {
+  ssr: false,
+  loading: () => <div className="h-[420px]" aria-hidden />,
+});
+const OnlineChart = dynamic(() => import("./online-chart").then((m) => m.OnlineChart), {
+  ssr: false,
+  loading: () => <div className="h-44" aria-hidden />,
+});
 
 /**
  * Фон обложки — в три слоя, чтобы обложка никогда не выглядела пусто:
@@ -177,16 +186,16 @@ export function HomeSection({
               <button
                 type="button"
                 onClick={() => onNavigate("news")}
-                className="relative z-10 inline-flex max-w-full items-center gap-3 rounded-full border border-[var(--accent)] bg-[rgba(200,169,106,0.08)] px-5 py-2.5 text-sm transition-colors hover:bg-[rgba(200,169,106,0.18)]"
+                className="relative z-10 inline-flex max-w-full items-center gap-2 rounded-full border border-[var(--accent)] bg-[rgba(200,169,106,0.08)] px-4 py-2.5 text-sm transition-colors hover:bg-[rgba(200,169,106,0.18)]"
                 title="Открыть патч-ноуты и новости"
               >
-                <span className="dot-dl" />
-                <span className="truncate">
+                <span className="dot-dl shrink-0" />
+                <span className="min-w-0 text-left leading-snug">
                   {state.latestPatch.isPatch ? "Свежий патч:" : "Свежее обновление:"}{" "}
-                  <b>{state.latestPatch.title}</b>
+                  <b className="break-words">{state.latestPatch.title}</b>
                 </span>
-                <span className="whitespace-nowrap text-xs text-[var(--muted2)]">{fmtDate(state.latestPatch.pubDate)}</span>
-                <ArrowRight className="h-3.5 w-3.5 text-[var(--accent)]" aria-hidden />
+                <span className="hidden whitespace-nowrap text-xs text-[var(--muted2)] sm:inline">{fmtDate(state.latestPatch.pubDate)}</span>
+                <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[var(--accent)]" aria-hidden />
               </button>
             ) : null}
           </div>
@@ -240,7 +249,7 @@ export function HomeSection({
           <SectionHeader
             kicker="Навигация"
             title="Что внутри портала"
-            lead="Восемь разделов и пять уникальных инструментов — всё на автоматически синхронизируемых данных."
+            lead="Восемь разделов и шесть уникальных инструментов — всё на автоматически синхронизируемых данных."
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
@@ -249,7 +258,7 @@ export function HomeSection({
               { tab: "leaderboard" as TabKey, icon: Trophy, cls: "card-gold", color: "var(--accent)", t: "Лидерборд", d: "Топ-игроки пяти регионов, поиск, подиум, топ героев в рейтинге. Обновляется каждые 30 минут." },
               { tab: "esports" as TabKey, icon: Shield, cls: "card-danger", color: "var(--danger)", t: "Киберспорт", d: "Турниры, команды и расписание матчей: от студенческой лиги DCS до первого LAN — Guildlock Invitational." },
               { tab: "guides" as TabKey, icon: BookOpen, cls: "card-vitality", color: "var(--vitality)", t: "Гайды", d: "Авто-гайды по каждому герою: способности с цифрами, сильные и слабые матчапы, билд по стадиям игры." },
-              { tab: "tools" as TabKey, icon: Wrench, cls: "card-gold", color: "var(--accent)", t: "Инструменты", d: "5 фишек: сравнение героев, калькулятор билдов, анализ влияния патчей, live-центр и центр автоматизации." },
+              { tab: "tools" as TabKey, icon: Wrench, cls: "card-gold", color: "var(--accent)", t: "Инструменты", d: "6 инструментов: сравнение героев, калькулятор билдов, анализ влияния патчей, live-центр, тест знаний и центр автоматизации." },
             ].map(({ tab, icon: Icon, cls, color, t, d }) => (
               <article key={t} className={`card-dl ${cls} cursor-pointer p-5`} onClick={() => onNavigate(tab)}>
                 <div className="flex items-center gap-3">
@@ -336,49 +345,7 @@ export function HomeSection({
 
             {online.data.length > 1 ? (
               <div className="h-44">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={online.data} margin={{ top: 6, right: 8, bottom: 0, left: 4 }}>
-                    <defs>
-                      <linearGradient id="onlineFill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#4CAD6D" stopOpacity={0.35} />
-                        <stop offset="100%" stopColor="#4CAD6D" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <XAxis
-                      dataKey="t"
-                      tick={{ fill: "#8A9490", fontSize: 10 }}
-                      tickLine={false}
-                      axisLine={{ stroke: "#2A332F" }}
-                      minTickGap={46}
-                      interval="preserveStartEnd"
-                    />
-                    <YAxis
-                      tick={{ fill: "#8A9490", fontSize: 10 }}
-                      tickLine={false}
-                      axisLine={false}
-                      width={56}
-                      // домен растягивается и на официальный пик 24 ч, чтобы линия пика была видна
-                      domain={["auto", (max: number) => Math.max(max, (state?.online?.peak ?? 0) + 3000)]}
-                      padding={{ top: 8, bottom: 4 }}
-                      tickFormatter={(v: number) => fmtSouls(v)}
-                    />
-                    {state?.online?.peak ? (
-                      <ReferenceLine
-                        y={state.online.peak}
-                        stroke="#DDA326"
-                        strokeDasharray="4 4"
-                        strokeOpacity={0.7}
-                        label={{ value: `пик 24 ч ${fmtInt(state.online.peak)}`, fill: "#DDA326", fontSize: 10, position: "insideTopRight" }}
-                      />
-                    ) : null}
-                    <Tooltip
-                      contentStyle={{ background: "#161C1A", border: "1px solid #2A332F", borderRadius: 10, fontSize: 12, color: "#E8E6E0" }}
-                      labelStyle={{ color: "#8A9490" }}
-                      formatter={(v: number | string) => [`${fmtInt(Number(v))} игрок(ов)`, "Онлайн"]}
-                    />
-                    <Area type="monotone" dataKey="v" stroke="#4CAD6D" strokeWidth={2} fill="url(#onlineFill)" isAnimationActive={false} />
-                  </AreaChart>
-                </ResponsiveContainer>
+                <OnlineChart data={online.data} peak={state?.online?.peak ?? null} />
               </div>
             ) : (
               <div className="flex h-44 items-center justify-center rounded-lg border border-dashed border-[var(--line)] bg-[var(--panel2)] px-6 text-center">

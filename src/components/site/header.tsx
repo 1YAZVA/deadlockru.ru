@@ -48,18 +48,34 @@ export function SiteHeader({
     setMobileOpen(false);
   };
 
+  // Настоящие <a href="/#tab"> вместо кнопок: работают средняя кнопка мыши,
+  // «открыть в новой вкладке» и обход ссылок поисковиками. Обычный левый клик
+  // перехватываем и переключаем вкладку без перезагрузки.
+  const tabLink = (t: TabKey) => ({
+    href: `/#${t}`,
+    onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      go(t);
+    },
+  });
+
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(13,17,16,0.9)] backdrop-blur-md">
       <div className="container-dl flex h-14 items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => go("home")}
+          <a
+            href="/"
+            onClick={(e) => {
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+              e.preventDefault();
+              go("home");
+            }}
             className="whitespace-nowrap font-display text-[15px] font-bold uppercase tracking-[0.14em]"
             aria-label="На главную"
           >
             Deadlock<span className="text-[var(--accent)]">{"//"}</span>RU
-          </button>
+          </a>
           {/* возрастная маркировка информационной продукции — ФЗ-436:
               графический знак (чёрный квадрат с белой надписью) */}
           <span
@@ -73,20 +89,18 @@ export function SiteHeader({
         </div>
 
         <nav className="ml-auto hidden items-center gap-6 text-sm text-[var(--muted2)] md:flex" aria-label="Основная навигация">
-          <button
-            type="button"
-            onClick={() => go("home")}
+          <a
+            {...tabLink("home")}
             className={`transition-colors hover:text-[var(--ink)] ${active === "home" ? "text-[var(--ink)]" : ""}`}
           >
             Главная
-          </button>
-          <button
-            type="button"
-            onClick={() => go("news")}
+          </a>
+          <a
+            {...tabLink("news")}
             className={`transition-colors hover:text-[var(--ink)] ${active === "news" ? "text-[var(--ink)]" : ""}`}
           >
             Новости
-          </button>
+          </a>
           <span
             className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-[var(--line)] bg-[var(--panel)] px-3 py-1 text-[13px] text-[var(--muted2)]"
             title="Мониторинг онлайна Deadlock в Steam"
@@ -114,15 +128,14 @@ export function SiteHeader({
                 className="fade-in absolute right-0 top-[calc(100%+8px)] w-56 overflow-hidden rounded-xl border border-[var(--line)] bg-[var(--panel)] p-1.5 shadow-2xl"
               >
                 {MENU_ORDER.map((t) => (
-                  <button
+                  <a
                     key={t}
-                    type="button"
+                    {...tabLink(t)}
                     role="menuitem"
-                    onClick={() => go(t)}
                     className={`block w-full rounded-lg px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--accent-hover)] ${active === t ? "text-[var(--accent)]" : "text-[var(--ink)]"}`}
                   >
                     {TAB_LABELS[t]}
-                  </button>
+                  </a>
                 ))}
                 <div className="deco-line my-1.5" />
                 <div className="px-3 py-1.5 text-[11px] text-[var(--muted2)]">
@@ -150,14 +163,13 @@ export function SiteHeader({
         <div className="fade-in border-t border-[var(--line)] bg-[var(--panel2)] md:hidden">
           <div className="container-dl grid grid-cols-2 gap-1 py-3">
             {(Object.keys(TAB_LABELS) as TabKey[]).map((t) => (
-              <button
+              <a
                 key={t}
-                type="button"
-                onClick={() => go(t)}
+                {...tabLink(t)}
                 className={`rounded-lg px-3 py-2.5 text-left text-sm ${active === t ? "bg-[var(--accent-hover)] text-[var(--accent)]" : "text-[var(--ink)]"}`}
               >
                 {TAB_LABELS[t]}
-              </button>
+              </a>
             ))}
             <div className="col-span-2 mt-1 flex items-center justify-center gap-2 rounded-full border border-[var(--line)] px-3 py-1.5 text-xs text-[var(--muted2)]">
               <span className="dot-dl" />

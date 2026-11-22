@@ -56,6 +56,11 @@ export function ItemsSection({ items }: { items: ItemRow[] }) {
         kicker={`${fmtInt(items.length)} предметов с данными`}
         title="Предметы"
         lead="Магазин как в игре: вкладки категорий справа, тиры и цены у каждого предмета. Глобальный винрейт — из реальных матчей, обновляется автоматически."
+        right={
+          <a href="/items/" className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--panel)] px-3 py-1 text-xs text-[var(--muted2)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]">
+            Каталог предметов →
+          </a>
+        }
       />
 
       <div className="grid gap-4 lg:grid-cols-[1fr_200px]">

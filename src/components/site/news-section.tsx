@@ -85,7 +85,14 @@ export function NewsSection() {
         kicker="Автоматическая лента"
         title="Новости и патчи"
         lead="Официальные новости Valve из Steam и changelog с форумов playdeadlock.com — попадают на сайт автоматически, каждый час. Патчи показываем на русском (официальный перевод Valve), рядом доступен оригинал."
-        right={<FreshChip at={lastAt} prefix="Свежая запись" />}
+        right={
+          <div className="flex flex-wrap items-center gap-2">
+            <a href="/patches/" className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--panel)] px-3 py-1 text-xs text-[var(--muted2)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]">
+              Архив патчей →
+            </a>
+            <FreshChip at={lastAt} prefix="Свежая запись" />
+          </div>
+        }
       />
 
       <div className="mb-6 flex flex-wrap items-center gap-3">

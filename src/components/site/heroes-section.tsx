@@ -42,6 +42,11 @@ export function HeroesSection({ heroes, onOpenHero }: { heroes: HeroRow[]; onOpe
         kicker={`${countLabel(heroes.length, "герой", "героя", "героев")} в каталоге`}
         title="Герои"
         lead="Нажмите на героя: способности с цифрами, базовые характеристики, винрейт за 30 дней, топ-предметы, автобилд по стадиям и матрица контрпиков — всё из реальных матчей."
+        right={
+          <a href="/heroes/" className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--panel)] px-3 py-1 text-xs text-[var(--muted2)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]">
+            Каталог героев →
+          </a>
+        }
       />
 
       <div className="mb-6 flex flex-wrap items-center gap-3">

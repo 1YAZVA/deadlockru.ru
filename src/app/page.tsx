@@ -1,23 +1,35 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import type { HeroRow, ItemRow, MetaResponse, StateData } from "@/lib/site";
 import { apiGet } from "@/lib/site";
 import { SiteHeader, type TabKey } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { HomeSection } from "@/components/site/home-section";
-import { NewsSection } from "@/components/site/news-section";
-import { HeroesSection } from "@/components/site/heroes-section";
-import { MetaSection } from "@/components/site/meta-section";
-import { ItemsSection } from "@/components/site/items-section";
-import { LeaderboardSection } from "@/components/site/leaderboard-section";
-import { EsportsSection } from "@/components/site/esports-section";
-import { GuidesSection } from "@/components/site/guides-section";
-import { ToolsSection } from "@/components/site/tools-section";
-import { CommandsSection } from "@/components/site/commands-section";
-import { AccountSection } from "@/components/site/account-section";
-import { HeroDialog } from "@/components/site/hero-dialog";
 import { Spinner } from "@/components/site/shared";
+
+/**
+ * Разделы грузятся отдельными чанками: главная не тянет код инструментов,
+ * рулетки, таблиц и карточки героя. Это режет стартовый JS в разы.
+ */
+const sectionFallback = () => (
+  <div className="py-20">
+    <Spinner label="Загружаем раздел…" />
+  </div>
+);
+
+const NewsSection = dynamic(() => import("@/components/site/news-section").then((m) => m.NewsSection), { loading: sectionFallback });
+const HeroesSection = dynamic(() => import("@/components/site/heroes-section").then((m) => m.HeroesSection), { loading: sectionFallback });
+const MetaSection = dynamic(() => import("@/components/site/meta-section").then((m) => m.MetaSection), { loading: sectionFallback });
+const ItemsSection = dynamic(() => import("@/components/site/items-section").then((m) => m.ItemsSection), { loading: sectionFallback });
+const LeaderboardSection = dynamic(() => import("@/components/site/leaderboard-section").then((m) => m.LeaderboardSection), { loading: sectionFallback });
+const EsportsSection = dynamic(() => import("@/components/site/esports-section").then((m) => m.EsportsSection), { loading: sectionFallback });
+const GuidesSection = dynamic(() => import("@/components/site/guides-section").then((m) => m.GuidesSection), { loading: sectionFallback });
+const ToolsSection = dynamic(() => import("@/components/site/tools-section").then((m) => m.ToolsSection), { loading: sectionFallback });
+const CommandsSection = dynamic(() => import("@/components/site/commands-section").then((m) => m.CommandsSection), { loading: sectionFallback });
+const AccountSection = dynamic(() => import("@/components/site/account-section").then((m) => m.AccountSection), { loading: sectionFallback });
+const HeroDialog = dynamic(() => import("@/components/site/hero-dialog").then((m) => m.HeroDialog), { loading: () => null });
 
 const VALID_TABS: TabKey[] = ["home", "news", "heroes", "meta", "items", "leaderboard", "esports", "guides", "tools", "commands", "account"];
 

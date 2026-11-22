@@ -6,7 +6,7 @@
  * /api/player — работает из любых сетей, включая РФ.
  */
 import { useCallback, useRef, useState } from "react";
-import { ExternalLink, Search } from "lucide-react";
+import { ExternalLink, Search, Trophy } from "lucide-react";
 import type { HeroRow } from "@/lib/site";
 import { fmtInt, viaImgProxy, rankLocalIcon, RANK_NAMES, RANK_ROMAN, RANK_TIER_COLORS, HERO_TYPE_RU, STATIC_MODE, REMOTE_API } from "@/lib/site";
 import { HeroIcon, SectionHeader } from "./shared";
@@ -194,6 +194,39 @@ export function AccountSection({ heroes }: { heroes: HeroRow[] }) {
         <button type="button" className="steam-example" onClick={() => { const v = "deadlock"; setInput(v); void lookup(v); }}>deadlock</button>
         <button type="button" className="steam-example" onClick={() => { const v = "https://steamcommunity.com/id/gabelogannewell"; setInput(v); void lookup(v); }}>steamcommunity.com/id/gabelogannewell</button>
       </div>
+
+      {/* пустое состояние: без него до первого поиска на странице был большой пустой экран */}
+      {!loading && !msg && !resolved && candidates.length === 0 ? (
+        <div className="fade-in mt-6">
+          <div className="mb-2 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[var(--accent)]">
+            <Trophy className="h-3.5 w-3.5" aria-hidden />
+            Пример отчёта — так выглядит результат
+          </div>
+          <div className="sp-head" aria-hidden>
+            <span className="sp-ava grid place-items-center text-lg text-[var(--muted2)]">?</span>
+            <span className="sp-who">
+              <b>Ваш ник в Deadlock</b>
+              <span className="sp-sub">ID: 123456789 · найден по ссылке профиля Steam</span>
+              <span className="sp-link">Открыть в Steam ↗</span>
+            </span>
+            <span className="sp-rank">
+              <span className="sp-tier">
+                <b style={{ color: "var(--accent)" }}>Ascendant II</b>
+                <small>звание · бейдж 74</small>
+              </span>
+            </span>
+          </div>
+          <div className="sp-tiles" aria-hidden>
+            <div className="sp-tile hot"><div className="n">399</div><div className="t">матчей за 30 дней</div></div>
+            <div className="sp-tile"><div className="n">58%</div><div className="t">винрейт</div></div>
+            <div className="sp-tile"><div className="n">205 ч</div><div className="t">в игре</div></div>
+          </div>
+          <p className="mt-3 text-xs leading-relaxed text-[var(--muted2)]">
+            Введите ник или Steam ID выше — соберём ранг, винрейты по героям, движение по рангу
+            и историю последних матчей из вашей реальной игры. Поиск бесплатный и без регистрации.
+          </p>
+        </div>
+      ) : null}
 
       {msg ? (
         <div className={`steam-msg ${msg.err ? "err" : ""}`} role="status">{msg.text}</div>
