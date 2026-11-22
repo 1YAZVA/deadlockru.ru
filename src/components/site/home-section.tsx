@@ -96,7 +96,7 @@ function HeroVideoBg() {
           ) : null}
           {introOk && !introGone ? (
             <video
-              className={`hero-film hero-film-intro${introOn ? " is-on" : ""}`}
+              className={`hero-film hero-film-intro${introOn && !introDone ? " is-on" : ""}`}
               src={INTRO_SRC}
               autoPlay
               muted
