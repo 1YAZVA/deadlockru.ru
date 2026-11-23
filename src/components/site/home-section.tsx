@@ -61,10 +61,13 @@ function HeroVideoBg() {
     if (enabled && mode === "local" && !introOk && !loopOk) setMode("vk");
   }, [enabled, mode, introOk, loopOk]);
 
-  // интро закончилось (или сломалось) — гасим его кроссфейдом поверх уже играющего цикла
+  // интро закончилось (или сломалось) — цикл стартует с первого кадра и проявляется кроссфейдом
   const endIntro = () => {
     setIntroDone(true);
-    loopRef.current?.play().catch(() => {});
+    const v = loopRef.current;
+    if (!v) return;
+    try { v.currentTime = 0; } catch {}
+    v.play().catch(() => {});
   };
 
   // страховка: если transitionend не пришёл, всё равно снимаем интро с экрана
