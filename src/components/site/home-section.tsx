@@ -32,10 +32,13 @@ const VK_VIDEO_SRC =
   "https://vkvideo.ru/video_ext.php?oid=-223127459&id=456239026&autoplay=1&loop=1&mute=1&hd=2&no_ads=1";
 const INTRO_SRC = "/video/hero-intro.webm";
 const LOOP_SRC = "/video/hero-loop.webm";
+// интро — один раз за загрузку страницы: возврат на «Главную» внутри SPA его не повторяет
+let introShown = false;
 
 function HeroVideoBg() {
   const [enabled, setEnabled] = useState(false);
   const [mode, setMode] = useState<"local" | "vk" | "none">("none");
+  const [withIntro] = useState(() => !introShown);
   const [introOn, setIntroOn] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const [introGone, setIntroGone] = useState(false);
@@ -52,6 +55,7 @@ function HeroVideoBg() {
     const probe = document.createElement("video");
     const canLocal =
       probe.canPlayType('video/webm; codecs="vp9"') !== "" || probe.canPlayType("video/webm") !== "";
+    if (canLocal) introShown = true;
     setEnabled(true);
     setMode(canLocal ? "local" : "vk");
   }, []);
@@ -97,7 +101,7 @@ function HeroVideoBg() {
               onError={() => setLoopOk(false)}
             />
           ) : null}
-          {introOk && !introGone ? (
+          {introOk && !introGone && withIntro ? (
             <video
               className={`hero-film hero-film-intro${introOn && !introDone ? " is-on" : ""}`}
               src={INTRO_SRC}
